@@ -1,0 +1,476 @@
+// Casino Management Background Theme
+// Professional Casino Backoffice Atmosphere
+
+// ============================================
+// MAIN BACKGROUND
+// ============================================
+
+body, #root {
+  background: #0a0a0a;
+  background-image: 
+    // Poker table felt subtle tint
+    radial-gradient(ellipse at 30% 30%, rgba(0, 100, 70, 0.04) 0%, transparent 40%),
+    radial-gradient(ellipse at 70% 70%, rgba(0, 80, 60, 0.03) 0%, transparent 40%),
+    
+    // Subtle casino pattern overlay
+    radial-gradient(circle at 20% 50%, rgba(0, 229, 160, 0.03) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(0, 217, 148, 0.03) 0%, transparent 50%),
+    radial-gradient(circle at 40% 80%, rgba(0, 191, 136, 0.02) 0%, transparent 50%),
+    
+    // Casino management grid pattern
+    repeating-linear-gradient(
+      0deg,
+      transparent 0px,
+      transparent 49px,
+      rgba(0, 229, 160, 0.02) 49px,
+      rgba(0, 229, 160, 0.02) 50px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent 0px,
+      transparent 49px,
+      rgba(0, 229, 160, 0.02) 49px,
+      rgba(0, 229, 160, 0.02) 50px
+    ),
+    
+    // Fine grid for detail
+    repeating-linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.005) 0px,
+      transparent 1px,
+      transparent 19px,
+      rgba(255, 255, 255, 0.005) 20px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.005) 0px,
+      transparent 1px,
+      transparent 19px,
+      rgba(255, 255, 255, 0.005) 20px
+    ),
+    
+    // Diagonal lines pattern (casino floor style)
+    repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 100px,
+      rgba(0, 229, 160, 0.008) 100px,
+      rgba(0, 229, 160, 0.008) 102px
+    ),
+    
+    // Base gradient with subtle green tint
+    radial-gradient(ellipse at 50% 50%, #0f0f0f 0%, #0a0a0a 100%);
+  
+  background-attachment: fixed;
+  background-size: 
+    100% 100%,
+    100% 100%,
+    100% 100%,
+    100% 100%,
+    100% 100%,
+    50px 50px,
+    50px 50px,
+    20px 20px,
+    20px 20px,
+    200px 200px,
+    100% 100%;
+  
+  position: relative;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+// ============================================
+// ANIMATED CASINO ELEMENTS
+// ============================================
+
+// Floating geometric shapes in background
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    // Casino floor pattern - card suits and chips (very subtle)
+    radial-gradient(circle at 10% 20%, rgba(0, 229, 160, 0.015) 0%, transparent 2%),
+    radial-gradient(circle at 90% 25%, rgba(0, 229, 160, 0.015) 0%, transparent 2%),
+    radial-gradient(circle at 20% 70%, rgba(0, 229, 160, 0.015) 0%, transparent 2%),
+    radial-gradient(circle at 80% 75%, rgba(0, 229, 160, 0.015) 0%, transparent 2%),
+    radial-gradient(circle at 50% 50%, rgba(0, 229, 160, 0.01) 0%, transparent 3%),
+    
+    // Roulette wheel inspired circular patterns
+    radial-gradient(circle at 5% 50%, rgba(0, 229, 160, 0.008) 0%, transparent 10%),
+    radial-gradient(circle at 95% 50%, rgba(0, 229, 160, 0.008) 0%, transparent 10%);
+  
+  animation: floatCasino 40s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes floatCasino {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+    opacity: 0.4;
+  }
+  50% {
+    transform: translateY(-20px) scale(1.02);
+    opacity: 0.6;
+  }
+}
+
+// Subtle glow effect - Casino ambiance lighting
+body::after {
+  content: '';
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: 
+    // Multiple light sources like casino lighting
+    radial-gradient(circle at 30% 30%, rgba(0, 229, 160, 0.06) 0%, transparent 25%),
+    radial-gradient(circle at 70% 70%, rgba(0, 217, 148, 0.06) 0%, transparent 25%),
+    radial-gradient(circle at 50% 50%, rgba(0, 191, 136, 0.04) 0%, transparent 30%);
+  animation: rotateLights 80s linear infinite;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.4;
+}
+
+@keyframes rotateLights {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-20px) scale(1.02);
+  }
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+// ============================================
+// LOGIN PAGE SPECIFIC BACKGROUND
+// ============================================
+
+// Casino-themed background for all pages
+main, .main-content, [role="main"] {
+  position: relative;
+  z-index: 1;
+  
+  &::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+      // Casino floor ambiance - chip stacks and card patterns
+      radial-gradient(circle at 10% 20%, rgba(0, 229, 160, 0.025) 0%, transparent 15%),
+      radial-gradient(circle at 90% 80%, rgba(0, 229, 160, 0.025) 0%, transparent 15%),
+      radial-gradient(circle at 30% 70%, rgba(0, 217, 148, 0.02) 0%, transparent 12%),
+      radial-gradient(circle at 70% 30%, rgba(0, 217, 148, 0.02) 0%, transparent 12%),
+      radial-gradient(circle at 50% 50%, rgba(0, 191, 136, 0.015) 0%, transparent 20%);
+    animation: pulseCasinoGlow 10s ease-in-out infinite;
+    pointer-events: none;
+    z-index: -1;
+  }
+}
+
+@keyframes pulseCasinoGlow {
+  0%, 100% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+// ============================================
+// CONTENT AREA BACKGROUND
+// ============================================
+
+// Main content area with casino floor pattern
+.content, .main-content, [class*="content"], .sidebar + main {
+  position: relative;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+      // Casino chip pattern (subtle dots)
+      radial-gradient(circle at 20% 20%, rgba(0, 229, 160, 0.008) 0%, transparent 1.5%),
+      radial-gradient(circle at 80% 80%, rgba(0, 229, 160, 0.008) 0%, transparent 1.5%),
+      radial-gradient(circle at 40% 60%, rgba(0, 229, 160, 0.006) 0%, transparent 1.5%),
+      radial-gradient(circle at 60% 40%, rgba(0, 229, 160, 0.006) 0%, transparent 1.5%);
+    background-size: 80px 80px;
+    background-position: 0 0, 40px 40px, 20px 60px, 60px 20px;
+    pointer-events: none;
+    z-index: -1;
+    animation: driftPattern 120s linear infinite;
+  }
+}
+
+@keyframes driftPattern {
+  from {
+    background-position: 0 0, 40px 40px, 20px 60px, 60px 20px;
+  }
+  to {
+    background-position: 80px 80px, 120px 120px, 100px 140px, 140px 100px;
+  }
+}
+
+// ============================================
+// CASINO DECORATIVE ELEMENTS
+// ============================================
+
+// Subtle corner decorations
+.casino-corner-decoration {
+  position: fixed;
+  width: 200px;
+  height: 200px;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.1;
+  
+  &.top-left {
+    top: 0;
+    left: 0;
+    background: 
+      linear-gradient(135deg, rgba(0, 229, 160, 0.1) 0%, transparent 70%);
+    border-radius: 0 0 100% 0;
+  }
+  
+  &.top-right {
+    top: 0;
+    right: 0;
+    background: 
+      linear-gradient(225deg, rgba(0, 229, 160, 0.1) 0%, transparent 70%);
+    border-radius: 0 0 0 100%;
+  }
+  
+  &.bottom-left {
+    bottom: 0;
+    left: 0;
+    background: 
+      linear-gradient(45deg, rgba(0, 229, 160, 0.1) 0%, transparent 70%);
+    border-radius: 0 100% 0 0;
+  }
+  
+  &.bottom-right {
+    bottom: 0;
+    right: 0;
+    background: 
+      linear-gradient(315deg, rgba(0, 229, 160, 0.1) 0%, transparent 70%);
+    border-radius: 100% 0 0 0;
+  }
+}
+
+// ============================================
+// CARD PATTERN BACKGROUND (Subtle)
+// ============================================
+
+.casino-card-pattern {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    // Card-like rectangles pattern
+    repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 100px,
+      rgba(0, 229, 160, 0.008) 100px,
+      rgba(0, 229, 160, 0.008) 102px,
+      transparent 102px,
+      transparent 150px
+    ),
+    repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 100px,
+      rgba(0, 229, 160, 0.008) 100px,
+      rgba(0, 229, 160, 0.008) 102px,
+      transparent 102px,
+      transparent 150px
+    );
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.5;
+}
+
+// ============================================
+// CHIP STACK PATTERN
+// ============================================
+
+.casino-chip-pattern {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image:
+    radial-gradient(circle at 5% 10%, rgba(0, 229, 160, 0.02) 0%, transparent 2%),
+    radial-gradient(circle at 15% 30%, rgba(0, 229, 160, 0.02) 0%, transparent 2%),
+    radial-gradient(circle at 25% 50%, rgba(0, 229, 160, 0.02) 0%, transparent 2%),
+    radial-gradient(circle at 35% 70%, rgba(0, 229, 160, 0.02) 0%, transparent 2%),
+    radial-gradient(circle at 45% 90%, rgba(0, 229, 160, 0.02) 0%, transparent 2%),
+    radial-gradient(circle at 95% 15%, rgba(0, 229, 160, 0.02) 0%, transparent 2%),
+    radial-gradient(circle at 85% 35%, rgba(0, 229, 160, 0.02) 0%, transparent 2%),
+    radial-gradient(circle at 75% 55%, rgba(0, 229, 160, 0.02) 0%, transparent 2%),
+    radial-gradient(circle at 65% 75%, rgba(0, 229, 160, 0.02) 0%, transparent 2%),
+    radial-gradient(circle at 55% 95%, rgba(0, 229, 160, 0.02) 0%, transparent 2%);
+  background-size: 100% 100%;
+  pointer-events: none;
+  z-index: 0;
+  animation: float 40s ease-in-out infinite;
+}
+
+// ============================================
+// DASHBOARD GRID OVERLAY
+// ============================================
+
+.dashboard-grid-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    // Strong grid lines
+    repeating-linear-gradient(
+      0deg,
+      transparent 0px,
+      transparent 79px,
+      rgba(0, 229, 160, 0.03) 79px,
+      rgba(0, 229, 160, 0.03) 80px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent 0px,
+      transparent 79px,
+      rgba(0, 229, 160, 0.03) 79px,
+      rgba(0, 229, 160, 0.03) 80px
+    ),
+    // Fine grid
+    repeating-linear-gradient(
+      0deg,
+      transparent 0px,
+      transparent 19px,
+      rgba(255, 255, 255, 0.01) 19px,
+      rgba(255, 255, 255, 0.01) 20px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent 0px,
+      transparent 19px,
+      rgba(255, 255, 255, 0.01) 19px,
+      rgba(255, 255, 255, 0.01) 20px
+    );
+  background-size: 80px 80px, 80px 80px, 20px 20px, 20px 20px;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.4;
+}
+
+// ============================================
+// VIGNETTE EFFECT
+// ============================================
+
+.vignette-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 0%,
+    transparent 60%,
+    rgba(0, 0, 0, 0.4) 100%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+// ============================================
+// UTILITY CLASSES
+// ============================================
+
+.bg-casino-dark {
+  background: 
+    linear-gradient(135deg, rgba(10, 10, 10, 0.95) 0%, rgba(15, 15, 15, 0.95) 100%),
+    repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 20px,
+      rgba(0, 229, 160, 0.01) 20px,
+      rgba(0, 229, 160, 0.01) 21px
+    ) !important;
+}
+
+.bg-casino-gradient {
+  background: linear-gradient(
+    135deg,
+    rgba(0, 229, 160, 0.05) 0%,
+    rgba(0, 217, 148, 0.03) 50%,
+    rgba(0, 191, 136, 0.05) 100%
+  ) !important;
+}
+
+// Subtle scan line effect (like casino displays)
+.scanline-effect {
+  position: relative;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.05) 0px,
+      transparent 1px,
+      transparent 2px,
+      rgba(0, 0, 0, 0.05) 3px
+    );
+    pointer-events: none;
+    animation: scanline 8s linear infinite;
+  }
+}
+
+@keyframes scanline {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 0 100%;
+  }
+}
+

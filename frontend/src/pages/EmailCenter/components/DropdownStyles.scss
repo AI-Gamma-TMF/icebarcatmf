@@ -1,0 +1,80 @@
+// Variables for consistent theming
+$primary-color: #6c757d; // Grey color
+$primary-hover: #5a6268; // Darker grey for hover
+$text-color: #333;
+$background-hover: #e9ecef; // Light grey for hover background
+$border-radius: 8px;
+
+// Dropdown button styling
+.custom-dropdown {
+  .dropdown-toggle {
+    background-color: $primary-color;
+    color: #fff;
+    border: none;
+    border-radius: $border-radius;
+    padding: 10px 15px;
+    font-size: 16px;
+    font-weight: 500;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+
+    &:hover,
+    &:focus {
+      background-color: $primary-hover;
+      color: #fff;
+      box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+    }
+  }
+
+  // Dropdown menu styling
+  .dropdown-menu {
+    border-radius: $border-radius;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    max-height: 300px;
+    overflow-y: auto;
+    border: none;
+
+    // Scrollbar styling
+    &::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: $primary-color;
+      border-radius: 4px;
+
+      &:hover {
+        background-color: $primary-hover;
+      }
+    }
+  }
+
+  // Dropdown item styling
+  .custom-dropdown-item {
+    padding: 8px 12px;
+    font-size: 14px;
+    transition: background-color 0.2s ease;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $background-hover;
+    }
+  }
+
+  // Checkbox styling
+  .custom-checkbox {
+    .form-check-input {
+      width: 18px;
+      height: 18px;
+      margin-right: 10px;
+      accent-color: $primary-color;
+    }
+
+    .form-check-label {
+      font-size: 14px;
+      font-weight: 500;
+      color: $text-color;
+    }
+  }
+}

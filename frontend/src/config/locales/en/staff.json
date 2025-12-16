@@ -1,0 +1,143 @@
+{
+  "title": "Staff",
+  "search": "Search",
+  "createButton": "Create",
+  "activeStatus": "Active",
+  "inActiveStatus": "In-Active",
+  "noDataFound": "No data found",
+  "headers": {
+    "id": "Id",
+    "email": "Email",
+    "name": "Name",
+    "role": "Role",
+    "group": "Group",
+    "status": "Status",
+    "action": "Action"
+  },
+  "overviewConst": {
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "email": "Email",
+    "password": "Password",
+    "userName": "User Name",
+    "role": "Role",
+    "group": "Group"
+  },
+  "createStaff": {
+    "title":  "Create Staff",
+    "createdSuccessToast": "admin added successfully in staff.",
+    "selectPermissionErrorToast": "Please Select At Least One Permission"
+  },
+  "editStaff": {
+    "title": "Edit Staff",
+    "editSuccessToast": "Admin updated successfully.",
+    "selectPermissionErrorToast": "Please Select At Least One Permission"
+  },
+  "deleteSuccessToast": "Admin deleted successfully.",
+  "staffFields": {
+    "email": {
+      "label": "Email",
+      "placeholder": "Enter Email",
+      "errors": {
+        "invalid": "Invalid email",
+        "required": "Email required"
+      }
+    },
+    "password": {
+      "label": "Password",
+      "placeholder": "Enter Password",
+      "popoverMessage": "Must be at-least 8 characters long with 1 uppercase and 1 lowercase letters, 1 special character and 1 digit",
+      "errors": {
+        "invalid": "Invalid password",
+        "required": "Password required"
+      }
+    },
+    "firstName": {
+      "label": "First Name",
+      "placeholder": "Enter First Name",
+      "errors": {
+        "invalid": "Only Alphabets and Space Allowed and Must Start with Alphabet",
+        "required": "First Name required",
+        "min": "First Name must be at-least 3 characters",
+        "max": "First Name must be less than 30 characters"
+      }
+    },
+    "lastName": {
+      "label": "Last Name",
+      "placeholder": "Enter Last Name",
+      "errors": {
+        "invalid": "Only Alphabets and Space Allowed and Must Start with Alphabet",
+        "required": "Last Name required",
+        "min": "Last Name must be at-least 3 characters",
+        "max": "Last Name must be less than 30 characters"
+      }
+    },
+    "username": {
+      "label": "User Name",
+      "placeholder": "Enter User Name",
+      "errors": {
+        "invalid": "Only Alphabets Allowed",
+        "required": "User name required",
+        "min": "User name must be at-least 8 characters",
+        "max": "User name must be less than 30 characters"
+      }
+    },
+    "group": {
+      "label": "Group",
+      "errors": {
+        "invalid": "Only Alphabets, Numbers and Space Allowed",
+        "required": "Group name required",
+        "min": "Group Name must be at-least 3 characters",
+        "max": "Group Name must be less than 50 characters"
+      }
+    },
+    "role": {
+      "label": "Role",
+      "selectRole": "Select Role",
+      "errors": {
+        "required": "Role required"
+      }
+    },
+    "manager": {
+      "label": "Manager",
+      "selectManager": "Select Manager",
+      "errors": {
+        "invalid": "Only Alphabets Allowed",
+        "required": "Parent Manager is required",
+        "min": "User name must be at-least 8 characters"
+      }
+    },
+    "permissions": {
+      "label": "Permissions",
+      "selectReadPermissionErrorToast": "Please Select Read Permission Before Selecting Other For This Module",
+      "vipManagementReadRequiredErrorToast":"Please Select Read Permission of VIP Management before selecting VIP ManagedBy",
+      "create": "Create"
+    },
+    "addCoins": {
+      "label": "Add Coins Limit",
+      "errors": {
+        "required": "Coins required"
+      }
+    },
+    "gcLimit": {
+      "label": "GC Limit",
+      "placeholder": "Enter GC Limit",
+      "errors": {
+        "required": "GC Limit required",
+        "invalidType": "Invalid Type",
+        "minValue": "GC limit must be a positive number greater than 0"
+      }
+    },
+    "scLimit": {
+      "label": "SC Limit",
+      "placeholder": "Enter SC Limit",
+      "errors": {
+        "required": "SC Limit required",
+        "invalidType": "Invalid Type",
+        "minValue": "SC limit must be a positive number greater than 0"
+      }
+    },
+    "cancelButton": "Cancel",
+    "submitButton": "Submit"
+  }
+}

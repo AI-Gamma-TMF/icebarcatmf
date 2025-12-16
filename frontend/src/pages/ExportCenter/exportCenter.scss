@@ -1,0 +1,22 @@
+.status {
+    padding: 0 4px;        
+    border-radius: 5px;               
+    display: inline-block;    
+    color: #ffffff;         
+    // margin-top: 5px;
+    &.completed {
+        background-color: #4CAF50; 
+        border: 2px solid #388E3C; 
+    }
+
+    &.pending {
+        background-color: #FFC107; 
+        border: 2px solid #FFA000; 
+        color: #000000;           
+    }
+
+    &.failed {
+        background-color: #F44336; 
+        border: 2px solid #D32F2F; 
+    }
+}

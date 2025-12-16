@@ -1,0 +1,139 @@
+{
+  "title": "Dashboard",
+  "elastic": "Elastic",
+  "livePlayerReport": "Live Player Report",
+  "betSummary": "Bet Summary",
+  "gameReport": "Game Report",
+  "exportDetails": "Export Details",
+  "headers": {
+    "data": "Data",
+    "loginData": "Login",
+    "customerDataKeys": "Customers",
+    "transactionDataKeys": "Transactions",
+    "coinEcoDataKeys": "Coin Economy"
+  },
+  "loginKeys": {
+    "UNIQ_LOGIN": "Unique Logins",
+    "TOTAL_LOGIN": "Total Logins"
+  },
+  "customerDataKeys": {
+    "NEW_REGISTRATION": "New Registered Players",
+    "PHONE_VERIFIED": "New Phone Verified Total",
+    "FIRST_DEPOSIT": "First Time Purchasor",
+    "FIRST_DEPOSIT_AMOUNT_SUM": "First Time Purchasor Amount",
+    "PURCHASE_AMOUNT_SUM": "Total Purchase Amount",
+    "PURCHASE_AMOUNT_COUNT": "Total Number Of Purchases",
+    "AVERAGE_PURCHASE_AMOUNT": "Average Purchase Amount",
+    "APPROVAL_REDEMPTION_AMOUNT_SUM": "Approved Redemption Total",
+    "REQUEST_REDEMPTION_AMOUNT_SUM": "Requested Redemption Total",
+    "REQUEST_REDEMPTION_COUNT_SUM": "Total Number Of Redemptions",
+    "PENDING_REDEMPTION_COUNT_SUM": "Number Of Pending Redemptions",
+    "GROSS_REVENUE": "Net Revenue"
+  },
+  "customerDataKeysV2": {
+    "NEW_REGISTRATION": "New Registration",
+    "FIRST_DEPOSIT_COUNT": "First Deposit Count",
+    "FIRST_DEPOSIT_SUM": "First Deposit Sum",
+    "PURCHASE_COUNT": "Total Purchase Count",
+    "PURCHASE_SUM": "Total Purchase Sum",
+    "AVERAGE_PURCHASE_AMOUNT": "Average Purchase Amount",
+    "REQUESTED_REDEMPTION_COUNT": "Requested Redemption Count",
+    "APPROVAL_REDEMPTION_COUNT": "Approval Redemption Count",
+    "CANCELLED_REDEMPTION_COUNT": "Cancelled Redemption Count",
+    "REQUESTED_REDEMPTION_SUM": "Requested Redemption Sum",
+    "APPROVAL_REDEMPTION_SUM": "Approval Redemption Sum",
+    "CANCELLED_REDEMPTION_SUM": "Cancelled Redemption Sum",
+    "NET_REVENUE": "Net Revenue"
+  },
+  "customerDataKeysInternal" : {
+   
+    "FIRST_DEPOSIT": "First Time Purchasor",
+    "FIRST_DEPOSIT_AMOUNT_SUM": "First Time Purchasor Amount",
+    "PURCHASE_AMOUNT_SUM": "Total Purchase Amount",
+    "PURCHASE_AMOUNT_COUNT": "Total Number Of Purchases",
+    "AVERAGE_PURCHASE_AMOUNT": "Average Purchase Amount"
+  },
+  "transactionDataKeys": {
+    "ACTIVE_GC_PLAYER": "Active GC Players",
+    "ACTIVE_SC_PLAYER": "Active SC Players",
+    "SC_STAKED_TOTAL": "SC Staked",
+    "SC_WIN_TOTAL": "SC wins",
+    "SC_GGR_TOTAL": "GGR SC",
+    "SC_NEW_ACTIVE_PLAYER": "New Active SC Player",
+    "RETURN_TO_PLAYER":"RTP (in %)",
+    "HOUSE_EDGE":"House Edge (in %)"
+  },
+  "coinEcoDataKeys": {
+    "GC_CREDITED_PURCHASE": "GC Credited Purchase",
+    "SC_CREDITED_PURCHASE": "SC Credited Purchase",
+    "GC_AWARDED_TOTAL": "GC Awarded Total",
+    "SC_AWARDED_TOTAL": "SC Awarded Total",
+    "SC_TOTAL_BALANCE": "SC Total Balance",
+    "USC_BALANCE":"USC Balance",
+    "RSC_BALANCE":"RSC Balance"
+  },
+  "filter": {
+    "date": {
+      "title": "Date Options",
+      "today": "Today",
+      "yesterday": "Yesterday",
+      "monthtodate": "Month To Date",
+      "custom": "Custom",
+      "last7days": "Last 7 Days",
+      "last30days": "Last 30 Days",
+      "last90days": "Last 90 Days",
+      "weektodate": "Week To Date",
+      "yeartodate": "Year To Date",
+      "previousmonth": "Previous Month",
+      "previousyear": "Previous Year",
+      "startDate": "Date From",
+      "endDate": "Date to"
+    },
+    "playerType": {
+      "title": "Player Type",
+      "all": "All",
+      "testPlayer": "Test Player",
+      "realPlayer": "Real Player",
+      "hourTitle":"Hourly Filter",
+      "oneHour":"1 hour",
+      "twoHour":"2 hour",
+      "twentyFourHour":"24 hour"
+    }
+  },
+  "label": {
+    "totalDeposits": "Total Deposits",
+    "totalWithdrawals": "Total Withdrawals",
+    "totalGCCoin": "Total GC Coin",
+    "totalSCCoin": "Total SC Coin",
+    "netProfit": "Net Profit",
+    "registrations": "Registrations",
+    "totalPlayers": "Total Players",
+    "loggedInPlayers": "Logged In Players",
+    "inActivePlayers": "In-active Players",
+    "depositConvRate": "Deposit Conv Rate",
+    "registrationConvRate": "Registration Conv Rate"
+  },
+  "table": {
+    "data": "Data",
+    "today": "Today",
+    "yesterday": "Yesterday",
+    "tillDate": "Till Date",
+    "lastMonth": "Last Month",
+    "monthToDate": "Month To Date",
+    "selectedDate": "Selected Date",
+    "parameters": "Parameters"
+  },
+  "game": "Game",
+  "provider": "Provider",
+  "gameTable": {
+    "id": "ID",
+    "name": "Name",
+    "identifier": "Identifier",
+    "roundCount": "Round Count",
+    "totalBet": "Total Bet",
+    "totalWin": "Total Win",
+    "ggr": "GGR",
+    "playerCount": "Player Count",
+    "payout": "Payout"
+  }
+}

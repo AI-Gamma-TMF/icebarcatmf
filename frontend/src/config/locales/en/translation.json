@@ -1,0 +1,41 @@
+{
+  "pagination": {
+    "rowsPerPage": "Rows Per Page :"
+  },
+  "confirmationModal": {
+    "areYouSure": "Are you sure?",
+    "toggleStatus": "Toggle Status to",
+    "resetMessage": "You want to Reset",
+    "deleteMessage": "You want to delete it?",
+    "reuseMessage": "You want to reuse the package?",
+    "youWantToMessage": "You want to ",
+    "active": "Active",
+    "inActive": "In-Active",
+    "yes": "Yes",
+    "no": "No",
+    "galleryTitle": "Gallery",
+    "copyUrl": "Copy This Image URL to Clipboard",
+    "copiedToClipboardToast": "Copied To Clipboard",
+    "galleryNoImage": "No Image Found",
+    "removeLimitsMessage": "You want to remove",
+    "approveMessage" : " Do you want to approve this redeem request",
+    "approveAllMessage" : " Do you want to approve all this redeem request",
+    "cancelMessage" : " Do you want to cancel this redeem request"
+  },
+  "permissions": {
+    "create": "Create",
+    "read": "Read",
+    "dashBoardReports": "Dashboard Reports",
+    "commissionReports": "Commission Reports",
+    "update": "Update",
+    "delete": "Delete",
+    "toggleStatus": "Toggle Status",
+    "apply": "Apply",
+    "createCustom": "Create Custom",
+    "limit": "Limit",
+    "manageWallet": "Manage Wallet",
+    "testEmail": "Test Email",
+    "assign" : "Assign",
+    "resolve" : "Resolve"
+  }
+}

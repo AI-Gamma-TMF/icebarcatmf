@@ -1,0 +1,106 @@
+.table > tbody {
+  vertical-align: middle;
+}
+
+.btn-align {
+  position: relative;
+  top: 30px;
+}
+
+.tournament-card {
+  background: #f5f7fa;
+  box-shadow: 0 0 15px #00000030;
+  height: 100%;
+  border: none;
+  &.statistics {
+    label {
+      width: 100%;
+    }
+  }
+}
+
+.game-stat-select {
+  .css-1p5rhav-control {
+    width: 100%;
+    height: 43px;
+  }
+  .css-emypvm-control {
+    width: 100%;
+    height: 43px;
+  }
+}
+
+.tournament-detail-wrap {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  .tournament-card {
+    display: flex;
+    margin-top: 1rem;
+    gap: 10px;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px !important;
+    flex-direction: row;
+    @media (max-width: 550px) {
+      width: 100%;
+    }
+    p {
+      font-size: 11px;
+      font-weight: 500;
+      color: #000;
+    }
+    h3 {
+      font-size: 18px;
+      font-weight: 700;
+    }
+    img {
+      width: 50px;
+    }
+  }
+  .btn-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    button {
+      font-size: 15px;
+      font-weight: 600;
+      color: #fff;
+      background: #262b40;
+      padding: 10px 40px;
+      border-radius: 6px;
+    }
+  }
+}
+
+.tournament-reorder {
+  margin-top: 2rem;
+  p {
+    text-align: center;
+    padding-left: 20px;
+  }
+  .reorder-content p {
+    width: 18%;
+  }
+}
+.scan-date {
+  .rdt {
+    width: 100%;
+  }
+}
+
+.tournament-detail {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: end;
+  padding: 25px 25px 0 0;
+  h1 {
+    font-size: 30px;
+    font-weight: 700;
+  }
+  h3 {
+    font-size: 18px;
+    font-weight: 500;
+  }
+}

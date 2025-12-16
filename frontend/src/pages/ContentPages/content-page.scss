@@ -1,0 +1,145 @@
+.create-editor-wrapper {
+  border: 1px solid #d1d7e0;
+  border-radius: 0.5rem;
+
+  .editor-toolbar-sec {
+    border: none;
+    border-bottom: 1px solid #d1d7e0;
+    border-top-right-radius: 0.5rem;
+    border-top-left-radius: 0.5rem;
+
+    .rdw-option-wrapper {
+      border: 1px solid #61dafb;
+      padding: .5rem .625rem;
+      height: 35px !important;
+      background: #61dafb;
+
+      &:hover {
+        box-shadow: none !important;
+        background: #6bdfff87;
+      }
+    }
+
+    .rdw-dropdown-wrapper {
+      height: 35px;
+      box-shadow: none;
+      background: #61dafb;
+
+      &:hover {
+        box-shadow: none !important;
+        background: #6bdfff87;
+      }
+
+      .rdw-dropdown-optionwrapper {
+        max-height: 130px !important;
+      }
+    }
+
+    .rdw-link-wrapper {
+      .rdw-link-modal {
+        height: 147px !important;
+        overflow-y: scroll !important;
+
+        .rdw-link-modal-input {
+          min-height: 35px !important;
+        }
+      }
+    }
+  }
+
+  .editor-main-sec {
+    max-height: 400px;
+  }
+
+  .rdw-inline-wrapper {
+    gap: 0.313rem;
+    padding-right: 0.625rem;
+    border-right: 1px solid #d1d7e0;
+    margin-right: .625rem;
+  
+    .rdw-option-wrapper {
+      margin: 0px;
+    }
+  }
+  
+  .rdw-block-wrapper {
+    gap: 0.313rem;
+    padding-right: .625rem;
+    border-right: 1px solid #d1d7e0;
+    margin-right: .625rem;
+  
+    .rdw-dropdown-wrapper {
+      margin: 0;
+    }
+  }
+  
+  .rdw-list-wrapper {
+    gap: 0.313rem;
+    padding-right: .625rem;
+    border-right: 1px solid #d1d7e0;
+    margin-right: .625rem;
+  
+    .rdw-option-wrapper {
+      margin: 0px;
+    }
+  }
+  
+  .rdw-link-wrapper {
+    gap: 0.313rem;
+    padding-right: .625rem;
+    border-right: 1px solid #d1d7e0;
+    margin-right: .625rem;
+  
+    .rdw-option-wrapper {
+      margin: 0px;
+    }
+  }
+  
+  .rdw-text-align-wrapper {
+    gap: 0.313rem;
+    padding-right: .625rem;
+    border-right: 1px solid #d1d7e0;
+    margin-right: .625rem;
+  
+    .rdw-option-wrapper {
+      margin: 0px;
+    }
+  }
+  
+  .rdw-history-wrapper {
+    gap: 0.313rem;
+  
+    .rdw-option-wrapper {
+      margin: 0px;
+    }
+  }
+}
+
+.editor-colorpicker {
+  overflow: auto;
+  .rdw-colorpicker-option {
+    padding: 0 !important;
+  }
+}
+
+
+
+
+.cus__nav--light {
+  flex-wrap: nowrap;
+  overflow-x: auto;
+
+  .nav-item {
+    white-space: nowrap;
+  }
+
+  @media screen and (max-width: 575px) {
+    font-size: 0.875rem;
+  }
+
+  .nav-link {
+    @media screen and (max-width: 575px) {
+      padding: 0.75rem 0.5rem !important;
+    }
+  }
+}

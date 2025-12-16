@@ -1,0 +1,66 @@
+[
+    {
+        "Game Name": "3 Big Barrels Buffalo 90",
+        "Game ID": "kg_5507",
+        "RTP": "90%",
+        "Active": true, 
+        "Free Round": true
+    },
+    {
+        "Game Name": "3 Big Barrels Buffalo 94",
+        "Game ID": "kg_5006",
+        "RTP": "94%",
+        "Active": true, 
+        "Free Round": true
+    },
+    {
+        "Game Name": "3 Big Barrels Buffalo 96",
+        "Game ID": "kg_5505",
+        "RTP": "96%",
+        "Active": true, 
+        "Free Round": true
+    },
+     {
+        "Game Name": "Voltage Blitz Vortex 90",
+        "Game ID": "kg_5502",
+        "RTP": "90%",
+        "Active": true, 
+        "Free Round": true
+    },
+     {
+        "Game Name": "Voltage Blitz Egypt 90",
+        "Game ID": "kg_5506",
+        "RTP": "90%",
+        "Active": true, 
+        "Free Round": true
+    },
+     {
+        "Game Name": "Voltage Blitz Egypt 94",
+        "Game ID": "kg_5004",
+        "RTP": "94%",
+        "Active": true, 
+        "Free Round": true
+    },
+     {
+        "Game Name": "Voltage Blitz Egypt 96",
+        "Game ID": "kg_5508",
+        "RTP": "96%",
+        "Active": true, 
+        "Free Round": true
+    },
+     {
+        "Game Name": "Voltage Blitz Vortex 96",
+        "Game ID": "kg_5504",
+        "RTP": "96%",
+        "Active": true, 
+        "Free Round": true
+    },
+     {
+        "Game Name": "Voltage Blitz Vortex 94",
+        "Game ID": "kg_5001",
+        "RTP": "94%",
+        "Active": true, 
+        "Free Round": true
+    }
+]  
+

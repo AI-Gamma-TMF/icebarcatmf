@@ -1,0 +1,12 @@
+{
+  "title": "Gallery",
+  "imageUploadSuccessToast": "Image Uploaded Successfully",
+  "imageDeleteSuccessToast": "Image deleted successfully.",
+  "uploadPermissionNotGrantedToast": "Upload Permission Not Granted",
+  "deletePermissionNotGrantedToast": "Delete Permission Not Granted",
+  "extentionAllowedToast1": "Only",
+  "extentionAllowedToast2": "Extensions Allowed",
+  "imageSizeErrorToast1": "Size of the image must be",
+  "imageSizeErrorToast2": "MB"
+
+}

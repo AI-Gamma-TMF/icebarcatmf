@@ -1,0 +1,92 @@
+{
+  "title": "Pages",
+  "filter": {
+    "search": "Search"
+  },
+  "headers": {
+    "id": "Id",
+    "name": "Page Name",
+    "action": "Action"
+  },
+  "createButton": "Create",
+  "noDataFound": "No data found",
+  "createPageSuccessToast": "Content Page created successfully.",
+  "editPageSuccessToast": "Content Page edited successfully.",
+  "deletePageSuccessToast": "Content Page deleted successfully.",
+  "createPageAssetSuccessToast": "Asset Added successfully.",
+  "editPageAssetSuccessToast": "Asset edited successfully.",
+  "deletePageAssetSuccessToast": "Asset deleted successfully.",
+  "createPageTitle": "Create Page",
+  "editCmsTitle": "Edit",
+  "viewCmsTitle": "Page:",
+  "inputField": {
+    "pageName": {
+      "label": "Name",
+      "placeholder": "Page Name(About Us, pendingPage",
+      "errors": {
+        "required": "Name is required"
+      }
+    }
+  },
+  "createContentPage": {
+    "label": "Content Page"
+  },
+  "seoDetails": {
+    "inputField": {
+      "title": {
+        "label": "Title",
+        "placeholder": "Page Title",
+        "errors": {
+          "required": "Title is required"
+        }
+      },
+      "description": {
+        "label": "Description",
+        "placeholder": "Page Description",
+        "errors": {
+          "required": "Description is required"
+        }
+      },
+      "keywords": {
+        "label": "Keywords",
+        "placeholder": "Page Keywords",
+        "errors": {
+          "required": "Keywords are required"
+        }
+      }
+    }
+  },
+  "asset": {
+    "inputField": {
+      "assetKey": {
+        "label": "Asset Key",
+        "placeholder": "Asset Key(eg: about_us_title, landing_page_heading",
+        "errors": {
+          "max": "Asset key must be less than 20 characters",
+          "required": "Asset key is required",
+          "isValid": "Asset key can only contain alphabets, numbers and '-', '_' signs in between letters"
+        }
+      },
+      "assetValue": {
+        "label": "Asset Value",
+        "placeholder": "Enter Asset Value",
+        "errors": {
+          "required": "Asset value is required"
+        }
+      },
+      "assetImageValue": {
+        "label": "Asset Value",
+        "placeholder": "Enter Asset Value",
+        "message": "Only SVG allowed with size < 1MB",
+        "errors": {
+          "required": "A SVG file is required",
+          "invalidFormat": "Uploaded file has unsupported format.",
+          "max": "File Size Should be Less Than 1MB"
+        }
+      }
+    }
+  },
+  "cancelButton": "Cancel",
+  "editButton": "Edit",
+  "submitButton": "Submit"
+}

@@ -1,0 +1,477 @@
+// Additional Casino Elements - Cards, Chips, Symbols
+// Rich Background Decoration
+
+// ============================================
+// PLAYING CARDS SCATTERED
+// ============================================
+
+// Card 1 - Top Left Area
+.casino-login-section .row {
+  &::after {
+    content: '';
+    position: absolute;
+    top: 20%;
+    left: 8%;
+    width: 70px;
+    height: 100px;
+    background: 
+      linear-gradient(135deg, 
+        rgba(0, 229, 160, 0.06) 0%, 
+        rgba(0, 217, 148, 0.04) 50%,
+        rgba(0, 191, 136, 0.06) 100%
+      );
+    border: 2px solid rgba(0, 229, 160, 0.12);
+    border-radius: 8px;
+    box-shadow: 
+      0 4px 12px rgba(0, 229, 160, 0.15),
+      inset 0 2px 4px rgba(255, 255, 255, 0.05);
+    animation: floatCard1 14s ease-in-out infinite;
+    pointer-events: none;
+    z-index: 0;
+    
+    // Card suit symbol (spade)
+    &::before {
+      content: '♠';
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 24px;
+      color: rgba(0, 229, 160, 0.3);
+    }
+    
+    @media (max-width: 768px) {
+      width: 45px;
+      height: 65px;
+      &::before {
+        font-size: 16px;
+      }
+    }
+  }
+}
+
+// Card 2 - Top Right Area
+body::before {
+  content: '';
+  position: fixed;
+  top: 18%;
+  right: 10%;
+  width: 75px;
+  height: 105px;
+  background: 
+    linear-gradient(135deg, 
+      rgba(0, 229, 160, 0.07) 0%, 
+      rgba(0, 217, 148, 0.05) 50%,
+      rgba(0, 191, 136, 0.07) 100%
+    );
+  border: 2px solid rgba(0, 229, 160, 0.13);
+  border-radius: 8px;
+  box-shadow: 
+    0 5px 15px rgba(0, 229, 160, 0.18),
+    inset 0 2px 4px rgba(255, 255, 255, 0.06);
+  animation: floatCard2 16s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
+  
+  @media (max-width: 768px) {
+    width: 50px;
+    height: 70px;
+  }
+}
+
+// Card 3 - Bottom Right
+body::after {
+  content: '♦';
+  position: fixed;
+  bottom: 18%;
+  right: 12%;
+  width: 68px;
+  height: 98px;
+  background: 
+    linear-gradient(135deg, 
+      rgba(0, 229, 160, 0.065) 0%, 
+      rgba(0, 217, 148, 0.045) 50%,
+      rgba(0, 191, 136, 0.065) 100%
+    );
+  border: 2px solid rgba(0, 229, 160, 0.11);
+  border-radius: 8px;
+  box-shadow: 
+    0 4px 13px rgba(0, 229, 160, 0.16),
+    inset 0 2px 4px rgba(255, 255, 255, 0.05);
+  animation: floatCard3 13s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  color: rgba(0, 229, 160, 0.35);
+  
+  @media (max-width: 768px) {
+    width: 48px;
+    height: 68px;
+    font-size: 20px;
+  }
+}
+
+// ============================================
+// POKER CHIPS
+// ============================================
+
+// Chip 1 - Left Side
+.casino-login-section {
+  &::after {
+    content: '';
+    position: absolute;
+    top: 45%;
+    left: 5%;
+    width: 80px;
+    height: 80px;
+    background: 
+      radial-gradient(circle at center, 
+        rgba(0, 229, 160, 0.08) 0%,
+        rgba(0, 229, 160, 0.12) 40%,
+        transparent 40%,
+        transparent 42%,
+        rgba(0, 229, 160, 0.15) 42%,
+        rgba(0, 229, 160, 0.15) 45%,
+        transparent 45%,
+        transparent 55%,
+        rgba(0, 229, 160, 0.15) 55%,
+        rgba(0, 229, 160, 0.15) 58%,
+        transparent 58%
+      ),
+      // Chip edge pattern
+      repeating-conic-gradient(
+        from 0deg at center,
+        rgba(0, 229, 160, 0.1) 0deg,
+        rgba(0, 229, 160, 0.1) 20deg,
+        rgba(0, 217, 148, 0.08) 20deg,
+        rgba(0, 217, 148, 0.08) 40deg
+      );
+    border-radius: 50%;
+    border: 3px solid rgba(0, 229, 160, 0.2);
+    box-shadow: 
+      0 6px 20px rgba(0, 229, 160, 0.25),
+      inset 0 2px 8px rgba(0, 0, 0, 0.3);
+    animation: chipFloat1 11s ease-in-out infinite;
+    pointer-events: none;
+    z-index: 0;
+    
+    @media (max-width: 768px) {
+      width: 50px;
+      height: 50px;
+      left: 3%;
+    }
+  }
+}
+
+// Chip Stack - Right Side
+main::before {
+  content: '';
+  position: fixed;
+  bottom: 25%;
+  left: 8%;
+  width: 70px;
+  height: 90px;
+  background: 
+    // Stack of 3 chips
+    radial-gradient(ellipse at 50% 25%, rgba(0, 229, 160, 0.15) 0%, transparent 40%),
+    radial-gradient(ellipse at 50% 50%, rgba(0, 229, 160, 0.13) 0%, transparent 40%),
+    radial-gradient(ellipse at 50% 75%, rgba(0, 229, 160, 0.11) 0%, transparent 40%),
+    // Edges
+    linear-gradient(180deg,
+      transparent 0%,
+      rgba(0, 229, 160, 0.08) 20%,
+      rgba(0, 229, 160, 0.08) 25%,
+      transparent 25%,
+      transparent 45%,
+      rgba(0, 229, 160, 0.08) 45%,
+      rgba(0, 229, 160, 0.08) 50%,
+      transparent 50%,
+      transparent 70%,
+      rgba(0, 229, 160, 0.08) 70%,
+      rgba(0, 229, 160, 0.08) 75%,
+      transparent 75%
+    );
+  border-radius: 50% / 15%;
+  box-shadow: 
+    0 5px 18px rgba(0, 229, 160, 0.22);
+  animation: chipStackFloat 13s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
+  
+  @media (max-width: 768px) {
+    width: 45px;
+    height: 60px;
+    left: 5%;
+  }
+}
+
+// Chip 2 - Right Bottom
+main::after {
+  content: '$';
+  position: fixed;
+  bottom: 20%;
+  right: 8%;
+  width: 75px;
+  height: 75px;
+  background: 
+    radial-gradient(circle at center, 
+      rgba(0, 229, 160, 0.1) 0%,
+      rgba(0, 229, 160, 0.14) 35%,
+      transparent 35%,
+      transparent 38%,
+      rgba(0, 229, 160, 0.18) 38%,
+      rgba(0, 229, 160, 0.18) 42%,
+      transparent 42%
+    );
+  border-radius: 50%;
+  border: 3px solid rgba(0, 229, 160, 0.22);
+  box-shadow: 
+    0 6px 22px rgba(0, 229, 160, 0.28),
+    inset 0 2px 8px rgba(0, 0, 0, 0.3);
+  animation: chipFloat2 15s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  font-weight: bold;
+  color: rgba(0, 229, 160, 0.4);
+  
+  @media (max-width: 768px) {
+    width: 48px;
+    height: 48px;
+    font-size: 22px;
+    right: 5%;
+  }
+}
+
+// ============================================
+// CARD SUIT SYMBOLS FLOATING
+// ============================================
+
+// Spade Symbol
+#root::before {
+  content: '♠';
+  position: fixed;
+  top: 30%;
+  left: 20%;
+  font-size: 60px;
+  color: rgba(0, 229, 160, 0.12);
+  animation: floatSymbol1 17s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
+  text-shadow: 0 4px 12px rgba(0, 229, 160, 0.3);
+  
+  @media (max-width: 768px) {
+    font-size: 35px;
+  }
+}
+
+// Club Symbol
+#root::after {
+  content: '♣';
+  position: fixed;
+  bottom: 30%;
+  right: 20%;
+  font-size: 55px;
+  color: rgba(0, 229, 160, 0.11);
+  animation: floatSymbol2 19s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
+  text-shadow: 0 4px 12px rgba(0, 229, 160, 0.28);
+  
+  @media (max-width: 768px) {
+    font-size: 32px;
+  }
+}
+
+// ============================================
+// ROULETTE WHEEL SECTION
+// ============================================
+
+.casino-login-section {
+  // Small roulette wheels scattered
+  .container {
+    // Wheel 1 - Bottom Left
+    &::before {
+      content: '';
+      position: absolute;
+      bottom: 12%;
+      left: 12%;
+      width: 90px;
+      height: 90px;
+      background: 
+        // Center
+        radial-gradient(circle at center, 
+          rgba(0, 229, 160, 0.15) 0%,
+          rgba(0, 229, 160, 0.15) 15%,
+          transparent 15%
+        ),
+        // Inner ring
+        radial-gradient(circle at center, 
+          transparent 25%,
+          rgba(0, 229, 160, 0.12) 25%,
+          rgba(0, 229, 160, 0.12) 35%,
+          transparent 35%
+        ),
+        // Outer segments
+        repeating-conic-gradient(
+          from 0deg at center,
+          rgba(0, 229, 160, 0.08) 0deg,
+          rgba(0, 229, 160, 0.08) 15deg,
+          rgba(0, 217, 148, 0.06) 15deg,
+          rgba(0, 217, 148, 0.06) 30deg
+        );
+      border-radius: 50%;
+      border: 2px solid rgba(0, 229, 160, 0.15);
+      box-shadow: 0 5px 18px rgba(0, 229, 160, 0.2);
+      animation: rouletteWheel1 25s linear infinite;
+      pointer-events: none;
+      z-index: 0;
+      
+      @media (max-width: 768px) {
+        width: 55px;
+        height: 55px;
+      }
+    }
+  }
+}
+
+// ============================================
+// ANIMATIONS
+// ============================================
+
+@keyframes diceRoll1 {
+  0%, 100% {
+    transform: translateX(-50%) rotate(0deg) scale(1);
+  }
+  25% {
+    transform: translateX(-50%) rotate(90deg) scale(1.05);
+  }
+  50% {
+    transform: translateX(-50%) rotate(180deg) scale(1);
+  }
+  75% {
+    transform: translateX(-50%) rotate(270deg) scale(1.05);
+  }
+}
+
+@keyframes diceRoll2 {
+  0%, 100% {
+    transform: rotate(0deg) translateY(0);
+  }
+  33% {
+    transform: rotate(120deg) translateY(-10px);
+  }
+  66% {
+    transform: rotate(240deg) translateY(0);
+  }
+}
+
+@keyframes diceRoll3 {
+  0%, 100% {
+    transform: rotate(360deg) scale(1);
+  }
+  50% {
+    transform: rotate(180deg) scale(1.08);
+  }
+}
+
+@keyframes diceRoll4 {
+  0%, 100% {
+    transform: rotate(0deg) translateX(0);
+  }
+  50% {
+    transform: rotate(180deg) translateX(10px);
+  }
+}
+
+@keyframes floatCard1 {
+  0%, 100% {
+    transform: translateY(0) rotate(-5deg);
+  }
+  50% {
+    transform: translateY(-15px) rotate(5deg);
+  }
+}
+
+@keyframes floatCard2 {
+  0%, 100% {
+    transform: translateY(0) rotate(8deg);
+  }
+  50% {
+    transform: translateY(-20px) rotate(-8deg);
+  }
+}
+
+@keyframes floatCard3 {
+  0%, 100% {
+    transform: translateY(0) rotate(-10deg);
+  }
+  50% {
+    transform: translateY(-18px) rotate(10deg);
+  }
+}
+
+@keyframes chipFloat1 {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-12px) scale(1.05);
+  }
+}
+
+@keyframes chipFloat2 {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-15px) rotate(180deg);
+  }
+}
+
+@keyframes chipStackFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes floatSymbol1 {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+    opacity: 0.12;
+  }
+  50% {
+    transform: translateY(-25px) scale(1.1);
+    opacity: 0.18;
+  }
+}
+
+@keyframes floatSymbol2 {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+    opacity: 0.11;
+  }
+  50% {
+    transform: translateY(-22px) scale(1.08);
+    opacity: 0.16;
+  }
+}
+
+@keyframes rouletteWheel1 {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+

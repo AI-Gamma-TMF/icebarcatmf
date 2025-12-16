@@ -1,0 +1,46 @@
+.imagecontainer {
+    position: relative;
+  }
+  .imagecontainer img {
+    display: block;
+  }
+  .imagecontainer .copy {
+    position: absolute;
+    top: 0;
+    right: 10px;
+  }
+  .imagecontainer .text {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+  
+  .modal-height-width {
+    width: 100vw !important;
+  }
+  
+  .fixTableHead {
+    overflow-y: auto;
+    height: 50px;
+  }
+  
+  .fixTableHead-th th {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+  }
+  
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  // .custom-switch-label {
+  //   width: "60px";
+  //   height: "30px";
+  //   border-radius: "15px";
+  //   position: "relative";
+  //   transition: "background-color 0.3s";
+  // }
+  

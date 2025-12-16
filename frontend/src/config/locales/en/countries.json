@@ -1,0 +1,48 @@
+{
+    "title": "Countries",
+    "viewTitle": "View Blocked Games",
+    "viewProviderTitle": "View Blocked Providers",
+    "search": "Search",
+    "noDataFound": "No data found",
+    "headers": {
+        "id": "Id",
+        "code": "Country Code",
+        "name": "Country Name",
+        "action": "Action"
+    },
+    "restrictedProvider": {
+        "restrictedProviders": "Restricted Providers",
+        "unRestrictedProviders": "Unrestricted Providers",
+        "addProviders": "Add to Restricted Providers",
+        "removeProviders": "Remove from Restricted Providers",
+        "updateMessage": "Update restricted items successfully",
+        "alreadyAdd": "Already added this Provider",
+        "active": "Active",
+        "inactive": "In-Active",
+        "addProvider": "Add This Provider",
+        "removeProvider": "Remove This Provider",
+        "noData": "No data found",
+        "removeMessage": "Providers you remove will appear here",
+        "addProviderMessage": "Providers you add will appear here",
+        "submit": "Submit",
+        "headers": {
+            "id": "ID",
+            "name": "Name",
+            "status": "Status",
+            "actions": "Actions",
+            "operatorStatus": "Operator Status"
+        }
+    },
+    "restrictedGame": {
+        "alreadyAdd": "Already added this game",
+        "restrictedGames": "Restricted Games",
+        "addGames":"Add to Restricted Games",
+        "removeGames": "Remove from Restricted Games",
+        "addGameMessage": "Games you add will appear here",
+        "unrestrictedGames": "Unrestricted Games",
+        "addGame": "Add This Game",
+        "removeGame": "Remove This Game",
+        "removeMessage": "Games you remove will appear here"
+    }
+
+}

@@ -1,0 +1,22 @@
+.limit h6 {
+   align-items: center;
+}
+
+.limit div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 4px;
+}
+
+.limit div div{
+    display: flex;
+}
+
+.limit div div span{
+    margin-right: 10px;
+}
+
+.limit div div button{
+    margin-right: 10px;
+}

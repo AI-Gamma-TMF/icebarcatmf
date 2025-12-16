@@ -1,0 +1,37 @@
+{
+    "title": "Export Center",
+    "filter": {
+        "statusType": "Status Type",
+        "type": "Type",
+        "searchPlace": "Search by type",
+        "status": "Status",
+        "startDate": "Start Date",
+        "endDate":"End Date"
+    },
+    "tableHeaders": {
+        "id": "Id",
+        "type": "Type",
+        "status": "Status",
+        "updatedAt": "Date",
+        "downloadURL":"URL"
+        
+    },
+    "body":{
+        "type":{
+             "purchase_report_csv_download":"Purchase Report",
+            "player_activity_csv_download":"Player Activity",
+            "players_csv_download":"Players",
+            "casino_transactions_csv_download":"Casino Transactions",
+            "transactions_banking_csv_download":"Transactions Banking",
+            "vault_data_csv_download": "Vault",
+            "redeem_requests_csv_download":"Redeem Requests",
+            "promocode_blocked_users_csv_download":"Promocode Block",
+            "tournament_csv_download" : "Tournament",
+            "game_dashboard_csv_download":"Game Dashboard",
+            "promocode_applied_history_csv_download":"Promocode Applied History",
+            "merv_report_csv_download":"User Daily Report"
+        }
+    },
+    "noDataFound":"No Data Found"
+
+}

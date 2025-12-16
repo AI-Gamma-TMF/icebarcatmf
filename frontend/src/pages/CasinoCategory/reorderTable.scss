@@ -1,0 +1,113 @@
+.cus-reorder-table {
+
+    .cus-reorder {
+
+        &-heading {
+
+            @media screen and (max-width: 767px) {
+                display: none;
+            }
+
+        }
+
+        &-content {
+
+            @media screen and (max-width: 767px) {
+                display: flex;
+                flex-direction: column;
+                padding: 0;
+                margin-bottom: 0.5rem;
+                border-radius: 0.313rem;
+                overflow: hidden;
+            }
+
+        }
+
+        &-id {
+            @media screen and (max-width: 767px) {
+                border-bottom: 1px solid #00000021;
+                padding: .5rem .5rem .5rem 48%;
+                width: 100%;
+                margin: 0;
+                position: relative;
+            }
+
+            &:before {
+                @media screen and (max-width: 767px) {
+                    content: 'ID';
+                    position: absolute;
+                    left: 0;
+                    width: 46%;
+                    border-right: 1px solid #00000021;
+                    height: 100%;
+                    top: 0;
+                    display: flex;
+                    align-items: center;
+                    white-space: wrap;
+                    background: #262B40;
+                    padding:0.313rem 0.313rem 0.313rem 0.5rem;
+                    color: #fff;
+                    font-weight: 600;
+                }
+            }
+        }
+
+        &-name {
+            @media screen and (max-width: 767px) {
+                border-bottom: 1px solid #00000021;
+                padding: .5rem .5rem .5rem 48%;
+                width: 100%;
+                margin: 0;
+                position: relative;
+            }
+
+            &:before {
+                @media screen and (max-width: 767px) {
+                    content: 'Name';
+                    position: absolute;
+                    left: 0rem;
+                    width: 46%;
+                    border-right: 1px solid #00000021;
+                    height: 100%;
+                    top: 0;
+                    display: flex;
+                    align-items: center;
+                    white-space: wrap;
+                    background: #262B40;
+                    padding:0.313rem 0.313rem 0.313rem 0.5rem;
+                    color: #fff;
+                    font-weight: 600;
+                }
+            }
+        }
+
+        &-status {
+            @media screen and (max-width: 767px) {
+                padding: .5rem .5rem .5rem 48%;
+                width: 100%;
+                margin: 0;
+                position: relative;
+            }
+
+            &:before {
+                @media screen and (max-width: 767px) {
+                    content: 'Status';
+                    position: absolute;
+                    left: 0rem;
+                    width: 46%;
+                    border-right: 1px solid #00000021;
+                    height: 100%;
+                    top: 0;
+                    display: flex;
+                    align-items: center;
+                    white-space: wrap;
+                    background: #262B40;
+                    padding:0.313rem 0.313rem 0.313rem 0.5rem;
+                    color: #fff;
+                    font-weight: 600;
+                }
+            }
+        }
+    }
+
+}

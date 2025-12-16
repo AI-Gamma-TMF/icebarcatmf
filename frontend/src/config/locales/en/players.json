@@ -1,0 +1,163 @@
+{
+  "title": "Players",
+  "kycStatus": "Kyc Status",
+  "search": "Search",
+  "tableHeaders": {
+    "id": "Id",
+    "email": "Email",
+    "name": "Name",
+    "status": "Status",
+    "kycStatus": "Kyc Status",
+    "action": "Action",
+    "regDate": "Registration Date",
+    "currency": "Currency",
+    "country": "Country",
+    "username": "Username",
+    "totalPurchaseAmount": "Total Purchase Amount",
+    "totalRedemptionAmount": "Total Redemption Amount",
+    "playThrough": "Play Through",
+    "SCBalance": "SC balance",
+    "LastLogin": "Last login",
+    "tierName": "Tier Name"
+  },
+  "activeStatus": "Active",
+  "inActiveStatus": "In-Active",
+  "noDataFound": "No data found",
+  "playerDetails": {
+    "title": "Player:",
+    "overview": {
+      "title": "Overview",
+      "basicInfo": {
+        "title": "Basic Info"
+      }
+    },
+    "wallet": {
+      "title": "Wallet",
+      "walletId": "Wallet Id",
+      "currencyCode": "Currency Code",
+      "totalSc": "Total SC",
+      "psc": "Purchased Cash (PSC)",
+      "wsc": "Winning Cash (WSC)",
+      "bsc": "Bonus Cash (BSC)",
+      "gc": "GC",
+      "createdAt": "Created At",
+      "updatedAt": "Updated At"
+    }
+  },
+  "playerLimit": {
+    "wager": "wager",
+    "deposit": "deposit",
+    "notSet": "Not Set",
+    "setLimit": "Set Limit",
+    "resetLimit": "Reset Limit",
+    "setBreak": "Set Take A Break",
+    "resetBreak": "Reset Take A Break",
+    "selfExclusion": "Self Exclusion",
+    "sessionLimit": "Session Limit",
+    "timePeriod": "Time Period",
+    "permanent": "Permanent",
+    "customValue": "Custom Value",
+    "months": "Months",
+    "set": "Set",
+    "monthPlace": "Enter Month",
+    "daysPlace": "Enter Days",
+    "hoursPlace": "Enter Hours",
+    "limitPlace": "Enter Limit",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "setSelfExclusion": "Set Self Exclusion",
+    "resetSelfExclusion": "Reset Self Exclusion",
+    "limitResetToast": "Limits Reset Successfully",
+    "limitUpdatedToast": "Limits Updated Successfully",
+    "userVerificationUpdateToast": "User Verification Updated Successfully",
+    "limitHeading": {
+      "dailyWageLimit": "Daily Purchase Limit",
+      "weeklyWageLimit": "Weekly Purchase Limit",
+      "monthlyWageLimit": "Monthly Purchase Limit",
+      "dailyDepositLimit": "Daily Deposit Limit",
+      "weeklyDepositLimit": "Weekly Deposit Limit",
+      "monthlyDepositLimit": "Monthly Deposit Limit",
+      "dailyLossLimit": "Daily Loss Limit",
+      "weeklyLossLimit": "Weekly Loss Limit",
+      "monthlyLossLimit": "Monthly Loss Limit",
+      "dailyTimeLimit": "Daily Play Limit",
+      "weeklyTimeLimit": "Weekly Play Limit",
+      "monthlyTimeLimit": "Monthly Play Limit"
+    },
+    "errors": {
+      "limitPositive": "Limit must be positive number",
+      "limitInt": "Limit must be an integer",
+      "limitReq": "Limit Required",
+      "timePeriodPositive": "Time Period must be positive number",
+      "timePeriodInt": "Time Period must be an integer",
+      "timePeriodReq": "Time Period Required",
+      "monthPositive": "Month must be positive number",
+      "monthInt": "Month must be an integer",
+      "monthReq": "Month Required"
+    }
+  },
+  "history": {
+    "filters": {
+      "coinType": "Coin Type",
+      "currency": "Select a Coin"
+    },
+    "headers": {
+      "id": "Casino Transaction Id",
+      "transactionId": "External transaction Id",
+      "userEmail": "Email",
+      "userId": "User Id",
+      "userName": "User Name",
+      "gameName": "Game Id",
+      "actionType": "Action Type",
+      "amount": "Amount",
+      "bonusMoney": "Bonus Money",
+      "currencyCode": "Amount Type",
+      "status": "Status",
+      "createdAt": "Created At",
+      "casinoGameName": "Game Name",
+      "action": "Action"
+    }
+  },
+  "transactions": {
+    "transactionsBanking": "Transactions Banking",
+    "casinoTransactions": "Casino Transactions",
+    "filters": {
+      "search": "Search",
+      "SearchByUserId":"Search by User Id",
+      "actionType": "Action Type",
+      "actionTypeOpt": "Choose Type",
+      "currency": "Select a Coin",
+      "status": "Status",
+      "time": "Time Period",
+      "casinoTransactionId": "Casino Txn ID",
+      "externalTransactionId":"External Txn ID",
+      "userId":"User Id",
+      "userName":"User Name"
+    },
+    "headers": {
+      "id": "Transaction Id",
+      "paymentId": "Payment Id",
+      "amount": "Amount",
+      "email": "Email",
+      "actioneeName": "Actionee Name",
+      "transactionType": "Transaction Type",
+      "actionType": "Action Type",
+      "status": "Status",
+      "gcCoin": "GC Coin",
+      "scCoin": "SC Coin",
+      "createdAt": "Created At",
+      "action": "Action"
+    }
+  },
+  "amoe": {
+    "amoeHeading": "Alternative Method of Entry Bonus",
+    "amoeDashboardHeading": "Amoe Dashboard",
+    "filters": {
+      "search": "Search",
+            "startDate": "Start Date",
+      "endDate": "End Date",
+      "scannedDate" : "Scanned Date",
+      "dashboard" : "Dashboard"
+        }
+  }
+}

@@ -1,0 +1,102 @@
+{
+	"title": "Packages",
+	"filters": {
+		"hot": "Hot",
+		"status": "Status",
+		"isVisibleInStore": "Is Visible in Store",
+		"search": "Search"
+	},
+	"headers": {
+		"id": "Id",
+		"orderId": "Order Id",
+		"amount": "Amount",
+		"gcCoin": "GC + Bonus GC Coin",
+		"scCoin": "SC + Bonus SC Coin",
+		"status": "Status",
+		"hot": "Hot",
+		"type": "Type",
+		"packageType": "Package Type",
+		"visibleInStore": "Visible In Store",
+		"packageUsedCount": "Claimed count",
+		"purchaseCount": "Purchase count",
+		"action": "Action"
+	},
+	"createButton": "Create",
+	"reorderButton": "Reorder",
+	"save": "Save",
+	"cancel": "Cancel",
+	"reorderPackage": {
+		"label": "Packages Reorder"
+	},
+	"activeStatus": "Active",
+	"inActiveStatus": "In-Active",
+	"noDataFound": "No data found",
+	"reorderedToast": "Packages Successfully Reordered",
+	"createPackage": {
+		"title": "Create Package",
+		"inputFields": {
+			"amountField": {
+				"label": "Amount",
+				"placeholder": "Enter Amount"
+			},
+			"gcField": {
+				"label": "GC Coin",
+				"placeholder": "Enter Coins"
+			},
+			"scField": {
+				"label": "SC Coin",
+				"placeholder": "Enter Coins"
+			},
+			"bonusGc": {
+				"label": "GC Bonus",
+				"placeholder": "Enter Bonus Coins"
+			},
+			"bonusSc": {
+				"label": "SC Bonus",
+				"placeholder": "Enter Bonus Coins"
+			},
+			"firstPurchaseScBonus": {
+				"label": "First Purchase Sc Bonus",
+				"placeholder": "Enter Coins"
+			},
+			"firstPurchaseGcBonus": {
+				"label": "First Purchase Gc Bonus",
+				"placeholder": "Enter Coins"
+			},
+			"welcomePurchaseBonusApplicableMinutes": {
+				"label": "Welcome Special Purchase Bonus",
+				"placeholder": "Enter Validation Time in Minutes"
+			},
+			"purchaseLimitPerUser": {
+				"label": "Special Purchase Limit Per User",
+				"placeholder": "Enter Special Purchase Limit"
+			},
+			"type": {
+				"label": "Package Type",
+				"options": {
+					"regular": "Regular",
+					"best": "Best",
+					"popular": "Popular"
+				}
+			},
+			"thumbnail": {
+				"label": "Thumbnail",
+				"message": "Only PNG, JPG, JPEG allowed with size < 1MB"
+			},
+			"validTill": "Valid Till",
+			"validFrom": "Valid From",
+			"12Hour": "Valid for 12 Hour",
+			"24Hour": "Valid for 24 Hour",
+			"selectDate": "Select Date",
+			"active": "Active",
+			"hot": "Hot",
+			"visibleInStore": "Visible In Store",
+			"specialPackage": "Special Package",
+			"subscriberOnly": "Subscriber Only",
+			"firstPurchaseApplicable": "First Purchase Applicable",
+			"welcomePurchaseBonusApplicable": "Welcome Purchase Bonus Applicable"
+		},
+		"cancelButton": "Cancel",
+		"submitButton": "Submit"
+	}
+}

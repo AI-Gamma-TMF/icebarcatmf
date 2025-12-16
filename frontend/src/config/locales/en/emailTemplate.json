@@ -1,0 +1,51 @@
+{
+  "title": "Email Templates",
+  "createButton": "Create",
+  "toggle": "View Template",
+  "table": {
+    "id": "Id",
+    "label": "Label",
+    "status": "Status",
+    "action": "Action"
+  },
+  "language": "Language",
+  "english": "English",
+  "editTemplate": {
+    "title": "Email Template:",
+    "dynamicKeys": "Dynamic Keys",
+    "required": "(Required)",
+    "optional": "(Optional)",
+    "contentRequired": "Content is Required!",
+    "editSuccessToast": "Template edited successfully",
+    "deleteSuccessToast": "Template deleted successfully",
+    "useAllKeysErrorToast": "Please Use All Required Dynamic Keys",
+    "invalidDynamicKeyErrorToast": "Invalid Dynamic Keys",
+    "cancelButton": "Cancel",
+    "sendTestEmailButton": "Send test email",
+    "submitButton": "Submit",
+    "testEmailTitle": "Enter Test Email",
+    "emailLabel": "Email",
+    "sendButton": "Send"
+  },
+  "createTemplate": {
+    "title": "Create Email Template",
+    "edit_title": "Edit Email Template",
+    "subject": "Subject",
+    "subjectPlace": "Enter Subject",
+    "emailCategory": "Email Category",
+    "defaultCategoryOption": "Select Category",
+    "scheduleTime": "Schedule Time",
+    "timePlace": "Select Scheduled At",
+    "content": "Content",
+    "dynamicKeys": "Dynamic Keys",
+    "cancel": "Cancel",
+    "submit": "Submit"
+  },
+  "createTemplateToast": "Template created successfully",
+  "updateTemplateToast": "Template updated successfully",
+  "errors": {
+    "subject": "Subject required",
+    "scheduleTime": "Schedule time required",
+    "emailCategory": "Email category required"
+  }
+}

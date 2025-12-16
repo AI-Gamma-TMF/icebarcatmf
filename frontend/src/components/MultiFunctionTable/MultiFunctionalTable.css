@@ -1,0 +1,28 @@
+/* .resizer {
+  cursor: ew-resize;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 6px;
+  height: 100%;
+  z-index: 100;
+} */
+
+.resizer {
+  width: 5px;
+  cursor: col-resize;
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  z-index: 1;
+}
+
+.custom-multiselect {
+  height: 43.59px;
+}
+
+.custom-multiselect .dropdown-container {
+  height: 100%;
+  border-radius: 0.5rem !important;
+}

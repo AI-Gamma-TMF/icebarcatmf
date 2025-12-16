@@ -1,0 +1,6 @@
+export * from './createPromotionThumbnail.service'
+export * from './updatePromotionThumbnail.service'
+export * from './getPromotionThumbnail.service'
+export * from './deletePromotionThumbnail.service'
+export * from './orderPromotionThumbnail.service'
+export * from './updatePromotionThumbnailActiveStatus.service'

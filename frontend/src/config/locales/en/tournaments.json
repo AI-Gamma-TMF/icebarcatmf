@@ -1,0 +1,408 @@
+{
+  "restrictedCountries": {
+    "updateSuccessToast": "Restricted countries list updated successfully.",
+    "alreadyAddedToast": "Already added this Country",
+    "restrictedCountriesLabel": "Restricted Countries",
+    "addToRestrictedCountries": "Add to Restricted Countries",
+    "removeFromRestrictedCountries": "Remove from Restricted Countries",
+    "noDataFound": "No data found",
+    "actions": "Actions",
+    "addCountriesAppearHere": "Countries you add will appear here",
+    "submitButton": "Submit",
+    "unRestrictedCountriesLabel": "Unrestricted Countries",
+    "removeCountriesAppearHere": "Countries you remove will appear here"
+  },
+  "message":"View",
+  "casinoProvider": {
+    "title": "Casino Providers",
+    "headers": {
+      "id": "Id",
+      "name": "Name",
+      "aggregators": "Aggregators",
+      "status": "Status",
+      "actions": "Actions"
+    },
+    "createButton": "Create",
+    "viewHere": "View Here",
+    "noImageAvailable": "No Image Available",
+    "activeStatus": "Active",
+    "inActiveStatus": "In-Active",
+    "noDataFound": "No data found",
+    "createProviderSuccessToast": "Provider Successfully Created.",
+    "editProviderSuccessToast": "Provider Successfully Updated.",
+    "deleteProviderSuccessToast": "Provider Successfully Deleted.",
+    "createProvider": {
+      "title": "Create Provider",
+      "provider": "Provider",
+      "cancel": "Cancel",
+      "submit": "Submit"
+    },
+    "inputField": {
+      "providerName": {
+        "label": "Provider Name",
+        "placeholder": "Enter Provider Name",
+        "errors": {
+          "required": "Provider Name Required",
+          "invalid": "Only Alpha-Numeric Values Allowed",
+          "max": "Name must be less than 50 characters"
+        }
+      },
+      "status": {
+        "label": "Active"
+      },
+      "thumbnail": {
+        "label": "Thumbnail",
+        "message": "Only PNG, JPG, JPEG allowed with size < 1MB",
+        "errors": {
+          "required": "A file is required",
+          "invalidFormat": "Uploaded file has unsupported format.",
+          "max": "File Size Should be Less Than 1MB"
+        }
+      }
+    }
+  },
+  "tournaments": {
+    "title": "Tournaments",
+    "createButton": "Create",
+    "reorder": "Reorder",
+    "headers": {
+      "tournamentId": "Tournament Id",
+      "startDate":"Start Date",
+      "endDate":"End Date",
+      "name": "Title",
+      "entryAmount": "Joining Amount",
+      "entryAmountType":"Joining Coin",
+      "totalPlayerCount":"Total Joined Player",
+      "status": "Status",
+      "actions": "Actions"
+    },
+    "reorderCategory": {
+      "label": "Casino Categories Reorder",
+      "save": "Save",
+      "id": "ID",
+      "name": "Name",
+      "status": "Status"
+    },
+    "categoryUpdateToast": "Tournament Successfully Updated.",
+    "categoryCreateToast": "Tournament Successfully Created.",
+    "categoriesReorderSuccessToast": "Tournament Successfully Reordered.",
+    "activeStatus": "Active",
+    "inActiveStatus": "In-Active",
+    "noDataFound": "No data found",
+    "createCategory": {
+      "label": "Tournament",
+      "cancel": "Cancel",
+      "submit": "Submit"
+    },
+    "checkBox": {
+      "errors": {
+        "required": "Required"
+      }
+    },
+    "inputField": {
+      "categoryName": {
+        "label": "Title",
+        "placeholder": "Enter Title",
+        "errors": {
+          "required": "Title Required",
+          "max": "Title must be less than 100 characters"
+        }
+      },
+      "entryAmount": {
+				"label": "Joining Amount",
+				"placeholder": "Enter Amount"
+			},
+      "playerLimit": {
+				"label": "Player Limit",
+				"placeholder": "Enter number of Players"
+			},
+
+      "winGc": {
+				"label": "Prize Amount GC",
+				"placeholder": "Enter  GC Amount"
+			},
+      "winSc": {
+				"label": "Prize Amount SC",
+				"placeholder": "Enter SC Amount"
+			},
+			"type": {
+				"label": "Package Type", 
+				"options": {
+					"regular": "Regular",
+					"best": "Best",
+					"popular": "Popular"
+				}
+			},
+			"thumbnail": {
+				"label": "Thumbnail",
+				"message": "Only PNG, JPG, JPEG allowed with size < 1MB"
+			},
+      "endDate": "Tournament End Date",
+      "startDate": "Tournament Start Date",
+      "selectDate": "Select Date",
+      "isActive": {
+        "label": "Active"
+      },
+      "numberOfWinners": {
+				"label": "Number Of Winners",
+				"placeholder": "Enter number of Winners"
+			},
+
+      "description": {
+				"label": "Description",
+				"placeholder": "Enter descriptions here.."
+			}
+
+    }
+  },
+  "casinoSubCategory": {
+    "title": "Casino Sub Categories",
+    "createButton": "Create",
+    "reorder": "Reorder",
+    "headers": {
+      "id": "ID",
+      "name": "Name",
+      "orderId": "Order Id",
+      "status": "Status",
+      "thumbnail": "Thumbnail",
+      "categoryName": "Category Name",
+      "featured": "Featured",
+      "actions": "Actions"
+    },
+    "viewHere": "View Here",
+    "noImageAvailable": "No Image Available",
+    "activeStatus": "Active",
+    "inActiveStatus": "In-Active",
+    "noDataFound": "No data found",
+    "categoryFirst": "Select Category First",
+    "categoryCreateSuccess": "Sub Category Successfully Created.",
+    "categoryUpdateSuccess": "Sub Category Successfully Updated.",
+    "categoryReorderSuccess": "Sub Category Successfully Reordered.",
+    "filters": {
+      "category": "Category",
+      "all": "All",
+      "onGoing":"On-Going",
+      "upComing":"Up-Coming",
+      "completed":"Completed",
+      "cancelled":"Cancelled",
+      "scCoin": "SC Coin",
+      "gcCoin": "GC Coin",
+      "active": "Active",
+      "inactive": "In-Active",
+      "status": "Status",
+      "coinType":"Coin Type",
+      "search": "Search",
+      "searchPlace": "Search Sub Category Name"
+    },
+    "reorderCategory": {
+      "title": "Casino Sub Categories Reorder",
+      "category": "Category",
+      "selectCategory": "Select Category",
+      "save": "Save",
+      "id": "ID",
+      "name": "Name",
+      "status": "Status",
+      "categoryName": "Category Name"
+    },
+    "createSubCategory": {
+      "title": "Casino Sub Category",
+      "cancel": "Cancel",
+      "submit": "Submit"
+    },
+    "inputField": {
+      "categoryName": {
+        "label": "Sub Category Name",
+        "placeholder": "Enter Sub-category Name",
+        "errors": {
+          "required": "Sub Category Name Required",
+          "max": "Sub Category Name must be less than 100 characters"
+        }
+      },
+      "category": {
+        "label": "Main Category",
+        "option": "Select Category",
+        "errors": {
+          "required": "Category is required"
+        }
+      },
+      "active": {
+        "label": "Active"
+      },
+      "featured": {
+        "label": "Is Featured"
+      },
+      "thumbnail": {
+        "label": "Sidebar Category Thumbnail",
+        "label2": "Category Thumbnail",
+        "label3": "Selected Category Thumbnail",
+        "message": "Only SVG allowed with size < 1MB",
+        "errors": {
+          "required": "A file is required",
+          "invalidFormat": "Uploaded file has unsupported format.",
+          "max": "File Size Should be Less Than 1MB"
+        }
+      }
+    }
+  },
+  "casinoGames": {
+    "addGames": {
+      "title": "Add / Remove / View Games :",
+      "gameScrumbTitle": "Casino Management >>",
+      "AddGameScrumb": " Sub Categories",
+      "gameScrumb": "Add Games",
+      "createButton": "Save",
+      "gameSuccessToast": "Games added Successfully.",
+      "addGameToast": "Already added this game",
+      "gameAddTitle": "Games you add will appear here",
+      "gameRemoveTitle": "Games you remove will appear here",
+      "gameAddedTitle": "Added Games",
+      "gameRemainTitle": "Not Added Games",
+      "headers": {
+        "id": "ID",
+        "name": "Name",
+        "gameName": "Game Name",
+        "casinoProvider": "Casino Provider",
+        "actions": "Actions"
+       
+      },
+      "addGameMessage": "Add Games to view",
+      "search": "Search",
+      "searchPlaceholder": "Search Game Name",
+      "noData": "No data found"
+    },
+    "reorder": {
+      "title": "Game Reorder",
+      "updateButton": "Update",
+      "category": "Category",
+      "selectCategory": "Select Category",
+      "subCategory": "Sub Category",
+      "all": "All",
+      "headers": {
+        "id": "ID",
+        "orderID": "Order ID",
+        "gameName": "Game Name",
+        "action": "Action"
+      },
+      "noData": "No Data Found.",
+      "selectFirstMessage": "Select Category & Sub Category First",
+      "gameNotSelected": "Game Not Selected",
+      "reorderGameSuccess": "Casino category games reordered successfully"
+    }
+  },
+  "casinoBannerManagement": {
+    "title": "Banner Management",
+    "uploadButton": "Upload",
+    "bannerPreview": "Banner Preview",
+    "noDataFound": "No data found",
+    "updateMessage": "Update Banner",
+    "delete": "Delete",
+    "bannerCreateSuccess": "Banner Successfully Created.",
+    "bannerUpdateSuccess": "Banner Successfully Updated.",
+    "bannerDeleteSuccess": "Banner Successfully Deleted.",
+    "headers": {
+      "id": "ID",
+      "visibility": "Visibility",
+      "bannerMobile": "Mobile Banner",
+      "bannerDesktop": "Banner Desktop",
+      "status": "Status",
+      "action": "Action",
+      "name" : "Banner Name",
+      "pageName": "Page Name"
+    },
+    "uploadBanner": {
+      "title": "Banner",
+      "cancel": "Cancel",
+      "submit": "Submit"
+    },
+    "constant": {
+      "homeBackground": "Home Background",
+      "homeBanner": "Home Banner",
+      "casinoBackground": "Casino Background",
+      "casinoBanner": "Casino Banner",
+      "promotionBackground": "Promotion Background",
+      "promotionBanner": "Promotion Banner",
+      "loyaltyBackground": "Loyalty Background",
+      "loyaltyBanner": "Loyalty Banner",
+      "beforeLogin": "Before Login",
+      "afterLogin": "After Login",
+      "selectBannerVisibility": "Select Banner Visibility",
+      "registration": "Registration",
+      "search": "Search",
+      "purchase": "Purchase",
+      "kyc": "KYC",
+      "none": "None",
+      "both": "Both",
+      "lobbyPage": "Lobby Page",
+      "lobbySlider" : "Lobby Slider",
+      "promotionPage": "Promotion Page",
+      "tournamentPage": "Tournament Page",
+      "rewardPage": "Reward Page",
+      "personalBonus" : "Personal Bonus Page",
+      "storePage" : "Store Page",
+      "selectPageName": "Select Page Name"
+    },
+    "inputField": {
+      "visibility": {
+        "label": "Banner Visibility",
+        "option": "Select",
+        "errors": {
+          "required": "Banner Visibility is Required"
+        }
+      },
+      "pageName": {
+        "label": "Page Name",
+        "option": "Select",
+        "errors": {
+          "required": "Page Name is Required"
+        }
+      },
+      "btnRedirection": {
+        "label": "Button Redirection",
+        "placeholder": "Enter Button Redirection"
+      },
+      "mobileImage": {
+        "label": "Mobile Banner",
+        "errors": {
+          "required": "Mobile Banner Image required",
+          "invalidFormat": "Uploaded file has unsupported format.",
+          "max": "File Size Should be Less Than 1MB"
+        }
+      },
+      "desktopImage": {
+        "label": "Desktop Banner",
+        "errors": {
+          "required": "Desktop Banner Image required",
+          "invalidFormat": "Uploaded file has unsupported format.",
+          "max": "File Size Should be Less Than 1MB"
+        }
+      },
+      "textOne": {
+        "label": "Text Heading1",
+        "placeholder": "Enter Text Heading",
+        "max": "Text Heading1 must be less than 100 characters"
+      },
+      "textTwo": {
+        "label": "Text Heading2",
+        "placeholder": "Enter Text Heading",
+        "max": "Text Heading2 must be less than 100 characters"
+      },
+      "textThree": {
+        "label": "Text Description",
+        "placeholder": "Enter Text Description",
+        "max": "Text Description must be less than 100 characters"
+      },
+      "btnText": {
+        "label": "Button Text",
+        "placeholder": "Enter Button Text",
+        "max": "Button Text must be less than 50 characters"
+      },
+      "name": {
+        "label": "Banner Name",
+        "placeholder": "Enter Banner Name",
+        "errors": {
+          "required": "Banner Name is Required"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,32 @@
+export const tableHeaders = () => [
+        { labelKey: 'history.headers.id', value: 'casinoTransactionId' },
+        // isAllUser ? { labelKey: 'history.headers.userEmail', value: 'email' },
+        { labelKey: 'history.headers.transactionId', value: 'transactionId' },
+        { labelKey: 'history.headers.userEmail', value: 'email' },
+        { labelKey: 'history.headers.userId', value: 'userId' },
+        { labelKey: 'history.headers.userName', value: 'userName' },
+        { labelKey: 'history.headers.gameName', value: 'gameId' },
+        { labelKey: 'history.headers.casinoGameName', value: '' },
+        { labelKey: 'history.headers.actionType', value: ''},
+        { labelKey: 'history.headers.amount', value: 'amount' },
+        // { labelKey: 'history.headers.bonusMoney', value: 'hot' },
+        { labelKey: 'history.headers.currencyCode', value: 'amountType' },
+        { labelKey: 'history.headers.status', value: '' },
+        { labelKey: 'history.headers.createdAt', value: 'updatedAt' },
+        { labelKey: 'history.headers.action', value: '' },
+]
+
+export const tableHeadersForPlayer = () => [
+        { labelKey: 'history.headers.id', value: 'casinoTransactionId' },
+        // isAllUser ? { labelKey: 'history.headers.userEmail', value: 'email' },
+        { labelKey: 'history.headers.transactionId', value: 'transactionId' },
+        { labelKey: 'history.headers.gameName', value: 'gameId' },
+        { labelKey: 'history.headers.casinoGameName', value: '' },
+        { labelKey: 'history.headers.actionType', value: ''},
+        { labelKey: 'history.headers.amount', value: 'amount' },
+        // { labelKey: 'history.headers.bonusMoney', value: 'hot' },
+        { labelKey: 'history.headers.currencyCode', value: 'amountType' },
+        { labelKey: 'history.headers.status', value: '' },
+        { labelKey: 'history.headers.createdAt', value: 'updatedAt' },
+        { labelKey: 'history.headers.action', value: '' },
+]

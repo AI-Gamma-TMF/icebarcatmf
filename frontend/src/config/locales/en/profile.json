@@ -1,0 +1,204 @@
+{
+  "title": "Profile",
+  "overview": "Overview",
+  "credentials": "Credentials",
+  "siteConf": "Site Configuration",
+  "permissionsTitle": "Permissions",
+  "tree": "Tree",
+  "editButton": "Edit",
+  "submitButton": "Submit",
+  "sendgridEmail": "Sendgrid Email",
+  "sendgridApiKey": "Sendgrid Api Key",
+  "overviewHeaders": {
+    "firstName": "First Name",
+    "oldPassword": "Existing Password",
+    "lastName": "Last Name",
+    "newPassword": "New Password",
+    "email": "Email",
+    "confirmNewPassword": "Confirm New Password",
+    "userName": "User Name",
+    "role": "Role"
+  },
+  "inputFields": {
+    "firstName": {
+      "errors": {
+        "min": "First Name must be at-least 3 characters",
+        "max": "First Name must be less than 30 characters",
+        "invalid": "Only Alphabets and Space Allowed and Must Start with Alphabet",
+        "required": "First Name Required"
+      }
+    },
+    "lastName": {
+      "errors": {
+        "min": "Last Name must be at-least 3 characters",
+        "max": "Last Name must be less than 30 characters",
+        "invalid": "Only Alphabets and Space Allowed and Must Start with Alphabet",
+        "required": "Last Name Required"
+      }
+    },
+    "oldPassword": {
+      "errors": {
+        "required": "Current password is requiredd",
+        "max": "Old Password must be less than 50 characters"
+      }
+    },
+    "newPassword": {
+      "errors": {
+        "invalid": "Invalid Password",
+        "required": "New password is required",
+        "max": "New Password must be less than 50 characters"
+
+      }
+    },
+    "confirmNewPassword": {
+      "errors": {
+        "notMatch": "Passwords does not match",
+        "required": "Must enter confirm Password",
+        "max": "confirm New Password Password must be less than 50 characters"
+      }
+    },
+    "phone": {
+      "errors": {
+        "min": "Phone must be at-least 10 digits",
+        "max": "Phone must be at-most 20 digits",
+        "invalid": "Enter a valid Phone Number"
+      }
+    },
+    "siteName": {
+      "label": "Site Name",
+      "errors": {
+        "min": "Site name must be at-least 3 characters",
+        "max": "Site name must be at-most 30 characters"
+      }
+    },
+    "siteUrl": {
+      "label": "Site Url",
+      "errors": {
+        "invalid": "Site URL is not valid"
+      }
+    },
+    "supportEmailAddress": {
+      "label": "Support Email Address",
+      "errors": {
+        "invalid": "Enter a valid email address"
+      }
+    },
+    "minRedeemableCoins": {
+      "label": "Minimum Redeemable Coins",
+      "errors": {
+        "required": "Minimum coins is required",
+        "min": "Coin must be at-least 1"
+      }
+    },
+    "maxRedeemableCoins": {
+      "label": "Maximum Redeemable Coins",
+      "errors": {
+        "required": "Maximum coins is required",
+        "min": "Coin must be at-least 1"
+      }
+    },
+    "xpScToGcRate": {
+      "label": "Tier's SC-GC Reward Rate",
+      "errors": {
+        "required": "Rate is required",
+        "min": "Coin must be at-least 1"
+      }
+    },
+    "scToGcRate": {
+      "label": "SC To GC Base Coin Rate",
+      "errors": {
+        "required": "Minimum coins is required",
+        "min": "Coin must be at-least 1"
+      }
+    },
+    "minScSpinLimit": {
+      "label": "Spin wheel minimum SC coins",
+      "errors": {
+        "required": "Required Field*",
+        "min": "Coin must be at-least 0"
+      }
+    },
+    "minGcSpinLimit": {
+      "label": "Minimum GC coins",
+      "errors": {
+        "required": "Required Field*",
+        "min": "Coin must be at-least 0"
+      }
+    },
+    "scVaultPercentage": {
+      "label": "Sc Vault Percentage",
+      "errors": {
+        "required": "Required Field*",
+        "min": "Coin must be at-least 1",
+        "max": "Coin must be at most 100"
+      }
+    },
+    "gcVaultPercentage": {
+      "label": "Gc Vault Percentage",
+      "errors": {
+        "required": "Required Field*",
+        "min": "Coin must be at-least 1",
+        "max": "Coin must be at most 100"
+      }
+    },
+    "siteLogo": {
+      "label": "Site Logo",
+      "errors": {
+        "required": "Site logo is required",
+        "invalid": "File Size Should be Less Than 1MB",
+        "invalidFormat": "Uploaded file has unsupported format."
+      }
+    },
+    "kycDepositAmount": {
+      "label": "KYC Deposit Amount",
+      "errors": {
+        "required": "Required Field*",
+        "min": "Amount must be at-least 1",
+        "max": "Amount must be at most 100"
+      }
+    },
+    "kycRedeemAmount": {
+      "label": "KYC Redeem Amount",
+      "errors": {
+        "required": "Required Field*",
+        "min": "Amount must be at-least 1",
+        "max": "Amount must be at most 100"
+      }
+    },
+    "cardPurchaseAmount": {
+      "label": "Card Purchase Amount",
+      "errors": {
+        "required": "Required Field*",
+        "min": "Amount must be at-least 1",
+        "max": "Amount must be at most 100"
+      }
+    },
+    "amoeBonusAmount": {
+      "label": "Amoe Bonus Time (in Days)",
+      "errors": {
+        "required": "Amoe Bonus Time (in Days) is required",
+        "min": "Days must be at-least 1"
+      }
+    },
+    "vipMinQuestionnaireBonus":{
+      "label":"Minimum VIP Questionnaire SC Reward",
+      "errors":{
+        "required":"VIP Questionnaire SC Reward Min value is required",
+        "min":"Questionnaire SC Reward must be-atleast 1"
+      }
+    },
+    "vipMaxQuestionnaireBonus":{
+      "label":"Maximum VIP Questionnaire SC Reward",
+      "errors":{
+        "required":"VIP Questionnaire SC Reward Max value is required",
+        "min":"Questionnaire SC Reward must be-atleast 1"
+      }
+    },
+    "vipNgrQuestionnaireMultiplier":{
+      "label":"Vip Questionnaire NGR multiplier",
+      "errors":{
+        "required":"VIP Questionnaire NGR multiplier is required"
+      }
+    }
+  }
+}

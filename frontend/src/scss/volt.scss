@@ -1,0 +1,48 @@
+@import url('https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600,700,800&display=swap');
+
+// Bootstrap mixins and functions
+@import "../../node_modules/bootstrap/scss/mixins";
+@import "../../node_modules/bootstrap/scss/functions";
+
+// Change variables here
+@import "volt/variables";
+
+// Bootstrap
+@import "../../node_modules/bootstrap/scss/bootstrap";
+
+// Vendor
+@import "volt/vendor";
+
+// volt mixins & functions
+@import "volt/mixins";
+@import "volt/functions";
+
+// Utilities
+@import "volt/reboot";
+@import "volt/utilities";
+
+// Layout
+@import "volt/layout";
+
+// Components
+@import "volt/components";
+
+// Casino Luxurious Gold Theme
+@import "casino-theme";
+
+// Modern Theme - Glass Morphism & Contemporary Design
+@import "modern-theme";
+
+// Casino Management Background
+@import "casino-background";
+
+// Casino Login Page Background
+@import "casino-login-bg";
+
+// Casino Elements - Cards, Chips, Dice
+@import "casino-elements";
+
+// Remove Scroll
+@import "remove-scroll";
+
+// write your custom styles here!

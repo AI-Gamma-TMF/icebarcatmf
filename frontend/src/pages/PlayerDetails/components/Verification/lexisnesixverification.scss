@@ -1,0 +1,119 @@
+// .custom-col{
+//     min-height: 100px;
+
+//     .div-overview{
+//         margin: 0 1rem;
+//     }
+
+// }
+
+// .input-range-line {
+//     width: 100%;
+//     background-color: #000;
+//     height: 2px;
+//     margin-top: 2rem;
+//     display: flex;
+//     justify-content: end;
+
+//     .input-range-bg {
+//         margin-top: -10px;
+//         background: rgb(253, 29, 29);
+//         background: linear-gradient(90deg, rgba(253, 29, 29, 1) 0%, rgba(252, 176, 69, 1) 33%, rgba(180, 173, 58, 1) 65%, rgba(58, 180, 80, 1) 82%);
+//         width: 80%;
+//         height: 10px;
+//         display: flex;
+//         position: relative;
+//         z-index: 1;
+//     }
+// }
+
+// .input-range-box {
+//     width: 100%;
+//     display: flex;
+//     justify-content: space-between;
+//     align-items: center;
+
+//     // .input-range-zero{
+//     //     position: relative;
+//     //     padding-top: 0.75rem;
+
+//     //     &::before {
+//     //         width: 2px;
+//     //         height: 20px;
+//     //         content: '';
+//     //         position: absolute;
+//     //         background: black;
+//     //         left: 0%;
+//     //         bottom: 75%;
+//     //     }
+//     // }
+
+//     .input-range {
+//         position: relative;
+//         padding-top: 0.75rem;
+//         &:not(:last-child) {
+//             width: calc(100% / 5);
+//         }
+
+//         &:first-child .input-range-number{
+//             left: -0.063rem;
+//         }
+
+//         .input-range-number {
+//             position: absolute;
+//             left: -0.563rem;
+//         }
+        
+//         &::before {
+//             width: 2px;
+//             height: 20px;
+//             content: '';
+//             position: absolute;
+//             background: black;
+//             left: 0%;
+//             bottom: 25%;
+//         }
+
+//         &.input-range-one {
+//             &::before {
+//                 left: 0%;
+//             }
+//         }
+
+//         &.input-range-last {
+//             &::before {
+//                 left: 100%;
+//             }
+//         }
+//     }
+// }
+
+// .input-range-selector{
+//     margin-top: -1.313rem;
+//     z-index: 3;
+//     position: relative;
+//     input{
+//         appearance: none;
+//         background: transparent;
+//         width: calc(100% + 12px);
+//         margin-left: -6px;
+//         margin-right: -6px;
+//     }
+
+//       input[type=range]::-webkit-slider-thumb {
+//         -webkit-appearance: none;
+//         border: none;
+//         height: 2rem;
+//         width: 1rem;
+//         border-radius: 3px;
+//         background: #272740;
+//         // background: url('../../../../assets/img/arrow-v.png');
+//         // background-position: center;
+//         // background-repeat: no-repeat;
+//         // background-size: 1rem 2rem;
+//         cursor: pointer;
+//         margin-top: -12px;
+//       }
+// }
+
+// not in use 

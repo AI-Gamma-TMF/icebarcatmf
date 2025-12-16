@@ -1,0 +1,484 @@
+// Modern Casino Management Login Background
+// Professional Casino Backoffice Theme
+
+// ============================================
+// CASINO LOGIN SECTION
+// ============================================
+
+.casino-login-section {
+  position: relative;
+  min-height: 100vh;
+  max-height: 100vh;
+  height: 100vh;
+  overflow: hidden;
+  margin: 0 !important;
+  padding: 0 !important;
+  display: flex;
+  align-items: center;
+  
+  // Remove default background
+  background: transparent !important;
+  
+  // Main casino-themed background
+  &::before {
+    content: '';
+    position: absolute;
+    top: -10%;
+    left: -10%;
+    right: -10%;
+    bottom: -10%;
+    background: 
+      // Poker table green felt texture (very subtle)
+      radial-gradient(circle at 30% 40%, rgba(0, 100, 70, 0.03) 0%, transparent 40%),
+      radial-gradient(circle at 70% 60%, rgba(0, 80, 60, 0.02) 0%, transparent 40%),
+      
+      // Subtle grid for management interface feel
+      repeating-linear-gradient(
+        0deg,
+        transparent 0px,
+        transparent 49px,
+        rgba(0, 229, 160, 0.03) 49px,
+        rgba(0, 229, 160, 0.03) 50px
+      ),
+      repeating-linear-gradient(
+        90deg,
+        transparent 0px,
+        transparent 49px,
+        rgba(0, 229, 160, 0.03) 49px,
+        rgba(0, 229, 160, 0.03) 50px
+      ),
+      
+      // Base dark gradient
+      radial-gradient(ellipse at 50% 50%, #0f0f0f 0%, #0a0a0a 100%);
+    
+    z-index: -2;
+    filter: blur(0px);
+  }
+  
+  // Animated casino elements
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+      // Floating card suits (spade, heart, diamond, club)
+      radial-gradient(circle at 15% 20%, rgba(0, 229, 160, 0.015) 0%, transparent 3%),
+      radial-gradient(circle at 85% 25%, rgba(0, 229, 160, 0.015) 0%, transparent 3%),
+      radial-gradient(circle at 25% 75%, rgba(0, 229, 160, 0.015) 0%, transparent 3%),
+      radial-gradient(circle at 75% 80%, rgba(0, 229, 160, 0.015) 0%, transparent 3%),
+      radial-gradient(circle at 50% 50%, rgba(0, 229, 160, 0.01) 0%, transparent 5%);
+    
+    background-size: 100% 100%;
+    animation: floatElements 25s ease-in-out infinite;
+    z-index: -1;
+    pointer-events: none;
+  }
+}
+
+// ============================================
+// CASINO THEMED DECORATIVE ELEMENTS
+// ============================================
+
+// Left side casino elements
+.casino-login-section {
+  .container {
+    position: relative;
+    z-index: 1;
+  }
+  
+  .container::before {
+    content: '';
+    position: absolute;
+    left: -200px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 400px;
+    height: 400px;
+    background: 
+      // Roulette wheel inspired circular pattern
+      radial-gradient(circle at center, 
+        transparent 0%,
+        transparent 30%,
+        rgba(0, 229, 160, 0.02) 30%,
+        rgba(0, 229, 160, 0.02) 31%,
+        transparent 31%,
+        transparent 45%,
+        rgba(0, 229, 160, 0.015) 45%,
+        rgba(0, 229, 160, 0.015) 46%,
+        transparent 46%,
+        transparent 60%,
+        rgba(0, 229, 160, 0.01) 60%,
+        rgba(0, 229, 160, 0.01) 61%,
+        transparent 61%
+      ),
+      // Radiating lines (like roulette numbers)
+      repeating-conic-gradient(
+        from 0deg at center,
+        transparent 0deg,
+        transparent 8deg,
+        rgba(0, 229, 160, 0.01) 8deg,
+        rgba(0, 229, 160, 0.01) 10deg
+      );
+    
+    border-radius: 50%;
+    animation: rotate 60s linear infinite;
+    pointer-events: none;
+    z-index: 0;
+    
+    @media (max-width: 768px) {
+      display: none;
+    }
+  }
+  
+  // Right side casino elements
+  .container::after {
+    content: '';
+    position: absolute;
+    right: -200px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 400px;
+    height: 400px;
+    background: 
+      // Poker chip stack pattern
+      radial-gradient(circle at 50% 30%, rgba(0, 229, 160, 0.03) 0%, transparent 15%),
+      radial-gradient(circle at 50% 40%, rgba(0, 229, 160, 0.025) 0%, transparent 15%),
+      radial-gradient(circle at 50% 50%, rgba(0, 229, 160, 0.02) 0%, transparent 15%),
+      radial-gradient(circle at 50% 60%, rgba(0, 229, 160, 0.015) 0%, transparent 15%),
+      radial-gradient(circle at 50% 70%, rgba(0, 229, 160, 0.01) 0%, transparent 15%);
+    
+    animation: floatUp 20s ease-in-out infinite;
+    pointer-events: none;
+    z-index: 0;
+    
+    @media (max-width: 768px) {
+      display: none;
+    }
+  }
+}
+
+// ============================================
+// MULTIPLE DICE SCATTERED ACROSS BACKGROUND
+// ============================================
+
+// Dice 1 - Top Center
+.casino-login-section .row::before {
+  content: '';
+  position: absolute;
+  top: 8%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 120px;
+  background: 
+    radial-gradient(circle at 30% 30%, rgba(0, 229, 160, 0.06) 0%, rgba(0, 229, 160, 0.06) 8%, transparent 8%),
+    radial-gradient(circle at 70% 70%, rgba(0, 229, 160, 0.06) 0%, rgba(0, 229, 160, 0.06) 8%, transparent 8%),
+    radial-gradient(circle at 50% 50%, rgba(0, 229, 160, 0.05) 0%, rgba(0, 229, 160, 0.05) 8%, transparent 8%);
+  border: 2px solid rgba(0, 229, 160, 0.08);
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 229, 160, 0.15);
+  animation: diceRoll1 12s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
+  
+  @media (max-width: 768px) {
+    width: 70px;
+    height: 70px;
+  }
+}
+
+// Dice 2 - Top Left
+.casino-login-section::before {
+  content: '';
+  position: absolute;
+  top: 15%;
+  left: 15%;
+  width: 100px;
+  height: 100px;
+  background: 
+    radial-gradient(circle at 25% 25%, rgba(0, 229, 160, 0.05) 0%, rgba(0, 229, 160, 0.05) 10%, transparent 10%),
+    radial-gradient(circle at 75% 25%, rgba(0, 229, 160, 0.05) 0%, rgba(0, 229, 160, 0.05) 10%, transparent 10%),
+    radial-gradient(circle at 25% 75%, rgba(0, 229, 160, 0.05) 0%, rgba(0, 229, 160, 0.05) 10%, transparent 10%),
+    radial-gradient(circle at 75% 75%, rgba(0, 229, 160, 0.05) 0%, rgba(0, 229, 160, 0.05) 10%, transparent 10%);
+  border: 2px solid rgba(0, 229, 160, 0.07);
+  border-radius: 12px;
+  box-shadow: 0 3px 12px rgba(0, 229, 160, 0.12);
+  animation: diceRoll2 15s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
+  
+  @media (max-width: 768px) {
+    width: 60px;
+    height: 60px;
+    left: 5%;
+  }
+}
+
+// Dice 3 - Top Right
+.casino-login-section .container::before {
+  width: 110px;
+  height: 110px;
+  top: 12%;
+  right: 12%;
+  left: auto;
+  background: 
+    radial-gradient(circle at 30% 30%, rgba(0, 229, 160, 0.055) 0%, rgba(0, 229, 160, 0.055) 9%, transparent 9%),
+    radial-gradient(circle at 70% 30%, rgba(0, 229, 160, 0.055) 0%, rgba(0, 229, 160, 0.055) 9%, transparent 9%),
+    radial-gradient(circle at 30% 70%, rgba(0, 229, 160, 0.055) 0%, rgba(0, 229, 160, 0.055) 9%, transparent 9%),
+    radial-gradient(circle at 70% 70%, rgba(0, 229, 160, 0.055) 0%, rgba(0, 229, 160, 0.055) 9%, transparent 9%),
+    radial-gradient(circle at 50% 50%, rgba(0, 229, 160, 0.055) 0%, rgba(0, 229, 160, 0.055) 9%, transparent 9%);
+  border: 2px solid rgba(0, 229, 160, 0.07);
+  border-radius: 13px;
+  box-shadow: 0 3px 12px rgba(0, 229, 160, 0.13);
+  animation: diceRoll3 18s ease-in-out infinite;
+  
+  @media (max-width: 768px) {
+    width: 65px;
+    height: 65px;
+    right: 5%;
+  }
+}
+
+// Dice 4 - Bottom Left
+.casino-login-section .container::after {
+  content: '';
+  position: absolute;
+  bottom: 15%;
+  left: 10%;
+  width: 95px;
+  height: 95px;
+  background: 
+    radial-gradient(circle at 50% 50%, rgba(0, 229, 160, 0.06) 0%, rgba(0, 229, 160, 0.06) 10%, transparent 10%),
+    radial-gradient(circle at 30% 30%, rgba(0, 229, 160, 0.05) 0%, rgba(0, 229, 160, 0.05) 8%, transparent 8%),
+    radial-gradient(circle at 70% 30%, rgba(0, 229, 160, 0.05) 0%, rgba(0, 229, 160, 0.05) 8%, transparent 8%),
+    radial-gradient(circle at 30% 70%, rgba(0, 229, 160, 0.05) 0%, rgba(0, 229, 160, 0.05) 8%, transparent 8%),
+    radial-gradient(circle at 70% 70%, rgba(0, 229, 160, 0.05) 0%, rgba(0, 229, 160, 0.05) 8%, transparent 8%),
+    radial-gradient(circle at 50% 20%, rgba(0, 229, 160, 0.04) 0%, rgba(0, 229, 160, 0.04) 7%, transparent 7%),
+    radial-gradient(circle at 50% 80%, rgba(0, 229, 160, 0.04) 0%, rgba(0, 229, 160, 0.04) 7%, transparent 7%);
+  border: 2px solid rgba(0, 229, 160, 0.08);
+  border-radius: 14px;
+  box-shadow: 0 4px 14px rgba(0, 229, 160, 0.14);
+  animation: diceRoll4 20s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
+  
+  @media (max-width: 768px) {
+    width: 55px;
+    height: 55px;
+    left: 5%;
+  }
+}
+
+// ============================================
+// CARD DECK PATTERN (Bottom)
+// ============================================
+
+.casino-login-section .row::after {
+  content: '';
+  position: absolute;
+  bottom: -120px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 300px;
+  height: 100px;
+  background: 
+    // Stacked cards effect
+    linear-gradient(90deg, 
+      transparent 0%,
+      rgba(0, 229, 160, 0.02) 10%,
+      rgba(0, 229, 160, 0.03) 20%,
+      rgba(0, 229, 160, 0.04) 30%,
+      rgba(0, 229, 160, 0.03) 40%,
+      rgba(0, 229, 160, 0.02) 50%,
+      rgba(0, 229, 160, 0.03) 60%,
+      rgba(0, 229, 160, 0.04) 70%,
+      rgba(0, 229, 160, 0.03) 80%,
+      rgba(0, 229, 160, 0.02) 90%,
+      transparent 100%
+    );
+  
+  border-radius: 10px;
+  animation: cardShuffle 10s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
+  
+  @media (max-width: 768px) {
+    width: 200px;
+    height: 60px;
+    bottom: -80px;
+  }
+}
+
+// ============================================
+// SLOT MACHINE INSPIRED LINES
+// ============================================
+
+.casino-login-section .row {
+  position: relative;
+  
+  &::before {
+    box-shadow: 
+      0 0 30px rgba(0, 229, 160, 0.1),
+      inset 0 0 20px rgba(0, 229, 160, 0.05);
+  }
+}
+
+// ============================================
+// ANIMATED CASINO GLOW EFFECTS
+// ============================================
+
+.casino-login-section {
+  // Top glow
+  &::after {
+    background-image: 
+      radial-gradient(ellipse at 50% 0%, rgba(0, 229, 160, 0.08) 0%, transparent 50%),
+      radial-gradient(ellipse at 0% 50%, rgba(0, 229, 160, 0.05) 0%, transparent 50%),
+      radial-gradient(ellipse at 100% 50%, rgba(0, 229, 160, 0.05) 0%, transparent 50%);
+    mix-blend-mode: screen;
+  }
+}
+
+// ============================================
+// ANIMATIONS
+// ============================================
+
+@keyframes floatElements {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+    opacity: 0.3;
+  }
+  50% {
+    transform: translateY(-30px) scale(1.05);
+    opacity: 0.5;
+  }
+}
+
+@keyframes rotate {
+  from {
+    transform: translateY(-50%) rotate(0deg);
+  }
+  to {
+    transform: translateY(-50%) rotate(360deg);
+  }
+}
+
+@keyframes floatUp {
+  0%, 100% {
+    transform: translateY(-50%);
+  }
+  50% {
+    transform: translateY(-60%);
+  }
+}
+
+@keyframes diceRoll {
+  0%, 100% {
+    transform: translateX(-50%) rotate(0deg);
+  }
+  25% {
+    transform: translateX(-50%) rotate(90deg);
+  }
+  50% {
+    transform: translateX(-50%) rotate(180deg);
+  }
+  75% {
+    transform: translateX(-50%) rotate(270deg);
+  }
+}
+
+@keyframes cardShuffle {
+  0%, 100% {
+    transform: translateX(-50%) skewX(0deg);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translateX(-50%) skewX(-5deg);
+    opacity: 0.7;
+  }
+}
+
+// ============================================
+// POKER TABLE FELT TEXTURE
+// ============================================
+
+.casino-login-section {
+  // Add subtle texture overlay
+  background-image: 
+    // Fine noise texture
+    repeating-linear-gradient(
+      45deg,
+      transparent 0px,
+      transparent 2px,
+      rgba(0, 0, 0, 0.02) 2px,
+      rgba(0, 0, 0, 0.02) 4px
+    );
+  
+  background-size: 4px 4px;
+}
+
+// ============================================
+// CHIP STACK CORNERS
+// ============================================
+
+.casino-login-section {
+  // Top-left chip stack
+  &::before {
+    content: '';
+    position: absolute;
+    top: 10%;
+    left: 5%;
+    width: 100px;
+    height: 100px;
+    background: 
+      radial-gradient(circle at center, rgba(0, 229, 160, 0.04) 0%, transparent 40%),
+      radial-gradient(circle at center, transparent 30%, rgba(0, 229, 160, 0.02) 30%, rgba(0, 229, 160, 0.02) 32%, transparent 32%);
+    border-radius: 50%;
+    animation: pulse 4s ease-in-out infinite;
+    
+    @media (max-width: 768px) {
+      width: 60px;
+      height: 60px;
+    }
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.1);
+  }
+}
+
+// ============================================
+// CARD SUIT SYMBOLS (Very Subtle)
+// ============================================
+
+.casino-login-section .container {
+  &::before,
+  &::after {
+    // Add card suit patterns
+    box-shadow: 
+      inset 0 0 50px rgba(0, 229, 160, 0.02);
+  }
+}
+
+// ============================================
+// RESPONSIVE ADJUSTMENTS
+// ============================================
+
+@media (max-width: 768px) {
+  .casino-login-section {
+    &::before,
+    &::after {
+      background-size: 50px 50px;
+    }
+  }
+}
+

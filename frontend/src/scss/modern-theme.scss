@@ -1,0 +1,837 @@
+// Modern Casino Backoffice Theme with SWEEP Branding
+// Glass Morphism, Smooth Animations, Contemporary Design
+
+// ============================================
+// MODERN CARD DESIGNS
+// ============================================
+
+.card {
+  background: rgba(26, 26, 26, 0.8) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  border: 1px solid rgba(0, 229, 160, 0.15) !important;
+  box-shadow: 
+    0 8px 32px 0 rgba(0, 0, 0, 0.37),
+    0 0 1px 0 rgba(0, 229, 160, 0.1) !important;
+  border-radius: 16px !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  overflow: hidden !important;
+  
+  &:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 
+      0 12px 48px 0 rgba(0, 0, 0, 0.5),
+      0 0 2px 0 rgba(0, 229, 160, 0.3) !important;
+    border-color: rgba(0, 229, 160, 0.3) !important;
+  }
+  
+  .card-header {
+    background: linear-gradient(135deg, rgba(0, 229, 160, 0.1) 0%, rgba(0, 217, 148, 0.05) 100%) !important;
+    border-bottom: 1px solid rgba(0, 229, 160, 0.15) !important;
+    border-radius: 16px 16px 0 0 !important;
+    padding: 1.25rem 1.5rem !important;
+    color: #ffffff !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.5px !important;
+  }
+  
+  .card-body {
+    padding: 1.5rem !important;
+    color: #e5e5e5 !important;
+  }
+  
+  .card-footer {
+    background: rgba(0, 229, 160, 0.03) !important;
+    border-top: 1px solid rgba(0, 229, 160, 0.1) !important;
+    border-radius: 0 0 16px 16px !important;
+    padding: 1rem 1.5rem !important;
+  }
+}
+
+// ============================================
+// MODERN BUTTON STYLES
+// ============================================
+
+.btn {
+  border-radius: 12px !important;
+  padding: 0.75rem 1.5rem !important;
+  font-weight: 600 !important;
+  font-size: 0.95rem !important;
+  letter-spacing: 0.5px !important;
+  text-transform: uppercase !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  position: relative !important;
+  overflow: hidden !important;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+  }
+  
+  &:hover::before {
+    width: 300px;
+    height: 300px;
+  }
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #00E5A0 0%, #00FFAA 50%, #00D994 100%) !important;
+  background-size: 200% 200% !important;
+  border: none !important;
+  color: #000000 !important;
+  box-shadow: 
+    0 4px 15px rgba(0, 229, 160, 0.4),
+    0 0 20px rgba(0, 229, 160, 0.1) !important;
+  
+  &:hover:not(:disabled) {
+    background-position: right center !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 
+      0 6px 25px rgba(0, 229, 160, 0.5),
+      0 0 30px rgba(0, 229, 160, 0.2) !important;
+  }
+  
+  &:active:not(:disabled) {
+    transform: translateY(0) !important;
+    box-shadow: 
+      0 2px 10px rgba(0, 229, 160, 0.3),
+      0 0 15px rgba(0, 229, 160, 0.1) !important;
+  }
+  
+  &:disabled {
+    opacity: 0.4 !important;
+    cursor: not-allowed !important;
+    background: linear-gradient(135deg, #4a4a4a 0%, #666666 50%, #4a4a4a 100%) !important;
+    box-shadow: none !important;
+    transform: none !important;
+    color: #999999 !important;
+    pointer-events: none !important;
+  }
+  
+  &:not(:disabled) {
+    cursor: pointer !important;
+    pointer-events: auto !important;
+  }
+}
+
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  color: #ffffff !important;
+  
+  &:hover {
+    background: rgba(255, 255, 255, 0.1) !important;
+    border-color: rgba(0, 229, 160, 0.3) !important;
+  }
+}
+
+.btn-outline-primary {
+  background: transparent !important;
+  border: 2px solid #00E5A0 !important;
+  color: #00E5A0 !important;
+  
+  &:hover {
+    background: #00E5A0 !important;
+    color: #000000 !important;
+    box-shadow: 0 0 20px rgba(0, 229, 160, 0.4) !important;
+  }
+}
+
+// ============================================
+// MODERN INPUT FIELDS
+// ============================================
+
+.form-group {
+  margin-bottom: 1.5rem !important;
+  position: relative !important;
+}
+
+.form-control {
+  background: rgba(255, 255, 255, 0.03) !important;
+  backdrop-filter: blur(10px) !important;
+  border: 2px solid rgba(255, 255, 255, 0.08) !important;
+  border-radius: 12px !important;
+  padding: 0.875rem 1rem !important;
+  color: #ffffff !important;
+  font-size: 0.95rem !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  
+  &:focus {
+    background: rgba(255, 255, 255, 0.05) !important;
+    border-color: #00E5A0 !important;
+    box-shadow: 
+      0 0 0 4px rgba(0, 229, 160, 0.1),
+      0 8px 16px rgba(0, 0, 0, 0.2) !important;
+    transform: translateY(-1px) !important;
+    color: #ffffff !important;
+  }
+  
+  &:hover:not(:focus) {
+    border-color: rgba(0, 229, 160, 0.2) !important;
+  }
+  
+  &::placeholder {
+    color: rgba(255, 255, 255, 0.4) !important;
+    font-size: 0.9rem !important;
+  }
+}
+
+// Input Group with Icons
+.input-group {
+  width: 100% !important;
+  max-width: 100% !important;
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  
+  .input-group-text {
+    background: rgba(0, 229, 160, 0.08) !important;
+    border: 2px solid rgba(255, 255, 255, 0.08) !important;
+    border-right: none !important;
+    border-radius: 12px 0 0 12px !important;
+    color: #00E5A0 !important;
+    transition: all 0.3s ease !important;
+    min-width: 44px !important;
+    flex-shrink: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    
+    &:last-child {
+      border-right: 2px solid rgba(255, 255, 255, 0.08) !important;
+      border-left: none !important;
+      border-radius: 0 12px 12px 0 !important;
+    }
+  }
+  
+  .form-control {
+    border-left: none !important;
+    border-radius: 0 12px 12px 0 !important;
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+    
+    &:not(:last-child) {
+      border-radius: 0 !important;
+    }
+  }
+  
+  &:focus-within {
+    .input-group-text {
+      border-color: #00E5A0 !important;
+      background: rgba(0, 229, 160, 0.12) !important;
+      box-shadow: 0 0 0 4px rgba(0, 229, 160, 0.1) !important;
+    }
+  }
+}
+
+// Modern Labels
+label {
+  color: rgba(255, 255, 255, 0.9) !important;
+  font-weight: 600 !important;
+  font-size: 0.875rem !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.5px !important;
+  margin-bottom: 0.5rem !important;
+  display: block !important;
+}
+
+// ============================================
+// MODERN TABLE DESIGN
+// ============================================
+
+.table {
+  color: #e5e5e5 !important;
+  border-collapse: separate !important;
+  border-spacing: 0 8px !important;
+  
+  thead th {
+    background: linear-gradient(135deg, rgba(0, 229, 160, 0.15) 0%, rgba(0, 217, 148, 0.1) 100%) !important;
+    border: none !important;
+    padding: 1rem 1.25rem !important;
+    color: #00FFAA !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1px !important;
+    font-size: 0.75rem !important;
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 10 !important;
+    backdrop-filter: blur(10px) !important;
+    
+    &:first-child {
+      border-radius: 12px 0 0 12px !important;
+    }
+    
+    &:last-child {
+      border-radius: 0 12px 12px 0 !important;
+    }
+  }
+  
+  tbody tr {
+    background: rgba(26, 26, 26, 0.6) !important;
+    backdrop-filter: blur(10px) !important;
+    border: 1px solid rgba(0, 229, 160, 0.08) !important;
+    transition: all 0.3s ease !important;
+    
+    &:hover {
+      background: rgba(0, 229, 160, 0.08) !important;
+      border-color: rgba(0, 229, 160, 0.2) !important;
+      transform: translateX(4px) !important;
+      box-shadow: -4px 0 0 #00E5A0 !important;
+    }
+    
+    td {
+      padding: 1rem 1.25rem !important;
+      border: none !important;
+      
+      &:first-child {
+        border-radius: 12px 0 0 12px !important;
+      }
+      
+      &:last-child {
+        border-radius: 0 12px 12px 0 !important;
+      }
+    }
+  }
+}
+
+// ============================================
+// MODERN BADGES
+// ============================================
+
+.badge {
+  padding: 0.5em 1em !important;
+  border-radius: 8px !important;
+  font-weight: 600 !important;
+  font-size: 0.75rem !important;
+  letter-spacing: 0.5px !important;
+  text-transform: uppercase !important;
+  border: 1px solid transparent !important;
+  
+  &.badge-success,
+  &.bg-success {
+    background: linear-gradient(135deg, #10b981 0%, #14b8a6 100%) !important;
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3) !important;
+    color: #ffffff !important;
+  }
+  
+  &.badge-danger,
+  &.bg-danger {
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%) !important;
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3) !important;
+    color: #ffffff !important;
+  }
+  
+  &.badge-warning,
+  &.bg-warning {
+    background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%) !important;
+    box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3) !important;
+    color: #000000 !important;
+  }
+  
+  &.badge-primary,
+  &.bg-primary {
+    background: linear-gradient(135deg, #00E5A0 0%, #00D994 100%) !important;
+    box-shadow: 0 4px 12px rgba(0, 229, 160, 0.3) !important;
+    color: #000000 !important;
+  }
+}
+
+// ============================================
+// MODERN MODAL
+// ============================================
+
+.modal-content {
+  background: rgba(26, 26, 26, 0.95) !important;
+  backdrop-filter: blur(30px) !important;
+  border: 1px solid rgba(0, 229, 160, 0.2) !important;
+  border-radius: 20px !important;
+  box-shadow: 
+    0 20px 60px rgba(0, 0, 0, 0.7),
+    0 0 1px rgba(0, 229, 160, 0.3) !important;
+  
+  .modal-header {
+    background: linear-gradient(135deg, rgba(0, 229, 160, 0.1) 0%, transparent 100%) !important;
+    border-bottom: 1px solid rgba(0, 229, 160, 0.15) !important;
+    border-radius: 20px 20px 0 0 !important;
+    padding: 1.5rem !important;
+    
+    .modal-title {
+      color: #00FFAA !important;
+      font-weight: 700 !important;
+      letter-spacing: 0.5px !important;
+    }
+    
+    .btn-close {
+      filter: invert(1) grayscale(100%) brightness(200%);
+      opacity: 0.7;
+      transition: all 0.3s ease !important;
+      
+      &:hover {
+        opacity: 1;
+        transform: rotate(90deg);
+      }
+    }
+  }
+  
+  .modal-body {
+    padding: 1.5rem !important;
+    color: #e5e5e5 !important;
+  }
+  
+  .modal-footer {
+    background: rgba(0, 229, 160, 0.03) !important;
+    border-top: 1px solid rgba(0, 229, 160, 0.15) !important;
+    border-radius: 0 0 20px 20px !important;
+    padding: 1.25rem 1.5rem !important;
+  }
+}
+
+.modal-backdrop {
+  backdrop-filter: blur(8px) !important;
+  background: rgba(0, 0, 0, 0.7) !important;
+}
+
+// ============================================
+// MODERN DROPDOWN
+// ============================================
+
+.dropdown-menu {
+  background: rgba(26, 26, 26, 0.95) !important;
+  backdrop-filter: blur(20px) !important;
+  border: 1px solid rgba(0, 229, 160, 0.2) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5) !important;
+  padding: 0.5rem !important;
+  
+  .dropdown-item {
+    color: #e5e5e5 !important;
+    border-radius: 8px !important;
+    padding: 0.75rem 1rem !important;
+    margin-bottom: 0.25rem !important;
+    transition: all 0.2s ease !important;
+    
+    &:hover {
+      background: rgba(0, 229, 160, 0.1) !important;
+      color: #00FFAA !important;
+      transform: translateX(4px) !important;
+    }
+    
+    &:active {
+      background: rgba(0, 229, 160, 0.15) !important;
+    }
+    
+    &:last-child {
+      margin-bottom: 0 !important;
+    }
+  }
+  
+  .dropdown-divider {
+    border-color: rgba(0, 229, 160, 0.15) !important;
+    margin: 0.5rem 0 !important;
+  }
+}
+
+// ============================================
+// MODERN PAGINATION
+// ============================================
+
+.pagination {
+  gap: 0.5rem !important;
+  
+  .page-item {
+    .page-link {
+      background: rgba(26, 26, 26, 0.6) !important;
+      backdrop-filter: blur(10px) !important;
+      border: 1px solid rgba(0, 229, 160, 0.15) !important;
+      border-radius: 10px !important;
+      color: #00E5A0 !important;
+      padding: 0.625rem 1rem !important;
+      font-weight: 600 !important;
+      transition: all 0.3s ease !important;
+      margin: 0 !important;
+      
+      &:hover {
+        background: rgba(0, 229, 160, 0.1) !important;
+        border-color: #00E5A0 !important;
+        color: #00FFAA !important;
+        transform: translateY(-2px) !important;
+        box-shadow: 0 4px 12px rgba(0, 229, 160, 0.2) !important;
+      }
+    }
+    
+    &.active .page-link {
+      background: linear-gradient(135deg, #00E5A0 0%, #00D994 100%) !important;
+      border-color: #00E5A0 !important;
+      color: #000000 !important;
+      box-shadow: 0 4px 15px rgba(0, 229, 160, 0.4) !important;
+    }
+    
+    &.disabled .page-link {
+      background: rgba(15, 15, 15, 0.4) !important;
+      border-color: rgba(255, 255, 255, 0.05) !important;
+      color: rgba(255, 255, 255, 0.3) !important;
+    }
+  }
+}
+
+// ============================================
+// MODERN ALERTS
+// ============================================
+
+.alert {
+  border-radius: 12px !important;
+  border: none !important;
+  border-left: 4px solid !important;
+  backdrop-filter: blur(10px) !important;
+  padding: 1rem 1.25rem !important;
+  font-weight: 500 !important;
+  
+  &.alert-success {
+    background: rgba(16, 185, 129, 0.15) !important;
+    border-color: #10b981 !important;
+    color: #86efac !important;
+  }
+  
+  &.alert-danger {
+    background: rgba(239, 68, 68, 0.15) !important;
+    border-color: #ef4444 !important;
+    color: #fca5a5 !important;
+  }
+  
+  &.alert-warning {
+    background: rgba(245, 158, 11, 0.15) !important;
+    border-color: #f59e0b !important;
+    color: #fbbf24 !important;
+  }
+  
+  &.alert-info {
+    background: rgba(0, 229, 160, 0.15) !important;
+    border-color: #00E5A0 !important;
+    color: #00FFAA !important;
+  }
+}
+
+// ============================================
+// MODERN ERROR MESSAGES
+// ============================================
+
+.error-message,
+.text-danger {
+  color: #ff6b6b !important;
+  font-size: 0.875rem !important;
+  margin-top: 0.5rem !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.5rem !important;
+  padding: 0 !important;
+  background: transparent !important;
+  border: none !important;
+  font-weight: 500 !important;
+  animation: slideInError 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  
+  &::before {
+    content: "⚠" !important;
+    font-size: 1.1rem !important;
+    flex-shrink: 0 !important;
+  }
+}
+
+@keyframes slideInError {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Success Message Styling
+.text-success,
+.success-message {
+  color: #86efac !important;
+  font-size: 0.875rem !important;
+  margin-top: 0.5rem !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.5rem !important;
+  padding: 0 !important;
+  background: transparent !important;
+  border: none !important;
+  font-weight: 500 !important;
+  animation: slideInError 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  
+  &::before {
+    content: "✓" !important;
+    font-size: 1.1rem !important;
+    flex-shrink: 0 !important;
+  }
+}
+
+// Warning Message Styling
+.text-warning,
+.warning-message {
+  color: #fbbf24 !important;
+  font-size: 0.875rem !important;
+  margin-top: 0.5rem !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.5rem !important;
+  padding: 0 !important;
+  background: transparent !important;
+  border: none !important;
+  font-weight: 500 !important;
+  animation: slideInError 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  
+  &::before {
+    content: "ℹ" !important;
+    font-size: 1.1rem !important;
+    flex-shrink: 0 !important;
+  }
+}
+
+// ============================================
+// MODERN PROGRESS BARS
+// ============================================
+
+.progress {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border-radius: 10px !important;
+  height: 12px !important;
+  overflow: hidden !important;
+  backdrop-filter: blur(10px) !important;
+  
+  .progress-bar {
+    background: linear-gradient(90deg, #00E5A0 0%, #00FFAA 50%, #00D994 100%) !important;
+    background-size: 200% 100% !important;
+    animation: shimmer 2s infinite !important;
+    border-radius: 10px !important;
+    box-shadow: 0 0 10px rgba(0, 229, 160, 0.5) !important;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -100% 0;
+  }
+  100% {
+    background-position: 100% 0;
+  }
+}
+
+// ============================================
+// MODERN BREADCRUMBS
+// ============================================
+
+.breadcrumb {
+  background: rgba(0, 229, 160, 0.05) !important;
+  backdrop-filter: blur(10px) !important;
+  border-radius: 10px !important;
+  padding: 0.75rem 1.25rem !important;
+  
+  .breadcrumb-item {
+    color: rgba(255, 255, 255, 0.6) !important;
+    font-weight: 500 !important;
+    
+    &.active {
+      color: #00E5A0 !important;
+      font-weight: 600 !important;
+    }
+    
+    + .breadcrumb-item::before {
+      color: rgba(255, 255, 255, 0.3) !important;
+    }
+    
+    a {
+      color: rgba(255, 255, 255, 0.7) !important;
+      transition: all 0.2s ease !important;
+      
+      &:hover {
+        color: #00FFAA !important;
+      }
+    }
+  }
+}
+
+// ============================================
+// MODERN NAV TABS
+// ============================================
+
+.nav-tabs {
+  border-bottom: 2px solid rgba(0, 229, 160, 0.2) !important;
+  gap: 0.5rem !important;
+  
+  .nav-link {
+    color: rgba(255, 255, 255, 0.6) !important;
+    border: none !important;
+    border-radius: 10px 10px 0 0 !important;
+    padding: 0.875rem 1.5rem !important;
+    font-weight: 600 !important;
+    transition: all 0.3s ease !important;
+    position: relative !important;
+    
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: #00E5A0;
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+    }
+    
+    &:hover {
+      color: #00FFAA !important;
+      background: rgba(0, 229, 160, 0.05) !important;
+    }
+    
+    &.active {
+      color: #00E5A0 !important;
+      background: rgba(0, 229, 160, 0.1) !important;
+      font-weight: 700 !important;
+      
+      &::after {
+        transform: scaleX(1);
+      }
+    }
+  }
+}
+
+// ============================================
+// MODERN SCROLLBAR
+// ============================================
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(15, 15, 15, 0.5);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #00E5A0 0%, #00D994 100%);
+  border-radius: 10px;
+  
+  &:hover {
+    background: linear-gradient(180deg, #00FFAA 0%, #00E5A0 100%);
+  }
+}
+
+// ============================================
+// MODERN TOOLTIPS
+// ============================================
+
+.tooltip {
+  .tooltip-inner {
+    background: rgba(0, 229, 160, 0.95) !important;
+    backdrop-filter: blur(10px) !important;
+    color: #000000 !important;
+    padding: 0.5rem 1rem !important;
+    border-radius: 8px !important;
+    font-weight: 600 !important;
+    box-shadow: 0 4px 12px rgba(0, 229, 160, 0.4) !important;
+  }
+  
+  .tooltip-arrow::before {
+    border-top-color: rgba(0, 229, 160, 0.95) !important;
+    border-bottom-color: rgba(0, 229, 160, 0.95) !important;
+  }
+}
+
+// ============================================
+// UTILITY ANIMATIONS
+// ============================================
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease-out !important;
+}
+
+.slide-in-right {
+  animation: slideInRight 0.5s ease-out !important;
+}
+
+// ============================================
+// TEXT UTILITIES
+// ============================================
+
+.text-primary {
+  color: #00E5A0 !important;
+}
+
+.text-secondary {
+  color: #00FFAA !important;
+}
+
+.text-muted {
+  color: rgba(255, 255, 255, 0.5) !important;
+}
+
+.text-gradient {
+  background: linear-gradient(135deg, #00E5A0 0%, #00FFAA 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 700 !important;
+}
+
+// ============================================
+// BACKGROUND UTILITIES
+// ============================================
+
+.bg-glass {
+  background: rgba(26, 26, 26, 0.6) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+}
+
+.bg-glass-light {
+  background: rgba(255, 255, 255, 0.05) !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+}
+

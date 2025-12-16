@@ -1,0 +1,24 @@
+{
+  "restartable": "rs",
+  "ignore": [
+    ".git",
+    "dist",
+    "node_modules/**/node_modules"
+  ],
+  "verbose": false,
+  "execMap": {
+    "js": "node --harmony"
+  },
+  "events": {
+    "restart": "echo App restarted",
+    "crash": "sh -c 'lsof -i :${PORT:-4001} -t | xargs kill'"
+  },
+  "watch": [
+    "./src/",
+    "./"
+  ],
+  "env": {
+    "NODE_ENV": "development"
+  },
+  "ext": "js"
+}

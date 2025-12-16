@@ -1,0 +1,2375 @@
+[
+    {
+        "#": "1",
+        "Game Name": "Madame Luck",
+        "Game ID": "rp_1",
+        "RTP": "96.47%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "2",
+        "Game Name": "Medusa Money",
+        "Game ID": "rp_2",
+        "RTP": "96.50%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "3",
+        "Game Name": "Dragon Prophecy",
+        "Game ID": "rp_3",
+        "RTP": "94.61%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "4",
+        "Game Name": "Piggy Gold",
+        "Game ID": "rp_4",
+        "RTP": "96.41%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "5",
+        "Game Name": "Hot & Heavy",
+        "Game ID": "rp_5",
+        "RTP": "96.14%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "6",
+        "Game Name": "Macau Beauties",
+        "Game ID": "rp_6",
+        "RTP": "96.52%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "7",
+        "Game Name": "Dragon Ladies",
+        "Game ID": "rp_7",
+        "RTP": "96.49%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "8",
+        "Game Name": "Lady Phoenix",
+        "Game ID": "rp_8",
+        "RTP": "96.49%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "9",
+        "Game Name": "Wild Thirst",
+        "Game ID": "rp_9",
+        "RTP": "96.26%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "10",
+        "Game Name": "Book of Riches",
+        "Game ID": "rp_10",
+        "RTP": "94.89%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "11",
+        "Game Name": "Bamboo Fortune",
+        "Game ID": "rp_11",
+        "RTP": "96.37%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "12",
+        "Game Name": "Sheerluck",
+        "Game ID": "rp_12",
+        "RTP": "96.22%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "13",
+        "Game Name": "Rio Pleasures",
+        "Game ID": "rp_13",
+        "RTP": "96.24%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "14",
+        "Game Name": "Dragoness",
+        "Game ID": "rp_14",
+        "RTP": "96.33%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "15",
+        "Game Name": "Brilliant Gems",
+        "Game ID": "rp_15",
+        "RTP": "96.49%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "16",
+        "Game Name": "Immortal Empress",
+        "Game ID": "rp_16",
+        "RTP": "96.18%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "17",
+        "Game Name": "Savage Lion",
+        "Game ID": "rp_17",
+        "RTP": "96.46%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "18",
+        "Game Name": "Gallantry",
+        "Game ID": "rp_18",
+        "RTP": "96.29%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "19",
+        "Game Name": "Vegas Hotties",
+        "Game ID": "rp_19",
+        "RTP": "96.52%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "20",
+        "Game Name": "Loco Habanero",
+        "Game ID": "rp_20",
+        "RTP": "96.49%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "21",
+        "Game Name": "Book of Riches Deluxe",
+        "Game ID": "rp_22",
+        "RTP": "96.49%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "22",
+        "Game Name": "Quest of Gods",
+        "Game ID": "rp_23",
+        "RTP": "96.48%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "23",
+        "Game Name": "Shake Shake Money Tree",
+        "Game ID": "rp_25",
+        "RTP": "96.48%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "24",
+        "Game Name": "New Year Happiness",
+        "Game ID": "rp_27",
+        "RTP": "96.46%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "25",
+        "Game Name": "Pirate's Booty",
+        "Game ID": "rp_31",
+        "RTP": "96.49%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "26",
+        "Game Name": "Reel All-Stars",
+        "Game ID": "rp_30",
+        "RTP": "96.47%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "27",
+        "Game Name": "Arcane Beauties",
+        "Game ID": "rp_24",
+        "RTP": "96.48%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "28",
+        "Game Name": "Mayan Cache",
+        "Game ID": "rp_32",
+        "RTP": "96.47%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "29",
+        "Game Name": "Egyptian Sun",
+        "Game ID": "rp_28",
+        "RTP": "96.44%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "30",
+        "Game Name": "Dragon 8s 25x",
+        "Game ID": "rp_33",
+        "RTP": "96.30%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "31",
+        "Game Name": "Sun of Ra",
+        "Game ID": "rp_34",
+        "RTP": "96.90%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "32",
+        "Game Name": "#Alice in the Wild",
+        "Game ID": "rp_29",
+        "RTP": "96.40%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "33",
+        "Game Name": "Shake Shake Leprechaun",
+        "Game ID": "rp_35",
+        "RTP": "96.48%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "34",
+        "Game Name": "Wolf Haven",
+        "Game ID": "rp_26",
+        "RTP": "96.49%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "35",
+        "Game Name": "Dr. Frankenstein",
+        "Game ID": "rp_21",
+        "RTP": "96.39%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "36",
+        "Game Name": "He He Yang",
+        "Game ID": "rp_36",
+        "RTP": "96.90%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "37",
+        "Game Name": "Blazing Tiger",
+        "Game ID": "rp_37",
+        "RTP": "96.40%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "38",
+        "Game Name": "Zeus Rush Fever",
+        "Game ID": "rp_38",
+        "RTP": "96.90%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "39",
+        "Game Name": "Christmas Fortune",
+        "Game ID": "rp_40",
+        "RTP": "96.49%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "40",
+        "Game Name": "Prosperity Journey",
+        "Game ID": "rp_41",
+        "RTP": "96.48%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "41",
+        "Game Name": "Elephant Stampede",
+        "Game ID": "rp_42",
+        "RTP": "96.91%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "42",
+        "Game Name": "Dawn of the Incas",
+        "Game ID": "rp_43",
+        "RTP": "96.90%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "43",
+        "Game Name": "Rush Fever 7s",
+        "Game ID": "rp_44",
+        "RTP": "96.90%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "44",
+        "Game Name": "Silver & Gold Mine",
+        "Game ID": "rp_45",
+        "RTP": "96.88%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "45",
+        "Game Name": "Book of 8 Riches",
+        "Game ID": "rp_46",
+        "RTP": "96.90%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "46",
+        "Game Name": "African Cats",
+        "Game ID": "rp_47",
+        "RTP": "96.33%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "47",
+        "Game Name": "Grand Express Action Class",
+        "Game ID": "rp_48",
+        "RTP": "96.94%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "48",
+        "Game Name": "Bull Fever",
+        "Game ID": "rp_49",
+        "RTP": "96.88%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "49",
+        "Game Name": "Enter the Vault",
+        "Game ID": "rp_50",
+        "RTP": "96.82%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "50",
+        "Game Name": "Adventures of Li'l Red",
+        "Game ID": "rp_51",
+        "RTP": "96.90%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "51",
+        "Game Name": "Vegas No Limit Wins",
+        "Game ID": "rp_52",
+        "RTP": "96.88%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "52",
+        "Game Name": "Grand Express Diamond Class",
+        "Game ID": "rp_55",
+        "RTP": "96.88%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "53",
+        "Game Name": "Feliz Dia de los Muertos",
+        "Game ID": "rp_54",
+        "RTP": "96.88%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "54",
+        "Game Name": "#Alice and the Mad Respin Party",
+        "Game ID": "rp_53",
+        "RTP": "96.70%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "55",
+        "Game Name": "Wizard's Spell",
+        "Game ID": "rp_56",
+        "RTP": "96.81%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "56",
+        "Game Name": "Clovers of Luck",
+        "Game ID": "rp_57",
+        "RTP": "96.40%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "57",
+        "Game Name": "Volcano Rising",
+        "Game ID": "rp_58",
+        "RTP": "96.46%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "58",
+        "Game Name": "Ancient Pharaoh",
+        "Game ID": "rp_59",
+        "RTP": "96.51%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "59",
+        "Game Name": "Shake Shake Christmas",
+        "Game ID": "rp_61",
+        "RTP": "96.48%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "60",
+        "Game Name": "New Year Rising",
+        "Game ID": "rp_62",
+        "RTP": "96.46%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "61",
+        "Game Name": "Mucho Loco Habanero",
+        "Game ID": "rp_60",
+        "RTP": "96.41%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "62",
+        "Game Name": "Book of Riches Deluxe: Chapter 2",
+        "Game ID": "rp_63",
+        "RTP": "96.49%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "63",
+        "Game Name": "Roman Legend",
+        "Game ID": "rp_67",
+        "RTP": "96.57%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "64",
+        "Game Name": "Mayan Blaze",
+        "Game ID": "rp_65",
+        "RTP": "96.40%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "65",
+        "Game Name": "More Dragon Ladies",
+        "Game ID": "rp_66",
+        "RTP": "96.39%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "66",
+        "Game Name": "Zeus Rush Fever Deluxe",
+        "Game ID": "rp_68",
+        "RTP": "96.56%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "67",
+        "Game Name": "Viking Crusade",
+        "Game ID": "rp_69",
+        "RTP": "96.49%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "68",
+        "Game Name": "Golden Forge",
+        "Game ID": "rp_70",
+        "RTP": "96.48%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "69",
+        "Game Name": "Diamond Explosion 7s",
+        "Game ID": "rp_72",
+        "RTP": "96.82%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "70",
+        "Game Name": "Arabian Secret",
+        "Game ID": "rp_71",
+        "RTP": "96.34%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "71",
+        "Game Name": "Rush Fever 7s Deluxe",
+        "Game ID": "rp_73",
+        "RTP": "96.56%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "72",
+        "Game Name": "Grand Mariachi",
+        "Game ID": "rp_74",
+        "RTP": "96.44%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "73",
+        "Game Name": "Native Spirit",
+        "Game ID": "rp_76",
+        "RTP": "96.37%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "74",
+        "Game Name": "Clovers of Luck 2",
+        "Game ID": "rp_77",
+        "RTP": "96.70%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "75",
+        "Game Name": "Tiki Blaze",
+        "Game ID": "rp_78",
+        "RTP": "96.47%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "76",
+        "Game Name": "Royal Griffin",
+        "Game ID": "rp_79",
+        "RTP": "96.47%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "77",
+        "Game Name": "Prosperity Blessing",
+        "Game ID": "rp_80",
+        "RTP": "96.34%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "78",
+        "Game Name": "Rockin' Gorilla",
+        "Game ID": "rp_83",
+        "RTP": "96.57%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "79",
+        "Game Name": "Cache Rush",
+        "Game ID": "rp_81",
+        "RTP": "96.39%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "80",
+        "Game Name": "Vegas Repeat Wins",
+        "Game ID": "rp_84",
+        "RTP": "96.36%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "81",
+        "Game Name": "True Wild",
+        "Game ID": "rp_87",
+        "RTP": "96.37%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "82",
+        "Game Name": "Immortal Ways Diamonds",
+        "Game ID": "rp_88",
+        "RTP": "96.29%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "83",
+        "Game Name": "Prince of Riches",
+        "Game ID": "rp_85",
+        "RTP": "96.53%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "84",
+        "Game Name": "Immortal Ways Buffalo",
+        "Game ID": "rp_93",
+        "RTP": "96.29%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "85",
+        "Game Name": "Grand Express Fiesta",
+        "Game ID": "rp_89",
+        "RTP": "96.43%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "86",
+        "Game Name": "Immortal Ways Piñata",
+        "Game ID": "rp_95",
+        "RTP": "96.29%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "87",
+        "Game Name": "ZapOtec Gold",
+        "Game ID": "rp_91",
+        "RTP": "96.43%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "88",
+        "Game Name": "ZapOtec Gold 94",
+        "Game ID": "rp_586",
+        "RTP": "94.39%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "89",
+        "Game Name": "ZapOtec Gold 90",
+        "Game ID": "rp_587",
+        "RTP": "90.39%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "90",
+        "Game Name": "ZapOtec Gold 88",
+        "Game ID": "rp_588",
+        "RTP": "88.38%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "91",
+        "Game Name": "Stampede Rush Wicked",
+        "Game ID": "rp_97",
+        "RTP": "96.41%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "92",
+        "Game Name": "Stampede Rush Wicked 94",
+        "Game ID": "rp_592",
+        "RTP": "94.31%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "93",
+        "Game Name": "Stampede Rush Wicked 90",
+        "Game ID": "rp_593",
+        "RTP": "90.43%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "94",
+        "Game Name": "Stampede Rush Wicked 88",
+        "Game ID": "rp_594",
+        "RTP": "88.36%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "95",
+        "Game Name": "Mad Hit Oasis",
+        "Game ID": "rp_96",
+        "RTP": "96.27%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "96",
+        "Game Name": "Mad Hit Oasis 94",
+        "Game ID": "rp_601",
+        "RTP": "94.36%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "97",
+        "Game Name": "Mad Hit Oasis 90",
+        "Game ID": "rp_603",
+        "RTP": "90.32%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "98",
+        "Game Name": "Mad Hit Oasis 88",
+        "Game ID": "rp_604",
+        "RTP": "88.31%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "99",
+        "Game Name": "Stampede Rush Speedy Santa",
+        "Game ID": "rp_99",
+        "RTP": "96.41%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "100",
+        "Game Name": "Stampede Rush Speedy Santa 94",
+        "Game ID": "rp_595",
+        "RTP": "94.31%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "101",
+        "Game Name": "Stampede Rush Speedy Santa 90",
+        "Game ID": "rp_596",
+        "RTP": "90.43%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "102",
+        "Game Name": "Stampede Rush Speedy Santa 88",
+        "Game ID": "rp_597",
+        "RTP": "88.36%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "103",
+        "Game Name": "Diamond Explosion 7s 94",
+        "Game ID": "rp_504",
+        "RTP": "94.45%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "104",
+        "Game Name": "Diamond Explosion 7s 90",
+        "Game ID": "rp_505",
+        "RTP": "90.48%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "105",
+        "Game Name": "Diamond Explosion 7s 88",
+        "Game ID": "rp_506",
+        "RTP": "88.47%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "106",
+        "Game Name": "Vegas No Limit Wins 94",
+        "Game ID": "rp_507",
+        "RTP": "94.47%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "107",
+        "Game Name": "Vegas No Limit Wins 90",
+        "Game ID": "rp_508",
+        "RTP": "90.41%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "108",
+        "Game Name": "Vegas No Limit Wins 88",
+        "Game ID": "rp_509",
+        "RTP": "88.44%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "109",
+        "Game Name": "Rush Fever 7s Deluxe 94",
+        "Game ID": "rp_510",
+        "RTP": "94.46%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "110",
+        "Game Name": "Rush Fever 7s Deluxe 90",
+        "Game ID": "rp_511",
+        "RTP": "90.45%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "111",
+        "Game Name": "Rush Fever 7s Deluxe 88",
+        "Game ID": "rp_512",
+        "RTP": "88.44%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "112",
+        "Game Name": "Vegas Repeat Wins 94",
+        "Game ID": "rp_528",
+        "RTP": "94.36%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "113",
+        "Game Name": "Vegas Repeat Wins 90",
+        "Game ID": "rp_529",
+        "RTP": "90.39%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "114",
+        "Game Name": "Vegas Repeat Wins 88",
+        "Game ID": "rp_530",
+        "RTP": "88.34%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "115",
+        "Game Name": "Immortal Ways Diamonds 94",
+        "Game ID": "rp_531",
+        "RTP": "94.28%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "116",
+        "Game Name": "Immortal Ways Diamonds 90",
+        "Game ID": "rp_532",
+        "RTP": "90.31%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "117",
+        "Game Name": "Immortal Ways Diamonds 88",
+        "Game ID": "rp_533",
+        "RTP": "88.34%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "118",
+        "Game Name": "Mayan Cache 94",
+        "Game ID": "rp_501",
+        "RTP": "94.47%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "119",
+        "Game Name": "Mayan Cache 90",
+        "Game ID": "rp_502",
+        "RTP": "90.47%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "120",
+        "Game Name": "Mayan Cache 88",
+        "Game ID": "rp_503",
+        "RTP": "88.42%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "121",
+        "Game Name": "Shake Shake Leprechaun 94",
+        "Game ID": "rp_516",
+        "RTP": "94.41%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "122",
+        "Game Name": "Shake Shake Leprechaun 90",
+        "Game ID": "rp_517",
+        "RTP": "90.47%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "123",
+        "Game Name": "Shake Shake Leprechaun 88",
+        "Game ID": "rp_518",
+        "RTP": "88.40%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "124",
+        "Game Name": "Shake Shake Money Tree 94",
+        "Game ID": "rp_522",
+        "RTP": "94.41%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "125",
+        "Game Name": "Shake Shake Money Tree 90",
+        "Game ID": "rp_523",
+        "RTP": "90.47%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "126",
+        "Game Name": "Shake Shake Money Tree 88",
+        "Game ID": "rp_524",
+        "RTP": "88.40%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "127",
+        "Game Name": "Shake Shake Christmas 94",
+        "Game ID": "rp_543",
+        "RTP": "94.41%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "128",
+        "Game Name": "Shake Shake Christmas 90",
+        "Game ID": "rp_544",
+        "RTP": "90.47%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "129",
+        "Game Name": "Shake Shake Christmas 88",
+        "Game ID": "rp_545",
+        "RTP": "88.40%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "130",
+        "Game Name": "Christmas Fortune 94",
+        "Game ID": "rp_569",
+        "RTP": "94.39%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "131",
+        "Game Name": "Christmas Fortune 90",
+        "Game ID": "rp_570",
+        "RTP": "90.38%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "132",
+        "Game Name": "Christmas Fortune 88",
+        "Game ID": "rp_571",
+        "RTP": "88.38%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "133",
+        "Game Name": "New Year Rising 94",
+        "Game ID": "rp_608",
+        "RTP": "94.36%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "134",
+        "Game Name": "New Year Rising 90",
+        "Game ID": "rp_610",
+        "RTP": "90.43%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "135",
+        "Game Name": "New Year Rising 88",
+        "Game ID": "rp_611",
+        "RTP": "88.52%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "136",
+        "Game Name": "Grand Express Diamond Class 94",
+        "Game ID": "rp_552",
+        "RTP": "94.44%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "137",
+        "Game Name": "Grand Express Diamond Class 90",
+        "Game ID": "rp_553",
+        "RTP": "90.49%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "138",
+        "Game Name": "Grand Express Diamond Class 88",
+        "Game ID": "rp_554",
+        "RTP": "88.46%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "139",
+        "Game Name": "Mad Hit Marlin Bonanza",
+        "Game ID": "rp_102",
+        "RTP": "96.27%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "140",
+        "Game Name": "Mad Hit Marlin Bonanza 94",
+        "Game ID": "rp_614",
+        "RTP": "94.36%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "141",
+        "Game Name": "Mad Hit Marlin Bonanza 90",
+        "Game ID": "rp_616",
+        "RTP": "90.32%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "142",
+        "Game Name": "Mad Hit Marlin Bonanza 88",
+        "Game ID": "rp_617",
+        "RTP": "88.31%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "143",
+        "Game Name": "Go High Harvest",
+        "Game ID": "rp_98",
+        "RTP": "96.31%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "144",
+        "Game Name": "Go High Harvest 94",
+        "Game ID": "rp_632",
+        "RTP": "94.29%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "145",
+        "Game Name": "Go High Harvest 90",
+        "Game ID": "rp_634",
+        "RTP": "90.41%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "146",
+        "Game Name": "Go High Harvest 88",
+        "Game ID": "rp_635",
+        "RTP": "88.30%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "147",
+        "Game Name": "Immortal Ways 88 Charms",
+        "Game ID": "rp_94",
+        "RTP": "96.29%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "148",
+        "Game Name": "Diamond Explosion Sweet Love",
+        "Game ID": "rp_101",
+        "RTP": "96.82%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "149",
+        "Game Name": "Diamond Explosion Sweet Love 94",
+        "Game ID": "rp_605",
+        "RTP": "94.45%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "150",
+        "Game Name": "Diamond Explosion Sweet Love 90",
+        "Game ID": "rp_606",
+        "RTP": "90.48%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "151",
+        "Game Name": "Diamond Explosion Sweet Love 88",
+        "Game ID": "rp_607",
+        "RTP": "88.47%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "152",
+        "Game Name": "Zeus Rush Fever Deluxe 94",
+        "Game ID": "rp_555",
+        "RTP": "94.46%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "153",
+        "Game Name": "Zeus Rush Fever Deluxe 90",
+        "Game ID": "rp_556",
+        "RTP": "90.45%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "154",
+        "Game Name": "Zeus Rush Fever Deluxe 88",
+        "Game ID": "rp_557",
+        "RTP": "88.44%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "155",
+        "Game Name": "Mad Hit Wild Alice",
+        "Game ID": "rp_107",
+        "RTP": "96.27%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "156",
+        "Game Name": "Mad Hit Wild Alice 94",
+        "Game ID": "rp_627",
+        "RTP": "94.36%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "157",
+        "Game Name": "Mad Hit Wild Alice 90",
+        "Game ID": "rp_629",
+        "RTP": "90.32%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "158",
+        "Game Name": "Mad Hit Wild Alice 88",
+        "Game ID": "rp_630",
+        "RTP": "88.31%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "159",
+        "Game Name": "Immortal Ways Buffalo 94",
+        "Game ID": "rp_534",
+        "RTP": "94.28%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "160",
+        "Game Name": "Immortal Ways Buffalo 90",
+        "Game ID": "rp_535",
+        "RTP": "90.31%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "161",
+        "Game Name": "Immortal Ways Buffalo 88",
+        "Game ID": "rp_536",
+        "RTP": "88.34%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "162",
+        "Game Name": "Volcano Rising 94",
+        "Game ID": "rp_558",
+        "RTP": "94.36%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "163",
+        "Game Name": "Volcano Rising 90",
+        "Game ID": "rp_560",
+        "RTP": "90.43%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "164",
+        "Game Name": "Volcano Rising 88",
+        "Game ID": "rp_561",
+        "RTP": "88.52%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "165",
+        "Game Name": "J Mania Golden Eggs",
+        "Game ID": "rp_104",
+        "RTP": "96.47%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "166",
+        "Game Name": "J Mania Golden Eggs 94",
+        "Game ID": "rp_622",
+        "RTP": "94.47%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "167",
+        "Game Name": "J Mania Golden Eggs 90",
+        "Game ID": "rp_623",
+        "RTP": "90.47%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "168",
+        "Game Name": "J Mania Golden Eggs 88",
+        "Game ID": "rp_624",
+        "RTP": "88.42%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "169",
+        "Game Name": "Go High Gone Fishing",
+        "Game ID": "rp_111",
+        "RTP": "96.31%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "170",
+        "Game Name": "Go High Gone Fishing 94",
+        "Game ID": "rp_639",
+        "RTP": "94.29%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "171",
+        "Game Name": "Go High Gone Fishing 90",
+        "Game ID": "rp_640",
+        "RTP": "90.41%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "172",
+        "Game Name": "Go High Gone Fishing 88",
+        "Game ID": "rp_641",
+        "RTP": "88.30%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "173",
+        "Game Name": "Grand Express Action Class 94",
+        "Game ID": "rp_572",
+        "RTP": "94.41%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "174",
+        "Game Name": "Grand Express Action Class 90",
+        "Game ID": "rp_573",
+        "RTP": "90.44%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "175",
+        "Game Name": "Grand Express Action Class 88",
+        "Game ID": "rp_574",
+        "RTP": "88.40%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "176",
+        "Game Name": "Sheerluck 94",
+        "Game ID": "rp_645",
+        "RTP": "94.47%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "177",
+        "Game Name": "Sheerluck 90",
+        "Game ID": "rp_647",
+        "RTP": "90.47%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "178",
+        "Game Name": "Sheerluck 88",
+        "Game ID": "rp_648",
+        "RTP": "88.42%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "179",
+        "Game Name": "Mad Hit Supernova",
+        "Game ID": "rp_108",
+        "RTP": "96.30%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "180",
+        "Game Name": "Mad Hit Supernova 94",
+        "Game ID": "rp_636",
+        "RTP": "94.33%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "181",
+        "Game Name": "Mad Hit Supernova 90",
+        "Game ID": "rp_637",
+        "RTP": "90.34%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "182",
+        "Game Name": "Mad Hit Supernova 88",
+        "Game ID": "rp_638",
+        "RTP": "88.33%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "183",
+        "Game Name": "Enter the Vault 94",
+        "Game ID": "rp_649",
+        "RTP": "94.45%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "184",
+        "Game Name": "Enter the Vault 90",
+        "Game ID": "rp_650",
+        "RTP": "90.48%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "185",
+        "Game Name": "Enter the Vault 88",
+        "Game ID": "rp_651",
+        "RTP": "88.47%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "186",
+        "Game Name": "Elephant Stampede 94",
+        "Game ID": "rp_519",
+        "RTP": "94.32%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "187",
+        "Game Name": "Elephant Stampede 90",
+        "Game ID": "rp_520",
+        "RTP": "90.30%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "188",
+        "Game Name": "Elephant Stampede 88",
+        "Game ID": "rp_521",
+        "RTP": "88.30%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "189",
+        "Game Name": "Go High Fruit",
+        "Game ID": "rp_112",
+        "RTP": "96.31%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "190",
+        "Game Name": "Go High Fruit 94",
+        "Game ID": "rp_652",
+        "RTP": "94.29%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "191",
+        "Game Name": "Go High Fruit 90",
+        "Game ID": "rp_653",
+        "RTP": "90.41%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "192",
+        "Game Name": "Go High Fruit 88",
+        "Game ID": "rp_654",
+        "RTP": "88.30%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "193",
+        "Game Name": "Immortal Ways Sweet Coin",
+        "Game ID": "rp_106",
+        "RTP": "96.28%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "194",
+        "Game Name": "Immortal Ways Sweet Coin 94",
+        "Game ID": "rp_679",
+        "RTP": "94.35%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "195",
+        "Game Name": "Immortal Ways Sweet Coin 90",
+        "Game ID": "rp_680",
+        "RTP": "90.39%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "196",
+        "Game Name": "Immortal Ways Sweet Coin 88",
+        "Game ID": "rp_681",
+        "RTP": "88.39%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "197",
+        "Game Name": "Royal Griffin 94",
+        "Game ID": "rp_513",
+        "RTP": "94.47%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "198",
+        "Game Name": "Royal Griffin 90",
+        "Game ID": "rp_514",
+        "RTP": "90.47%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "199",
+        "Game Name": "Royal Griffin 88",
+        "Game ID": "rp_515",
+        "RTP": "88.42%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "200",
+        "Game Name": "Immortal Ways 88 Charms 94",
+        "Game ID": "rp_537",
+        "RTP": "94.28%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "201",
+        "Game Name": "Immortal Ways 88 Charms 90",
+        "Game ID": "rp_538",
+        "RTP": "90.31%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "202",
+        "Game Name": "Immortal Ways 88 Charms 88",
+        "Game ID": "rp_539",
+        "RTP": "88.34%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "203",
+        "Game Name": "Mad Hit Hidden Cities",
+        "Game ID": "rp_103",
+        "RTP": "96.27%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "204",
+        "Game Name": "Mad Hit Hidden Cities 94",
+        "Game ID": "rp_618",
+        "RTP": "94.36%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "205",
+        "Game Name": "Mad Hit Hidden Cities 90",
+        "Game ID": "rp_620",
+        "RTP": "90.32%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "206",
+        "Game Name": "Mad Hit Hidden Cities 88",
+        "Game ID": "rp_621",
+        "RTP": "88.31%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "207",
+        "Game Name": "J Mania Diamonds",
+        "Game ID": "rp_118",
+        "RTP": "96.31%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "208",
+        "Game Name": "J Mania Diamonds 94",
+        "Game ID": "rp_664",
+        "RTP": "94.30%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "209",
+        "Game Name": "J Mania Diamonds 90",
+        "Game ID": "rp_665",
+        "RTP": "90.31%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "210",
+        "Game Name": "J Mania Diamonds 88",
+        "Game ID": "rp_666",
+        "RTP": "88.29%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "211",
+        "Game Name": "Go High Olympus",
+        "Game ID": "rp_114",
+        "RTP": "96.31%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "212",
+        "Game Name": "Go High Olympus 94",
+        "Game ID": "rp_658",
+        "RTP": "94.29%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "213",
+        "Game Name": "Go High Olympus 90",
+        "Game ID": "rp_659",
+        "RTP": "90.41%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "214",
+        "Game Name": "Go High Olympus 88",
+        "Game ID": "rp_660",
+        "RTP": "88.30%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "215",
+        "Game Name": "Diamond Explosion Patriots",
+        "Game ID": "rp_124",
+        "RTP": "96.33%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "216",
+        "Game Name": "Diamond Explosion Patriots 94",
+        "Game ID": "rp_673",
+        "RTP": "94.35%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "217",
+        "Game Name": "Diamond Explosion Patriots 90",
+        "Game ID": "rp_674",
+        "RTP": "90.36%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "218",
+        "Game Name": "Diamond Explosion Patriots 88",
+        "Game ID": "rp_675",
+        "RTP": "88.35%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "219",
+        "Game Name": "Loco Habanero 94",
+        "Game ID": "rp_690",
+        "RTP": "94.39%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "220",
+        "Game Name": "Loco Habanero 90",
+        "Game ID": "rp_691",
+        "RTP": "90.38%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "221",
+        "Game Name": "Loco Habanero 88",
+        "Game ID": "rp_692",
+        "RTP": "88.38%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "222",
+        "Game Name": "Quest of Gods 94",
+        "Game ID": "rp_696",
+        "RTP": "94.33%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "223",
+        "Game Name": "Quest of Gods 90",
+        "Game ID": "rp_697",
+        "RTP": "90.33%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "224",
+        "Game Name": "Quest of Gods 88",
+        "Game ID": "rp_698",
+        "RTP": "88.32%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "225",
+        "Game Name": "Book of Riches Deluxe: Chapter 2 94",
+        "Game ID": "rp_683",
+        "RTP": "94.37%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "226",
+        "Game Name": "Book of Riches Deluxe: Chapter 2 90",
+        "Game ID": "rp_684",
+        "RTP": "90.29%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "227",
+        "Game Name": "Book of Riches Deluxe: Chapter 2 88",
+        "Game ID": "rp_685",
+        "RTP": "88.34%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "228",
+        "Game Name": "Go High Panda",
+        "Game ID": "rp_109",
+        "RTP": "96.37%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "229",
+        "Game Name": "Go High Panda 94",
+        "Game ID": "rp_642",
+        "RTP": "94.35%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "230",
+        "Game Name": "Go High Panda 90",
+        "Game ID": "rp_643",
+        "RTP": "90.32%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "231",
+        "Game Name": "Go High Panda 88",
+        "Game ID": "rp_644",
+        "RTP": "88.29%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "232",
+        "Game Name": "Immortal Ways Champions",
+        "Game ID": "rp_128",
+        "RTP": "96.28%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "233",
+        "Game Name": "Immortal Ways Champions 94",
+        "Game ID": "rp_693",
+        "RTP": "94.35%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "234",
+        "Game Name": "Immortal Ways Champions 90",
+        "Game ID": "rp_694",
+        "RTP": "90.39%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "235",
+        "Game Name": "Immortal Ways Champions 88",
+        "Game ID": "rp_695",
+        "RTP": "88.39%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "236",
+        "Game Name": "Sugar Rush Fever",
+        "Game ID": "rp_119",
+        "RTP": "96.37%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "237",
+        "Game Name": "Sugar Rush Fever 94",
+        "Game ID": "rp_678",
+        "RTP": "94.31%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "238",
+        "Game Name": "Sugar Rush Fever 90",
+        "Game ID": "rp_677",
+        "RTP": "90.34%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "239",
+        "Game Name": "Sugar Rush Fever 88",
+        "Game ID": "rp_676",
+        "RTP": "88.36%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "240",
+        "Game Name": "J Mania Turkey Chef",
+        "Game ID": "rp_132",
+        "RTP": "96.31%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "241",
+        "Game Name": "J Mania Turkey Chef 94",
+        "Game ID": "rp_711",
+        "RTP": "94.30%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "242",
+        "Game Name": "J Mania Turkey Chef 90",
+        "Game ID": "rp_712",
+        "RTP": "90.31%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "243",
+        "Game Name": "J Mania Turkey Chef 88",
+        "Game ID": "rp_713",
+        "RTP": "88.29%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "244",
+        "Game Name": "Immortal Ways Lady Moon",
+        "Game ID": "rp_131",
+        "RTP": "96.28%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "245",
+        "Game Name": "Immortal Ways Lady Moon 94",
+        "Game ID": "rp_708",
+        "RTP": "94.35%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "246",
+        "Game Name": "Immortal Ways Lady Moon 90",
+        "Game ID": "rp_709",
+        "RTP": "90.39%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "247",
+        "Game Name": "Immortal Ways Lady Moon 88",
+        "Game ID": "rp_710",
+        "RTP": "88.39%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "248",
+        "Game Name": "Mad Hit Bearhaus",
+        "Game ID": "rp_133",
+        "RTP": "96.30%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "249",
+        "Game Name": "Mad Hit Bearhaus 94",
+        "Game ID": "rp_714",
+        "RTP": "94.33%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "250",
+        "Game Name": "Mad Hit Bearhaus 90",
+        "Game ID": "rp_715",
+        "RTP": "90.34%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "251",
+        "Game Name": "Mad Hit Bearhaus 88",
+        "Game ID": "rp_716",
+        "RTP": "88.33%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "252",
+        "Game Name": "Gummy Giga Match",
+        "Game ID": "rp_125",
+        "RTP": "96.32%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "253",
+        "Game Name": "Gummy Giga Match 94",
+        "Game ID": "rp_687",
+        "RTP": "94.36%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "254",
+        "Game Name": "Gummy Giga Match 90",
+        "Game ID": "rp_688",
+        "RTP": "90.27%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "255",
+        "Game Name": "Gummy Giga Match 88",
+        "Game ID": "rp_689",
+        "RTP": "88.32%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "256",
+        "Game Name": "Immortal Ways Spooktacular",
+        "Game ID": "rp_126",
+        "RTP": "96.30%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "257",
+        "Game Name": "Immortal Ways Spooktacular 94",
+        "Game ID": "rp_719",
+        "RTP": "94.34%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "258",
+        "Game Name": "Immortal Ways Spooktacular 90",
+        "Game ID": "rp_720",
+        "RTP": "90.31%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "259",
+        "Game Name": "Immortal Ways Spooktacular 88",
+        "Game ID": "rp_721",
+        "RTP": "88.34%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "260",
+        "Game Name": "Giga Match Sugar Skull",
+        "Game ID": "rp_136",
+        "RTP": "96.32%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "261",
+        "Game Name": "Giga Match Sugar Skull 94",
+        "Game ID": "rp_722",
+        "RTP": "94.36%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "262",
+        "Game Name": "Giga Match Sugar Skull 90",
+        "Game ID": "rp_723",
+        "RTP": "90.27%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "263",
+        "Game Name": "Giga Match Sugar Skull 88",
+        "Game ID": "rp_724",
+        "RTP": "88.32%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "264",
+        "Game Name": "Go High Gallina",
+        "Game ID": "rp_142",
+        "RTP": "96.37%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "265",
+        "Game Name": "Go High Gallina 94",
+        "Game ID": "rp_741",
+        "RTP": "94.35%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "266",
+        "Game Name": "Go High Gallina 90",
+        "Game ID": "rp_742",
+        "RTP": "90.32%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "267",
+        "Game Name": "Go High Gallina 88",
+        "Game ID": "rp_743",
+        "RTP": "88.29%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "268",
+        "Game Name": "Immortal Ways Buffalo SE",
+        "Game ID": "rp_141",
+        "RTP": "96.29%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "269",
+        "Game Name": "Immortal Ways Buffalo SE 94",
+        "Game ID": "rp_736",
+        "RTP": "94.28%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "270",
+        "Game Name": "Immortal Ways Buffalo SE 90",
+        "Game ID": "rp_751",
+        "RTP": "90.31%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "271",
+        "Game Name": "Ten Ton Ways Goldfish",
+        "Game ID": "rp_129",
+        "RTP": "96.33%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "272",
+        "Game Name": "Ten Ton Ways Goldfish 94",
+        "Game ID": "rp_703",
+        "RTP": "94.39%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "273",
+        "Game Name": "Ten Ton Ways Goldfish 90",
+        "Game ID": "rp_704",
+        "RTP": "90.32%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "274",
+        "Game Name": "Ten Ton Ways Goldfish 88",
+        "Game ID": "rp_705",
+        "RTP": "88.34%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "275",
+        "Game Name": "Immortal Ways Luva",
+        "Game ID": "rp_158",
+        "RTP": "96.29%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "276",
+        "Game Name": "Immortal Ways Luva 94",
+        "Game ID": "rp_782",
+        "RTP": "94.28%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "277",
+        "Game Name": "Immortal Ways Luva 90",
+        "Game ID": "rp_783",
+        "RTP": "90.31%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "278",
+        "Game Name": "Immortal Ways Luva 88",
+        "Game ID": "rp_784",
+        "RTP": "88.34%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "279",
+        "Game Name": "Diamond Explosion Christmas Tango",
+        "Game ID": "rp_144",
+        "RTP": "96.33%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "280",
+        "Game Name": "Diamond Explosion Christmas Tango 94",
+        "Game ID": "rp_747",
+        "RTP": "94.35%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "281",
+        "Game Name": "Diamond Explosion Christmas Tango 90",
+        "Game ID": "rp_748",
+        "RTP": "90.36%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "282",
+        "Game Name": "Diamond Explosion Christmas Tango 88",
+        "Game ID": "rp_749",
+        "RTP": "88.35%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "283",
+        "Game Name": "Giga Match North Pole",
+        "Game ID": "rp_138",
+        "RTP": "96.32%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "284",
+        "Game Name": "Giga Match North Pole 94",
+        "Game ID": "rp_727",
+        "RTP": "94.36%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "285",
+        "Game Name": "Giga Match North Pole 90",
+        "Game ID": "rp_728",
+        "RTP": "90.27%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "286",
+        "Game Name": "Giga Match North Pole 88",
+        "Game ID": "rp_729",
+        "RTP": "88.32%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "287",
+        "Game Name": "Giga Match Fruits",
+        "Game ID": "rp_130",
+        "RTP": "96.30%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "288",
+        "Game Name": "Giga Match Fruits 94",
+        "Game ID": "rp_738",
+        "RTP": "94.36%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "289",
+        "Game Name": "Giga Match Fruits 90",
+        "Game ID": "rp_739",
+        "RTP": "90.38%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "290",
+        "Game Name": "Giga Match Fruits 88",
+        "Game ID": "rp_740",
+        "RTP": "88.36%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "291",
+        "Game Name": "Immortal Ways Cleopatra",
+        "Game ID": "rp_143",
+        "RTP": "96.28%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "292",
+        "Game Name": "Immortal Ways Cleopatra 94",
+        "Game ID": "rp_744",
+        "RTP": "94.35%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "293",
+        "Game Name": "Immortal Ways Cleopatra 90",
+        "Game ID": "rp_745",
+        "RTP": "90.39%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "294",
+        "Game Name": "Immortal Ways Cleopatra 88",
+        "Game ID": "rp_746",
+        "RTP": "88.39%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "295",
+        "Game Name": "Diamond Explosion 7s SE",
+        "Game ID": "rp_146",
+        "RTP": "96.37%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "296",
+        "Game Name": "Diamond Explosion 7s SE 97",
+        "Game ID": "rp_768",
+        "RTP": "96.82%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "297",
+        "Game Name": "Diamond Explosion 7s SE 94",
+        "Game ID": "rp_755",
+        "RTP": "94.45%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "298",
+        "Game Name": "Diamond Explosion 7s SE 90",
+        "Game ID": "rp_756",
+        "RTP": "90.48%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "299",
+        "Game Name": "Go High Puppy Love",
+        "Game ID": "rp_159",
+        "RTP": "96.37%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "300",
+        "Game Name": "Go High Puppy Love 94",
+        "Game ID": "rp_788",
+        "RTP": "94.35%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "301",
+        "Game Name": "Go High Puppy Love 90",
+        "Game ID": "rp_789",
+        "RTP": "90.32%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "302",
+        "Game Name": "Go High Puppy Love 88",
+        "Game ID": "rp_790",
+        "RTP": "88.29%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "303",
+        "Game Name": "Volcano Rising SE",
+        "Game ID": "rp_150",
+        "RTP": "96.46%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "304",
+        "Game Name": "Volcano Rising SE 94",
+        "Game ID": "rp_763",
+        "RTP": "94.36%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "305",
+        "Game Name": "Volcano Rising SE 90",
+        "Game ID": "rp_764",
+        "RTP": "90.43%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "306",
+        "Game Name": "Immortal Ways Diamonds SE",
+        "Game ID": "rp_145",
+        "RTP": "96.29%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "307",
+        "Game Name": "Immortal Ways Diamonds SE 94",
+        "Game ID": "rp_753",
+        "RTP": "94.28%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "308",
+        "Game Name": "Immortal Ways Diamonds SE 90",
+        "Game ID": "rp_754",
+        "RTP": "90.31%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "309",
+        "Game Name": "Mad Hit Savannah",
+        "Game ID": "rp_155",
+        "RTP": "96.30%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "310",
+        "Game Name": "Mad Hit Savannah 94",
+        "Game ID": "rp_778",
+        "RTP": "94.33%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "311",
+        "Game Name": "Mad Hit Savannah 90",
+        "Game ID": "rp_779",
+        "RTP": "90.34%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "312",
+        "Game Name": "Mad Hit Savannah 88",
+        "Game ID": "rp_780",
+        "RTP": "88.33%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "313",
+        "Game Name": "Rush Fever Soda Pop",
+        "Game ID": "rp_120",
+        "RTP": "96.35%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "314",
+        "Game Name": "Rush Fever Soda Pop 94",
+        "Game ID": "rp_700",
+        "RTP": "94.33%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "315",
+        "Game Name": "Rush Fever Soda Pop 90",
+        "Game ID": "rp_701",
+        "RTP": "90.31%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "316",
+        "Game Name": "Rush Fever Soda Pop 88",
+        "Game ID": "rp_702",
+        "RTP": "88.38%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "317",
+        "Game Name": "Ten Ton Ways Luck",
+        "Game ID": "rp_163",
+        "RTP": "96.33%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "318",
+        "Game Name": "Ten Ton Ways Luck 94",
+        "Game ID": "rp_801",
+        "RTP": "94.39%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "319",
+        "Game Name": "Ten Ton Ways Luck 90",
+        "Game ID": "rp_802",
+        "RTP": "90.32%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "320",
+        "Game Name": "Go High Joker",
+        "Game ID": "rp_165",
+        "RTP": "96.37%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "321",
+        "Game Name": "Go High Joker 94",
+        "Game ID": "rp_807",
+        "RTP": "94.35%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "322",
+        "Game Name": "Go High Joker 90",
+        "Game ID": "rp_808",
+        "RTP": "90.32%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "323",
+        "Game Name": "Elephant Stampede SE",
+        "Game ID": "rp_149",
+        "RTP": "96.29%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "324",
+        "Game Name": "Elephant Stampede SE 97",
+        "Game ID": "rp_769",
+        "RTP": "96.91%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "325",
+        "Game Name": "Elephant Stampede SE 94",
+        "Game ID": "rp_761",
+        "RTP": "94.32%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "326",
+        "Game Name": "Elephant Stampede SE 90",
+        "Game ID": "rp_762",
+        "RTP": "90.30%",
+        "Active": "TRUE"
+    },
+    {
+        "#": "327",
+        "Game Name": "Mad Hit Full Steam",
+        "Game ID": "rp_139",
+        "RTP": "96.33%",
+        "Active": "FALSE"
+    },
+    {
+        "#": "328",
+        "Game Name": "Mad Hit Full Steam 94",
+        "Game ID": "rp_730",
+        "RTP": "94.32%",
+        "Active": "FALSE"
+    },
+    {
+        "#": "329",
+        "Game Name": "Mad Hit Full Steam 90",
+        "Game ID": "rp_731",
+        "RTP": "90.38%",
+        "Active": "FALSE"
+    },
+    {
+        "#": "330",
+        "Game Name": "Stampede Rush Trident",
+        "Game ID": "rp_92",
+        "RTP": "96.41%",
+        "Active": "FALSE"
+    },
+    {
+        "#": "331",
+        "Game Name": "Stampede Rush Trident 94",
+        "Game ID": "rp_589",
+        "RTP": "94.31%",
+        "Active": "FALSE"
+    },
+    {
+        "#": "332",
+        "Game Name": "Stampede Rush Trident 90",
+        "Game ID": "rp_590",
+        "RTP": "90.43%",
+        "Active": "FALSE"
+    },
+    {
+        "#": "333",
+        "Game Name": "Stampede Rush Trident 88",
+        "Game ID": "rp_591",
+        "RTP": "88.36%",
+        "Active": "FALSE"
+    },
+    {
+        "#": "334",
+        "Game Name": "Giga Match Bunny",
+        "Game ID": "rp_160",
+        "RTP": "96.32%",
+        "Active": "FALSE"
+    },
+    {
+        "#": "335",
+        "Game Name": "Giga Match Bunny 94",
+        "Game ID": "rp_791",
+        "RTP": "94.36%",
+        "Active": "FALSE"
+    },
+    {
+        "#": "336",
+        "Game Name": "Giga Match Bunny 90",
+        "Game ID": "rp_792",
+        "RTP": "90.27%",
+        "Active": "FALSE"
+    },
+    {
+        "#": "337",
+        "Game Name": "Zeus Rush Fever Deluxe SE",
+        "Game ID": "rp_148",
+        "RTP": "96.56%",
+        "Active": "FALSE"
+    },
+    {
+        "#": "338",
+        "Game Name": "Zeus Rush Fever Deluxe SE 94",
+        "Game ID": "rp_759",
+        "RTP": "94.46%",
+        "Active": "FALSE"
+    },
+    {
+        "#": "339",
+        "Game Name": "Zeus Rush Fever Deluxe SE 90",
+        "Game ID": "rp_760",
+        "RTP": "90.45%",
+        "Active": "FALSE"
+    }
+]

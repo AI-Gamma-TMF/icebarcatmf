@@ -1,0 +1,112 @@
+{
+  "name": "moneyFactory",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "prepare": "husky install",
+    "start": "node ./dist/index.js",
+    "babel-node": "babel-node --inspect=0.0.0.0:9229",
+    "lint": "standard --fix",
+    "start:dev": "nodemon --exec npm run babel-node -- ./index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "sequelize": "npm run babel-node node_modules/.bin/sequelize-cli",
+    "migrate:init": "npm run babel-node node_modules/.bin/sequelize-cli db:create && npm run babel-node node_modules/.bin/sequelize-cli db:migrate",
+    "migrate": "npm run babel-node node_modules/.bin/sequelize-cli db:migrate",
+    "migrate:undo": "npm run babel-node node_modules/.bin/sequelize-cli db:migrate:undo",
+    "elastic:reset": "node src/libs/resetElastic.js",
+    "migrate:status": "npm run babel-node node_modules/.bin/sequelize-cli db:migrate:status",
+    "db:reset": "npm run babel-node node_modules/.bin/sequelize-cli db:drop && npm run babel-node node_modules/.bin/sequelize-cli db:create && npm run babel-node node_modules/.bin/sequelize-cli db:migrate && npm run babel-node node_modules/.bin/sequelize-cli db:seed:all",
+    "seed": "npm run babel-node node_modules/.bin/sequelize-cli db:seed:all",
+    "seed:undo": "npm run babel-node node_modules/.bin/sequelize-cli db:seed:undo"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "author": "gammastack",
+  "license": "ISC",
+  "engines": {
+    "node": "22.17.1"
+  },
+  "dependencies": {
+    "@elastic/elasticsearch": "8.2.1",
+    "@sendgrid/mail": "8.1.5",
+    "@socket.io/redis-adapter": "7.2.0",
+    "@socket.io/redis-emitter": "5.1.0",
+    "ajv": "8.8.2",
+    "ajv-formats": "2.1.1",
+    "ajv-i18n": "4.2.0",
+    "ajv-keywords": "5.1.0",
+    "aws-sdk": "2.1692.0",
+    "axios": "1.11.0",
+    "bcrypt": "5.0.1",
+    "body-parser": "1.20.3",
+    "convict": "6.2.4",
+    "cookie-parser": "1.4.7",
+    "cors": "2.8.5",
+    "crypto-js": "4.2.0",
+    "csv-parse": "5.5.2",
+    "currency-symbol-map": "5.1.0",
+    "dayjs": "1.11.13",
+    "debug": "2.6.9",
+    "dotenv": "14.2.0",
+    "express": "4.21.2",
+    "flatted": "3.2.4",
+    "helmet": "6.0.1",
+    "hi-base32": "0.5.1",
+    "http-status-codes": "2.2.0",
+    "i18n": "0.15.1",
+    "ioredis": "4.28.2",
+    "js-md5": "0.8.3",
+    "json2csv": "6.0.0-alpha.2",
+    "lodash": "4.17.21",
+    "moment": "2.29.4",
+    "morgan": "1.10.1",
+    "multer": "2.0.2",
+    "node-mailjet": "6.0.9",
+    "node-xlsx": "0.4.0",
+    "number-precision": "1.6.0",
+    "otpauth": "9.1.4",
+    "passport": "0.4.0",
+    "passport-jwt": "4.0.1",
+    "passport-local": "1.0.0",
+    "pg": "8.7.1",
+    "pg-hstore": "2.3.4",
+    "sendgrid": "5.2.3",
+    "sequelize": "6.37.7",
+    "sequelize-cli": "6.3.0",
+    "sharp": "0.34.3",
+    "socket.io": "4.8.1",
+    "socket.io-client": "4.8.1",
+    "uuid": "8.3.0",
+    "winston": "3.3.3"
+  },
+  "devDependencies": {
+    "@babel/cli": "7.16.0",
+    "@babel/core": "7.16.5",
+    "@babel/eslint-parser": "7.16.5",
+    "@babel/node": "7.16.5",
+    "@babel/preset-env": "7.16.5",
+    "dotenv": "10.0.0",
+    "eslint": "7.12.1",
+    "husky": "^7.0.4",
+    "lint-staged": "12.1.2",
+    "nodemon": "3.1.10",
+    "standard": "16.0.4"
+  },
+  "standard": {
+    "parser": "@babel/eslint-parser",
+    "env": {
+      "jest": true,
+      "browser": true,
+      "node": true
+    }
+  },
+  "lint-staged": {
+    "src/**/*.js": [
+      "npm run lint"
+    ]
+  }
+}

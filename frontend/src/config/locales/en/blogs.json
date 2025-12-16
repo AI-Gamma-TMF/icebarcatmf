@@ -1,0 +1,146 @@
+{
+    "title": "Blogs",
+    "filter": {
+      "search": "Search",
+      "status": {
+        "title": "Status",
+        "options": {
+          "all": "All",
+          "active": "Active",
+          "inActive": "In-Active"
+        }
+      }
+    },
+    "headers": {
+      "id": "Id",
+      "title": "Title",
+      "status": "Status",
+      "description": "Description",
+      "url":"URL",
+      "blogHeading":"Blog Heading",
+      "bannerImage":"Banner Image",
+      "altHeading":"Alt Heading",
+      "postDescription":"Post Description",
+      "seoKeywords":"SEO Keywords"
+      
+    },
+    "createButton": "Create",
+    "activeStatus": "Active",
+    "inActiveStatus": "In-Active",
+    "noDataFound": "No data found",
+    "createBlogSuccessToast": "Blog created successfully.",
+    "editBlogSuccessToast": "Blog edited successfully.",
+    "deleteBlogSuccessToast": "Blog deleted successfully.",
+    "updateBlogToast":"Blog updated successfully.",
+    "createBlogTitle": "Create Blog",
+    "editBlogTitle": "Edit",
+    "viewBlogTitle": "Blog:",
+    "inputField": {
+      "description": {
+        "label": "Description",
+        "errors": {
+          "required": "Description is required",
+          "min": "Description must be at least 150 characters",
+          "max": "Description must be at most 160 characters"
+        }
+      },
+      
+      "blogHeading": {
+        "label": "Blog Heading",
+        "errors": {
+          "required": "Blog Heading is required Required",
+          "max":"Blog must be at most 60 characters"
+        }
+      },
+
+      "blogDescription": {
+        "label": "Blog Description (Use % for image width and height) ",
+        "errors": {
+          "required": "Blog Description is required Required",
+          "max":"Blog must be at most 60 characters"
+        }
+      },
+
+      "title" : {
+        "label": "Title",
+        "errors": {
+        "required": "Title Required",
+        "min": "Description must be at least 60 characters",
+        "max": "Description must be at most 70 characters"
+        }
+      },
+      "url": {
+        "label": "URL",
+        "errors": {
+          "required": "URL is required",
+          "invalid": "Enter a valid URL",
+          "max": "Description must be at most 70 characters"
+
+        }
+      },
+      "bannerImage": {
+        "label": "Banner Image",
+        "errors": {
+          "required": "Image is required"
+        }
+      },
+      "altDescription": {
+        "label": "Alt Heading",
+        "errors": {
+          "required": "Heading is required"
+        }
+      },
+      "postDescription": {
+        "label": "Post Description",
+        "errors": {
+          "required": "Post Description is required"
+        }
+      },
+      "seoKeyWords": {
+        "label": "SEO Keywords",
+        "errors": {
+          "required": "Keywords are required"
+        }
+      },
+      "bannerImageValidation": {
+        "label": "Banner Image",
+        "errors": {
+          "invalidDimentionsToast":"Image dimensions must be equal to 1013*593 pixels."
+        }
+      },
+      
+      "isActive": {
+        "label": "Is Active",
+        "errors": {
+          "required": "Keywords are required"
+        }
+      },
+      "isPopular": {
+        "label": "Is Popular",
+        "errors": {
+          "required": "Keywords are required"
+        }
+      },
+      "content": {
+        "label": "Is Popular",
+        "errors": {
+          "requiredToast": "Blog Description is required",
+          "noWhiteSpaces":"Leading or trailing spaces are not allowed in the Blog Description."
+        }
+      }
+      
+
+      
+    },
+    "dynamicKeys": "Dynamic Keys",
+    "required": "(Required)",
+    "optional": "(Optional)",
+    "cancelButton": "Cancel",
+    "submitButton": "Submit",
+    "codepen": {
+      "title": "Code playground",
+      "result": "Results",
+      "testData": "TEST DATA",
+      "html": "HTML"
+    }
+  }

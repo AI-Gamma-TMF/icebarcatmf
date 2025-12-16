@@ -1,0 +1,126 @@
+cus-reorder-package {
+    .cus-reorder {
+      &-heading {
+        display: flex;
+        align-items: center;
+  
+        p {
+          margin: 0;
+          padding: 0.5rem;
+          font-weight: 600;
+          text-align: center;
+  
+          &:nth-child(2) {
+            text-align: left; // Question column
+          }
+        }
+  
+        @media screen and (max-width: 991px) {
+          display: none;
+        }
+      }
+  
+      &-content {
+        display: flex;
+        align-items: center;
+  
+        @media screen and (max-width: 991px) {
+          display: flex;
+          flex-direction: column;
+          padding: 0;
+          margin-bottom: 0.5rem;
+          height: auto;
+          border-radius: 0.313rem;
+          overflow: hidden;
+        }
+      }
+  
+      &-id,
+      &-question-type,
+      &-status {
+        width: 16.67%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        word-break: break-word;
+        text-align: center;
+  
+        @media screen and (max-width: 991px) {
+          border-bottom: 1px solid #00000021;
+          padding: 0.5rem 0.5rem 0.5rem 48%;
+          width: 100%;
+          margin: 0;
+          position: relative;
+          display: block;
+          text-align: left;
+        }
+  
+        &:before {
+          @media screen and (max-width: 991px) {
+            position: absolute;
+            left: 0rem;
+            width: 46%;
+            border-right: 1px solid #00000021;
+            height: 100%;
+            top: 0;
+            display: flex;
+            align-items: center;
+            background: #262B40;
+            padding: 0.313rem 0.313rem 0.313rem 0.5rem;
+            color: #fff;
+            font-weight: 600;
+            white-space: normal;
+          }
+        }
+      }
+  
+      &-id:before {
+        content: 'ID';
+      }
+  
+      &-question-type:before {
+        content: 'GC Coin';
+      }
+  
+      &-status:before {
+        content: 'Status';
+      }
+  
+      &-question {
+        width: 50%;
+        display: flex;
+        align-items: center;
+        text-align: left;
+        word-break: break-word;
+  
+        @media screen and (max-width: 991px) {
+          border-bottom: 1px solid #00000021;
+          padding: 0.5rem 0.5rem 0.5rem 48%;
+          width: 100%;
+          margin: 0;
+          position: relative;
+          display: block;
+        }
+  
+        &:before {
+          @media screen and (max-width: 991px) {
+            content: 'Amount';
+            position: absolute;
+            left: 0rem;
+            width: 46%;
+            border-right: 1px solid #00000021;
+            height: 100%;
+            top: 0;
+            display: flex;
+            align-items: center;
+            white-space: normal;
+            background: #262B40;
+            padding: 0.313rem 0.313rem 0.313rem 0.5rem;
+            color: #fff;
+            font-weight: 600;
+          }
+        }
+      }
+    }
+  }
+  

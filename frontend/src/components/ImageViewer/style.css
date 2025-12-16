@@ -1,0 +1,17 @@
+.ril-inner.ril__inner {
+    border: 1px dashed #fff;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+    background: #ffffff3d;
+    backdrop-filter: blur(10px);
+    overflow: hidden;
+    width: 340px;
+    height: 480px;
+}
+
+
+.ril__image{
+    width: 100%;
+}

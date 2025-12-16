@@ -1,0 +1,34 @@
+{   "accountStatus" : "Account Status",
+    "veriff" : {
+        "title" : "Veriff",
+        "info" : "Person was not verified. The verification process is not complete. Accessing the sessionURL again will show the client's verification is pending"
+    },
+    "personalDetails": {
+        "title" : "Personal Details",
+        "firstName": "First Name",
+        "middleName": "Middle Name",
+        "lastName": "Last Name",
+        "dob": "Date Of Birth",
+        "gender": "Gender",
+        "addLine1": "Address Line 1",
+        "addLine2": "Address Line 2",
+        "city": "City",
+        "zipCode": "Zip Code",
+        "state": "State",
+        "country": "Country",
+        "proofOfID": "Proof Of ID",
+        "proofOfAdd": "Proof Of Address"
+
+    },
+    "bankDetails" : {
+        "title" : "Bank Details",
+        "routing" : "ABA Routing Number *9 Digits",
+        "bankName": "Name Of Bank",
+        "accountNo": "Bank Account Number",
+        "name": "Account Holder Name",
+        "bankStatement": "Upload Bank Statement"
+    },
+    "lexisnexis" : {
+        "title" : "Lexisnexis"
+    }
+}

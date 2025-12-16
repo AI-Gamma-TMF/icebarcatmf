@@ -1,0 +1,410 @@
+import { Button, Row, Col, Table, Form } from "@themesberg/react-bootstrap";
+import PaginationComponent from "../../../components/Pagination";
+import {
+  ConfirmationModal,
+  HideConfirmationModal,
+} from "../../../components/ConfirmationModal";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Trigger from "../../../components/OverlayTrigger";
+import useAggregatorListing from "./useAggregatorListing";
+import CreateAggregator from "./components/CreateAggregator";
+import useCheckPermission from "../../../utils/checkPermission";
+import {
+  faCheckSquare,
+  faWindowClose,
+  faArrowCircleUp,
+  faArrowCircleDown,
+  faRedoAlt,
+  faFan,
+  faEyeSlash,
+} from "@fortawesome/free-solid-svg-icons";
+import { hideAggregatorMsg, tableHeaders } from "./constants";
+import { InlineLoader } from "../../../components/Preloader";
+const CasinoAggregator = () => {
+  const {
+    aggregators,
+    limit,
+    setLimit,
+    page,
+    setPage,
+    search,
+    setSearch,
+    // setCategoryFilter,
+    // categoryFilter,
+    // statusFilter,
+    // setStatusFilter,
+    totalPages,
+    handleStatusShow,
+    handleYes,
+    statusShow,
+    setStatusShow,
+    show,
+    handleClose,
+    // handleShow,
+    loading,
+    status,
+    t,
+    createAggregator,
+    name,
+    setOrderBy,
+    selected,
+    sort,
+    setSort,
+    over,
+    setOver,
+    updateloading,
+    aggregatorStatus,
+    setAggregatorStatus,
+    handleFreeSpin,
+    hideModalShow,
+    setHideModalShow,
+    handleHideYes,
+    hideLoading,
+    handleHide,
+    setFreeSpinStatusShow,
+    handleFreeSpinYes,
+    freeSpinStatusShow,
+    freeSpinstatus,
+    updateFreeSpinloading,
+  } = useAggregatorListing();
+  const { isHidden } = useCheckPermission();
+
+  const resetFilters = () => {
+    setSearch("");
+    setAggregatorStatus("all");
+  };
+
+  return (
+    <>
+      <Row>
+        <Col xs={7}>
+          <h3>Casino Aggregators</h3>
+        </Col>
+      </Row>
+
+      <Row>
+        <Col xs={12} md={3}>
+          <Form.Label>Search</Form.Label>
+
+          <Form.Control
+            type="search"
+            value={search}
+            placeholder={"Search by Id or Name"}
+            onChange={(event) => {
+              setPage(1);
+              setSearch(event?.target?.value);
+            }}
+          />
+        </Col>
+        <Col xs={12} md={3}>
+          <Form.Group controlId="formStatus">
+            <Form.Label>Status</Form.Label>
+            <Form.Select
+              as="select"
+              value={aggregatorStatus}
+              onChange={(event) => {
+                setPage(1);
+                setAggregatorStatus(event?.target?.value);
+              }}
+            >
+              <option value="all">All</option>
+              <option value="true">Active</option>
+              <option value="false">In-active</option>
+            </Form.Select>
+          </Form.Group>
+        </Col>
+        <Col xs={12} md={3} style={{ marginTop: "30px" }}>
+          <Trigger message="Reset Filters" id={"redo"} />
+          <Button id={"redo"} variant="success" onClick={resetFilters}>
+            <FontAwesomeIcon icon={faRedoAlt} />
+          </Button>
+        </Col>
+      </Row>
+
+      <Table
+        bordered
+        striped
+        responsive
+        hover
+        size="sm"
+        className="text-center mt-4"
+      >
+        <thead className="thead-dark">
+          <tr>
+            {tableHeaders.map((h, idx) => (
+              <th
+                key={idx}
+                onClick={() =>
+                  h.value !== "" &&
+                  (setOrderBy(h.value) ||
+                    setSort(sort === "ASC" ? "DESC" : "ASC"))
+                }
+                style={{
+                  cursor: h.value !== "" ? "pointer" : "default",
+                }}
+                className={selected(h) ? "border-3 border border-blue" : ""}
+              >
+                {t(h.labelKey)}{" "}
+                {selected(h) &&
+                  (sort === "ASC" ? (
+                    <FontAwesomeIcon
+                      style={over ? { color: "red" } : {}}
+                      icon={faArrowCircleUp}
+                      onClick={() => setSort("DESC")}
+                      onMouseOver={() => setOver(true)}
+                      onMouseLeave={() => setOver(false)}
+                    />
+                  ) : (
+                    <FontAwesomeIcon
+                      style={over ? { color: "red" } : {}}
+                      icon={faArrowCircleDown}
+                      onClick={() => setSort("ASC")}
+                      onMouseOver={() => setOver(true)}
+                      onMouseLeave={() => setOver(false)}
+                    />
+                  ))}
+              </th>
+            ))}
+          </tr>
+        </thead>
+
+        <tbody id={loading ? "cover-spin" : ""}>
+          {aggregators &&
+            !loading &&
+            aggregators?.rows?.map(
+              ({
+                name,
+                masterGameAggregatorId,
+                isActive,
+                freeSpinAllowed,
+                adminEnabledFreespin,
+              }) => {
+                return (
+                  <tr key={masterGameAggregatorId}>
+                    <td>{masterGameAggregatorId}</td>
+
+                    <td>
+                      <Trigger
+                        message={name}
+                        id={masterGameAggregatorId + "name"}
+                      />
+                      <span
+                        id={masterGameAggregatorId + "name"}
+                        style={{
+                          width: "100px",
+                          cursor: "pointer",
+                          textTransform: "uppercase",
+                        }}
+                        className="d-inline-block text-truncate"
+                      >
+                        {name}
+                      </span>
+                    </td>
+
+                    <td>
+                      {isActive ? (
+                        <span className="text-success">Active</span>
+                      ) : (
+                        <span className="text-danger">In Active</span>
+                      )}
+                    </td>
+                    {!isHidden({
+                      module: { key: "CasinoManagement", value: "U" },
+                    }) ||
+                    !isHidden({
+                      module: { key: "CasinoManagement", value: "T" },
+                    }) ? (
+                      <td>
+                        {!isActive ? (
+                          <>
+                            <Trigger
+                              message="Set Status Active"
+                              id={masterGameAggregatorId + "active"}
+                            />
+                            <Button
+                              id={masterGameAggregatorId + "active"}
+                              className="m-1"
+                              size="sm"
+                              variant="success"
+                              onClick={() =>
+                                handleStatusShow(
+                                  masterGameAggregatorId,
+                                  isActive,
+                                  name,
+                                  freeSpinAllowed
+                                )
+                              }
+                              hidden={isHidden({
+                                module: { key: "CasinoManagement", value: "T" },
+                              })}
+                            >
+                              <FontAwesomeIcon icon={faCheckSquare} />
+                            </Button>
+                          </>
+                        ) : (
+                          <>
+                            <Trigger
+                              message="Set Status In-Active"
+                              id={masterGameAggregatorId + "inactive"}
+                            />
+                            <Button
+                              id={masterGameAggregatorId + "inactive"}
+                              className="m-1"
+                              size="sm"
+                              variant="danger"
+                              onClick={() =>
+                                handleStatusShow(
+                                  masterGameAggregatorId,
+                                  isActive,
+                                  name,
+                                  freeSpinAllowed
+                                )
+                              }
+                              hidden={isHidden({
+                                module: { key: "CasinoManagement", value: "T" },
+                              })}
+                            >
+                              <FontAwesomeIcon icon={faWindowClose} />
+                            </Button>
+                          </>
+                        )}
+
+                        <Trigger
+                          message="Hide"
+                          id={masterGameAggregatorId + "hide"}
+                        />
+                        <Button
+                          id={masterGameAggregatorId + "hide"}
+                          hidden={isHidden({
+                            module: { key: "CasinoManagement", value: "D" },
+                          })}
+                          className="m-1"
+                          size="sm"
+                          variant="warning"
+                          onClick={() => handleHide(masterGameAggregatorId)}
+                        >
+                          <FontAwesomeIcon icon={faEyeSlash} />
+                        </Button>
+                        {freeSpinAllowed &&
+                          (!adminEnabledFreespin ? (
+                            <>
+                              <Trigger
+                                message="Enable Free Spin"
+                                id={masterGameAggregatorId + "enable"}
+                              />
+                              <Button
+                                id={masterGameAggregatorId + "enable"}
+                                className="m-1"
+                                size="sm"
+                                variant="success"
+                                onClick={() =>
+                                  handleFreeSpin(
+                                    masterGameAggregatorId,
+                                    adminEnabledFreespin
+                                  )
+                                }
+                                hidden={isHidden({
+                                  module: {
+                                    key: "CasinoManagement",
+                                    value: "T",
+                                  },
+                                })}
+                              >
+                                <FontAwesomeIcon icon={faFan} />
+                              </Button>
+                            </>
+                          ) : (
+                            <>
+                              <Trigger
+                                message="Disable FreeSpin"
+                                id={masterGameAggregatorId + "disable"}
+                              />
+                              <Button
+                                id={masterGameAggregatorId + "disable"}
+                                className="m-1"
+                                size="sm"
+                                variant="danger"
+                                onClick={() =>
+                                  handleFreeSpin(
+                                    masterGameAggregatorId,
+                                    adminEnabledFreespin
+                                  )
+                                }
+                                hidden={isHidden({
+                                  module: {
+                                    key: "CasinoManagement",
+                                    value: "T",
+                                  },
+                                })}
+                              >
+                                <FontAwesomeIcon icon={faFan} />
+                              </Button>
+                            </>
+                          ))}
+                      </td>
+                    ) : (
+                      "NA"
+                    )}
+                  </tr>
+                );
+              }
+            )}
+          
+          {aggregators?.count === 0 && !loading && (
+            <tr>
+              <td colSpan={5} className="text-danger text-center">
+                No data found
+              </td>
+            </tr>
+          )}
+        </tbody>
+      </Table>
+      {loading && <InlineLoader />}
+      {aggregators?.count !== 0 && !loading && (
+        <PaginationComponent
+          page={aggregators?.count < page ? setPage(1) : page}
+          totalPages={totalPages}
+          setPage={setPage}
+          limit={limit}
+          setLimit={setLimit}
+        />
+      )}
+      <ConfirmationModal
+        setShow={setStatusShow}
+        show={statusShow}
+        handleYes={handleYes}
+        active={status}
+        name={name}
+        loading={updateloading}
+        note="Deactivating this Aggregator will cancel all associated Free Spins ."
+        freeSpinstatus={freeSpinstatus}
+      />
+      <ConfirmationModal
+        setShow={setFreeSpinStatusShow}
+        show={freeSpinStatusShow}
+        handleYes={handleFreeSpinYes}
+        active={freeSpinstatus}
+        loading={updateFreeSpinloading}
+        message="Update Free Spin Status"
+      />
+      <CreateAggregator
+        handleClose={handleClose}
+        show={show}
+        createAggregator={createAggregator}
+        loading={loading}
+      />
+
+      {hideModalShow && (
+        <HideConfirmationModal
+          hideModalShow={hideModalShow}
+          setHideModalShow={setHideModalShow}
+          handleHideYes={handleHideYes}
+          loading={hideLoading}
+          hideMsg={hideAggregatorMsg}
+        />
+      )}
+    </>
+  );
+};
+
+export default CasinoAggregator;

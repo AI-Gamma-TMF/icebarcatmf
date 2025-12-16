@@ -1,0 +1,108 @@
+{
+  "title": "CMS",
+  "filter": {
+    "search": "Search",
+    "status": {
+      "title": "Status",
+      "options": {
+        "all": "All",
+        "active": "Active",
+        "inActive": "In-Active"
+      }
+    }
+  },
+  "headers": {
+    "id": "Id",
+    "title": "Title",
+    "slug": "Slug",
+    "status": "Status",
+    "action": "Action"
+  },
+  "createButton": "Create",
+  "activeStatus": "Active",
+  "inActiveStatus": "In-Active",
+  "noDataFound": "No data found",
+  "createCmsSuccessToast": "CMS created successfully.",
+  "editCmsSuccessToast": "CMS edited successfully.",
+  "deleteCmsSuccessToast": "CMS deleted successfully.",
+  "createCmsTitle": "Create CMS",
+  "editCmsTitle": "Edit",
+  "viewCmsTitle": "CMS:",
+  "inputField": {
+    "slug": {
+      "label": "Slug",
+      "errors": {
+        "required": "Slug is required",
+        "invalid": "Enter a valid url slug",
+        "min": "Slug must be at least 3 characters",
+        "max": "Slug must be at most 30 characters"
+      }
+    },
+    "category": {
+      "label": "Category",
+      "options": {
+        "support": "Support",
+        "about": "About",
+        "responsibleGaming": "Responsible Gaming",
+        "footer": "Footer"
+      },
+      "errors": {
+        "required": "Password Required"
+      }
+    },
+    "type" : {
+      "label": "Type",
+      "options": {
+        "internal": "Internal",
+        "external": "External",
+        "footer": "Footer"
+      },
+      "errors": {
+        "required": "Cms Type Required"
+      }
+    },
+    "targetUrl": {
+      "label": "Target URL",
+      "errors": {
+        "required": "URL is required",
+        "invalid": "Enter a valid URL"
+      }
+    },
+    "status": {
+      "label": "Status"
+    },
+    "isHidden": {
+      "label": "Hidden"
+    },
+    "showCmsPopupToUser": {
+      "label": "Notify User"
+    },
+    "cmsLink": {
+      "label": "CMS Link"
+    },
+    "title": {
+      "label": "Title",
+      "errors": {
+        "required": "Title is required"
+      }
+    },
+    "content": {
+      "label": "Content",
+      "errors": {
+        "required": "Content is Required!",
+        "requiredToast": "Content Required!"
+      }
+    }
+  },
+  "dynamicKeys": "Dynamic Keys",
+  "required": "(Required)",
+  "optional": "(Optional)",
+  "cancelButton": "Cancel",
+  "submitButton": "Submit",
+  "codepen": {
+    "title": "Code playground",
+    "result": "Results",
+    "testData": "TEST DATA",
+    "html": "HTML"
+  }
+}

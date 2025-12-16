@@ -1,0 +1,173 @@
+@import 'react-querybuilder/dist/query-builder.css';
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+/* General Query Builder Styles */
+.queryBuilder-branches {
+  background-color: #f8f9fa; /* Light gray background */
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid #dee2e6; /* Bootstrap border color */
+  font-family: 'Arial', sans-serif;
+}
+
+/* Rule Group Styling */
+.queryBuilder .ruleGroup {
+  background-color: #ffffff;
+  border: 2px solid #959da7; /* Bootstrap primary color */
+  border-radius: 8px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+/* Rule Group Header */
+.queryBuilder .ruleGroup-header {
+  background-color: transparent;
+  color: #ffffff;
+  font-weight: bold;
+  padding: 6px;
+  border-radius: 6px;
+}
+
+/* Individual Rule Styling */
+.queryBuilder .rule {
+  border: 1px solid #2a479650; /* Green for rules */
+  padding: 8px;
+  margin: 5px 0;
+  background-color: transparent;
+  border-radius: 5px;
+}
+
+/* Dropdowns and Inputs */
+.queryBuilder .fieldSelector,
+.queryBuilder .operatorSelector,
+.queryBuilder .valueEditor {
+  /* background-color: #f8f9fa; */
+  background-color: #22c014;
+  border: 1px solid #d7dbdf;
+  padding: 5px;
+  border-radius: 5px;
+  width: 100px;
+}
+
+.queryBuilder .form-select{
+  width: 550px;
+  border-radius: 5px;
+ 
+}
+
+.queryBuilder .form-control{
+  width: 500px;
+ 
+}
+.queryBuilder .form-control-sm
+  {
+    min-height: calc(1.5em + 0.625rem);
+    padding: 0.01rem 0.01rem;
+    border-radius : 0.2rem;
+    font-size: 1.2rem;
+}
+/* .queryBuilder .btn-secondary {
+  background-color:#f5b759; 
+  color:black;
+  border-radius: 5px;
+  padding: 5px 10px;
+  border: none;
+  cursor: pointer;
+} */
+.queryBuilder .btn-secondary {
+  background-color: #f5b759; /* Warm yellow-orange */
+  color: black;
+  border-radius: 5px;
+  padding: 5px 10px;
+  border: none;
+  cursor: pointer;
+ 
+  font-weight: bold;
+ 
+}
+
+.queryBuilder .btn-secondary:hover {
+  background-color: #e0a247; /* Slightly darker shade on hover */
+  transform: scale(1.05); /* Subtle pop effect */
+}
+
+.queryBuilder .btn-secondary:active {
+  background-color: #c98c39; /* Even darker on click */
+  transform: scale(0.98); /* Slight press effect */
+}
+
+.queryBuilder .btn-primary {
+  background-color:#05a677; /* Green color */
+  color:white;
+  border-radius: 5px;
+  padding: 5px 10px;
+  border: none;
+  cursor: pointer;
+}
+
+.queryBuilder .btn-danger:hover {
+  background-color: #b71c1c; /* Darker red on hover */
+  transform: scale(1.05);
+}
+
+.queryBuilder .btn-danger:active {
+  background-color: #9a0007; /* Even darker red on click */
+  transform: scale(0.98);
+}
+
+/* Remove Rule Button */
+.queryBuilder .rule .removeRule {
+  background-color: #dc3545; /* Red color */
+  color: white;
+  border-radius: 5px;
+  padding: 5px 10px;
+  border: none;
+  cursor: pointer;
+}
+
+.queryBuilder .rule .removeRule:hover {
+  background-color: #c82333;
+}
+                                                                   
+/* Add Rule Button */
+.queryBuilder .addRule {
+  background-color: #17a2b8; /* Bootstrap info color */
+  color: white;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.queryBuilder .addRule:hover {
+  background-color: #138496;
+}
+
+/* Custom Scrollbar for Large Queries */
+.queryBuilder {
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+/* Preview Box */
+.query-preview {
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+  padding: 15px;
+  border-radius: 8px;
+  margin-top: 20px;
+}
+
+.queryBuilder .form-select:nth-of-type(1) {
+  width: 550px; /* First form select */
+}
+
+.queryBuilder .form-select:nth-of-type(2) {
+  width: 100px; /* Second form select */
+}
+
+.queryBuilder .form-select {
+  border-radius: 5px;
+}

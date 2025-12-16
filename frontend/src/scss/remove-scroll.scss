@@ -1,0 +1,67 @@
+// Remove Scroll from Login Page
+// Ensure perfect viewport fit
+
+// Remove body scroll on login page
+body {
+  overflow-x: hidden;
+}
+
+// Login page specific - no scroll
+.casino-login-section {
+  overflow: hidden !important;
+  
+  .container {
+    max-width: 100% !important;
+    padding: 0 15px !important;
+  }
+  
+  .row {
+    margin: 0 !important;
+    height: 100vh;
+    max-height: 100vh;
+    overflow: hidden;
+  }
+  
+  // Remove extra spacing
+  &.my-5,
+  &.mt-lg-6,
+  &.mb-lg-5 {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+  }
+}
+
+// Ensure main content doesn't cause scroll on login
+main {
+  &:has(.casino-login-section) {
+    height: 100vh;
+    max-height: 100vh;
+    overflow: hidden;
+  }
+}
+
+// Fix card positioning to prevent overflow
+.casino-login-section .card {
+  max-width: 500px;
+  width: 90%;
+  margin: 0 auto;
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .casino-login-section {
+    .card {
+      width: 95%;
+      padding: 1.5rem !important;
+    }
+  }
+}
+
+// Prevent any child elements from causing scroll
+.casino-login-section * {
+  &::before,
+  &::after {
+    max-height: 100vh;
+  }
+}
+

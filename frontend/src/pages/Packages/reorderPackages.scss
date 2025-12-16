@@ -1,0 +1,187 @@
+.cus-reorder-package {
+
+    .cus-reorder {
+
+        &-heading {
+
+            @media screen and (max-width: 991px) {
+                display: none;
+            }
+
+        }
+
+        &-content {
+
+            @media screen and (max-width: 991px) {
+                display: flex;
+                flex-direction: column;
+                padding: 0;
+                margin-bottom: 0.5rem;
+                height: auto;
+                border-radius: 0.313rem;
+                overflow: hidden;
+            }
+
+        }
+
+        &-id {
+
+            width: 18%;
+
+            @media screen and (max-width: 991px) {
+                border-bottom: 1px solid #00000021;
+                padding: .5rem .5rem .5rem 48%;
+                width: 100%;
+                margin: 0;
+                position: relative;
+            }
+
+            &:before {
+                @media screen and (max-width: 991px) {
+                    content: 'ID';
+                    position: absolute;
+                    left: 0rem;
+                    width: 46%;
+                    border-right: 1px solid #00000021;
+                    height: 100%;
+                    top: 0;
+                    display: flex;
+                    align-items: center;
+                    white-space: wrap;
+                    background: #262B40;
+                    padding:0.313rem 0.313rem 0.313rem 0.5rem;
+                    color: #fff;
+                    font-weight: 600;
+                }
+            }
+        }
+
+        &-amt {
+
+            width: 18%;
+
+            @media screen and (max-width: 991px) {
+                border-bottom: 1px solid #00000021;
+                padding: .5rem .5rem .5rem 48%;
+                width: 100%;
+                margin: 0;
+                position: relative;
+            }
+
+            &:before {
+                @media screen and (max-width: 991px) {
+                    content: 'Amount';
+                    position: absolute;
+                    left: 0rem;
+                    width: 46%;
+                    border-right: 1px solid #00000021;
+                    height: 100%;
+                    top: 0;
+                    display: flex;
+                    align-items: center;
+                    white-space: wrap;
+                    background: #262B40;
+                    padding:0.313rem 0.313rem 0.313rem 0.5rem;
+                    color: #fff;
+                    font-weight: 600;
+                }
+            }
+        }
+
+        &-gccoin {
+
+            width: 18%;
+            
+            @media screen and (max-width: 991px) {
+                border-bottom: 1px solid #00000021;
+                padding: .5rem .5rem .5rem 48%;
+                width: 100%;
+                margin: 0;
+                position: relative;
+            }
+
+            &:before {
+                @media screen and (max-width: 991px) {
+                    content: 'GC Coin';
+                    position: absolute;
+                    left: 0rem;
+                    width: 46%;
+                    border-right: 1px solid #00000021;
+                    height: 100%;
+                    top: 0;
+                    display: flex;
+                    align-items: center;
+                    white-space: wrap;
+                    background: #262B40;
+                    padding:0.313rem 0.313rem 0.313rem 0.5rem;
+                    color: #fff;
+                    font-weight: 600;
+                }
+            }
+        }
+
+        &-sccoin {
+            
+            width: 18%;
+
+            @media screen and (max-width: 991px) {
+                border-bottom: 1px solid #00000021;
+                padding: .5rem .5rem .5rem 48%;
+                width: 100%;
+                margin: 0;
+                position: relative;
+            }
+
+            &:before {
+                @media screen and (max-width: 991px) {
+                    content: 'SC Coin';
+                    position: absolute;
+                    left: 0rem;
+                    width: 46%;
+                    border-right: 1px solid #00000021;
+                    height: 100%;
+                    top: 0;
+                    display: flex;
+                    align-items: center;
+                    white-space: wrap;
+                    background: #262B40;
+                    padding:0.313rem 0.313rem 0.313rem 0.5rem;
+                    color: #fff;
+                    font-weight: 600;
+                }
+            }
+        }
+
+        &-status {
+
+            width: 18%;
+
+            @media screen and (max-width: 991px) {
+                padding: .5rem .5rem .5rem 48%;
+                width: 100%;
+                margin: 0;
+                position: relative;
+            }
+
+            &:before {
+                @media screen and (max-width: 991px) {
+                    content: 'Status';
+                    position: absolute;
+                    left: 0rem;
+                    width: 46%;
+                    border-right: 1px solid #00000021;
+                    height: 100%;
+                    top: 0;
+                    display: flex;
+                    align-items: center;
+                    white-space: wrap;
+                    background: #262B40;
+                    padding:0.313rem 0.313rem 0.313rem 0.5rem;
+                    color: #fff;
+                    font-weight: 600;
+                }
+            }
+        }
+    }
+
+}

@@ -1,0 +1,10 @@
+export const gameDiscountRateTableHeaders = [
+  { labelKey: "Start Date", value: "startMonthDate" },
+  { labelKey: "End Date", value: "endMonthDate" },
+  { labelKey: "Discount Percentage (%)", value: "discountPercentage" },
+  { labelKey: "Action", value: "action" },
+];
+
+
+export const fallBackImg = 'data:image/webp;base64,UklGRqQDAABXRUJQVlA4IJgDAADQHACdASqWAMwAPp1OoUysKq6nohYJwLATiWlu4XPxG9xRr2jr7s5O2WUuAptaFMA7zf3Dsz6FMA7zf3Dsvv5MqI51wQYuZyzfPt4lpT0vjjCWRB0491duLEgKnATsUQt988zUL0WM66SYeAM7VOS284riMFe/jGk9ohZKis31eC+GlrG5/iuIea2DBmWNQ78ZmELVXQoiVloBku/0XXsZV/xYteWgl+TjJKECbP0lBvllYXor4m/hef3lqE37fDz/J5Dio4zDM2zPg1m0+oxc/oI8w7Xc+3SuDvN/eBrBFuYB3m/uHZn0KYB3m/t7AAD+/ejAA8iXcmE3IHLqLcTEkVwcq6ig7FMk5QR0dj8lhLWegl1i7WKPsd7dINNL+Q2eXp2HwLdrMCh/Bj0Clsb9kGqoG6VGStAQKYiJPuFm0hSylguAoNR1xy9iBiSIwTukEg5hYidDiyeusrO2mJcyKsmqAX6uF1Uwv2jnqkpOm4s7sjjlKxTlN5Bei/yxxFjofVmpNu876ZCqMsrPjF9oQ77+LLd/9yamNIKjlw9k9YEB1G+RZ2MHq34nS+ijPUh7bUB9Q3aRiVC/8xuW6Hy2OU8saX8nnKu+So9EJcEfJpeIWumr9yF/JxErheGwXdkZxwGLSgjaXuQcoyudCJKm3eDMoUSkBEzeUPXEZvrzv5bLeOAN2/N0UpgnScmM02i+jVZXOaqcz6g/Z1SAwU1HyXkMm+3gekUWQ51q9+Uwi7E4S7J5mGn4mn3wqgOOJllulDKHki5T0p7hrum/3fhKoqrMAST14QWBlO7KkkcykCGwEecMfF4HAfUO1ebefD3RGIC9dT/FDMKdNN+qu/MOviRZcoM5cSr4Y3OVSABPceHeqVQ6okLuMkmZfc/GxxSOpYYpgiXtZwe42sSKtATaApp0US4gnpP/xz+jvjDl93oFHgQBV5mXzuTdwy2C5XPOi3gLGXiQc2ihojKFH3bj+cCgJzfTDoDFXubUPApmAyyMIjew7XiePKCZR9x4fcQivpx3sWj479kJ8PIou+3/B6EUH+66LF10viEZxPFZnyG9AIJVKhFzUBPTn1e9JS6ha4ymNBiHr8UPcnVQg4+/ruamvhiQi/r8ei0MDz5HK9YFyP7Pkh8l3uK7SFSUlpH59gkgPrRhEGBmKKEuckzc5q+VCKHZkMUKWijB55E+ssFgrHSEhnZyHbVLFOtF/gGx4wx4AAAAAA=='
+

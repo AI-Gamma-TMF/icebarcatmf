@@ -1,0 +1,211 @@
+{
+  "title": "Casino Games",
+  "noDataFound": "No data found",
+  "viewThumbnail": "View Thumbnail",
+  "notAvailable": "NA",
+  "noImage": "No Image",
+  "filter": {
+    "search": {
+      "title": "Search",
+      "place": "Search by name"
+    },
+    "provider": {
+      "title": "Provider",
+      "options": {
+        "all": "All"
+      }
+    },
+    "subCategory": {
+      "title": "Sub Category",
+      "options": {
+        "all": "All"
+      }
+    },
+    "status": {
+      "title": "Status",
+      "options": {
+        "all": "All",
+        "active": "Active",
+        "inActive": "In-Active"
+      }
+    },
+    "operator":{
+      "title":"Operator",
+      "options":{
+        "all":"All",
+        "gt":">",
+        "equal":"=",
+        "gte":">=",
+        "lt":"<",
+        "lte":"<="
+      }
+    },
+    "filterBy":{
+      "title":"Filter By",
+      "options":{
+        "all":"All",
+        "returnToPlayer":"Return to Player",
+        "systemRtp":"System RTP",
+        "betSum":"Bet Amount",
+        "winSum":"Win Amount",
+        "GGR":"GGR"
+      }
+    },
+    "filterValue":{
+      "title":"Value",
+      "place":"Enter value"
+    },
+    "gameActiveOnSite":{
+      "title":"Customer Facing",
+      "options": {
+        "all": "All",
+        "active": "Yes",
+        "inActive": "No"
+      }
+    }
+  },
+  "active": "Active",
+  "inActive": "In-Active",
+  "headers": {
+    "id": "Id",
+    "name": "Name",
+    "thumbnail": "Thumbnail",
+    "status": "Status",
+    "provider": "Provider",
+    "subCategory": "Sub Category Name",
+    "category": "Category",
+    "action": "Action",
+    "rtp": "RTP",
+    "systemRtp":"System RTP",
+    "betSum":"Bet Amount",
+    "winSum":"Win Amount",
+    "gameActiveOnSite":"Customer Facing",
+    "GGR":"GGR",
+    "createdAt":"Created at"
+  },
+  "trigger": {
+    "activeStatus": "Set Game Status Active",
+    "inActiveStatus": "Set Game Status In-Active",
+    "edit": "Edit",
+    "delete": "Delete",
+    "hide": "Hide"
+  },
+  "editGames": {
+    "title": "Game",
+    "submit": "Submit",
+    "cancel": "Cancel",
+    "fields": {
+      "name": {
+        "label": "Name",
+        "placeholder": "Enter Name",
+        "errors": {
+          "max": "Name must be less than 50 characters",
+          "required": "Game Name Required"
+        }
+      },
+      "description": {
+        "label": "Description",
+        "placeholder": "Enter Description",
+        "errors": {
+          "max": "Description must be less than 1000 characters"
+        }
+      },
+      "subCategory": {
+        "label": "Categories"
+      },
+      "status": {
+        "label": "Active"
+      },
+      "thumbnail": {
+        "label": "Thumbnail",
+        "errors": {
+          "fileSize": "File Size Should be Less Than 1MB",
+          "fileFormat": "Uploaded file has unsupported format."
+        }
+      }
+    },
+    "successMessageUpdate": "Game Successfully Updated."
+  },
+  "addGames": {
+    "title": "Game",
+    "submit": "Submit",
+    "cancel": "Cancel",
+    "fields": {
+      "gameName": {
+        "label": "Game Name",
+        "placeholder": "Enter Game Name",
+        "errors": {
+          "required": "Game Name is required"
+        }
+      },
+      "masterGameSubCategoryId": {
+        "label": "Sub Category",
+        "errors": {
+          "required": "Game Sub Category is required"
+        }
+      },
+      "providerId": {
+        "label": "Provider",
+        "placeholder": "Enter Provider",
+        "errors": {
+          "required": "Provider is required"
+        }
+      },
+      "identifier": {
+        "label": "Aggregator ID",
+        "placeholder": "Enter Aggregator ID",
+        "errors": {
+          "required": "Aggregator ID is required"
+        }
+      },
+      "returnToPlayer": {
+        "label": "Return to Player",
+        "placeholder": "Enter Return to Player",
+        "errors": {
+          "required": "Return to Player is required"
+        }
+      },
+      "status": {
+        "label": "Active"
+      },
+      "thumbnail": {
+        "label": "Thumbnail",
+        "errors": {
+          "fileSize": "File Size Should be Less Than 1MB",
+          "fileFormat": "Uploaded file has unsupported format."
+        }
+      }
+    },
+    "successMessageUpdate": "Game Successfully Updated."
+  },
+  "uploadGames": {
+    "title": "Upload Games",
+    "cancelButton": "Cancel",
+    "submitButton": "Submit",
+    "gamesUploadSuccessToast": "Games uploaded successfully.",
+    "fields": {
+      "providers": {
+        "label": "Provider",
+        "selectProviders": "Select Provider",
+        "errors": {
+          "required": "Provider is required"
+        }
+      },
+      "assetsURL": {
+        "label": "Game Assets URL",
+        "placeholder": "https://cdn.com/development/game/assets/provider/file.png",
+        "errors": {
+          "required": "Game Assets URL is required"
+        }
+      },
+      "inputJson": {
+        "label": "Game File( In JSON format)",
+        "errors": {
+          "required": "Game File is required",
+          "fileFormat": "File should be in json format"
+        }
+      }
+    }
+  },
+  "reorder": "Reorder"
+}

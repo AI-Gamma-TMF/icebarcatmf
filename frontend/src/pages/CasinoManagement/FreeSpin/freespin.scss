@@ -1,0 +1,119 @@
+.spin-card {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+    justify-content: space-between;
+  height: 100%;
+  gap: 2rem;
+  flex-direction: row;
+  padding: 12px;
+  box-shadow: 0px 4px 4px 0px #75757540;
+  @media screen and (max-width: 1450px) {
+    gap: 0.5rem;
+  }
+  @media screen and (max-width: 1200px) {
+    flex-direction: column;
+  }
+  @media screen and (max-width: 768px) {
+    flex-direction: row;
+  }
+  @media screen and (max-width: 545px) {
+    flex-direction: column;
+  }
+
+  img {
+    max-width: 65px;
+    @media screen and (max-width: 768px) {
+      max-width: 45px;
+    }
+  }
+
+  &.blue-bg {
+    border: none;
+    background: linear-gradient(
+      116.31deg,
+      rgba(179, 185, 255, 0.6) 14.58%,
+      rgba(125, 148, 253, 0.6) 62.42%
+    );
+    h5 {
+      color: #fff !important;
+    }
+  }
+  &.green-bg {
+    border: none;
+
+    background: linear-gradient(
+      116.31deg,
+      rgba(174, 242, 175, 0.6) 14.58%,
+      rgba(97, 207, 93, 0.6) 62.42%
+    );
+    color: #fff !important;
+  }
+  &.orange-bg {
+    border: none;
+
+    background: linear-gradient(
+      116.31deg,
+      rgba(255, 202, 145, 0.8) 14.58%,
+      rgba(243, 172, 129, 0.8) 62.42%
+    );
+    color: #fff !important;
+  }
+  &.pink-bg {
+    border: none;
+
+    background: linear-gradient(
+      116.31deg,
+      rgba(252, 150, 243, 0.8) 14.58%,
+      rgba(255, 115, 231, 0.8) 62.42%
+    );
+    color: #fff !important;
+  }
+  h5 {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 0;
+    @media screen and (max-width: 1450px) {
+      font-size: 16px;
+    }
+    &.purple {
+      color: #cd3bae;
+    }
+    &.blue {
+      color: #23a8fc;
+    }
+    &.green {
+      color: #00a30b;
+    }
+    &.orange {
+      color: #fdb72e;
+    }
+    &.dark-blue {
+      color: #3b64cd;
+    }
+    &.yellow {
+      color: #fce323;
+    }
+    &.pink {
+      color: #a3006d;
+    }
+    &.red {
+      color: #fd2e2e;
+    }
+  }
+  p {
+    font-size: 16px;
+    font-weight: 600;
+  }
+  .spin-detail {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    align-items: start;
+    justify-content: center;
+    @media screen and (max-width: 1200px) {
+      align-items: center;
+      text-align: center;
+    }
+  }
+}
