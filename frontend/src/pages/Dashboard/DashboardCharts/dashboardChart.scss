@@ -411,8 +411,74 @@
     // background: linear-gradient(116.31deg, rgba(255, 156, 198, 0.8) 14.58%, rgba(247, 101, 163, 0.8) 62.42%);
     --hover-bg: linear-gradient(116.31deg, rgba(255, 156, 198, 0.86) 14.58%, rgba(247, 101, 163, 0.86) 62.42%);
   }
+  // Allow swapping in KPI tiles that use the dashboard-box class names
+  &.sc-stack {
+    --accent: rgba(0, 229, 160, 1);
+    --hover-bg: linear-gradient(135deg, rgba(0, 229, 160, 0.22) 0%, rgba(0, 217, 148, 0.12) 100%), #e0ffde;
+  }
+  &.sc-win {
+    --accent: rgba(96, 255, 245, 1);
+    --hover-bg: linear-gradient(135deg, rgba(96, 255, 245, 0.20) 0%, rgba(0, 229, 160, 0.10) 100%), #e5fcff;
+  }
+  &.scr-sc {
+    --accent: rgba(255, 115, 231, 1);
+    --hover-bg: linear-gradient(135deg, rgba(255, 115, 231, 0.22) 0%, rgba(255, 156, 198, 0.12) 100%), #ffecfd;
+  }
+  &.usc-balance {
+    --accent: rgba(255, 202, 145, 1);
+    --hover-bg: linear-gradient(135deg, rgba(255, 202, 145, 0.26) 0%, rgba(243, 172, 129, 0.14) 100%), #fff4e7;
+  }
+  &.rsc-balance {
+    --accent: rgba(150, 174, 255, 1);
+    --hover-bg: linear-gradient(135deg, rgba(150, 174, 255, 0.22) 0%, rgba(97, 132, 242, 0.12) 100%), #e6e6ff;
+  }
+  &.ggrsc-balance {
+    --accent: rgba(255, 107, 107, 1);
+    --hover-bg: linear-gradient(135deg, rgba(255, 107, 107, 0.22) 0%, rgba(255, 156, 198, 0.12) 100%), #ffd9d9;
+  }
+  &.sc-jackpot {
+    --accent: rgba(207, 255, 107, 1);
+    --hover-bg: linear-gradient(135deg, rgba(207, 255, 107, 0.18) 0%, rgba(0, 229, 160, 0.10) 100%), #f9ffd9;
+  }
   &.new-icon-image {
     text-align: center;
+  }
+
+  .ticker-replace-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 30px;
+    height: 30px;
+    border-radius: 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.28);
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 140ms ease, transform 140ms ease, border-color 140ms ease;
+    z-index: 2;
+
+    img {
+      width: 16px;
+      height: 16px;
+      object-fit: contain;
+      filter: drop-shadow(0 10px 22px rgba(0, 0, 0, 0.55));
+      opacity: 0.95;
+    }
+
+    &:hover {
+      transform: translateY(-1px);
+      border-color: rgba(0, 229, 160, 0.22);
+    }
+  }
+
+  &:hover .ticker-replace-btn {
+    opacity: 1;
+    pointer-events: auto;
   }
 }
 
@@ -495,5 +561,74 @@
     @media screen and (max-width: 768px) {
       font-size: 1.05rem;
     }
+  }
+}
+
+// Dark theme for the "Replace tile" modal so it matches the dashboard UI
+.ticker-replace-modal {
+  .modal-content {
+    background:
+      linear-gradient(135deg, rgba(255, 255, 255, 0.04) 0%, rgba(0, 0, 0, 0.22) 100%),
+      rgba(26, 26, 26, 0.92);
+    border: 1px solid rgba(0, 229, 160, 0.20);
+    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.65);
+    border-radius: 18px;
+    backdrop-filter: blur(14px) saturate(140%);
+    -webkit-backdrop-filter: blur(14px) saturate(140%);
+    color: rgba(234, 250, 245, 0.92);
+  }
+
+  .modal-header {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .modal-footer {
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .modal-title {
+    color: rgba(0, 229, 160, 1);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+  }
+
+  // Close button in dark mode (Bootstrap uses an "x" icon; keep it visible)
+  .btn-close {
+    filter: invert(1) grayscale(1);
+    opacity: 0.85;
+  }
+  .btn-close:hover {
+    opacity: 1;
+  }
+
+  label,
+  .form-label {
+    color: rgba(234, 250, 245, 0.88);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+  }
+
+  .form-select {
+    background-color: rgba(0, 0, 0, 0.35);
+    color: rgba(255, 255, 255, 0.92);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 14px;
+    padding: 12px 42px 12px 14px;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  }
+
+  // Make the dropdown menu/options dark too (browser support varies)
+  .form-select option {
+    background: rgba(18, 18, 18, 0.98);
+    color: rgba(255, 255, 255, 0.92);
+  }
+
+  .form-select:focus {
+    border-color: rgba(0, 229, 160, 0.35);
+    box-shadow:
+      0 0 0 0.2rem rgba(0, 229, 160, 0.18),
+      inset 0 1px 0 rgba(255, 255, 255, 0.06);
   }
 }
