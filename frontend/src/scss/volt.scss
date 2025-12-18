@@ -48,4 +48,18 @@
 // Login modern inputs (scoped to login only)
 @import "login-modern";
 
+// ============================================================
+// Global brand variables (used to soften CTAs across the site)
+// ============================================================
+:root {
+  // Slightly muted “Sweep” accent (less bright, easier on eyes)
+  --gs-cta-start: #00c88c;
+  --gs-cta-mid: #00d6a0;
+  --gs-cta-end: #00b77b;
+
+  --gs-cta-rgb: 0, 200, 140;
+  --gs-cta-mid-rgb: 0, 214, 160;
+  --gs-cta-end-rgb: 0, 183, 123;
+}
+
 // write your custom styles here!

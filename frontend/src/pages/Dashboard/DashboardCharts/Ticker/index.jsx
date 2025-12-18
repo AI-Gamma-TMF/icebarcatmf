@@ -54,7 +54,7 @@ const normalizeSlots = (slots) => {
   return [...unique, ...missing].slice(0, 6);
 };
 
-export const Ticker = ({ _loginData, data }) => {
+export const Ticker = ({ data }) => {
   const [loginCount, setLoginCount] = useState(0);
   const [livePlayersCount, setLivePlayersCount] = useState(0);
   const [vaultSc, setVaultSc] = useState(0);
@@ -105,35 +105,20 @@ export const Ticker = ({ _loginData, data }) => {
   }, [slotTileIds, userKey]);
 
   useEffect(() => {
-    if (!loginCountSocketConnection) return;
-    loginCountSocket.on("COMBINED_LIVE_UPDATE", (data) => {
-      setWalletSc(Math.round(data?.totalScCoin * 100) / 100);
-      setVaultSc(Math.round(data?.totalVaultScCoin * 100) / 100);
+    if (!loginCountSocketConnection && !livePlayersCountConnection) return;
 
-      loginCountSocketData(data?.liveLoginCount);
-    });
-    return () => {
-      loginCountSocket.off("COMBINED_LIVE_UPDATE", () => {
-        console.log("socket disconnected");
-      });
+    const handler = (payload) => {
+      setWalletSc(Math.round(payload?.totalScCoin * 100) / 100);
+      setVaultSc(Math.round(payload?.totalVaultScCoin * 100) / 100);
+      if (loginCountSocketConnection) loginCountSocketData(payload?.liveLoginCount);
+      if (livePlayersCountConnection) livePlayersCountSocketData(payload?.liveGamePlayCount);
     };
-  }, [loginCountSocketConnection]);
 
-  useEffect(() => {
-    if (!livePlayersCountConnection) return;
-
-    loginCountSocket.on("COMBINED_LIVE_UPDATE", (data) => {
-      setWalletSc(Math.round(data?.totalScCoin * 100) / 100);
-      setVaultSc(Math.round(data?.totalVaultScCoin * 100) / 100);
-
-      livePlayersCountSocketData(data?.liveGamePlayCount);
-    });
+    loginCountSocket.on("COMBINED_LIVE_UPDATE", handler);
     return () => {
-      loginCountSocket.off("COMBINED_LIVE_UPDATE", () => {
-        console.log("socket disconnected");
-      });
+      loginCountSocket.off("COMBINED_LIVE_UPDATE", handler);
     };
-  }, [livePlayersCountConnection]);
+  }, [loginCountSocketConnection, livePlayersCountConnection]);
   const formattedVaultData =
     Math.round(data?.DASHBOARD_REPORT?.totalVaultScCoin * 100) / 100;
   const formattedWalletData =

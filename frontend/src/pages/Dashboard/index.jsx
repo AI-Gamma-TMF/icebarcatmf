@@ -93,6 +93,8 @@ const Dashboard = () => {
           economyData={economyDataV2}
           transactionData={transactionDataV2}
           dashboardDataV2={dashboardDataV2}
+          bonusDataV2={bonusDataV2}
+          bonusRefetchV2={bonusRefetchV2}
           dashboardReportLoadingV2={dashboardReportLoadingV2}
           dashboardReportRefetchV2={dashboardReportRefetchV2}
           isDashboardReportRefetchingV2={isDashboardReportRefetchingV2}

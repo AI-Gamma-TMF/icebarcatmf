@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { formatNumber } from "../../../../utils/dateFormatter";
 import SCBonusModal from "../Charts/SCBonusModal";
-import useDashboardDataListing from "../../hooks/useDashboardData";
 
 // const filterData = (data, label) => data.filter((row) => row.label === label);
 const DashboardBox = ({ icon, label, data, boxClass, showTooltip, tooltipData, onClickModal, refetchBonus }) => {
@@ -31,10 +30,8 @@ const DashboardBox = ({ icon, label, data, boxClass, showTooltip, tooltipData, o
   );
 };
 
-const MultiChartContainer = ({ data }) => {
+const MultiChartContainer = ({ data, bonusDataV2, bonusRefetchV2 }) => {
   const [showModal, setShowModal] = useState(false);
-
-  const { bonusDataV2, bonusRefetchV2 } = useDashboardDataListing(false, false, false)
 
   return (
     <>

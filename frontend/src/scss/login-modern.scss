@@ -28,14 +28,14 @@
     padding-right: 10px;
     font-size: 14px;
     line-height: 1.1;
-    background: linear-gradient(135deg, #00E5A0 0%, #00FFAA 50%, #00D994 100%);
+    background: linear-gradient(135deg, var(--gs-cta-start) 0%, var(--gs-cta-mid) 50%, var(--gs-cta-end) 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
     font-weight: 600;
     letter-spacing: 0.5px;
     text-transform: uppercase;
-    filter: drop-shadow(0 0 10px rgba(0, 229, 160, 0.4));
+    filter: drop-shadow(0 0 10px rgba(var(--gs-cta-rgb), 0.22));
   }
 
   // Unified input container

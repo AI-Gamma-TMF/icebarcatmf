@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { playerTypeOptions } from "./constants";
 import { Row, Col, Form, Button, Spinner } from "@themesberg/react-bootstrap";
 
@@ -29,7 +29,6 @@ const DashBoardFilters = ({
   isTransactionRefetching,
   customerRefetchV2,
 }) => {
-  const [loading, setLoading] = useState(false);
   const handleSearch = () => {
     try {
       reportRefetch();
@@ -39,21 +38,20 @@ const DashBoardFilters = ({
 
       transactionDataAccordianOpen && transactionRefetch();
       economicDataAccordionOpen && economyRefetch();
-      setLoading(false);
     } catch (e) {
       console.log("error", e);
     }
   };
+
+  const isBusy =
+    isDashboardReportRefetchingV2 ||
+    isReportRefetching ||
+    isCustomerRefetching ||
+    isEconomyRefetching ||
+    isTransactionRefetching;
+
   return (
-    <Row
-      className="mt-3"
-      style={{
-        display: "flex",
-        justifyContent: "flex-start",
-        flexDirection: "row",
-        alignContent: "center",
-      }}
-    >
+    <Row className="mt-3 dashboard-filters g-3 align-items-end">
       <Col className="col-lg-3 col-sm-12  col-12">
         <Form.Label>{t("filter.playerType.title")}</Form.Label>
 
@@ -76,9 +74,7 @@ const DashBoardFilters = ({
         className="col-lg-3 col-sm-6 col-6 mt-2 mt-sm-0"
         // style={{ width: "250px" }}
       >
-        <Form.Label column="sm" className="mx-auto text-nowrap px-2">
-          Start Date
-        </Form.Label>
+        <Form.Label className="text-nowrap">Start Date</Form.Label>
         <Datetime
           value={startDate}
           onChange={(date) => setStartDate(date)}
@@ -90,9 +86,7 @@ const DashBoardFilters = ({
         className="col-lg-3 col-sm-6 col-6 mt-2 mt-sm-0"
         // style={{ width: "250px" }}
       >
-        <Form.Label column="sm" className="mx-auto text-nowrap px-2">
-          End Date
-        </Form.Label>
+        <Form.Label className="text-nowrap">End Date</Form.Label>
         <Datetime
           value={endDate}
           onChange={(date) => setEndDate(date)}
@@ -100,18 +94,15 @@ const DashBoardFilters = ({
           inputProps={{ readOnly: true }}
         />
       </Col>
-      <Col className="col-lg-2 col-sm-6 col-12 d-flex align-items-end justify-content-center justify-content-md-start mt-3 mt-sm-3">
+      <Col className="col-lg-2 col-sm-6 col-12 d-flex justify-content-center justify-content-md-start mt-2 mt-lg-0">
         <Button
-          variant="outline-secondary"
-          disabled={loading}
+          className="dashboard-filters__search-btn"
+          variant="primary"
+          disabled={isBusy}
           onClick={handleSearch}
         >
           Search{" "}
-          {(isDashboardReportRefetchingV2 ||
-            isReportRefetching ||
-            isCustomerRefetching ||
-            isEconomyRefetching ||
-            isTransactionRefetching) && (
+          {isBusy && (
             <Spinner
               as="span"
               animation="border"

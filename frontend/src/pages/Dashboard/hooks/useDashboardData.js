@@ -174,7 +174,7 @@ const useDashboardDataListing = (
     select: (res) => res?.data,
     refetchOnWindowFocus: false,
   });
-  console.log(bonusDataV2, "8888")
+  // NOTE: Avoid noisy console logs on the dashboard (hurts perceived perf).
   const {
     data: reportTillData,
     isFetching: reportTillLoading,

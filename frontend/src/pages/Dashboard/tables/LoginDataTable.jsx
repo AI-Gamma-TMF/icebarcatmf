@@ -1,6 +1,5 @@
 import React from "react";
-import { useEffect, useState } from 'react';
-import { Row, Table } from "@themesberg/react-bootstrap";
+import { Row, Table, Button, Spinner } from "@themesberg/react-bootstrap";
 import { totalTablesList, tableData } from "../constants";
 import { InlineLoader } from "../../../components/Preloader";
 import { formatPriceWithCommas } from "../../../utils/helper";
@@ -14,7 +13,7 @@ const LoginDataTable = ({
   reportTillRefetch,
   isReportTillRefetching,
 }) => {
-  
+  const isTillBusy = reportTillLoading || isReportTillRefetching;
 
 
 
@@ -24,18 +23,18 @@ const LoginDataTable = ({
   
   return (
     <>
-        <Row className="mt-4">
+        <Row className="mt-4 dashboard-section-heading">
           <h5>
             {t(`headers.loginData`)} {t("headers.data")}
           </h5>
         </Row>
-        <hr></hr>
+        <hr className="dashboard-section-divider" />
 
-        <div className="table-responsive">
-          <Table bordered striped hover size="sm" className="text-center">
-            <thead className="thead-dark">
+        <div className="table-responsive dashboard-table">
+          <Table size="sm" className="text-center dashboard-data-table">
+            <thead>
               <tr>
-                <th className="text-left" style={{ width: "500px" }}>
+                <th className="text-left dashboard-data-table__param">
                   {t("table.parameters")}
                 </th>
                 <th>{t("table.today")}</th>
@@ -59,7 +58,7 @@ const LoginDataTable = ({
       return (
         Object.keys(totalTablesList["loginData"]).includes(data) && (
           <tr key={i}>
-            <td className="text-left">
+            <td className="text-left dashboard-data-table__param">
               {t(totalTablesList["loginData"][data])}
             </td>
             {tableData?.map((ele) => (
@@ -68,13 +67,26 @@ const LoginDataTable = ({
                reportTillData?.[data] ? (
                  formatPriceWithCommas(reportTillData[data])
                ) : (
-                 <button
-                   className='btn btn-primary btn-sm'
+                 <Button
+                   className="dashboard-table__action-btn"
                    onClick={() => reportTillRefetch()}
-                   disabled={reportTillLoading || isReportTillRefetching}
+                   disabled={isTillBusy}
                  >
-                   {reportTillLoading || isReportTillRefetching ? 'Loading...' : 'Show'}
-                 </button>
+                   {isTillBusy ? (
+                     <>
+                       Loading
+                       <Spinner
+                         as="span"
+                         animation="border"
+                         size="sm"
+                         role="status"
+                         aria-hidden="true"
+                       />
+                     </>
+                   ) : (
+                     "Show"
+                   )}
+                 </Button>
                )
              ) : (
                formatPriceWithCommas(reportData?.[data]?.[ele] || 0)
