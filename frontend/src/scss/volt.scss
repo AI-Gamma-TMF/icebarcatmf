@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600,700,800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=Nunito+Sans:wght@300;400;600;700;800&family=Fira+Code:wght@400;500&display=swap');
 
 // Bootstrap mixins and functions
 @import "../../node_modules/bootstrap/scss/mixins";
@@ -44,5 +44,22 @@
 
 // Remove Scroll
 @import "remove-scroll";
+
+// Login modern inputs (scoped to login only)
+@import "login-modern";
+
+// ============================================================
+// Global brand variables (used to soften CTAs across the site)
+// ============================================================
+:root {
+  // Slightly muted “Sweep” accent (less bright, easier on eyes)
+  --gs-cta-start: #00c88c;
+  --gs-cta-mid: #00d6a0;
+  --gs-cta-end: #00b77b;
+
+  --gs-cta-rgb: 0, 200, 140;
+  --gs-cta-mid-rgb: 0, 214, 160;
+  --gs-cta-end-rgb: 0, 183, 123;
+}
 
 // write your custom styles here!

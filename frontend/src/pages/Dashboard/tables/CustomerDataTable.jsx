@@ -15,7 +15,7 @@ const CustomerTable = ({
 
   return (
     <>
-        <Row className="mt-4 align-items-center">
+        <Row className="mt-4 align-items-center dashboard-section-heading">
           <Col>
             <div className="d-flex align-items-center" style={{ gap: "10px" }}>
               <h5 className="mb-0">
@@ -26,13 +26,13 @@ const CustomerTable = ({
           </Col>
         </Row>
 
-        <hr></hr>
+        <hr className="dashboard-section-divider" />
 
-        <div className="table-responsive">
-          <Table bordered striped hover size="sm" className="text-center">
-            <thead className="thead-dark">
+        <div className="table-responsive dashboard-table">
+          <Table size="sm" className="text-center dashboard-data-table">
+            <thead>
               <tr>
-                <th className="text-left" style={{ width: "500px" }}>
+                <th className="text-left dashboard-data-table__param">
                   {t("table.parameters")}
                 </th>
                 <th>{t("table.today")}</th>
@@ -59,7 +59,7 @@ const CustomerTable = ({
                         totalTablesList["customerDataKeysV2"]
                       ).includes(data) && (
                         <tr key={i}>
-                          <td className="text-left">
+                          <td className="text-left dashboard-data-table__param">
                             {t(totalTablesList["customerDataKeysV2"][data])}
                           </td>
                           {tableData?.map((ele) => (
@@ -96,7 +96,7 @@ const CustomerTable = ({
                         totalTablesList["customerDataKeysInternal"]
                       ).includes(data) && (
                         <tr key={i}>
-                          <td className="text-left">
+                          <td className="text-left dashboard-data-table__param">
                             {t(totalTablesList["customerDataKeysInternal"][data])}
                           </td>
                           {tableData?.map((ele) => (

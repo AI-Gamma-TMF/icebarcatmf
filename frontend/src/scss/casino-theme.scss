@@ -2,24 +2,24 @@
 
 // Premium Button Styles
 .btn-primary {
-  background: linear-gradient(135deg, #00E5A0 0%, #00FFAA 100%) !important;
+  background: linear-gradient(135deg, var(--gs-cta-start) 0%, var(--gs-cta-mid) 100%) !important;
   border: none !important;
   color: #0a0a0a !important;
   font-weight: 600 !important;
   text-transform: uppercase !important;
   letter-spacing: 0.5px !important;
-  box-shadow: 0 4px 15px rgba(0, 229, 160, 0.3) !important;
+  box-shadow: 0 4px 14px rgba(var(--gs-cta-rgb), 0.20) !important;
   transition: all 0.3s ease !important;
   
   &:hover {
-    background: linear-gradient(135deg, #00FFAA 0%, #00E5A0 100%) !important;
-    box-shadow: 0 6px 20px rgba(0, 229, 160, 0.5) !important;
+    background: linear-gradient(135deg, var(--gs-cta-mid) 0%, var(--gs-cta-start) 100%) !important;
+    box-shadow: 0 6px 20px rgba(var(--gs-cta-rgb), 0.26) !important;
     transform: translateY(-2px) !important;
   }
   
   &:active, &:focus {
-    background: linear-gradient(135deg, #00D994 0%, #00E5A0 100%) !important;
-    box-shadow: 0 2px 10px rgba(0, 229, 160, 0.4) !important;
+    background: linear-gradient(135deg, var(--gs-cta-end) 0%, var(--gs-cta-start) 100%) !important;
+    box-shadow: 0 2px 10px rgba(var(--gs-cta-rgb), 0.22) !important;
   }
 }
 
