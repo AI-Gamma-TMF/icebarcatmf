@@ -12,6 +12,9 @@ const RouteWithSidebar = ({ children }) => {
   const [collapseSidebar, setCollapseSidebar] = useState(false)
   const scrollRafRef = useRef(null)
   const scrollEndTimerRef = useRef(null)
+  const layoutAnimTimerRef = useRef(null)
+  const prevCollapsedRef = useRef(false)
+  const [layoutAnimClass, setLayoutAnimClass] = useState('')
 
   // Perf: disable GPU-heavy blur while actively scrolling to keep scrolling snappy.
   useEffect(() => {
@@ -38,10 +41,30 @@ const RouteWithSidebar = ({ children }) => {
     }
   }, [])
 
+  // "Premium but cheap" layout nudge on sidebar collapse/expand (transform-only animation).
+  useEffect(() => {
+    const prev = prevCollapsedRef.current
+    prevCollapsedRef.current = collapseSidebar
+
+    // First render: no animation
+    if (prev === collapseSidebar) return
+
+    const dir = collapseSidebar ? 'gs-layout-shift-left' : 'gs-layout-shift-right'
+    setLayoutAnimClass(dir)
+    if (layoutAnimTimerRef.current) window.clearTimeout(layoutAnimTimerRef.current)
+    layoutAnimTimerRef.current = window.setTimeout(() => {
+      setLayoutAnimClass('')
+    }, 170)
+
+    return () => {
+      if (layoutAnimTimerRef.current) window.clearTimeout(layoutAnimTimerRef.current)
+    }
+  }, [collapseSidebar])
+
   return (
     <>
       <Sidebar open={open} collapseSidebar={collapseSidebar} setCollapseSidebar={setCollapseSidebar} />
-      <main className={`${!collapseSidebar ? 'content px-0' : 'content-collapsed px-0'} ${open ? 'is-menu-open' : ''}`}>
+      <main className={`${!collapseSidebar ? 'content px-0' : 'content-collapsed px-0'} ${open ? 'is-menu-open' : ''} ${layoutAnimClass}`}>
         <Navbar open={open} setOpen={setOpen} collapseSidebar={collapseSidebar} setCollapseSidebar={setCollapseSidebar} />
         <div className='component-container'>
           {children}

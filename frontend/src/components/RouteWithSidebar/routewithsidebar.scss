@@ -6,6 +6,31 @@
   width: 100%;
 }
 
+// Cheap layout transition: transform-only animation on the content while sidebar toggles.
+// This avoids animating large layout properties (like margin-left) which can feel slow.
+@keyframes gsLayoutShiftLeft {
+  from { transform: translate3d(12px, 0, 0); opacity: 0.985; }
+  to   { transform: translate3d(0, 0, 0); opacity: 1; }
+}
+
+@keyframes gsLayoutShiftRight {
+  from { transform: translate3d(-12px, 0, 0); opacity: 0.985; }
+  to   { transform: translate3d(0, 0, 0); opacity: 1; }
+}
+
+main.gs-layout-shift-left .component-container,
+main.gs-layout-shift-right .component-container {
+  will-change: transform;
+}
+
+main.gs-layout-shift-left .component-container {
+  animation: gsLayoutShiftLeft 160ms cubic-bezier(0.2, 0.9, 0.2, 1);
+}
+
+main.gs-layout-shift-right .component-container {
+  animation: gsLayoutShiftRight 160ms cubic-bezier(0.2, 0.9, 0.2, 1);
+}
+
 .app-page {
   width: 100%;
   max-width: 1400px;
@@ -56,6 +81,16 @@ html.gs-is-scrolling {
   .app-page--surface {
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
+    // reduce paint cost while scrolling
+    box-shadow:
+      0 1px 2px rgba(0, 0, 0, 0.55),
+      0 10px 28px rgba(0, 0, 0, 0.28);
+  }
+
+  // Masks + inset highlights are surprisingly expensive during scroll; fade them out.
+  .app-page--surface::before,
+  .app-page--surface::after {
+    opacity: 0;
   }
 }
 

@@ -1246,6 +1246,17 @@ html.gs-is-scrolling {
     backdrop-filter: none !important;
     -webkit-backdrop-filter: none !important;
   }
+
+  // Reduce glow/shadows while scrolling for smoother frames.
+  .dashboard-box,
+  .dashboard-viz-panel,
+  .dashboard-viz-panel__chart {
+    box-shadow: none !important;
+  }
+
+  .dashboard-accordion-header .accordian-heading svg {
+    filter: none !important;
+  }
 }
 
 .dashboard-viz-panel__badge {

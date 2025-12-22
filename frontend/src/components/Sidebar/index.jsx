@@ -233,7 +233,12 @@ const Sidebar = (props) => {
   })
 
   return (
-    <CSSTransition style={props.collapseSidebar ? { width: "120px" } : {}} timeout={300} in={show} classNames='sidebar-transition'>
+    <CSSTransition
+      style={props.collapseSidebar ? { width: "120px" } : {}}
+      timeout={180}
+      in={show}
+      classNames='sidebar-transition'
+    >
       <SimpleBar
         ref={scrollBarRef}
         autoHide={false}

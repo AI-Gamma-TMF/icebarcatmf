@@ -13,7 +13,7 @@
   // overflow-y: auto;
   width: 100%;
   margin-top: 0;
-  @include transition(max-width 0.3s);
+  @include transition(max-width 0.18s);
 
   // Modern glass + dark gradient (match navbar)
   background: rgba(18, 18, 18, 0.72);
@@ -348,7 +348,8 @@
 .content {
   overflow: visible;
   padding: 0 $spacer 0 $spacer;
-  @include transition(all 0.3s);
+  // Avoid animating layout-heavy properties (feels "slow" and can jank).
+  transition: none;
 
   @include media-breakpoint-up(md) {
     margin-left: 274px;
@@ -358,7 +359,8 @@
 .content-collapsed {
   overflow: visible;
   padding: 0 $spacer 0 $spacer;
-  @include transition(all 0.3s);
+  // Avoid animating layout-heavy properties (feels "slow" and can jank).
+  transition: none;
 
   @include media-breakpoint-up(md) {
     margin-left: 120px;
@@ -382,7 +384,7 @@
 }
 
 .sidebar-transition {
-  @include transition(all 0.3s);
+  @include transition(all 0.18s);
 }
 
 .sidebar-transition-enter {
@@ -391,7 +393,7 @@
 
 .sidebar-transition-enter-active {
   opacity: 1;
-  transition: opacity 200ms;
+  transition: opacity 180ms;
 }
 
 .sidebar-transition-exit {
@@ -400,5 +402,5 @@
 
 .sidebar-transition-exit-active {
   opacity: 0;
-  transition: opacity 200ms;
+  transition: opacity 180ms;
 }
