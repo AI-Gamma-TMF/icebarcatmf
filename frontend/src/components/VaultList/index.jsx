@@ -33,22 +33,21 @@ const VaultList = ({
     <>
       <Table
         bordered
-        striped
         responsive
         hover
         size="sm"
-        className="text-center mt-4"
+        className="mb-0 text-center"
       >
-        <thead className="thead-dark">
+        <thead>
           <tr>
             {tableHeaders.map((h) => (
               <th
                 key={h.value}
                 onClick={() => h.value !== "" && setOrderBy(h.value)}
                 style={{
-                  cursor: (h.value !== "" && "pointer"),
+                  cursor: h.value !== "" ? "pointer" : "default",
                 }}
-                className={selected(h) ? "border-3 border border-blue" : ""}
+                className={selected(h) ? "sortable active" : "sortable"}
               >
                 {h.labelKey}{" "}
                 {selected(h) &&
@@ -73,61 +72,59 @@ const VaultList = ({
             ))}
           </tr>
         </thead>
-        {loading ? (
-          <tr>
-            <td colSpan={10} className="text-center">
-              <InlineLoader />
-            </td>
-          </tr>
-        ) : (
-          <tbody>
-            {data && data?.rows?.length > 0 ? (
-              data?.rows?.map(
-                ({ ownerId, User, vault_gc_coin, total_vault_sc_coin }) => {
-                  return (
-                    <tr key={ownerId} className="text-center">
-                      <td>{ownerId}</td>
-                      <td>
-                        {isHidden({ module: { key: "Users", value: "R" } }) ? (
-                          User?.email
-                        ) : (
-                          <Link to={`/admin/player-details/${ownerId}`}     className="text-link d-inline-block text-truncate">
-                            {User?.email}
-                          </Link>
-                        )}
-                      </td>
-                      <td>
-                        {isHidden({ module: { key: "Users", value: "R" } }) ? (
-                          User?.username
-                        ) : (
-                          <Link to={`/admin/player-details/${ownerId}`}>
-                            {User?.username}
-                          </Link>
-                        )}
-                      </td>
-                      <td>
-                        {vault_gc_coin
-                          ? formatPriceWithCommas(vault_gc_coin)
-                          : "0"}
-                      </td>
-                      <td>
-                        {total_vault_sc_coin
-                          ? formatPriceWithCommas(total_vault_sc_coin)
-                          : "0"}
-                      </td>
-                    </tr>
-                  );
-                }
-              )
-            ) : (
-              <tr>
-                <td colSpan={9} className="text-danger text-center">
-                  No data Found
-                </td>
-              </tr>
-            )}
-          </tbody>
-        )}
+        <tbody>
+          {loading ? (
+            <tr>
+              <td colSpan={tableHeaders.length || 1} className="text-center py-4">
+                <InlineLoader />
+              </td>
+            </tr>
+          ) : data && data?.rows?.length > 0 ? (
+            data?.rows?.map(({ ownerId, User, vault_gc_coin, total_vault_sc_coin }) => {
+              return (
+                <tr key={ownerId} className="text-center">
+                  <td>{ownerId}</td>
+                  <td>
+                    {isHidden({ module: { key: "Users", value: "R" } }) ? (
+                      User?.email
+                    ) : (
+                      <Link
+                        to={`/admin/player-details/${ownerId}`}
+                        className="text-link d-inline-block text-truncate"
+                      >
+                        {User?.email}
+                      </Link>
+                    )}
+                  </td>
+                  <td>
+                    {isHidden({ module: { key: "Users", value: "R" } }) ? (
+                      User?.username
+                    ) : (
+                      <Link to={`/admin/player-details/${ownerId}`}>
+                        {User?.username}
+                      </Link>
+                    )}
+                  </td>
+                  <td>{vault_gc_coin ? formatPriceWithCommas(vault_gc_coin) : "0"}</td>
+                  <td>
+                    {total_vault_sc_coin
+                      ? formatPriceWithCommas(total_vault_sc_coin)
+                      : "0"}
+                  </td>
+                </tr>
+              );
+            })
+          ) : (
+            <tr>
+              <td
+                colSpan={tableHeaders.length || 1}
+                className="text-danger text-center py-4"
+              >
+                No data Found
+              </td>
+            </tr>
+          )}
+        </tbody>
       </Table>
 
       {data?.count !== 0 && (

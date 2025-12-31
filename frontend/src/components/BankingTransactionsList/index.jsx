@@ -97,6 +97,7 @@ const BankingTransactionsList = ({
   };
 
   const selected = (h) => orderBy === h.value;
+  const headers = tableHeaders(isAllUser) || [];
 
   const handleShowMoreDetails = (details) => {
     if (details) {
@@ -134,22 +135,21 @@ const BankingTransactionsList = ({
       </ModalView>
       <Table
         bordered
-        striped
         responsive
         hover
         size="sm"
-        className="text-center mt-4"
+        className="mb-0"
       >
-        <thead className="thead-dark">
+        <thead>
           <tr>
-            {tableHeaders(isAllUser)?.map((h, idx) => (
+            {headers?.map((h, idx) => (
               <th
                 key={idx}
                 onClick={() => h.value !== "" && setOrderBy(h.value)}
                 style={{
                   cursor: "pointer",
                 }}
-                className={selected(h) ? "border-3 border border-blue" : ""}
+                className={selected(h) ? "sortable active" : "sortable"}
               >
                 {t(h.labelKey)}{" "}
                 {selected(h) &&
@@ -174,88 +174,83 @@ const BankingTransactionsList = ({
             ))}
           </tr>
         </thead>
-        {loading ? (
-          <tr>
-            <td colSpan={10} className="text-center">
-              <InlineLoader />
-            </td>
-          </tr>
-        ) : (
-          <tbody>
-            {data && data?.rows?.length > 0 ? (
-              data?.rows?.map(
-                ({
-                  actioneeName,
-                  actioneeEmail,
-                  transactionId,
-                  amount,
-                  gcCoin,
-                  scCoin,
-                  transactionType,
-                  status,
-                  createdAt,
-                  userId,
-                  moreDetails,
-                }) => {
-                  return (
-                    <tr key={transactionId} className="text-center">
-                      <td>{transactionId}</td>
-                      <td>{userId}</td>
-                      {!isAllUser ? (
-                        <td>{actioneeName}</td>
-                      ) : (
-                        <td>
-                          {isHidden({
-                            module: { key: "Users", value: "R" },
-                          }) ? (
-                            <span>{actioneeEmail}</span>
-                          ) : (
-                            <Link
-                              to={`/admin/player-details/${userId}`}
-                              className="text-link d-inline-block text-truncate"
-                            >
-                              {actioneeEmail}
-                            </Link>
-                          )}
-                        </td>
-                      )}
-
-                      <td>{formatPriceWithCommas(amount?.toFixed(2))}</td>
-                      <td>{gcCoin ? formatPriceWithCommas(gcCoin) : "-"}</td>
-                      <td>{scCoin ? formatPriceWithCommas(scCoin) : "-"}</td>
-                      <td className="text-capitalize">{transactionType}</td>
-                      <td>{TRANSACTION_STATUS[status]}</td>
+        <tbody>
+          {loading ? (
+            <tr>
+              <td colSpan={headers.length || 1} className="text-center py-4">
+                <InlineLoader />
+              </td>
+            </tr>
+          ) : data && data?.rows?.length > 0 ? (
+            data?.rows?.map(
+              ({
+                actioneeName,
+                actioneeEmail,
+                transactionId,
+                amount,
+                gcCoin,
+                scCoin,
+                transactionType,
+                status,
+                createdAt,
+                userId,
+                moreDetails,
+              }) => {
+                return (
+                  <tr key={transactionId} className="text-center">
+                    <td>{transactionId}</td>
+                    <td>{userId}</td>
+                    {!isAllUser ? (
+                      <td>{actioneeName}</td>
+                    ) : (
                       <td>
-                        {getDateTime(
-                          convertToTimeZone(createdAt, timezoneOffset)
+                        {isHidden({
+                          module: { key: "Users", value: "R" },
+                        }) ? (
+                          <span>{actioneeEmail}</span>
+                        ) : (
+                          <Link
+                            to={`/admin/player-details/${userId}`}
+                            className="text-link d-inline-block text-truncate"
+                          >
+                            {actioneeEmail}
+                          </Link>
                         )}
                       </td>
-                      <td>
-                        <Button
-                          style={{ padding: "3px 8px" }}
-                          onClick={() => handleShowMoreDetails(moreDetails)}
-                        >
-                          More Details
-                        </Button>
-                      </td>
-                      {/* {(transactionType === 'deposit' && status === 1)  ?
-           <td><Button type='button' className='btn btn-success'                    
-            onClick = {()=> toggleModalForRefund(actioneeId,paymentTransactionId, transactionBankingId)}>Void/Refund</Button></td>
-             :
-             <td> - </td>} */}
-                    </tr>
-                  );
-                }
-              )
-            ) : (
-              <tr>
-                <td colSpan={9} className="text-danger text-center">
-                  {t("noDataFound")}
-                </td>
-              </tr>
-            )}
-          </tbody>
-        )}
+                    )}
+
+                    <td>{formatPriceWithCommas(amount?.toFixed(2))}</td>
+                    <td>{gcCoin ? formatPriceWithCommas(gcCoin) : "-"}</td>
+                    <td>{scCoin ? formatPriceWithCommas(scCoin) : "-"}</td>
+                    <td className="text-capitalize">{transactionType}</td>
+                    <td>{TRANSACTION_STATUS[status]}</td>
+                    <td>
+                      {getDateTime(convertToTimeZone(createdAt, timezoneOffset))}
+                    </td>
+                    <td>
+                      <Button
+                        className="dashboard-table-btn"
+                        style={{ padding: "6px 10px" }}
+                        onClick={() => handleShowMoreDetails(moreDetails)}
+                      >
+                        More Details
+                      </Button>
+                    </td>
+                  </tr>
+                );
+              }
+            )
+          ) : (
+            <tr>
+              <td
+                colSpan={headers.length || 1}
+                className="text-center py-4 text-danger"
+              >
+                {t("noDataFound")}
+              </td>
+            </tr>
+          )}
+        </tbody>
       </Table>
       {data?.count !== 0 && (
         <PaginationComponent

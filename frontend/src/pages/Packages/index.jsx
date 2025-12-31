@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, Form, Row, Col, Table } from "@themesberg/react-bootstrap";
+import { Button, Form, Row, Col, Table, Card } from "@themesberg/react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faTrash,
@@ -33,6 +33,7 @@ import { InlineLoader } from "../../components/Preloader";
 import { convertToUTC, getDateTime } from "../../utils/dateFormatter";
 import { getItem } from "../../utils/storageUtils";
 import { timeZones } from "../Dashboard/constants";
+import "./packagesListing.scss";
 
 const Packages = () => {
   const [showPackageUser, setShowPackageUser] = useState(false);
@@ -141,95 +142,96 @@ const Packages = () => {
 
   return (
     <>
-      <Row>
-        <Row className="align-items-center justify-content-between mb-3">
-          <Col>
-            <h3>{t("title")}</h3>
-          </Col>
+      <div className="dashboard-typography packages-page">
+        <div className="d-flex flex-wrap justify-content-between align-items-start gap-3 mb-3">
+          <div>
+            <h3 className="packages-page__title">{t("title")}</h3>
+            <p className="packages-page__subtitle">Create and manage packages and promotions</p>
+          </div>
 
-          <Col xs="auto">
-            <div className="d-flex gap-3 align-items-center">
-              <Button
-                variant="success"
-                size="md"
-                className="px-3 py-2"
-                onClick={() => navigate(AdminRoutes.CreatePackage)}
-                hidden={isHidden({ module: { key: "Package", value: "C" } })}
-              >
-                {t("createButton")}
-              </Button>
-
-              <Button
-                variant="success"
-                size="md"
-                className="px-3 py-2"
-                onClick={() => navigate(AdminRoutes.ReorderPackage)}
-                hidden={isHidden({ module: { key: "Package", value: "U" } })}
-              >
-                {t("reorderButton")}
-              </Button>
-
-              <Button
-                variant="warning"
-                size="md"
-                className="px-3 py-2"
-                onClick={() => navigate(AdminRoutes.UnarchivePackage)}
-                hidden={isHidden({ module: { key: "Package", value: "U" } })}
-              >
-                Archived
-              </Button>
-            </div>
-          </Col>
-        </Row>
-
-        <Row className="mt-4">
-          <Col xs={12} md={3} className="mb-3">
-            <Form.Label>Search by Package Name, Amount & Coins</Form.Label>
-
-            <Form.Control
-              type="search"
-              placeholder="Search..."
-              value={search}
-              onChange={(event) => {
-                setPage(1);
-                setSearch(event?.target?.value);
-              }}
-            />
-          </Col>
-
-          <Col xs={12} md={3} className="mb-3">
-            <Form.Label>Package Type</Form.Label>
-            <Form.Select
-              onChange={(event) => {
-                setPage(1);
-                setPackageType(event?.target?.value);
-              }}
-              value={packageType}
+          <div className="packages-page__actions">
+            <Button
+              variant="primary"
+              className="packages-page__action-btn"
+              size="sm"
+              onClick={() => navigate(AdminRoutes.CreatePackage)}
+              hidden={isHidden({ module: { key: "Package", value: "C" } })}
             >
-              {PACKAGE_TYPE?.map((pkg) => (
-                <option key={pkg?.label} value={pkg?.value}>
-                  {pkg?.label}
-                </option>
-              ))}
-            </Form.Select>
-          </Col>
+              {t("createButton")}
+            </Button>
 
-          <Col xs={12} md={3} className="mb-3">
-            <Form.Label>{t("filters.status")}</Form.Label>
-            <Form.Select
-              value={isActive}
-              onChange={(event) => {
-                setPage(1);
-                setIsActive(event?.target?.value);
-              }}
+            <Button
+              variant="secondary"
+              className="packages-page__action-btn"
+              size="sm"
+              onClick={() => navigate(AdminRoutes.ReorderPackage)}
+              hidden={isHidden({ module: { key: "Package", value: "U" } })}
             >
-              {statusOptions?.map((status, _idx) => (
-                <option key={status.label} value={status.value}>
-                  {status.label}
-                </option>
-              ))}
-            </Form.Select>
-          </Col>
+              {t("reorderButton")}
+            </Button>
+
+            <Button
+              variant="warning"
+              className="packages-page__action-btn"
+              size="sm"
+              onClick={() => navigate(AdminRoutes.UnarchivePackage)}
+              hidden={isHidden({ module: { key: "Package", value: "U" } })}
+            >
+              Archived
+            </Button>
+          </div>
+        </div>
+
+        <Card className="dashboard-filters packages-filters mb-4">
+          <Card.Body>
+            <Row className="g-3 align-items-end">
+              <Col xs={12} md={6} lg={3}>
+                <Form.Label>Search by Package Name, Amount & Coins</Form.Label>
+
+                <Form.Control
+                  type="search"
+                  placeholder="Search..."
+                  value={search}
+                  onChange={(event) => {
+                    setPage(1);
+                    setSearch(event?.target?.value);
+                  }}
+                />
+              </Col>
+
+              <Col xs={12} md={6} lg={3}>
+                <Form.Label>Package Type</Form.Label>
+                <Form.Select
+                  onChange={(event) => {
+                    setPage(1);
+                    setPackageType(event?.target?.value);
+                  }}
+                  value={packageType}
+                >
+                  {PACKAGE_TYPE?.map((pkg) => (
+                    <option key={pkg?.label} value={pkg?.value}>
+                      {pkg?.label}
+                    </option>
+                  ))}
+                </Form.Select>
+              </Col>
+
+              <Col xs={12} md={6} lg={3}>
+                <Form.Label>{t("filters.status")}</Form.Label>
+                <Form.Select
+                  value={isActive}
+                  onChange={(event) => {
+                    setPage(1);
+                    setIsActive(event?.target?.value);
+                  }}
+                >
+                  {statusOptions?.map((status, _idx) => (
+                    <option key={status.label} value={status.value}>
+                      {status.label}
+                    </option>
+                  ))}
+                </Form.Select>
+              </Col>
 
           {/* <Col xs={2} className="mb-3">
             <Form.Label>{t("filters.isVisibleInStore")}</Form.Label>
@@ -252,109 +254,96 @@ const Packages = () => {
             </Form.Select>
           </Col> */}
 
-          <Col xs={12} md={3} className="mb-3">
-            <div>
-              <Form.Label>Package Id</Form.Label>
-              <Form.Control
-                type="search"
-                placeholder="Search by Package Id"
-                value={packageIdFilter}
-                onChange={(event) => {
-                  const inputValue = event?.target?.value;
-                  if (/^\d*$/.test(inputValue)) {
-                    if (inputValue.length <= 10) {
-                      setPage(1);
-                      setPackageIdFilter(inputValue);
-                      setError("");
-                    } else {
-                      setError("Package Id cannot exceed 10 digits");
+              <Col xs={12} md={6} lg={3}>
+                <div>
+                  <Form.Label>Package Id</Form.Label>
+                  <Form.Control
+                    type="search"
+                    placeholder="Search by Package Id"
+                    value={packageIdFilter}
+                    onChange={(event) => {
+                      const inputValue = event?.target?.value;
+                      if (/^\d*$/.test(inputValue)) {
+                        if (inputValue.length <= 10) {
+                          setPage(1);
+                          setPackageIdFilter(inputValue);
+                          setError("");
+                        } else {
+                          setError("Package Id cannot exceed 10 digits");
+                        }
+                      }
+                    }}
+                  />
+                </div>
+                {error && <div className="text-danger mt-1">{error}</div>}
+              </Col>
+
+              <Col xs={12} lg="auto">
+                <Trigger message="Reset Filters" id={"redo"} />
+                <Button id={"redo"} variant="secondary" onClick={resetFilters}>
+                  <FontAwesomeIcon icon={faRedoAlt} />
+                </Button>
+              </Col>
+            </Row>
+          </Card.Body>
+        </Card>
+
+      <div className="dashboard-data-table">
+        <div className="packages-table-wrap">
+          <Table bordered striped responsive hover size="sm" className="mb-0 text-center">
+            <thead>
+              <tr>
+                {tableHeaders?.map((h, idx) => (
+                  <th
+                    key={idx}
+                    onClick={() =>
+                      h.value !== "action" &&
+                      h.value !== "PackageUsers" &&
+                      h.value !== "claimedCount" &&
+                      h.value !== "packageType" &&
+                      setOrderBy(h.value)
                     }
-                  }
-                }}
-              />
-            </div>
-            {error && (
-              <div style={{ color: "red", marginTop: "5px" }}>{error}</div>
-            )}
-          </Col>
-
-          <Col xs={12} md={3} className="mb-3" style={{ marginTop: "30px" }}>
-            <Trigger message="Reset Filters" id={"redo"} />
-            <Button
-              id={"redo"}
-              variant="success"
-              className=""
-              onClick={resetFilters}
-            >
-              <FontAwesomeIcon icon={faRedoAlt} />
-            </Button>
-          </Col>
-        </Row>
-      </Row>
-
-      {
-        <Table
-          bordered
-          striped
-          responsive
-          hover
-          size="sm"
-          className="text-center mt-4"
-        >
-          <thead className="thead-dark">
-            <tr>
-              {tableHeaders?.map((h, idx) => (
-                <th
-                  key={idx}
-                  onClick={() =>
-                    h.value !== "action" &&
-                    h.value !== "PackageUsers" &&
-                    h.value !== "claimedCount" &&
-                    h.value !== "packageType" &&
-                    setOrderBy(h.value)
-                  }
-                  style={{
-                    cursor:
-                      h.value === "packageType" ||
-                      h.value === "claimedCount" ||
-                      h.value === "action"
-                        ? "default"
-                        : "pointer",
-                  }}
-                  className={selected(h) ? "border-3 border border-blue" : ""}
-                >
-                  {t(h.labelKey)}{" "}
-                  {selected(h) &&
-                    (sort === "asc" ? (
-                      <FontAwesomeIcon
-                        style={over ? { color: "red" } : {}}
-                        icon={faArrowCircleUp}
-                        onClick={() => setSort("desc")}
-                        onMouseOver={() => setOver(true)}
-                        onMouseLeave={() => setOver(false)}
-                      />
-                    ) : (
-                      <FontAwesomeIcon
-                        style={over ? { color: "red" } : {}}
-                        icon={faArrowCircleDown}
-                        onClick={() => setSort("asc")}
-                        onMouseOver={() => setOver(true)}
-                        onMouseLeave={() => setOver(false)}
-                      />
-                    ))}
-                </th>
-              ))}
-            </tr>
-          </thead>
-          {loading ? (
-            <tr>
-              <td colSpan={10} className="text-center">
-                <InlineLoader />
-              </td>
-            </tr>
-          ) : (
+                    style={{
+                      cursor:
+                        h.value === "packageType" ||
+                        h.value === "claimedCount" ||
+                        h.value === "action"
+                          ? "default"
+                          : "pointer",
+                    }}
+                    className={selected(h) ? "sortable active" : "sortable"}
+                  >
+                    {t(h.labelKey)}{" "}
+                    {selected(h) &&
+                      (sort === "asc" ? (
+                        <FontAwesomeIcon
+                          style={over ? { color: "red" } : {}}
+                          icon={faArrowCircleUp}
+                          onClick={() => setSort("desc")}
+                          onMouseOver={() => setOver(true)}
+                          onMouseLeave={() => setOver(false)}
+                        />
+                      ) : (
+                        <FontAwesomeIcon
+                          style={over ? { color: "red" } : {}}
+                          icon={faArrowCircleDown}
+                          onClick={() => setSort("asc")}
+                          onMouseOver={() => setOver(true)}
+                          onMouseLeave={() => setOver(false)}
+                        />
+                      ))}
+                  </th>
+                ))}
+              </tr>
+            </thead>
             <tbody>
-              {data && data.rows && data.rows.length > 0 ? (
+              {loading ? (
+                <tr>
+                  <td colSpan={tableHeaders.length} className="text-center py-4">
+                    <InlineLoader />
+                  </td>
+                </tr>
+              ) : data && data.rows && data.rows.length > 0 ? (
                 data?.rows?.map(
                   ({
                     packageId,
@@ -560,15 +549,15 @@ const Packages = () => {
                 )
               ) : (
                 <tr>
-                  <td colSpan={9} className="text-danger text-center">
+                  <td colSpan={tableHeaders.length} className="text-center py-4 packages-empty">
                     {t("noDataFound")}
                   </td>
                 </tr>
               )}
             </tbody>
-          )}
-        </Table>
-      }
+          </Table>
+        </div>
+      </div>
       {data?.count !== 0 && (
         <PaginationComponent
           page={data?.count < page ? setPage(1) : page}
@@ -620,6 +609,7 @@ const Packages = () => {
           setShowOverwriteModal={setShowOverwriteModal}
         />
       )}
+      </div>
     </>
   );
 };

@@ -1,42 +1,30 @@
-import React, { useState } from "react";
+import React from "react";
 import {
-  Table,
-  Button,
   Col,
   Row,
-  Form,
-  Accordion,
   Card,
 } from "@themesberg/react-bootstrap";
-import { InlineLoader } from "../../../components/Preloader";
-import PaginationComponent from "../../../components/Pagination";
-import useRedeemReport from "./useRedeemReport";
-import Datetime from "react-datetime";
-import moment from "moment";
-import { formatAmountWithCommas } from "../../../utils/helper";
-import RedeemReport from "./RedeemReport";
-
 import RedeemGraph from "./RedeemGraph";
+import "./redeemRateReport.scss";
 const RedeemRateReport = () => {
-  const [isAccordionOpen, setIsAccordionOpen] = useState(false);
-  const { redeemRefetch } = useRedeemReport();
-  const handleAccordionToggle = () => {
-    setIsAccordionOpen((prev) => !prev);
-  };
-
   return (
     <>
-      <Row className="mb-3">
-        <Col sm={12}>
-          <h3>Redeem Rate Report</h3>
+      <div className="redeem-rate-report-page dashboard-typography">
+        <Row className="d-flex align-items-center mb-2">
+          <Col sm={12}>
+            <h3 className="redeem-rate-report-page__title">Redeem Rate Report</h3>
+            <div className="redeem-rate-report-page__subtitle">
+              Track revenue vs redemptions, redemption rates, and export CSV.
+            </div>
+          </Col>
+        </Row>
+
+        <Col md={12} sm={12} className="mb-2">
+          <Card className="p-2 redeem-rate-report-page__card">
+            <RedeemGraph />
+          </Card>
         </Col>
-      </Row>
-      <Col md={12} sm={12} className="my-3">
-        <Card className=" tournament-card p-2">
-          <RedeemGraph />
-        </Card>
-      </Col>
-      
+      </div>
     </>
   );
 };

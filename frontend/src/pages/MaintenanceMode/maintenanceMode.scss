@@ -1,0 +1,143 @@
+// Maintenance Mode – modern dashboard skin (scoped to this page)
+@import "../Dashboard/DashboardCharts/dashboardChart.scss";
+
+.maintenance-mode-page {
+  padding-bottom: 6px;
+}
+
+.maintenance-mode-page__title {
+  margin: 0;
+}
+
+.maintenance-mode-page__subtitle {
+  margin-top: 4px;
+  color: rgba(234, 250, 245, 0.68);
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+.maintenance-mode-page__actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+
+  @media (min-width: 768px) {
+    margin-top: 0;
+  }
+}
+
+.maintenance-mode-page__action-btn.btn {
+  border-radius: 14px;
+  padding: 10px 14px;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border: 1px solid rgba(var(--gs-cta-rgb), 0.22);
+  background: linear-gradient(135deg, var(--gs-cta-start) 0%, var(--gs-cta-end) 100%);
+  box-shadow:
+    0 10px 26px rgba(var(--gs-cta-rgb), 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.18);
+}
+
+.maintenance-mode-page__card {
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.04) 0%, rgba(0, 0, 0, 0.22) 100%),
+    rgba(26, 26, 26, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.55),
+    0 14px 40px rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(12px) saturate(140%);
+  -webkit-backdrop-filter: blur(12px) saturate(140%);
+}
+
+.maintenance-mode-page__accordion {
+  .accordion-item {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 18px;
+    overflow: hidden;
+  }
+
+  .accordion-button {
+    background: rgba(0, 0, 0, 0.18) !important;
+    color: rgba(255, 255, 255, 0.92) !important;
+    box-shadow: none !important;
+    font-weight: 900;
+    padding: 14px 16px;
+  }
+
+  .accordion-button::after {
+    filter: invert(1);
+    opacity: 0.85;
+  }
+
+  .accordion-body {
+    background: rgba(0, 0, 0, 0.10);
+  }
+}
+
+.maintenance-mode-page__input.form-control {
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 14px;
+  color: rgba(255, 255, 255, 0.92);
+  padding: 12px 12px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.maintenance-mode-page__toggle-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  border-radius: 14px;
+  padding: 10px 12px;
+  background: rgba(0, 0, 0, 0.22);
+
+  p {
+    color: rgba(234, 250, 245, 0.85);
+    font-weight: 800;
+  }
+}
+
+.maintenance-mode-page__btn.btn {
+  border-radius: 14px;
+  padding: 10px 14px;
+  font-weight: 900;
+}
+
+.maintenance-mode-page__preview-title {
+  font-weight: 900;
+  margin: 0 0 8px 0;
+}
+
+.maintenance-mode-page__preview {
+  background: rgba(0, 0, 0, 0.22);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  padding: 12px;
+  border-radius: 14px;
+  margin: 0;
+}
+
+.maintenance-mode-page__preview-text {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.88);
+  margin: 0;
+}
+
+.maintenance-mode-page__table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+.maintenance-mode-page__empty {
+  color: rgba(255, 156, 198, 0.92);
+  font-weight: 800;
+}
+
+

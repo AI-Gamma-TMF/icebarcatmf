@@ -28,17 +28,19 @@ const useAggregatorListing = () => {
   const [hideModalShow, setHideModalShow] = useState(false)
 
 
-  const { data: aggregators,refetch ,isLoading: loading} = useQuery({
+  const { data: aggregators, refetch, isLoading: loading, isFetching } = useQuery({
     queryKey: ['AggregatorsList', limit, page, orderBy, sort, debouncedSearch, aggregatorStatus],
     queryFn: ({ queryKey }) => {
       const params = {pageNo: queryKey[2], limit: queryKey[1], orderBy: queryKey[3], sort: queryKey[4]};  
       if (queryKey[5]) params.search = queryKey[5];
-      if(queryKey[6]) params.isActive = queryKey[6]
+      if (queryKey[6] && queryKey[6] !== 'all') params.isActive = queryKey[6]
 
       return getCasinoAggregators(params)
     },
     select: (res) => res?.data?.casinoAggregator,
-    refetchOnWindowFocus: false
+    refetchOnWindowFocus: false,
+    keepPreviousData: true,
+    staleTime: 15000
   })
 
   const selected = (h) =>
@@ -158,6 +160,7 @@ const useAggregatorListing = () => {
     handleClose,
     handleShow,
     loading,
+    isFetching,
     status,
     name,    
     setOrderBy,

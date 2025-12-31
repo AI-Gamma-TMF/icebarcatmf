@@ -14,11 +14,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faArrowCircleDown,
   faArrowCircleUp,
-  faCancel,
   faEye,
   faPlusSquare,
   faRecycle,
-  faRedoAlt,
+  faXmark,
   faTrash,
 } from "@fortawesome/free-solid-svg-icons";
 import { faEdit, faSave } from "@fortawesome/free-regular-svg-icons";
@@ -139,177 +138,171 @@ const Scratchcard = () => {
   };
 
   return (
-    <>
-      <Col>
-        <h3>{isUnarchive ? "Archive Scratch Card" : "Scratch Card"}</h3>
-      </Col>
+    <div className="scratch-card-page dashboard-typography">
+      <Row className="d-flex align-items-center mb-2">
+        <Col>
+          <h3 className="scratch-card-page__title">
+            {isUnarchive ? "Archive Scratch Card" : "Scratch Card"}
+          </h3>
+        </Col>
+      </Row>
+
       <Col lg={12}>
         <Tabs
           activeKey={key}
           onSelect={handleTabChange}
-          className="ps-2"
-          id="amoe-tabs"
+          className="scratch-card-tabs"
+          id="scratch-card-tabs"
         >
           <Tab eventKey="dashboard" title="Dashboard">
             <ScratchCardGraph isHitoricalTab={key} />
           </Tab>
+
           <Tab eventKey="scratch-card-data" title="Scratch Card Detail">
-            <div className="mt-4">
-              <Row className="mb-2">
+            <div className="mt-3">
+              <Row className="d-flex align-items-center mb-2">
+                <Col />
+
                 {!isUnarchive && (
-                  <Col>
-                    <div className="d-flex justify-content-end">
-                      <Button
-                        variant="success"
-                        hidden={isHidden({
-                          module: {
-                            key: "ScratchCardConfiguration",
-                            value: "C",
-                          },
-                        })}
-                        size="sm"
-                        style={{ marginRight: "10px" }}
-                        onClick={() => {
-                          navigate(AdminRoutes.CreateScratchCard);
-                        }}
-                      >
-                        Create Scratch Card
-                      </Button>
-                      <Button
-                        variant="warning"
-                        size="md"
-                        className="px-3 py-2"
-                        onClick={() => {
-                          setPage(1);
-                          navigate(AdminRoutes.UnarchiveScratchCard);
-                        }}
-                        hidden={isHidden({
-                          module: {
-                            key: "ScratchCardConfiguration",
-                            value: "U",
-                          },
-                        })}
-                      >
-                        Archived
-                      </Button>
-                    </div>
+                  <Col xs="auto" className="d-flex justify-content-end gap-2">
+                    <Button
+                      className="scratch-card-page__action-btn"
+                      variant="success"
+                      hidden={isHidden({
+                        module: { key: "ScratchCardConfiguration", value: "C" },
+                      })}
+                      size="sm"
+                      onClick={() => navigate(AdminRoutes.CreateScratchCard)}
+                    >
+                      Create Scratch Card
+                    </Button>
+                    <Button
+                      className="scratch-card-page__action-btn"
+                      variant="warning"
+                      size="sm"
+                      onClick={() => {
+                        setPage(1);
+                        navigate(AdminRoutes.UnarchiveScratchCard);
+                      }}
+                      hidden={isHidden({
+                        module: { key: "ScratchCardConfiguration", value: "U" },
+                      })}
+                    >
+                      Archived
+                    </Button>
                   </Col>
                 )}
               </Row>
-              <Row>
-                <Col xs={12} md={4} className="mb-3">
-                  <Form.Label>Scratch card Id</Form.Label>
-                  <Form.Control
-                    type="search"
-                    value={scratchcardId}
-                    placeholder="Scratch card Id"
-                    onChange={(event) => {
-                      const inputValue = event?.target?.value;
-                      if (/^\d*$/.test(inputValue)) {
-                        if (inputValue.length <= 10) {
-                          setPage(1);
-                          setScratchcardId(inputValue);
-                          setError("");
-                        } else {
-                          setError("Scratch card Id cannot exceed 10 digits");
+
+              <div className="scratch-card-page__card p-2 mb-2">
+                <Row className="dashboard-filters scratch-card-filters g-3 align-items-end">
+                  <Col xs={12} md={4}>
+                    <Form.Label className="form-label">Scratch card Id</Form.Label>
+                    <Form.Control
+                      type="search"
+                      value={scratchcardId}
+                      placeholder="Scratch card Id"
+                      onChange={(event) => {
+                        const inputValue = event?.target?.value;
+                        if (/^\d*$/.test(inputValue)) {
+                          if (inputValue.length <= 10) {
+                            setPage(1);
+                            setScratchcardId(inputValue);
+                            setError("");
+                          } else {
+                            setError("Scratch card Id cannot exceed 10 digits");
+                          }
                         }
-                      }
-                    }}
-                  />
-                  {error && (
-                    <div style={{ color: "red", marginTop: "5px" }}>
-                      {error}
-                    </div>
-                  )}
-                </Col>
+                      }}
+                    />
+                    {error && <div className="scratch-card-error">{error}</div>}
+                  </Col>
 
-                <Col xs={12} md={4} className="mb-3">
-                  <div className="d-flex justify-content-start align-items-center w-100 flex-wrap">
-                    <Form.Label>Name</Form.Label>
-
+                  <Col xs={12} md={4}>
+                    <Form.Label className="form-label">Name</Form.Label>
                     <Form.Control
                       type="search"
                       value={search}
-                      placeholder={"Search by name"}
+                      placeholder="Search by name"
                       onChange={(event) => {
                         setPage(1);
                         setSearch(event?.target?.value);
                       }}
                     />
-                  </div>
-                </Col>
-                <Col xs={2} md={1} style={{ marginTop: "30px" }}>
-                  <Trigger message="Reset Filters" id={"redo"} />
-                  <Button id={"redo"} variant="success" onClick={resetFilters}>
-                    <FontAwesomeIcon icon={faRedoAlt} />
-                  </Button>
-                </Col>
-              </Row>
-              <Table
-                bordered
-                striped
-                responsive
-                hover
-                size="sm"
-                className="text-center mt-4"
-              >
-                <thead className="thead-dark">
-                  <tr>
-                    {tableHeaders.map((h, idx) => (
-                      <th
-                        key={idx}
-                        onClick={() =>
-                          ["scratchCardId"].includes(h.value) &&
-                          handleTableSorting(h)
-                        }
-                        style={{
-                          cursor:
-                            h.value === "scratchCardId" ? "pointer" : "default",
-                        }}
-                        className={
-                          selected(h) ? "border-3 border border-blue" : ""
-                        }
-                      >
-                        {h.labelKey}{" "}
-                        {selected(h) &&
-                          (sort === "ASC" ? (
-                            <FontAwesomeIcon
-                              style={over ? { color: "red" } : {}}
-                              icon={faArrowCircleUp}
-                              onClick={() => setSort("DESC")}
-                              onMouseOver={() => setOver(true)}
-                              onMouseLeave={() => setOver(false)}
-                            />
-                          ) : (
-                            <FontAwesomeIcon
-                              style={over ? { color: "red" } : {}}
-                              icon={faArrowCircleDown}
-                              onClick={() => setSort("ASC")}
-                              onMouseOver={() => setOver(true)}
-                              onMouseLeave={() => setOver(false)}
-                            />
-                          ))}
-                      </th>
-                    ))}
-                  </tr>
-                </thead>
+                  </Col>
 
-                {loading ? (
-                  <tr>
-                    <td colSpan={10} className="text-center">
-                      <InlineLoader />
-                    </td>
-                  </tr>
-                ) : (
-                  <tbody>
-                    {scratchCardList?.data?.map((scratchCard, index) => {
-                      const isOnlyOneChild =
-                        scratchCard.scratchCardConfigs?.length === 1;
-                      return (
-                        <React.Fragment key={scratchCard.scratchCardId}>
-                          {/* Parent Row */}
+                  <Col xs={12} md="auto" className="ms-auto d-flex gap-2">
+                    <Trigger message="Reset Filters" id={"scratchReset"} />
+                    <Button id={"scratchReset"} variant="secondary" onClick={resetFilters}>
+                      Reset
+                    </Button>
+                  </Col>
+                </Row>
 
-                          <tr>
+                <div className="dashboard-section-divider" />
+
+                <div className="scratch-card-table-wrap table-responsive">
+                  <Table
+                    bordered
+                    striped
+                    responsive
+                    hover
+                    size="sm"
+                    className="dashboard-data-table scratch-card-table text-center mt-3"
+                  >
+                    <thead className="thead-dark">
+                      <tr>
+                        {tableHeaders.map((h, idx) => (
+                          <th
+                            key={idx}
+                            onClick={() => ["scratchCardId"].includes(h.value) && handleTableSorting(h)}
+                            style={{
+                              cursor: h.value === "scratchCardId" ? "pointer" : "default",
+                            }}
+                            className={selected(h) ? "border-3 border border-blue" : ""}
+                          >
+                            {h.labelKey}{" "}
+                            {selected(h) &&
+                              (sort === "ASC" ? (
+                                <FontAwesomeIcon
+                                  style={over ? { color: "red" } : {}}
+                                  icon={faArrowCircleUp}
+                                  onClick={() => setSort("DESC")}
+                                  onMouseOver={() => setOver(true)}
+                                  onMouseLeave={() => setOver(false)}
+                                />
+                              ) : (
+                                <FontAwesomeIcon
+                                  style={over ? { color: "red" } : {}}
+                                  icon={faArrowCircleDown}
+                                  onClick={() => setSort("ASC")}
+                                  onMouseOver={() => setOver(true)}
+                                  onMouseLeave={() => setOver(false)}
+                                />
+                              ))}
+                          </th>
+                        ))}
+                      </tr>
+                    </thead>
+
+                    {loading ? (
+                      <tbody>
+                        <tr>
+                          <td colSpan={tableHeaders.length} className="text-center">
+                            <InlineLoader />
+                          </td>
+                        </tr>
+                      </tbody>
+                    ) : (
+                      <tbody>
+                        {scratchCardList?.data?.map((scratchCard, index) => {
+                          const isOnlyOneChild =
+                            scratchCard.scratchCardConfigs?.length === 1;
+                          return (
+                            <React.Fragment key={scratchCard.scratchCardId}>
+                              {/* Parent Row */}
+
+                              <tr>
                             <td>{scratchCard.scratchCardId}</td>
                             <td>
                               {editParentRowId === scratchCard.scratchCardId ? (
@@ -431,7 +424,7 @@ const Scratchcard = () => {
                                           },
                                         })}
                                       >
-                                        <FontAwesomeIcon icon={faCancel} />
+                                        <FontAwesomeIcon icon={faXmark} />
                                       </Button>
                                     </>
                                   ) : (
@@ -589,50 +582,57 @@ const Scratchcard = () => {
                       </tr>
                     )}
                   </tbody>
+                    )}
+                  </Table>
+                </div>
+
+                {scratchCardList?.count !== 0 && (
+                  <PaginationComponent
+                    page={scratchCardList?.count < page ? setPage(1) : page}
+                    totalPages={totalPages}
+                    setPage={setPage}
+                    limit={limit}
+                    setLimit={setLimit}
+                  />
                 )}
-              </Table>
-              {scratchCardList?.count !== 0 && (
-                <PaginationComponent
-                  page={scratchCardList?.count < page ? setPage(1) : page}
-                  totalPages={totalPages}
-                  setPage={setPage}
-                  limit={limit}
-                  setLimit={setLimit}
-                />
-              )}
-              {deleteModalShow && (
-                <DeleteConfirmationModal
-                  deleteModalShow={deleteModalShow}
-                  setDeleteModalShow={setDeleteModalShow}
-                  handleDeleteYes={handleDeleteYes}
-                />
-              )}
-              {reuseModalShow && (
-                <ReuseConfirmationModal
-                  reuseModalShow={reuseModalShow}
-                  setReuseModalShow={setReuseModalShow}
-                  handleReusePackageYes={handleReuseScratchcardYes}
-                  loading={reuseLoading}
-                  isScratchCard={true}
-                />
-              )}
-            </div>
-            {isUnarchive && (
-              <div className="mt-4 d-flex justify-content-between align-items-center">
-                <Button
-                  variant="warning"
-                  onClick={() => {
-                    navigate(AdminRoutes.ScratchCard), setPage(1);
-                  }}
-                >
-                  Cancel
-                </Button>
+
+                {deleteModalShow && (
+                  <DeleteConfirmationModal
+                    deleteModalShow={deleteModalShow}
+                    setDeleteModalShow={setDeleteModalShow}
+                    handleDeleteYes={handleDeleteYes}
+                  />
+                )}
+
+                {reuseModalShow && (
+                  <ReuseConfirmationModal
+                    reuseModalShow={reuseModalShow}
+                    setReuseModalShow={setReuseModalShow}
+                    handleReusePackageYes={handleReuseScratchcardYes}
+                    loading={reuseLoading}
+                    isScratchCard={true}
+                  />
+                )}
+
+                {isUnarchive && (
+                  <div className="mt-3 d-flex justify-content-between align-items-center">
+                    <Button
+                      variant="warning"
+                      onClick={() => {
+                        navigate(AdminRoutes.ScratchCard);
+                        setPage(1);
+                      }}
+                    >
+                      Cancel
+                    </Button>
+                  </div>
+                )}
               </div>
-            )}
+            </div>
           </Tab>
         </Tabs>
       </Col>
-    </>
+    </div>
   );
 };
 

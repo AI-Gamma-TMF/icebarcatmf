@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Row, Col, Tabs, Tab } from "@themesberg/react-bootstrap";
+import { Row, Col, Tabs, Tab, Card } from "@themesberg/react-bootstrap";
 
 import { useLocation, useNavigate } from "react-router-dom";
 import ProviderDashboard from "./components/ProviderDashboard";
@@ -24,25 +24,27 @@ const CasinoProviderDashboard = () => {
   }, [location.state, navigate]);
 
   return (
-    <Row className="mb-2">
-      <Col>
-        <h3>{t('casinoProviderDashboard.title')}</h3>
-      </Col>
+    <div className="dashboard-typography">
+      <div className="d-flex flex-wrap justify-content-between align-items-start gap-3 mb-3">
+        <div>
+          <h3>{t('casinoProviderDashboard.title')}</h3>
+          <p className="text-muted mb-0">Provider analytics and rate matrices</p>
+        </div>
+      </div>
 
-      <Col lg={12}>
-        <Tabs activeKey={key} onSelect={(k) => setKey(k)} className='ps-2' id='amoe-tabs'>
-          {/* Dashboard Tab */}
-          <Tab eventKey='dashboard' title='Dashboard'>
-            <ProviderDashboard isHitoricalTab={key} />
-          </Tab>
-
-          {/* History and List Tab */}
-          <Tab eventKey='provider-matrix' title='Provider rate matrix'>
-            <ProviderRateMatrixList loading={false} isHitoricalTab={key} />
-          </Tab>
-        </Tabs>
-      </Col>
-    </Row>
+      <Card className="dashboard-filters mb-4">
+        <Card.Body>
+          <Tabs activeKey={key} onSelect={(k) => setKey(k)} className="ps-2" id="amoe-tabs">
+            <Tab eventKey="dashboard" title="Dashboard">
+              <ProviderDashboard isHitoricalTab={key} />
+            </Tab>
+            <Tab eventKey="provider-matrix" title="Provider rate matrix">
+              <ProviderRateMatrixList loading={false} isHitoricalTab={key} />
+            </Tab>
+          </Tabs>
+        </Card.Body>
+      </Card>
+    </div>
   );
 };
 

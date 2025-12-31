@@ -166,6 +166,7 @@ const BonusGraph = () => {
               options={bonusMetricOptions}
               placeholder="Select Metric"
               isClearable={false}
+              classNamePrefix="bonus-select"
             />
           </Col>
 
@@ -210,7 +211,7 @@ const BonusGraph = () => {
                       setStartDate(startDate);
                       setEndDate(endDate);
                     }}
-                    style={{ marginTop: "25px", height: "38px" }}
+                    className="bonus-graph__clear-custom-btn"
                   >
                     &times;
                   </Button>
@@ -227,10 +228,7 @@ const BonusGraph = () => {
             ) : (
               <>
                 <label>Time Duration</label>
-                <div
-                  className="d-flex position-relative justify-content-between gap-3 border rounded px-3 py-2 align-items-center"
-                  style={{ top: "-3px" }}
-                >
+                <div className="quick-range-wrapper">
                   {/* Other ranges */}
                   <div className="d-flex gap-3">
                     {quickRanges
@@ -296,6 +294,7 @@ const BonusGraph = () => {
               options={intervalOptions}
               placeholder="Select Interval"
               isClearable={false}
+              classNamePrefix="bonus-select"
             />
           </Col>
 
@@ -311,24 +310,11 @@ const BonusGraph = () => {
         <Row>
           <Col xs={12} md={12} lg={12}>
             {refreshInterval !== "off" && (
-              <div
-                style={{
-                  height: "4px",
-                  width: "100%",
-                  backgroundColor: "#e9ecef",
-
-                  borderRadius: "4px",
-                  overflow: "hidden",
-                }}
-              >
+              <div className="progress-bar-track">
                 <div
                   key={countdownKey}
-                  style={{
-                    height: "100%",
-                    width: `${progress}%`,
-                    backgroundColor: "#0d6efd",
-                    transition: "width 0.1s linear",
-                  }}
+                  className="progress-bar-fill"
+                  style={{ width: `${progress}%` }}
                 />
               </div>
             )}
@@ -338,28 +324,14 @@ const BonusGraph = () => {
 
       <Col
         xs={12}
-        className="mb-3"
-        style={{ marginTop: "25px", display: "flex", justifyContent: "end" }}
+        className="bonus-graph__info-wrap mb-3"
       >
         <Trigger message="View Graph Info" id="infoBoxTrigger" />
         <Button
           id="infoBoxTrigger"
           variant="outline-primary"
           onClick={() => setShowInfoBox((prev) => !prev)}
-          className="ms-2"
-          style={{
-            width: "32px",
-            height: "32px",
-            padding: 0,
-            borderRadius: "50%",
-            backgroundColor: "#CCCCCC",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            color: "#fff",
-            border: "none",
-            boxShadow: "0 1px 2px rgba(0, 0, 0, 0.1)",
-          }}
+          className="bonus-info-btn ms-2"
         >
           <FontAwesomeIcon icon={faInfo} />
         </Button>

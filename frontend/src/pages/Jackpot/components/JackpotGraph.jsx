@@ -18,7 +18,7 @@ import {
 } from "chart.js";
 import Trigger from "../../../components/OverlayTrigger";
 import { getDateTime } from "../../../utils/dateFormatter";
-import AutoRefreshControl from "../../Reports/BonusReport/AutoRefreshControl";
+import JackpotAutoRefreshControl from "./JackpotAutoRefreshControl";
 import useJackpotGraph from "../hooks/useJackpotGraph";
 import { intervalOptions } from "../../Reports/BonusReport/constant";
 import GraphYDropDown from "./GraphYDropDown";
@@ -181,7 +181,7 @@ const JackpotGraph = () => {
   return (
     <>
       <div className="bonus-graph-container">
-        <Row className="mb-3">
+        <Row className="g-3 mx-0 align-items-end">
           <Col xs={12} md={12} lg={3} className="mb-3">
             <label>Jackpot Metrics</label>
             <GraphYDropDown
@@ -193,6 +193,8 @@ const JackpotGraph = () => {
           <Col xs={12} md={12} lg={2} className="mb-3">
             <label>Interval</label>
             <Select
+              className="jg-select"
+              classNamePrefix="jg-select"
               value={intervalTime}
               onChange={setIntervalTime}
               options={intervalOptions}
@@ -252,8 +254,7 @@ const JackpotGraph = () => {
                 <label>Time Duration</label>
                 <div
                   // className="d-flex position-relative justify-content-between align-items-center gap-3 gap-md-3 border w-content rounded px-2 py-1 px-sm-3 py-sm-2 position-relative mt-4"
-                  className="d-flex position-relative justify-content-between gap-3 border rounded px-3 py-2 align-items-center"
-                  style={{ top: "-3px", width: "fit-content" }}
+                  className="quick-range-wrapper"
                 >
                   <div className="d-flex gap-2 gap-lg-4 gap-md-3">
                     {quickRanges
@@ -305,13 +306,8 @@ const JackpotGraph = () => {
             )}
           </Col>
 
-          <Col
-            xs={12}
-            md={12}
-            lg={2}
-            // className="justify-content-md-end justify-content-start d-flex"
-          >
-            <AutoRefreshControl
+          <Col xs={12} md="auto" className="mb-3 d-flex align-items-end">
+            <JackpotAutoRefreshControl
               resetFilters={resetFilters}
               refreshInterval={refreshInterval}
               setRefreshInterval={setRefreshInterval}
@@ -319,27 +315,14 @@ const JackpotGraph = () => {
           </Col>
         </Row>
 
-        <Row>
+        <Row className="mx-0">
           <Col xs={12}>
             {refreshInterval !== "off" && (
-              <div
-                style={{
-                  height: "4px",
-                  width: "100%",
-                  backgroundColor: "#e9ecef",
-
-                  borderRadius: "4px",
-                  overflow: "hidden",
-                }}
-              >
+              <div className="progress-bar-track">
                 <div
                   key={countdownKey}
-                  style={{
-                    height: "100%",
-                    width: `${progress}%`,
-                    backgroundColor: "#0d6efd",
-                    transition: "width 0.1s linear",
-                  }}
+                  className="progress-bar-fill"
+                  style={{ width: `${progress}%`, transition: "width 0.1s linear" }}
                 />
               </div>
             )}

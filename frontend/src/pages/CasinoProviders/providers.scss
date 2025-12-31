@@ -1,0 +1,72 @@
+// Reuse dashboard “modern” styling primitives (glass panels, dark inputs, table skin)
+@import "../Dashboard/DashboardCharts/dashboardChart.scss";
+
+.providers-page {
+  padding-bottom: 6px;
+}
+
+.providers-page__title {
+  margin: 0;
+}
+
+.providers-page__card {
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.04) 0%, rgba(0, 0, 0, 0.22) 100%),
+    rgba(26, 26, 26, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.55),
+    0 14px 40px rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(12px) saturate(140%);
+  -webkit-backdrop-filter: blur(12px) saturate(140%);
+}
+
+.providers-page__action-btn {
+  border-radius: 14px !important;
+  padding: 10px 14px !important;
+  font-weight: 900 !important;
+  letter-spacing: 0.04em !important;
+  text-transform: uppercase !important;
+}
+
+.providers-page__reset-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 14px !important;
+  padding: 0 !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(var(--gs-cta-rgb), 0.18) !important;
+  background: rgba(var(--gs-cta-rgb), 0.10) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.10);
+}
+
+.providers-page__reset-btn:hover {
+  border-color: rgba(var(--gs-cta-rgb), 0.28) !important;
+  background: rgba(var(--gs-cta-rgb), 0.14) !important;
+  transform: translateY(-1px);
+}
+
+.providers-table-wrap {
+  overflow-x: auto;
+}
+
+.providers-table {
+  min-width: max-content;
+}
+
+.providers-table__name {
+  max-width: 260px;
+}
+
+.providers-table__aggregator {
+  max-width: 220px;
+}
+
+.providers-table__actions .btn {
+  border-radius: 12px;
+}
+
+

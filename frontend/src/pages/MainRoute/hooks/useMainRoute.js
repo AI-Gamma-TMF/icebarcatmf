@@ -37,6 +37,12 @@ const useMainRoute =()=>{
     
     useEffect(() => {
       if (!userDetails.userDetails) return
+      // Perf: sockets can keep the tab “hot” (frequent messages) and spike CPU/GPU on some machines.
+      // In low-power mode, we skip opening realtime connections.
+      const lowPower =
+        typeof document !== "undefined" &&
+        document.documentElement.classList.contains("gs-low-power");
+      if (lowPower) return;
       loginCountSocket.connect()
       whaleAlertSocket.connect()
       jackpotSocket.connect()

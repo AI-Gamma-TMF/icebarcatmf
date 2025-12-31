@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import {
   Row,
@@ -18,7 +18,6 @@ import {
   faEdit,
   faEye,
   faTrash,
-  faRedoAlt,
   faArrowCircleUp,
   faArrowCircleDown,
 } from "@fortawesome/free-solid-svg-icons";
@@ -27,8 +26,6 @@ import { ConfirmationModal } from "../../../components/ConfirmationModal";
 import PaginationComponent from "../../../components/Pagination";
 import "./freespin.scss";
 import { InlineLoader } from "../../../components/Preloader";
-import { useQuery } from "@tanstack/react-query";
-import { getFreeSpinDashboard } from "../../../utils/apiCalls";
 import { tableHeaders } from "./constant";
 
 const FreeSpinGames = () => {
@@ -80,21 +77,46 @@ const FreeSpinGames = () => {
     setItemToUpdate(freeSpinId);
     setStatusShow(true);
   };
+
+  const summaryTiles = [
+    { label: "Total Win SC", value: displayValue(dashboardData?.totalWinSc, true, 2), icon: "/spin-total-win-sc.png" },
+    { label: "Total Win GC", value: displayValue(dashboardData?.totalWinGc, true, 2), icon: "/spin-total-win-gc.png" },
+    { label: "Total Users", value: displayValue(dashboardData?.totalUsers, true, 0), icon: "/spin-total-users.png" },
+    { label: "Total Pending", value: displayValue(dashboardData?.totalPending, true, 0), icon: "/spin-total-pending.png" },
+    { label: "Total Expired", value: displayValue(dashboardData?.totalExpired, true, 0), icon: "/spin-total-expired.png" },
+    {
+      label: "Total Given GC",
+      value: displayValue(dashboardData?.totalAmountGivenByAdminGC, true, 2),
+      icon: "/spin-total-given-gc.png",
+    },
+    {
+      label: "Total Given SC",
+      value: displayValue(dashboardData?.totalAmountGivenByAdminSC, true, 2),
+      icon: "/spin-total-given-sc.png",
+    },
+    {
+      label: "Total Attached Grant",
+      value: displayValue(dashboardData?.totalAttachedGrant, true, 2),
+      icon: "/spin-total-attached-grant.png",
+    },
+    { label: "Total Cancelled", value: displayValue(dashboardData?.totalCancelled, true, 0), icon: "/spin-total-cancelled.png" },
+    { label: "Total Claimed", value: displayValue(dashboardData?.totalClaimed, true, 0), icon: "/spin-total-claimed.png" },
+    { label: "Total Direct Grant", value: displayValue(dashboardData?.totalDirectGrant, true, 2), icon: "/spin-total-direct-grant.png" },
+  ];
+
   return (
-    <>
-      <Row className="align-items-center justify-content-between mb-3">
+    <div className="free-spin-page dashboard-typography">
+      <Row className="d-flex align-items-center mb-2">
         <Col>
-          <h3>Games Free Spin</h3>
+          <h3 className="free-spin-page__title">Games Free Spin</h3>
         </Col>
 
         <Col xs="auto">
           <Button
+            className="free-spin-page__action-btn"
             variant="success"
-            size="md"
-            className="px-3 py-2"
-            onClick={() => {
-              navigate(AdminRoutes.FreeSpinGames);
-            }}
+            size="sm"
+            onClick={() => navigate(AdminRoutes.FreeSpinGames)}
             hidden={isHidden({
               module: { key: "CasinoManagement", value: "C" },
             })}
@@ -103,271 +125,136 @@ const FreeSpinGames = () => {
           </Button>
         </Col>
       </Row>
-      <Card className="p-3">
-        <Row className="g-3">
-          <Col xs={4} md={2}>
-            <Card className="spin-card">
-              <div className="spin-detail">
-                <h5 className="purple">
-                  {displayValue(dashboardData?.totalWinSc, true, 2)}
-                </h5>
-                <p>Total Win SC</p>
+
+      <div className="free-spin-summary dashboard-boxes-container">
+        {summaryTiles.map((tile) => (
+          <div key={tile.label} className="dashboard-box">
+            <div className="ticker-label">
+              <img src={tile.icon} alt={tile.label} />
+              <label>{tile.label}</label>
+            </div>
+            <div className="value-wrap">
+              <div className="live-report-data">{tile.value}</div>
+              <div className="new-icon">
+                <img src={tile.icon} alt="" />
               </div>
-              <img src="/spin-total-win-sc.png" alt="Free Spin Amount" />
-            </Card>
-          </Col>{" "}
-          <Col xs={4} md={2}>
-            <Card className="spin-card">
-              <div className="spin-detail">
-                <h5 className="purple">
-                  {displayValue(dashboardData?.totalWinGc, true, 2)}
-                </h5>
-                <p>Total Win GC</p>
-              </div>
-              <img src="/spin-total-win-gc.png" alt="Free Spin Amount" />
-            </Card>
-          </Col>{" "}
-          <Col xs={4} md={2}>
-            <Card className="spin-card">
-              <div className="spin-detail">
-                <h5 className="purple">
-                  {displayValue(dashboardData?.totalUsers, true, 2)}
-                </h5>
-                <p>Total Users</p>
-              </div>
-              <img src="/spin-total-users.png" alt="Free Spin Amount" />
-            </Card>
-          </Col>{" "}
-          <Col xs={4} md={2}>
-            <Card className="spin-card">
-              <div className="spin-detail">
-                <h5 className="purple">
-                  {displayValue(dashboardData?.totalPending, true, 2)}
-                </h5>
-                <p>Total Pending</p>
-              </div>
-              <img src="/spin-total-pending.png" alt="Free Spin Amount" />
-            </Card>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <Card className="p-2 mb-2 free-spin-page__card">
+        <Row className="dashboard-filters free-spin-filters g-3 align-items-end">
+          <Col xs={12} md={3}>
+            <Form.Label className="form-label">Search by Title</Form.Label>
+            <Form.Control
+              type="search"
+              value={search}
+              placeholder="Search"
+              onChange={(event) => {
+                setPage(1);
+                setSearch(event.target.value.replace(/[~`%^#)()><?]+/g, "").trim());
+              }}
+            />
           </Col>
-          <Col xs={4} md={2}>
-            <Card className="spin-card">
-              <div className="spin-detail">
-                <h5 className="purple">
-                  {displayValue(dashboardData?.totalExpired, true, 2)}
-                </h5>
-                <p>Total Expired</p>
-              </div>
-              <img src="/spin-total-expired.png" alt="Free Spin Amount" />
-            </Card>
-          </Col>{" "}
-          <Col xs={4} md={2}>
-            <Card className="spin-card">
-              <div className="spin-detail">
-                <h5 className="purple">
-                  {displayValue(
-                    dashboardData?.totalAmountGivenByAdminGC,
-                    true,
-                    2
-                  )}
-                </h5>
-                <p>Total Given GC</p>
-              </div>
-              <img src="/spin-total-given-gc.png" alt="Free Spin Amount" />
-            </Card>
-          </Col>{" "}
-        </Row>
-        <Row className="g-3 mt-2">
-          <Col>
-            <Card className="spin-card">
-              <div className="spin-detail">
-                <h5 className="purple">
-                  {displayValue(
-                    dashboardData?.totalAmountGivenByAdminSC,
-                    true,
-                    2
-                  )}
-                </h5>
-                <p>Total Given SC</p>
-              </div>
-              <img src="/spin-total-given-sc.png" alt="Free Spin Amount" />
-            </Card>
-          </Col>{" "}
-          <Col>
-            <Card className="spin-card">
-              <div className="spin-detail">
-                <h5 className="purple">
-                  {displayValue(dashboardData?.totalAttachedGrant, true, 2)}
-                </h5>
-                <p>Total Attached Grant</p>
-              </div>
-              <img
-                src="/spin-total-attached-grant.png"
-                alt="Free Spin Amount"
-              />
-            </Card>
-          </Col>{" "}
-          <Col>
-            <Card className="spin-card">
-              <div className="spin-detail">
-                <h5 className="purple">
-                  {displayValue(dashboardData?.totalCancelled, true, 2)}
-                </h5>
-                <p>Total Cancelled</p>
-              </div>
-              <img src="/spin-total-cancelled.png" alt="Free Spin Amount" />
-            </Card>
-          </Col>{" "}
-          <Col>
-            <Card className="spin-card">
-              <div className="spin-detail">
-                <h5 className="purple">
-                  {displayValue(dashboardData?.totalClaimed, true, 2)}
-                </h5>
-                <p>Total Claimed</p>
-              </div>
-              <img src="/spin-total-claimed.png" alt="Free Spin Amount" />
-            </Card>
+
+          <Col xs={12} md={3}>
+            <Form.Label className="form-label">Search by Provider</Form.Label>
+            <Form.Control
+              type="search"
+              value={providerSearch}
+              placeholder="Search"
+              onChange={(event) => {
+                setPage(1);
+                setProviderSearch(event.target.value.replace(/[~`%^#)()><?]+/g, "").trim());
+              }}
+            />
           </Col>
-          <Col>
-            <Card className="spin-card">
-              <div className="spin-detail">
-                <h5 className="purple">
-                  {displayValue(dashboardData?.totalDirectGrant, true, 2)}
-                </h5>
-                <p>Total Direct Grant</p>
-              </div>
-              <img src="/spin-total-direct-grant.png" alt="Free Spin Amount" />
-            </Card>
-          </Col>{" "}
+
+          <Col xs={12} md={2}>
+            <Form.Label className="form-label">Search by Freespin Id</Form.Label>
+            <Form.Control
+              type="number"
+              value={searchId}
+              placeholder="Search"
+              onPaste={(e) => e.preventDefault()}
+              onKeyDown={(e) => ["e", "E", "+", "-"].includes(e.key) && e.preventDefault()}
+              onChange={(event) => {
+                setPage(1);
+                setSearchId(event.target.value.replace(/[~`%^#)()><?]+/g, "").trim());
+              }}
+            />
+          </Col>
+
+          <Col xs={12} md={2}>
+            <Form.Label className="form-label">Search by Round</Form.Label>
+            <Form.Control
+              type="number"
+              value={searchRound}
+              placeholder="Search"
+              onPaste={(e) => e.preventDefault()}
+              onKeyDown={(e) => ["e", "E", "+", "-"].includes(e.key) && e.preventDefault()}
+              onChange={(event) => {
+                setPage(1);
+                setSearchRound(event.target.value.replace(/[~`%^#)()><?]+/g, "").trim());
+              }}
+            />
+          </Col>
+
+          <Col xs={12} md={2}>
+            <Form.Label className="form-label">Status</Form.Label>
+            <Form.Select
+              onChange={(e) => {
+                setPage(1);
+                setStatusSearch(e.target.value);
+              }}
+              value={statusSearch}
+            >
+              <option hidden>Select Status</option>
+              <option value="0">Upcoming</option>
+              <option value="1">Ongoing</option>
+              <option value="2">Completed</option>
+              <option value="3">Cancelled</option>
+            </Form.Select>
+          </Col>
+
+          <Col xs={12} md="auto" className="ms-auto d-flex gap-2">
+            <Trigger message="Reset Filters" id={"freeSpinReset"} />
+            <Button
+              id={"freeSpinReset"}
+              variant="secondary"
+              onClick={() => {
+                setProviderSearch("");
+                setSearch("");
+                setSearchId("");
+                setSearchRound("");
+                setLimit(15);
+                setPage(1);
+                setStatusSearch("");
+              }}
+            >
+              Reset
+            </Button>
+          </Col>
         </Row>
-      </Card>
 
-      <Row className="align-items-center mt-4 mb-4">
-        <Col lg={2} className="mb-0">
-          <Form.Label>Search by Title</Form.Label>
-          <Form.Control
-            type="search"
-            value={search}
-            placeholder="Search"
-            onChange={(event) => {
-              setPage(1);
-              setSearch(
-                event.target.value.replace(/[~`%^#)()><?]+/g, "").trim()
-              );
-            }}
-          />
-        </Col>
+        <div className="dashboard-section-divider" />
 
-        <Col lg={2} className="mb-0">
-          <Form.Label>Search by Provider</Form.Label>
-          <Form.Control
-            type="search"
-            value={providerSearch}
-            placeholder="Search"
-            onChange={(event) => {
-              setPage(1);
-              setProviderSearch(
-                event.target.value.replace(/[~`%^#)()><?]+/g, "").trim()
-              );
-            }}
-          />
-        </Col>
+        <div className="dashboard-section-heading">
+          <div className="dashboard-section-heading__row">
+            <h5 className="mb-0">Free spin report</h5>
+          </div>
+        </div>
 
-        <Col lg={2} className="mb-0">
-          <Form.Label>Search by Freespin Id</Form.Label>
-          <Form.Control
-            type="number"
-            value={searchId}
-            placeholder="Search"
-            onPaste={(e) => e.preventDefault()} // Disable paste
-            onKeyDown={(e) =>
-              ["e", "E", "+", "-"].includes(e.key) && e.preventDefault()
-            }
-            onChange={(event) => {
-              setPage(1);
-              setSearchId(
-                event.target.value.replace(/[~`%^#)()><?]+/g, "").trim()
-              );
-            }}
-          />
-        </Col>
-
-        <Col lg={2} className="mb-0">
-          <Form.Label>Search by Freespin Round</Form.Label>
-          <Form.Control
-            type="number"
-            value={searchRound}
-            placeholder="Search"
-            onPaste={(e) => e.preventDefault()} // Disable paste
-            onKeyDown={(e) =>
-              ["e", "E", "+", "-"].includes(e.key) && e.preventDefault()
-            }
-            onChange={(event) => {
-              setPage(1);
-              setSearchRound(
-                event.target.value.replace(/[~`%^#)()><?]+/g, "").trim()
-              );
-            }}
-          />
-        </Col>
-
-        <Col lg={2} className="mb-0">
-          <Form.Label>Status</Form.Label>
-          <Form.Select
-            onChange={(e) => {
-              setPage(1);
-              setStatusSearch(e.target.value);
-            }}
-            value={statusSearch}
-          >
-            <option hidden>Select Status</option>
-            <option value="0">Upcoming</option>
-            <option value="1">Ongoing</option>
-            <option value="2">Completed</option>
-            <option value="3">Cancelled</option>
-          </Form.Select>
-        </Col>
-
-        <Col lg={2} className="d-flex align-items-center gap-2 mt-3 mb-0 pt-3">
-          <Trigger message="Reset Filters" id={"redo"} />
-          <Button
-            id={"redo"}
-            variant="success"
-            onClick={() => {
-              setProviderSearch("");
-              setSearch("");
-              setSearchId("");
-              setSearchRound("");
-              setLimit(15);
-              setPage(1);
-              setStatusSearch("");
-            }}
-          >
-            <FontAwesomeIcon icon={faRedoAlt} />
-          </Button>
-        </Col>
-      </Row>
-
-      <Card className="p-2">
-        <h5 className="mb-0 pt-2">Free spin report</h5>
-        {
-          <Table
-            bordered
-            striped
-            responsive
-            hover
-            size="sm"
-            className="text-center mt-4"
-          >
+        <div className="free-spin-table-wrap table-responsive">
+          <Table bordered striped responsive hover size="sm" className="dashboard-data-table free-spin-table text-center mt-3">
             <thead className="thead-dark">
               <tr>
                 {tableHeaders.map((h) => (
                   <th
                     key={h.value}
                     onClick={() => h.value !== "" && setOrderBy(h.value)}
-                    style={{
-                      cursor: "pointer",
-                    }}
+                    style={{ cursor: "pointer" }}
                     className={selected(h) ? "border-3 border border-blue" : ""}
                   >
                     {h.labelKey}{" "}
@@ -395,11 +282,13 @@ const FreeSpinGames = () => {
             </thead>
 
             {listLoading ? (
-              <tr>
-                <td colSpan={10} className="text-center">
-                  {/* <InlineLoader /> */}
-                </td>
-              </tr>
+              <tbody>
+                <tr>
+                  <td colSpan={tableHeaders.length} className="text-center">
+                    <InlineLoader />
+                  </td>
+                </tr>
+              </tbody>
             ) : (
               <tbody>
                 {FreeSpingList?.count > 0 ? (
@@ -428,18 +317,10 @@ const FreeSpinGames = () => {
                         <td>{coinType}</td>
                         <td>{freeSpinType}</td>
                         <td>
-                          {startDate
-                            ? getDateTime(
-                                convertToTimeZone(startDate, timezoneOffset)
-                              )
-                            : "-"}
+                          {startDate ? getDateTime(convertToTimeZone(startDate, timezoneOffset)) : "-"}
                         </td>
                         <td>
-                          {endDate
-                            ? getDateTime(
-                                convertToTimeZone(endDate, timezoneOffset)
-                              )
-                            : "-"}
+                          {endDate ? getDateTime(convertToTimeZone(endDate, timezoneOffset)) : "-"}
                         </td>
 
                         <td>
@@ -463,11 +344,7 @@ const FreeSpinGames = () => {
                             size="sm"
                             variant="info"
                             onClick={() =>
-                              navigate(
-                                `${AdminRoutes.viewFreeSpin
-                                  .split(":")
-                                  .shift()}${freeSpinId}`
-                              )
+                              navigate(`${AdminRoutes.viewFreeSpin.split(":").shift()}${freeSpinId}`)
                             }
                             hidden={isHidden({
                               module: { key: "CasinoManagement", value: "R" },
@@ -483,11 +360,7 @@ const FreeSpinGames = () => {
                             size="sm"
                             variant="warning"
                             onClick={() =>
-                              navigate(
-                                `${AdminRoutes.EditFreeSpin.split(
-                                  ":"
-                                ).shift()}${freeSpinId}`
-                              )
+                              navigate(`${AdminRoutes.EditFreeSpin.split(":").shift()}${freeSpinId}`)
                             }
                             disabled={status == 2 || status == 3}
                             hidden={isHidden({
@@ -497,10 +370,7 @@ const FreeSpinGames = () => {
                             <FontAwesomeIcon icon={faEdit} />
                           </Button>
 
-                          <Trigger
-                            message={"Cancel Free Spin"}
-                            id={freeSpinId + "delete"}
-                          />
+                          <Trigger message={"Cancel Free Spin"} id={freeSpinId + "delete"} />
                           <Button
                             id={freeSpinId + "delete"}
                             className="m-1"
@@ -520,7 +390,7 @@ const FreeSpinGames = () => {
                   })
                 ) : (
                   <tr>
-                    <td colSpan={12} className="text-danger text-center">
+                    <td colSpan={tableHeaders.length} className="text-danger text-center">
                       No Data Found
                     </td>
                   </tr>
@@ -528,8 +398,7 @@ const FreeSpinGames = () => {
               </tbody>
             )}
           </Table>
-        }
-        {listLoading && <InlineLoader />}
+        </div>
 
         {/* {show && (
               <ConfirmationModal
@@ -559,7 +428,7 @@ const FreeSpinGames = () => {
           message={`Are you sure you want to cancel this Free Spin?`}
         />
       </Card>
-    </>
+    </div>
   );
 };
 

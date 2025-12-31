@@ -3,7 +3,8 @@ import {
   Row,
   Col,
   Table,
-  Form
+  Form,
+  Card
 
 } from '@themesberg/react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -27,6 +28,7 @@ import useCheckPermission from '../../utils/checkPermission'
 import { AdminRoutes } from '../../routes'
 import { tableHeaders } from './constants'
 import ImageViewer from '../../components/ImageViewer/ImageViewer'
+import './providers.scss'
 
 const CasinoProviders = () => {
   const {
@@ -53,6 +55,7 @@ const CasinoProviders = () => {
     handleStatusShow,
     handleYes,
     loading,
+    isFetching,
     createUpdateLoading,
     status,
     t,
@@ -75,134 +78,112 @@ const CasinoProviders = () => {
   } = useProviderListing()
   const { isHidden } = useCheckPermission()
   return (
-    <>
-      <>
-        <Row>
-          <Col sm={7}>
-            <h3>{t('casinoProvider.title')}</h3>
+    <div className="providers-page dashboard-typography">
+      <Row className="d-flex align-items-center mb-2">
+        <Col sm={7}>
+          <h3 className="providers-page__title">{t('casinoProvider.title')}</h3>
+        </Col>
+
+        <Col className="d-flex justify-content-end gap-2">
+          <Button
+            variant="success"
+            size="sm"
+            className="providers-page__action-btn"
+            hidden={isHidden({ module: { key: 'CasinoManagement', value: 'C' } })}
+            onClick={() => handleShow('Create', null)}
+          >
+            {t('casinoProvider.createButton')}
+          </Button>
+
+          <Button
+            variant="success"
+            size="sm"
+            className="providers-page__action-btn"
+            hidden={isHidden({ module: { key: 'CasinoManagement', value: 'U' } })}
+            onClick={() => navigate(AdminRoutes.ReorderCasinoProviders)}
+          >
+            {t('casinoProvider.reorder')}
+          </Button>
+        </Col>
+      </Row>
+
+      <Card className="p-2 mb-2 providers-page__card">
+        <Row className="dashboard-filters providers-filters g-3 align-items-end">
+          <Col xs={12} md={4}>
+            <Form.Label className="form-label">Aggregators</Form.Label>
+            <Form.Select
+              value={aggregatorsFilter}
+              onChange={(e) => {
+                setPage(1)
+                setAggregatorsFilter(e.target.value)
+              }}
+            >
+              <option value=''>{t('casinoSubCategory.filters.all')}</option>
+              {aggregatorsList?.rows?.map((c) => (
+                <option key={c?.masterGameAggregatorId} value={c?.masterGameAggregatorId}>
+                  {c?.name?.toUpperCase()}
+                </option>
+              ))}
+            </Form.Select>
           </Col>
 
-          <Col>
-            <div className='d-flex justify-content-end'>
-              <Button
-                variant='success'
-                size='sm'
-                hidden={isHidden({ module: { key: 'CasinoManagement', value: 'U' } })}
-                onClick={() => navigate(AdminRoutes.ReorderCasinoProviders)}
-              >
-                {t('casinoProvider.reorder')}
-              </Button>
-            </div>
+          <Col xs={12} md={3}>
+            <Form.Label className="form-label">{t('casinoSubCategory.filters.status')}</Form.Label>
+            <Form.Select
+              onChange={(e) => {
+                setPage(1)
+                setStatusFilter(e.target.value)
+              }}
+              value={statusFilter}
+            >
+              <option value='all'>{t('casinoSubCategory.filters.all')}</option>
+              <option value='true'>{t('casinoSubCategory.filters.active')}</option>
+              <option value='false'>{t('casinoSubCategory.filters.inactive')}</option>
+            </Form.Select>
           </Col>
 
-          {/* <Col sm={5}>
-            <div className='text-right mb-2'>
-              <Button
-                variant='success'
-                className='f-right'
-                size='sm'
-                onClick={() => handleShow('Create', null)}
-                hidden={isHidden({ module: { key: 'CasinoManagement', value: 'C' } })}
-              >
-                {t('casinoProvider.createButton')}
-              </Button>
-            </div>
-          </Col> */}
-        </Row>
-        <Row className='mb-3 w-100 m-auto'>
-          <Col xs='12' lg='auto'>
-            <div className='d-flex justify-content-start align-items-center w-100 mb-2 flex-wrap'>
-              <Form.Label column='sm' style={{ marginBottom: '0', marginRight: '15px' }}>
-                {'Aggregators'}
-              </Form.Label>
-
-              <Form.Select
-                value={aggregatorsFilter}
-                onChange={(e) => {
-                  setPage(1)
-                  setAggregatorsFilter(e.target.value)
-                }}
-                style={{ minWidth: '230px' }}
-              >
-                <option value=''>{t('casinoSubCategory.filters.all')}</option>
-
-                {aggregatorsList && aggregatorsList?.rows?.map((c) => (
-                  <option key={c?.masterGameAggregatorId} value={c?.masterGameAggregatorId}>{c?.name?.toUpperCase()}</option>
-                ))}
-              </Form.Select>
-            </div>
+          <Col xs={12} md={4}>
+            <Form.Label className="form-label">{t('casinoSubCategory.filters.search')}</Form.Label>
+            <Form.Control
+              type='search'
+              value={search}
+              placeholder={t('casinoSubCategory.filters.searchWithNName&Id')}
+              onChange={(event) => {
+                setPage(1)
+                setSearch(event.target.value.replace(/[~`!$%@^&*#=)()><?]+/g, ''))
+              }}
+            />
           </Col>
 
-          <Col xs='12' lg='auto'>
-            <div className='d-flex justify-content-start align-items-center w-100 flex-wrap'>
-              <Form.Label column='sm' style={{ marginBottom: '0', marginRight: '15px' }}>
-                {t('casinoSubCategory.filters.status')}
-              </Form.Label>
-
-              <Form.Select
-                onChange={(e) => {
-                  setPage(1)
-                  setStatusFilter(e.target.value)
-                }}
-                value={statusFilter}
-                style={{ minWidth: '230px' }}
-              >
-                <option value='all'>{t('casinoSubCategory.filters.all')}</option>
-                <option value='true'>{t('casinoSubCategory.filters.active')}</option>
-                <option value='false'>{t('casinoSubCategory.filters.inactive')}</option>
-              </Form.Select>
-            </div>
-          </Col>
-
-          <Col xs='12' lg='auto' className='mt-2 mt-lg-0'>
-            <div className='d-flex justify-content-start align-items-center w-100 flex-wrap'>
-              <Form.Label column='sm' style={{ marginBottom: '0', marginRight: '15px' }}>
-                {t('casinoSubCategory.filters.search')}
-              </Form.Label>
-
-              <Form.Control
-                type='search'
-                value={search}
-                placeholder={t('casinoSubCategory.filters.searchWithNName&Id')}
-                onChange={(event) => {
-                  setPage(1)
-                  setSearch(
-                    event.target.value.replace(/[~`!$%@^&*#=)()><?]+/g, '')
-                  )
-                }}
-                style={{ minWidth: '230px' }}
-              />
-            </div>
-          </Col>
-
-          <Col xs={3} style={{ marginTop: "30px" }}>
+          <Col xs={12} md="auto" className="ms-auto d-flex justify-content-end">
             <Trigger message="Reset Filters" id={"redo"} />
-            <Button id={"redo"} variant="success" onClick={resetFilters}>
+            <Button
+              id={"redo"}
+              variant="success"
+              className="providers-page__reset-btn"
+              onClick={resetFilters}
+            >
               <FontAwesomeIcon icon={faRedoAlt} />
             </Button>
           </Col>
         </Row>
-        <Table bordered striped responsive hover size='sm' className='text-center mt-4'>
-          <thead className='thead-dark'>
-            <tr>
-              {tableHeaders.map((h, idx) => (
-                <th
-                  key={idx}
-                  onClick={() => h.value !== '' && setOrderBy(h.value)}
-                  style={{
-                  cursor: (h.value !== '')
-                   ? 'pointer' : 'default',
-                }}
-                  className={
-                    selected(h)
-                      ? 'border-3 border border-blue'
-                      : ''
-                  }
-                >
-                  {t(h.labelKey)}{' '}
-                  {selected(h) &&
-                    (sort === 'asc'
-                      ? (
+
+        <div className="dashboard-section-divider" />
+
+        <div className="table-responsive providers-table-wrap">
+          <Table hover size="sm" className="dashboard-data-table providers-table text-center">
+            <thead>
+              <tr>
+                {tableHeaders.map((h, idx) => (
+                  <th
+                    key={idx}
+                    onClick={() => h.value !== '' && setOrderBy(h.value)}
+                    style={{ cursor: h.value !== '' ? 'pointer' : 'default' }}
+                    className={selected(h) ? 'border-3 border border-blue' : ''}
+                  >
+                    {t(h.labelKey)}{' '}
+                    {selected(h) &&
+                      (sort === 'asc' ? (
                         <FontAwesomeIcon
                           style={over ? { color: 'red' } : {}}
                           icon={faArrowCircleUp}
@@ -210,8 +191,7 @@ const CasinoProviders = () => {
                           onMouseOver={() => setOver(true)}
                           onMouseLeave={() => setOver(false)}
                         />
-                      )
-                      : (
+                      ) : (
                         <FontAwesomeIcon
                           style={over ? { color: 'red' } : {}}
                           icon={faArrowCircleDown}
@@ -220,146 +200,114 @@ const CasinoProviders = () => {
                           onMouseLeave={() => setOver(false)}
                         />
                       ))}
-                </th>
-              ))}
-            </tr>
-          </thead>
+                  </th>
+                ))}
+              </tr>
+            </thead>
 
-          <tbody>
-            {casinoProvidersData &&
-              casinoProvidersData?.rows?.map(
-                (
-                  {
-                    masterCasinoProviderId,
-                    name,
-                    isActive,
-                    thumbnailUrl,
-                    MasterGameAggregator,freeSpinAllowed,adminEnabledFreespin
-                  },
-                  index
-                ) => {
-                  return (
-                    <tr key={masterCasinoProviderId}>
-                      <td>{masterCasinoProviderId}</td>
-                      <td>
-                        <Trigger message={name} id={masterCasinoProviderId + 'name'} />
-                        <span
-                          id={masterCasinoProviderId + 'name'}
-                          style={{
-                            width: '100px',
-                            cursor: 'pointer'
-                          }}
-                          className='d-inline-block text-truncate'
-                        >
-                          {name}
-                        </span>
-                      </td>
+            <tbody>
+              {loading && !casinoProvidersData?.rows?.length ? (
+                <tr>
+                  <td colSpan={tableHeaders.length} className="text-center">
+                    <InlineLoader />
+                  </td>
+                </tr>
+              ) : (
+                <>
+                  {casinoProvidersData?.rows?.map(
+                    (
+                      {
+                        masterCasinoProviderId,
+                        name,
+                        isActive,
+                        thumbnailUrl,
+                        MasterGameAggregator,
+                        freeSpinAllowed,
+                        adminEnabledFreespin
+                      },
+                      index
+                    ) => (
+                      <tr key={masterCasinoProviderId}>
+                        <td>{masterCasinoProviderId}</td>
+                        <td>
+                          <Trigger message={name} id={masterCasinoProviderId + 'name'} />
+                          <span
+                            id={masterCasinoProviderId + 'name'}
+                            className='d-inline-block text-truncate providers-table__name'
+                            style={{ cursor: 'pointer' }}
+                          >
+                            {name}
+                          </span>
+                        </td>
 
-                      <td>
-                        {thumbnailUrl ? (
-                          <ImageViewer
-                            thumbnailUrl={thumbnailUrl}
-                          />
-                        ) : (
-                          t('noImage')
-                        )}
-                      </td>
+                        <td>
+                          {thumbnailUrl ? <ImageViewer thumbnailUrl={thumbnailUrl} /> : t('noImage')}
+                        </td>
 
-                      <td>
-                        <Trigger message={name} id={masterCasinoProviderId + 'aggregator'} />
-                        <span
-                          id={masterCasinoProviderId + 'aggregator'}
-                          style={{
-                            width: '100px',
-                            cursor: 'pointer'
-                          }}
-                          className='d-inline-block text-truncate'
-                        >
-                          {MasterGameAggregator?.name?.toUpperCase()}
-                        </span>
-                      </td>
+                        <td>
+                          <Trigger message={name} id={masterCasinoProviderId + 'aggregator'} />
+                          <span
+                            id={masterCasinoProviderId + 'aggregator'}
+                            className='d-inline-block text-truncate providers-table__aggregator'
+                            style={{ cursor: 'pointer' }}
+                          >
+                            {MasterGameAggregator?.name?.toUpperCase()}
+                          </span>
+                        </td>
 
-                      <td>
-                        {isActive
-                          ? (
+                        <td>
+                          {isActive ? (
                             <span className='text-success'>{t('casinoProvider.activeStatus')}</span>
-                          )
-                          : (
+                          ) : (
                             <span className='text-danger'>{t('casinoProvider.inActiveStatus')}</span>
                           )}
-                      </td>
-                      <td>
-                        {(!isHidden({ module: { key: 'CasinoManagement', value: 'U' } }) || !isHidden({ module: { key: 'CasinoManagement', value: 'T' } }))
-                          ? (
+                        </td>
+                        <td className="providers-table__actions">
+                          {!isHidden({ module: { key: 'CasinoManagement', value: 'U' } }) ||
+                          !isHidden({ module: { key: 'CasinoManagement', value: 'T' } }) ? (
                             <>
                               <Trigger message='Edit' id={masterCasinoProviderId + 'edit'} />
-
                               <Button
                                 id={masterCasinoProviderId + 'edit'}
                                 className='m-1'
                                 size='sm'
                                 variant='warning'
-                                onClick={() =>
-                                  handleShow(
-                                    'Edit',
-                                    casinoProvidersData?.rows[index]
-                                  )}
+                                onClick={() => handleShow('Edit', casinoProvidersData?.rows[index])}
                                 hidden={isHidden({ module: { key: 'CasinoManagement', value: 'U' } })}
                               >
                                 <FontAwesomeIcon icon={faEdit} />
                               </Button>
 
-                              {!isActive
-                                ? (
-                                  <>
-                                    <Trigger message='Set Status Active' id={masterCasinoProviderId + 'active'} />
-                                    <Button
-                                      id={masterCasinoProviderId + 'active'}
-                                      className='m-1'
-                                      size='sm'
-                                      variant='success'
-                                      onClick={() =>
-                                        handleStatusShow(
-                                          masterCasinoProviderId,
-                                          isActive,freeSpinAllowed
-                                        )}
-                                      hidden={isHidden({ module: { key: 'CasinoManagement', value: 'T' } })}
-                                    >
-                                      <FontAwesomeIcon icon={faCheckSquare} />
-                                    </Button>
-                                  </>
-                                )
-                                : (
-                                  <>
-                                    <Trigger message='Set Status In-Active' id={masterCasinoProviderId + 'inactive'} />
-                                    <Button
-                                      id={masterCasinoProviderId + 'inactive'}
-                                      className='m-1'
-                                      size='sm'
-                                      variant='danger'
-                                      onClick={() =>
-                                        handleStatusShow(
-                                          masterCasinoProviderId,
-                                          isActive,freeSpinAllowed
-                                        )}
-                                      hidden={isHidden({ module: { key: 'CasinoManagement', value: 'T' } })}
-                                    >
-                                      <FontAwesomeIcon icon={faWindowClose} />
-                                    </Button>
-                                  </>
-                                )}
+                              {!isActive ? (
+                                <>
+                                  <Trigger message='Set Status Active' id={masterCasinoProviderId + 'active'} />
+                                  <Button
+                                    id={masterCasinoProviderId + 'active'}
+                                    className='m-1'
+                                    size='sm'
+                                    variant='success'
+                                    onClick={() => handleStatusShow(masterCasinoProviderId, isActive, freeSpinAllowed)}
+                                    hidden={isHidden({ module: { key: 'CasinoManagement', value: 'T' } })}
+                                  >
+                                    <FontAwesomeIcon icon={faCheckSquare} />
+                                  </Button>
+                                </>
+                              ) : (
+                                <>
+                                  <Trigger message='Set Status In-Active' id={masterCasinoProviderId + 'inactive'} />
+                                  <Button
+                                    id={masterCasinoProviderId + 'inactive'}
+                                    className='m-1'
+                                    size='sm'
+                                    variant='danger'
+                                    onClick={() => handleStatusShow(masterCasinoProviderId, isActive, freeSpinAllowed)}
+                                    hidden={isHidden({ module: { key: 'CasinoManagement', value: 'T' } })}
+                                  >
+                                    <FontAwesomeIcon icon={faWindowClose} />
+                                  </Button>
+                                </>
+                              )}
 
-                              {/* <Trigger message='View Blocked Countries' id={masterCasinoProviderId + 'coun'} />
-                              <Button
-                                id={masterCasinoProviderId + 'coun'}
-                                className='m-1'
-                                size='sm'
-                                variant='secondary'
-                                hidden={isHidden({ module: { key: 'CasinoManagement', value: 'U' } })}
-                                onClick={() => navigate(`${AdminRoutes.RestrictedProviderCountries.split(':').shift()}${masterCasinoProviderId}`)}
-                              >
-                                <FontAwesomeIcon icon={faBan} />
-                              </Button> */}
                               <Trigger message={'Hide'} id={masterCasinoProviderId + 'hide'} />
                               <Button
                                 id={masterCasinoProviderId + 'hide'}
@@ -371,96 +319,77 @@ const CasinoProviders = () => {
                               >
                                 <FontAwesomeIcon icon={faEyeSlash} />
                               </Button>
-                                {freeSpinAllowed &&
-                          (!adminEnabledFreespin ? (
-                            <>
-                              <Trigger
-                                message="Enable Free Spin"
-                                id={masterCasinoProviderId + "enable"}
-                              />
-                              <Button
-                                id={masterCasinoProviderId + "enable"}
-                                className="m-1"
-                                size="sm"
-                                variant="success"
-                                onClick={() =>
-                                  handleFreeSpin(
-                                    masterCasinoProviderId,
-                                    adminEnabledFreespin
-                                  )
-                                }
-                                hidden={isHidden({
-                                  module: {
-                                    key: "CasinoManagement",
-                                    value: "T",
-                                  },
-                                })}
-                              >
-                                <FontAwesomeIcon icon={faFan} />
-                              </Button>
+
+                              {freeSpinAllowed &&
+                                (!adminEnabledFreespin ? (
+                                  <>
+                                    <Trigger message="Enable Free Spin" id={masterCasinoProviderId + "enable"} />
+                                    <Button
+                                      id={masterCasinoProviderId + "enable"}
+                                      className="m-1"
+                                      size="sm"
+                                      variant="success"
+                                      onClick={() => handleFreeSpin(masterCasinoProviderId, adminEnabledFreespin)}
+                                      hidden={isHidden({ module: { key: "CasinoManagement", value: "T" } })}
+                                    >
+                                      <FontAwesomeIcon icon={faFan} />
+                                    </Button>
+                                  </>
+                                ) : (
+                                  <>
+                                    <Trigger message="Disable FreeSpin" id={masterCasinoProviderId + "disable"} />
+                                    <Button
+                                      id={masterCasinoProviderId + "disable"}
+                                      className="m-1"
+                                      size="sm"
+                                      variant="danger"
+                                      onClick={() => handleFreeSpin(masterCasinoProviderId, adminEnabledFreespin)}
+                                      hidden={isHidden({ module: { key: "CasinoManagement", value: "T" } })}
+                                    >
+                                      <FontAwesomeIcon icon={faFan} />
+                                    </Button>
+                                  </>
+                                ))}
                             </>
                           ) : (
-                            <>
-                              <Trigger
-                                message="Disable FreeSpin"
-                                id={masterCasinoProviderId + "disable"}
-                              />
-                              <Button
-                                id={masterCasinoProviderId + "disable"}
-                                className="m-1"
-                                size="sm"
-                                variant="danger"
-                                onClick={() =>
-                                  handleFreeSpin(
-                                    masterCasinoProviderId,
-                                    adminEnabledFreespin
-                                  )
-                                }
-                                hidden={isHidden({
-                                  module: {
-                                    key: "CasinoManagement",
-                                    value: "T",
-                                  },
-                                })}
-                              >
-                                <FontAwesomeIcon icon={faFan} />
-                              </Button>
-                            </>
-                          ))}
-                            </>)
-                          : 'NA'}
+                            'NA'
+                          )}
+                        </td>
+                      </tr>
+                    )
+                  )}
+
+                  {casinoProvidersData?.count === 0 && (
+                    <tr>
+                      <td colSpan={tableHeaders.length} className="text-danger text-center">
+                        {t('casinoProvider.noDataFound')}
                       </td>
                     </tr>
-                  )
-                }
-              )}
+                  )}
 
-            {
-              casinoProvidersData?.count === 0 &&
-              (
-                <tr>
-                  <td
-                    colSpan={5}
-                    className='text-danger text-center'
-                  >
-                    {t('casinoProvider.noDataFound')}
-                  </td>
-                </tr>
-              )
-            }
-          </tbody>
-        </Table>
-        {loading && <InlineLoader />}
-        {casinoProvidersData?.count !== 0 &&
-          (
-            <PaginationComponent
-              page={casinoProvidersData?.count < page ? setPage(1) : page}
-              totalPages={totalPages}
-              setPage={setPage}
-              limit={limit}
-              setLimit={setLimit}
-            />
-          )}
+                  {isFetching && (
+                    <tr>
+                      <td colSpan={tableHeaders.length} className="text-center">
+                        <InlineLoader />
+                      </td>
+                    </tr>
+                  )}
+                </>
+              )}
+            </tbody>
+          </Table>
+        </div>
+      </Card>
+
+      {casinoProvidersData?.count !== 0 && !loading && (
+        <PaginationComponent
+          page={casinoProvidersData?.count < page ? setPage(1) : page}
+          totalPages={totalPages}
+          setPage={setPage}
+          limit={limit}
+          setLimit={setLimit}
+        />
+      )}
 
         <ConfirmationModal
           setShow={setStatusShow}
@@ -480,7 +409,6 @@ const CasinoProviders = () => {
               loading={hideLoading}
               hideMsg="Warning: Hiding this provider will make all of its games invisible to all users. Do you still want to proceed?"
             />)}
-      </>
        <ConfirmationModal
               setShow={setFreeSpinStatusShow}
               show={freeSpinStatusShow}
@@ -499,7 +427,7 @@ const CasinoProviders = () => {
         createProvider={createProvider}
         updateProvider={updateProvider}
       />
-    </>
+    </div>
   )
 }
 

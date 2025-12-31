@@ -147,41 +147,41 @@ const AmoeDashboard = ({ _amoeData }) => {
         </div>
       </div>
 
-      <Row style={{ marginTop: "50px" }}>
-        <Col sm={6} lg={2} style={{ marginBottom: "1rem" }}>
-          <label>
-            Start Date:
-            <Datetime
-              value={startDate}
-              onChange={handleStartDateChange}
-              timeFormat={false}
-              inputProps={{ readOnly: true }}
-            />
-          </label>
-          {startDateError && (
-            <div style={{ color: "red", marginTop: "0.5rem" }}>
-              {startDateError}
-            </div>
-          )}
-        </Col>
+      <Card className="dashboard-filters amoe-filters-card mt-4">
+        <Card.Body>
+          <Row className="g-3">
+            <Col xs={12} md={6} lg={3}>
+              <label>
+                Start Date:
+                <Datetime
+                  value={startDate}
+                  onChange={handleStartDateChange}
+                  timeFormat={false}
+                  inputProps={{ readOnly: true }}
+                />
+              </label>
+              {startDateError && (
+                <div className="text-danger mt-1">{startDateError}</div>
+              )}
+            </Col>
 
-        <Col sm={6} lg={2}>
-          <label>
-            End Date:
-            <Datetime
-              value={endDate}
-              onChange={handleEndDateChange}
-              timeFormat={false}
-              inputProps={{ readOnly: true }}
-            />
-          </label>
-          {endDateError && (
-            <div style={{ color: "red", marginTop: "0.5rem" }}>
-              {endDateError}
-            </div>
-          )}
-        </Col>
-      </Row>
+            <Col xs={12} md={6} lg={3}>
+              <label>
+                End Date:
+                <Datetime
+                  value={endDate}
+                  onChange={handleEndDateChange}
+                  timeFormat={false}
+                  inputProps={{ readOnly: true }}
+                />
+              </label>
+              {endDateError && (
+                <div className="text-danger mt-1">{endDateError}</div>
+              )}
+            </Col>
+          </Row>
+        </Card.Body>
+      </Card>
 
       <Row className="mt-0">
         <Col md={6} sm={6} className="mt-5">

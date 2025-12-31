@@ -9,6 +9,7 @@ import {
   Spinner,
   InputGroup,
   Accordion,
+  Card,
 } from "@themesberg/react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import {
@@ -32,6 +33,7 @@ import { useMaintenanceModeAlertTime } from "../../reactQuery/hooks/customMutati
 import { toast } from "../../components/Toast";
 import useCheckPermission from "../../utils/checkPermission";
 import { InlineLoader } from "../../components/Preloader";
+import "./maintenanceMode.scss";
 const MaintenanceMode = () => {
   const navigate = useNavigate();
   const {
@@ -148,254 +150,200 @@ const MaintenanceMode = () => {
   };
   return (
     <>
-      <Row>
-        <Col className="col-10">
-          <h3>Maintenance Mode</h3>
-        </Col>
-        <Col className="col-2 text-end ">
-          <Button
-            variant="success"
-            className="f-right"
-            size="sm"
-            style={{ height: "40px", width: "100px" }}
-            onClick={() => navigate(AdminRoutes.CreateMaintenanceMode)}
-            hidden={isHidden({
-              module: { key: "MaintenanceMode", value: "C" },
-            })}
-          >
-            Create
-          </Button>
-        </Col>
-      </Row>
-      <Accordion defaultActiveKey="1">
-        <Accordion.Item eventKey="0">
-          <Accordion.Header onClick={handleAccordionToggle}>
-            Add Ribbon
-          </Accordion.Header>
-          {isAccordionOpen && (
-            <Accordion.Body>
-              {ribbonloading ? (
-                <div className="text-center">
-                  <Spinner animation="border" variant="primary" />
-                </div>
-              ) : (
-                <Formik
-                  enableReinitialize
-                  initialValues={formValues}
-                  // validationSchema={validationSchema}
-                  onSubmit={handleSubmit}
-                >
-                  {({
-                    values,
-                    handleChange,
-                    setFieldValue,
-                    handleBlur,
-                    handleSubmit,
-                  }) => (
-                    <Form>
-                      <div>
-                        <Row>
-                          <Col>
-                            <BForm.Label>Start Message</BForm.Label>
-                            <BForm.Control
-                              type="text"
-                              name="startMessage"
-                              placeholder="Enter Start Message"
-                              value={values.startMessage}
-                              onChange={handleChange}
-                              onBlur={handleBlur}
-                            />
-                            <ErrorMessage
-                              name="startMessage"
-                              component="small"
-                              className="text-danger"
-                            />
-                          </Col>
+      <div className="maintenance-mode-page dashboard-typography">
+        <Row className="maintenance-mode-page__header align-items-center mb-2">
+          <Col xs={12} md={8}>
+            <h3 className="maintenance-mode-page__title">Maintenance Mode</h3>
+            <div className="maintenance-mode-page__subtitle">
+              Schedule maintenance windows and configure the pre-maintenance ribbon message.
+            </div>
+          </Col>
+          <Col xs={12} md={4} className="maintenance-mode-page__actions">
+            <Button
+              variant="success"
+              className="maintenance-mode-page__action-btn"
+              onClick={() => navigate(AdminRoutes.CreateMaintenanceMode)}
+              hidden={isHidden({ module: { key: "MaintenanceMode", value: "C" } })}
+            >
+              Create
+            </Button>
+          </Col>
+        </Row>
 
-                          <Col>
-                            <BForm.Label>Timer(Minutes)</BForm.Label>
-                            <InputGroup>
+        <Card className="maintenance-mode-page__card p-3 mb-3">
+          <Accordion defaultActiveKey="1" className="maintenance-mode-page__accordion">
+            <Accordion.Item eventKey="0">
+              <Accordion.Header onClick={handleAccordionToggle}>
+                Add Ribbon
+              </Accordion.Header>
+              {isAccordionOpen && (
+                <Accordion.Body>
+                  {ribbonloading ? (
+                    <div className="text-center">
+                      <Spinner animation="border" variant="primary" />
+                    </div>
+                  ) : (
+                    <Formik
+                      enableReinitialize
+                      initialValues={formValues}
+                      onSubmit={handleSubmit}
+                    >
+                      {({ values, handleChange, setFieldValue, handleBlur, handleSubmit }) => (
+                        <Form>
+                          <Row className="g-3">
+                            <Col xs={12} lg={4}>
+                              <BForm.Label>Start Message</BForm.Label>
                               <BForm.Control
-                                type="number"
-                                name="time"
-                                autoComplete="off"
-                                value={values.time}
+                                className="maintenance-mode-page__input"
+                                type="text"
+                                name="startMessage"
+                                placeholder="Enter Start Message"
+                                value={values.startMessage}
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                onKeyDown={(evt) =>
-                                  ["e", "E", "+", "-", "."].includes(evt.key) &&
-                                  evt.preventDefault()
-                                }
                               />
-                            </InputGroup>
-                            <ErrorMessage
-                              name="time"
-                              component="small"
-                              className="text-danger"
-                            />
-                          </Col>
+                              <ErrorMessage
+                                name="startMessage"
+                                component="small"
+                                className="text-danger"
+                              />
+                            </Col>
 
-                          <Col>
-                            <BForm.Label>End Message</BForm.Label>
-                            <BForm.Control
-                              type="text"
-                              name="endMessage"
-                              placeholder="Enter End Message"
-                              value={values.endMessage}
-                              onChange={handleChange}
-                              onBlur={handleBlur}
-                            />
-                            <ErrorMessage
-                              name="endMessage"
-                              component="small"
-                              className="text-danger"
-                            />
-                          </Col>
-                        </Row>
+                            <Col xs={12} lg={4}>
+                              <BForm.Label>Timer (Minutes)</BForm.Label>
+                              <InputGroup>
+                                <BForm.Control
+                                  className="maintenance-mode-page__input"
+                                  type="number"
+                                  name="time"
+                                  autoComplete="off"
+                                  value={values.time}
+                                  onChange={handleChange}
+                                  onBlur={handleBlur}
+                                  onKeyDown={(evt) =>
+                                    ["e", "E", "+", "-", "."].includes(evt.key) &&
+                                    evt.preventDefault()
+                                  }
+                                />
+                              </InputGroup>
+                              <ErrorMessage
+                                name="time"
+                                component="small"
+                                className="text-danger"
+                              />
+                            </Col>
 
-                        <Row className="mt-2">
-                          <Col>
-                            <div className="col-12 col-lg-12">
-                              <div
-                                className="d-flex align-items-center rounded p-2 justify-content-between"
-                                style={{ border: "0.0625rem solid #d1d7e0" }}
-                              >
+                            <Col xs={12} lg={4}>
+                              <BForm.Label>End Message</BForm.Label>
+                              <BForm.Control
+                                className="maintenance-mode-page__input"
+                                type="text"
+                                name="endMessage"
+                                placeholder="Enter End Message"
+                                value={values.endMessage}
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                              />
+                              <ErrorMessage
+                                name="endMessage"
+                                component="small"
+                                className="text-danger"
+                              />
+                            </Col>
+                          </Row>
+
+                          <Row className="mt-3 g-3 align-items-center">
+                            <Col xs={12} lg={6}>
+                              <div className="maintenance-mode-page__toggle-row">
                                 <p className="mb-0">Show Cancel Button</p>
                                 <BForm.Check
                                   name="isCancelActive"
                                   checked={values.isCancelActive}
                                   onChange={(e) =>
-                                    setFieldValue(
-                                      "isCancelActive",
-                                      e.target.checked
-                                    )
+                                    setFieldValue("isCancelActive", e.target.checked)
                                   }
                                 />
                               </div>
-                            </div>
-                          </Col>
-                          <Col></Col>
-                          <Col className="d-flex justify-content-end gap-2">
-                            <Button
-                              variant="warning"
-                              style={{ height: "40px", width: "100px" }}
-                              onClick={handleRemoveRibbon}
-                              disabled={
-                                deleteRibbonLoading || ribbondata === null
-                              } // Prevent multiple clicks
-                              hidden={isHidden({
-                                module: { key: "MaintenanceMode", value: "D" },
-                              })}
-                            >
-                              {deleteRibbonLoading ? "Removing..." : "Remove"}
-                            </Button>
+                            </Col>
+                            <Col xs={12} lg={6} className="d-flex justify-content-end gap-2">
+                              <Button
+                                variant="warning"
+                                className="maintenance-mode-page__btn"
+                                onClick={handleRemoveRibbon}
+                                disabled={deleteRibbonLoading || ribbondata === null}
+                                hidden={isHidden({ module: { key: "MaintenanceMode", value: "D" } })}
+                              >
+                                {deleteRibbonLoading ? "Removing..." : "Remove"}
+                              </Button>
 
-                            <Button
-                              variant="success"
-                              onClick={handleSubmit}
-                              disabled={
-                                !(values?.startMessage || values?.endMessage) ||
-                                ribbondata
-                              }
-                              style={{ height: "40px", width: "120px" }}
-                              hidden={isHidden({
-                                module: { key: "MaintenanceMode", value: "C" },
-                              })}
-                            >
-                              Add Ribbon
-                            </Button>
-                          </Col>
-                        </Row>
-                        <Row className="mt-4 d-flex justify-content-start">
-                          <Col>
-                            <h5>Ribbon Preview:</h5>
-                          </Col>
-                        </Row>
+                              <Button
+                                variant="success"
+                                className="maintenance-mode-page__btn"
+                                onClick={handleSubmit}
+                                disabled={!(values?.startMessage || values?.endMessage) || ribbondata}
+                                hidden={isHidden({ module: { key: "MaintenanceMode", value: "C" } })}
+                              >
+                                Add Ribbon
+                              </Button>
+                            </Col>
+                          </Row>
 
-                        <pre
-                          style={{
-                            backgroundColor: "#f4f4f4",
-                            padding: "10px",
-                            borderRadius: "5px",
-                          }}
-                        >
-                          <p
-                            style={{
-                              fontFamily: "monospace",
-                              fontSize: "16px",
-                              color: "#333",
-                              margin: 0,
-                            }}
-                          >
-                            {values.startMessage?.trim() ||
-                            values.time > 0 ||
-                            values.endMessage?.trim() ? (
-                              <>
-                                {values.startMessage?.trim()}{" "}
-                                {values.time > 0 ? `${values.time} ` : ""}
-                                {values.endMessage?.trim()}
-                              </>
-                            ) : (
-                              "No ribbon data available"
-                            )}
-                          </p>
-                        </pre>
-                      </div>
-                    </Form>
+                          <Row className="mt-4">
+                            <Col xs={12}>
+                              <h5 className="maintenance-mode-page__preview-title">Ribbon Preview</h5>
+                              <pre className="maintenance-mode-page__preview">
+                                <p className="maintenance-mode-page__preview-text">
+                                  {values.startMessage?.trim() ||
+                                  values.time > 0 ||
+                                  values.endMessage?.trim() ? (
+                                    <>
+                                      {values.startMessage?.trim()}{" "}
+                                      {values.time > 0 ? `${values.time} ` : ""}
+                                      {values.endMessage?.trim()}
+                                    </>
+                                  ) : (
+                                    "No ribbon data available"
+                                  )}
+                                </p>
+                              </pre>
+                            </Col>
+                          </Row>
+                        </Form>
+                      )}
+                    </Formik>
                   )}
-                </Formik>
+                </Accordion.Body>
               )}
-            </Accordion.Body>
-          )}
-        </Accordion.Item>
-      </Accordion>
+            </Accordion.Item>
+          </Accordion>
+        </Card>
 
-      {
-        <Table
-          bordered
-          striped
-          responsive
-          hover
-          size="sm"
-          className="text-center mt-4"
-        >
-          <thead className="thead-dark">
-            <tr>
-              <th> ID</th>
-              <th>Start Time</th>
-
-              <th>End Time</th>
-              <th>Status</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-
-          {loading ? (
-            <tr>
-              <td colSpan={10} className="text-center">
-                <InlineLoader />
-              </td>
-            </tr>
-          ) : (
+        <div className="maintenance-mode-page__table-wrap table-responsive dashboard-table">
+          <Table hover size="sm" className="dashboard-data-table maintenance-mode-table text-center mt-2">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Start Time</th>
+                <th>End Time</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
             <tbody>
-              {MaintenanceModeList?.count > 0 ? (
+              {loading ? (
+                <tr>
+                  <td colSpan={5} className="text-center">
+                    <InlineLoader />
+                  </td>
+                </tr>
+              ) : MaintenanceModeList?.count > 0 ? (
                 MaintenanceModeList?.rows?.map((data) => {
-                  const { maintenanceModeId, startTime, endTime, isActive } =
-                    data;
+                  const { maintenanceModeId, startTime, endTime, isActive } = data;
                   return (
                     <tr key={maintenanceModeId}>
                       <td>{maintenanceModeId}</td>
-
-                      <td>
-                        {getDateTime(
-                          convertToTimeZone(startTime, timezoneOffset)
-                        )}
-                      </td>
-                      <td>
-                        {getDateTime(
-                          convertToTimeZone(endTime, timezoneOffset)
-                        )}
-                      </td>
+                      <td>{getDateTime(convertToTimeZone(startTime, timezoneOffset))}</td>
+                      <td>{getDateTime(convertToTimeZone(endTime, timezoneOffset))}</td>
                       <td>
                         {isActive ? (
                           <span className="text-success">Active</span>
@@ -404,33 +352,21 @@ const MaintenanceMode = () => {
                         )}
                       </td>
                       <td>
-                        <Trigger
-                          message="Edit"
-                          id={`${maintenanceModeId}_Edit`}
-                        />
+                        <Trigger message="Edit" id={`${maintenanceModeId}_Edit`} />
                         <Button
                           id={`${maintenanceModeId}_Edit`}
                           className="m-1"
                           size="sm"
                           variant="warning"
                           onClick={() =>
-                            navigate(
-                              `${AdminRoutes.EditMaintenanceMode.split(
-                                ":"
-                              ).shift()}${maintenanceModeId}`
-                            )
+                            navigate(`${AdminRoutes.EditMaintenanceMode.split(":").shift()}${maintenanceModeId}`)
                           }
-                          hidden={isHidden({
-                            module: { key: "MaintenanceMode", value: "U" },
-                          })}
+                          hidden={isHidden({ module: { key: "MaintenanceMode", value: "U" } })}
                         >
                           <FontAwesomeIcon icon={faEdit} />
                         </Button>
 
-                        <Trigger
-                          message={"Delete"}
-                          id={maintenanceModeId + "delete"}
-                        />
+                        <Trigger message={"Delete"} id={maintenanceModeId + "delete"} />
                         <Button
                           id={maintenanceModeId + "delete"}
                           className="m-1"
@@ -438,51 +374,35 @@ const MaintenanceMode = () => {
                           size="sm"
                           variant="danger"
                           onClick={() => handleDeleteModal(maintenanceModeId)}
-                          hidden={isHidden({
-                            module: { key: "MaintenanceMode", value: "D" },
-                          })}
+                          hidden={isHidden({ module: { key: "MaintenanceMode", value: "D" } })}
                         >
                           <FontAwesomeIcon icon={faTrash} />
                         </Button>
 
                         {!isActive ? (
                           <>
-                            <Trigger
-                              message="Set Status Active"
-                              id={maintenanceModeId + "active"}
-                            />
+                            <Trigger message="Set Status Active" id={maintenanceModeId + "active"} />
                             <Button
                               id={maintenanceModeId + "active"}
                               className="m-1"
                               size="sm"
                               variant="success"
-                              onClick={() =>
-                                handleShow(maintenanceModeId, isActive)
-                              }
-                              hidden={isHidden({
-                                module: { key: "MaintenanceMode", value: "T" },
-                              })}
+                              onClick={() => handleShow(maintenanceModeId, isActive)}
+                              hidden={isHidden({ module: { key: "MaintenanceMode", value: "T" } })}
                             >
                               <FontAwesomeIcon icon={faCheckSquare} />
                             </Button>
                           </>
                         ) : (
                           <>
-                            <Trigger
-                              message="Set Status In-Active"
-                              id={maintenanceModeId + "inactive"}
-                            />
+                            <Trigger message="Set Status In-Active" id={maintenanceModeId + "inactive"} />
                             <Button
                               id={maintenanceModeId + "inactive"}
                               className="m-1"
                               size="sm"
                               variant="danger"
-                              onClick={() =>
-                                handleShow(maintenanceModeId, isActive)
-                              }
-                              hidden={isHidden({
-                                module: { key: "MaintenanceMode", value: "T" },
-                              })}
+                              onClick={() => handleShow(maintenanceModeId, isActive)}
+                              hidden={isHidden({ module: { key: "MaintenanceMode", value: "T" } })}
                             >
                               <FontAwesomeIcon icon={faWindowClose} />
                             </Button>
@@ -494,15 +414,14 @@ const MaintenanceMode = () => {
                 })
               ) : (
                 <tr>
-                  <td colSpan={6} className="text-danger text-center">
-                    No Data Found
+                  <td colSpan={5} className="text-center">
+                    <span className="maintenance-mode-page__empty">No Data Found</span>
                   </td>
                 </tr>
               )}
             </tbody>
-          )}
-        </Table>
-      }
+          </Table>
+        </div>
 
       {show && (
         <ConfirmationModal
@@ -530,6 +449,7 @@ const MaintenanceMode = () => {
           loading={deleteLoading}
         />
       )}
+      </div>
     </>
   );
 };

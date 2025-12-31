@@ -204,6 +204,7 @@ const handleStatusShow = (id, currentStatus) => {
     over,
     setOver,
     setOrderBy,
+    orderBy,
     bannerId,
     setBannerId,
     pageRoute,

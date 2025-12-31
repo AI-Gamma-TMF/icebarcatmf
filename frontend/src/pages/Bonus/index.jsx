@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import useCheckPermission from "../../utils/checkPermission";
-import { Button, Form, Row, Col, Table } from "@themesberg/react-bootstrap";
+import { Button, Form, Row, Col, Table, Card } from "@themesberg/react-bootstrap";
 import { AdminRoutes } from "../../routes";
 import useBonusListing from "./hooks/useBonusListing";
-import Preloader, { InlineLoader } from "../../components/Preloader";
+import { InlineLoader } from "../../components/Preloader";
 import { formatDateMDY } from "../../utils/dateFormatter";
 import Trigger from "../../components/OverlayTrigger";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -26,6 +26,7 @@ import {
   formatAmountWithCommas,
   getFormattedTimeZoneOffset,
 } from "../../utils/helper";
+import "./bonusListing.scss";
 
 const BonusListing = () => {
   const { isHidden } = useCheckPermission();
@@ -72,230 +73,211 @@ const BonusListing = () => {
     timeZone != null
       ? timeZones.find((x) => x.code === timeZone).value
       : getFormattedTimeZoneOffset();
+  const tableHeaders = [
+    t("headers.id"),
+    t("headers.name"),
+    t("headers.userCount"),
+    t("headers.validFrom"),
+    t("headers.status"),
+    t("headers.action"),
+  ];
+
   return (
-    <>
-      <Row>
-        <Col xs="9">
-          <h3>{t("title")}</h3>
-        </Col>
-      </Row>
-      <Row className="mt-2">
-        <Col xs="12" sm="6" lg="3">
-          <Form.Label>{t("filter.search")}</Form.Label>
-
-          <Form.Control
-            type="search"
-            value={search}
-            placeholder={t("filter.searchPlace")}
-            onChange={(event) => {
-              setPage(1);
-              setSearch(event.target.value.replace(/[~`!$%^&*#=)()><?]+/g, ""));
-            }}
-          />
-        </Col>
-        <Col xs="12" sm="6" lg="3">
-          <Form.Label>{t("filter.status")}</Form.Label>
-
-          <Form.Select
-            value={active}
-            onChange={(event) => {
-              setPage(1);
-              setActive(event.target.value.replace(/[~`!$%^&*#=)()><?]+/g, ""));
-            }}
+    <div className="dashboard-typography bonus-page">
+      <div className="d-flex justify-content-between align-items-center mb-4">
+        <div>
+          <h3 className="bonus-page__title">{t("title")}</h3>
+          <p className="bonus-page__subtitle">Manage bonuses, status, and details</p>
+        </div>
+        <div className="d-flex justify-content-end gap-2">
+          <Button
+            variant="primary"
+            size="sm"
+            className="bonus-page__create-btn"
+            onClick={() => navigate(AdminRoutes.BonusCreate)}
+            hidden={isHidden({ module: { key: "Bonus", value: "C" } })}
           >
-            <option key="" value="">
-              {t("filter.all")}
-            </option>
-            <option key="true" value>
-              {t("filter.active")}
-            </option>
-            <option key="false" value={false}>
-              {t("filter.inActive")}
-            </option>
-          </Form.Select>
-        </Col>
-      </Row>
-      <Table
-        bordered
-        striped
-        responsive
-        hover
-        size="sm"
-        className="text-center mt-4"
-      >
-        <thead className="thead-dark">
-          <tr>
-            {[
-              t("headers.id"),
-              t("headers.name"),
-              t("headers.userCount"),
-              t("headers.validFrom"),
-              t("headers.status"),
-              t("headers.action"),
-            ].map((h) => (
-              <th key={h}>{h}</th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {Boolean(bonusData) &&
-            bonusData?.rows?.map((bonus) => {
-              const {
-                bonusId,
-                bonusName,
-                bonusType,
-                day,
-                validFrom,
-                claimedCount,
-                userCount,
-                isActive,
-              } = bonus;
-              return (
-                bonusName !== "Postal Code Bonus" && (
-                  <tr key={bonusId}>
-                    <td>{bonusId}</td>
-                    <td>{bonusName}</td>
-                    {/* <td>{(bonusType).toUpperCase()}</td> */}
-                    {/* <td>{day || '-'}</td> */}
-                    <td>{formatAmountWithCommas(claimedCount) || "-"}</td>
-                    <td>
-                      {validFrom
-                        ? formatDateMDY(
-                            convertToTimeZone(validFrom, timezoneOffset)
-                          )
-                        : "-"}
-                    </td>
-                    {/* <td>{userCount}</td> */}
-                    <td>
-                      {isActive ? (
-                        <span className="text-success">
-                          {t("filter.active")}
-                        </span>
-                      ) : (
-                        <span className="text-danger">
-                          {t("filter.inActive")}
-                        </span>
-                      )}
-                    </td>
-                    <td>
-                      {bonusName === "Scratch Card Bonus" ? (
-                        <> </>
-                      ) : (
-                        <>
-                          <Trigger
-                            message={t("message.edit")}
-                            id={bonusId + "edit"}
-                          />
-                          <Button
-                            id={bonusId + "edit"}
-                            className="m-1"
-                            size="sm"
-                            variant="warning"
-                            onClick={() =>
-                              navigate(
-                                `${AdminRoutes.BonusEdit.split(
-                                  ":"
-                                ).shift()}${bonusId}`
-                              )
-                            }
-                            hidden={isHidden({
-                              module: { key: "Bonus", value: "U" },
-                            })}
-                          >
-                            <FontAwesomeIcon icon={faEdit} />
-                          </Button>{" "}
-                        </>
-                      )}
-                      <Trigger
-                        message={t("message.view")}
-                        id={bonusId + "view"}
-                      />
-                      <Button
-                        id={bonusId + "view"}
-                        className="m-1"
-                        size="sm"
-                        variant="info"
-                        onClick={() => {
-                          if (bonusName === "Scratch Card Bonus") {
-                            navigate(AdminRoutes.ScratchCard);
-                          } else {
-                            navigate(
-                              `${AdminRoutes.BonusDetails.split(
-                                ":"
-                              ).shift()}${bonusId}`
-                            );
+            Create
+          </Button>
+        </div>
+      </div>
+
+      <Card className="dashboard-filters mb-4">
+        <Card.Body>
+          <Row className="g-3">
+            <Col xs="12" sm="6" lg="4">
+              <Form.Label>{t("filter.search")}</Form.Label>
+              <Form.Control
+                type="search"
+                value={search}
+                placeholder={t("filter.searchPlace")}
+                onChange={(event) => {
+                  setPage(1);
+                  setSearch(event.target.value.replace(/[~`!$%^&*#=)()><?]+/g, ""));
+                }}
+              />
+            </Col>
+            <Col xs="12" sm="6" lg="3">
+              <Form.Label>{t("filter.status")}</Form.Label>
+              <Form.Select
+                value={active}
+                onChange={(event) => {
+                  setPage(1);
+                  setActive(event.target.value.replace(/[~`!$%^&*#=)()><?]+/g, ""));
+                }}
+              >
+                <option key="" value="">
+                  {t("filter.all")}
+                </option>
+                <option key="true" value>
+                  {t("filter.active")}
+                </option>
+                <option key="false" value={false}>
+                  {t("filter.inActive")}
+                </option>
+              </Form.Select>
+            </Col>
+          </Row>
+        </Card.Body>
+      </Card>
+
+      <div className="dashboard-data-table">
+        <div className="bonus-table-wrap">
+          <Table bordered hover responsive size="sm" className="mb-0 text-center">
+            <thead>
+              <tr>
+                {tableHeaders.map((h) => (
+                  <th key={h}>{h}</th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {loading ? (
+                <tr>
+                  <td colSpan={tableHeaders.length} className="text-center py-4">
+                    <InlineLoader />
+                  </td>
+                </tr>
+              ) : Boolean(bonusData) && bonusData?.rows?.length ? (
+                bonusData.rows.map((bonus) => {
+                  const {
+                    bonusId,
+                    bonusName,
+                    validFrom,
+                    claimedCount,
+                    isActive,
+                  } = bonus;
+
+                  if (bonusName === "Postal Code Bonus") return null;
+
+                  return (
+                    <tr key={bonusId}>
+                      <td>{bonusId}</td>
+                      <td>{bonusName}</td>
+                      <td>{formatAmountWithCommas(claimedCount) || "-"}</td>
+                      <td>
+                        {validFrom
+                          ? formatDateMDY(convertToTimeZone(validFrom, timezoneOffset))
+                          : "-"}
+                      </td>
+                      <td>
+                        <span
+                          className={
+                            isActive
+                              ? "bonus-pill bonus-pill--active"
+                              : "bonus-pill bonus-pill--inactive"
                           }
-                        }}
-                        hidden={isHidden({
-                          module: { key: "Bonus", value: "R" },
-                        })}
-                      >
-                        <FontAwesomeIcon icon={faEye} />
-                      </Button>
-                      {bonusName === "Scratch Card Bonus" ? (
-                        <> </>
-                      ) : (
-                        <>
-                          {!isActive ? (
+                        >
+                          {isActive ? t("filter.active") : t("filter.inActive")}
+                        </span>
+                      </td>
+                      <td>
+                        <div className="bonus-actions">
+                          {bonusName !== "Scratch Card Bonus" && (
                             <>
-                              <Trigger
-                                message={t("message.statusActive")}
-                                id={bonusId + "active"}
-                              />
+                              <Trigger message={t("message.edit")} id={bonusId + "edit"} />
                               <Button
-                                id={bonusId + "active"}
-                                className="m-1"
+                                id={bonusId + "edit"}
+                                className="bonus-icon-btn"
                                 size="sm"
-                                variant="success"
+                                variant="warning"
                                 onClick={() =>
-                                  handleStatusShow(bonus, isActive)
+                                  navigate(`${AdminRoutes.BonusEdit.split(":").shift()}${bonusId}`)
                                 }
-                                hidden={isHidden({
-                                  module: { key: "Bonus", value: "T" },
-                                })}
+                                hidden={isHidden({ module: { key: "Bonus", value: "U" } })}
                               >
-                                <FontAwesomeIcon icon={faCheckSquare} />
-                              </Button>
-                            </>
-                          ) : (
-                            <>
-                              <Trigger
-                                message={t("message.statusInactive")}
-                                id={bonusId + "inactive"}
-                              />
-                              <Button
-                                id={bonusId + "inactive"}
-                                className="m-1"
-                                size="sm"
-                                variant="danger"
-                                onClick={() =>
-                                  handleStatusShow(bonus, isActive)
-                                }
-                                hidden={isHidden({
-                                  module: { key: "Bonus", value: "T" },
-                                })}
-                              >
-                                <FontAwesomeIcon icon={faWindowClose} />
+                                <FontAwesomeIcon icon={faEdit} />
                               </Button>
                             </>
                           )}
-                        </>
-                      )}
-                    </td>
-                  </tr>
-                )
-              );
-            })}
-          {bonusData?.count === 0 && (
-            <tr>
-              <td colSpan={6} className="text-danger text-center">
-                {t("noDataFound")}
-              </td>
-            </tr>
-          )}
-        </tbody>
-      </Table>
-      {loading && <InlineLoader />}
+
+                          <Trigger message={t("message.view")} id={bonusId + "view"} />
+                          <Button
+                            id={bonusId + "view"}
+                            className="bonus-icon-btn"
+                            size="sm"
+                            variant="info"
+                            onClick={() => {
+                              if (bonusName === "Scratch Card Bonus") {
+                                navigate(AdminRoutes.ScratchCard);
+                              } else {
+                                navigate(`${AdminRoutes.BonusDetails.split(":").shift()}${bonusId}`);
+                              }
+                            }}
+                            hidden={isHidden({ module: { key: "Bonus", value: "R" } })}
+                          >
+                            <FontAwesomeIcon icon={faEye} />
+                          </Button>
+
+                          {bonusName !== "Scratch Card Bonus" && (
+                            <>
+                              {!isActive ? (
+                                <>
+                                  <Trigger message={t("message.statusActive")} id={bonusId + "active"} />
+                                  <Button
+                                    id={bonusId + "active"}
+                                    className="bonus-icon-btn"
+                                    size="sm"
+                                    variant="success"
+                                    onClick={() => handleStatusShow(bonus, isActive)}
+                                    hidden={isHidden({ module: { key: "Bonus", value: "T" } })}
+                                  >
+                                    <FontAwesomeIcon icon={faCheckSquare} />
+                                  </Button>
+                                </>
+                              ) : (
+                                <>
+                                  <Trigger message={t("message.statusInactive")} id={bonusId + "inactive"} />
+                                  <Button
+                                    id={bonusId + "inactive"}
+                                    className="bonus-icon-btn"
+                                    size="sm"
+                                    variant="danger"
+                                    onClick={() => handleStatusShow(bonus, isActive)}
+                                    hidden={isHidden({ module: { key: "Bonus", value: "T" } })}
+                                  >
+                                    <FontAwesomeIcon icon={faWindowClose} />
+                                  </Button>
+                                </>
+                              )}
+                            </>
+                          )}
+                        </div>
+                      </td>
+                    </tr>
+                  );
+                })
+              ) : (
+                <tr>
+                  <td colSpan={tableHeaders.length} className="text-center py-4 bonus-empty">
+                    {t("noDataFound")}
+                  </td>
+                </tr>
+              )}
+            </tbody>
+          </Table>
+        </div>
+      </div>
       {bonusData?.count !== 0 && (
         <PaginationComponent
           page={bonusData?.count < page ? setPage(1) : page}
@@ -323,7 +305,7 @@ const BonusListing = () => {
           handleDeleteYes={handleDeleteYes}
         />
       )}
-    </>
+    </div>
   );
 };
 

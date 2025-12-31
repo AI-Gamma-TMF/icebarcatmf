@@ -31,130 +31,60 @@ const AmoeList = ({
       : getFormattedTimeZoneOffset();
 
  
+  const isFailed = status === "2";
+  const failedHeaders = ["USERID", "ENTRY ID", "EMAIL", "SCANNED DATE", "REMARK"];
+  const activeHeaders = tableHeaders.map((h) => h.labelKey);
+  const headers = isFailed ? failedHeaders : activeHeaders;
+
   return (
     <>
-      {status === "2" ? (
-          <Table
-            bordered
-            striped
-            responsive
-            hover
-            size="sm"
-            className="text-center mt-4"
-          >
-            <thead className="thead-dark">
+      <div className="dashboard-data-table">
+        <div className="amoe-table-wrap">
+          <Table bordered hover responsive size="sm" className="mb-0 text-center">
+            <thead>
               <tr>
-                <th> USERID</th>
-                <th>ENTRY ID</th>
-                <th>EMAIL</th>
-                <th>SCANNED DATE</th>
-                <th>REMARK</th>
+                {headers.map((h) => (
+                  <th key={h}>{h}</th>
+                ))}
               </tr>
             </thead>
-            {loading ? (
-              <tr>
-                <td colSpan={10} className="text-center">
-                  <InlineLoader />
-                </td>
-              </tr>
-            ) : (
-              <tbody>
-                {data?.amoeBonusHistory &&
-                data?.amoeBonusHistory?.rows?.length > 0 ? (
-                  data?.amoeBonusHistory?.rows?.map((value, index) => {
-                    return (
-                      <tr
-                        key={index}
-                        className="text-center"
-                        style={{
-                          height: "40px",
-                          verticalAlign: "middle",
-                        }}
-                      >
-                        <td>{value?.userId}</td>
-                        <td>{value?.entryId}</td>
-                        <td>
-                          <Link to={`/admin/player-details/${value?.userId}`}>
-                            {value?.email}
-                          </Link>
-                          {/* )} */}
-                        </td>
-                        <td>
-                          {getDateTime(
-                            convertToTimeZone(value?.scannedDate, timezoneOffset)
-                          )}
-                        </td>
-                        <td>{value?.remark}</td>
-                      </tr>
-                    );
-                  })
-                ) : (
-                  <tr>
-                    <td colSpan={9} className="text-danger text-center">
-                      No data Found
-                    </td>
-                  </tr>
-                )}
-              </tbody>
-            )}
-          </Table>
-      ) : (
-        <Table
-          bordered
-          striped
-          responsive
-          hover
-          size="sm"
-          className="text-center mt-4"
-        >
-          <thead className="thead-dark">
-            <tr>
-              {tableHeaders.map((h, idx) => (
-                <th
-                  key={idx}
-                  style={{
-                    cursor: "default",
-                  }}
-                >
-                  {h.labelKey}
-                </th>
-              ))}
-            </tr>
-          </thead>
-          {loading ? (
-            <tr>
-              <td colSpan={10} className="text-center">
-                <InlineLoader />
-              </td>
-            </tr>
-          ) : (
             <tbody>
-              {data?.amoeBonusHistory &&
-              data?.amoeBonusHistory?.rows?.length > 0 ? (
-                data?.amoeBonusHistory?.rows?.map((value, index) => {
-                  return (
-                    <tr
-                      key={index}
-                      className="text-center"
-                      style={{
-                        height: "40px",
-                        verticalAlign: "middle",
-                      }}
-                    >
+              {loading ? (
+                <tr>
+                  <td colSpan={headers.length} className="text-center py-4">
+                    <InlineLoader />
+                  </td>
+                </tr>
+              ) : data?.amoeBonusHistory?.rows?.length ? (
+                data.amoeBonusHistory.rows.map((value, index) => {
+                  return isFailed ? (
+                    <tr key={index} className="text-center">
                       <td>{value?.userId}</td>
                       <td>{value?.entryId}</td>
                       <td>
-                          <Link to={`/admin/player-details/${value?.userId}`}>
-                            {value?.email}
-                          </Link>
-                        {/* )} */}
+                        <Link to={`/admin/player-details/${value?.userId}`}>
+                          {value?.email}
+                        </Link>
                       </td>
                       <td>
                         {getDateTime(
-                          convertToTimeZone(
-                            value?.registeredDate,
-                            timezoneOffset
-                          )
+                          convertToTimeZone(value?.scannedDate, timezoneOffset)
+                        )}
+                      </td>
+                      <td>{value?.remark}</td>
+                    </tr>
+                  ) : (
+                    <tr key={index} className="text-center">
+                      <td>{value?.userId}</td>
+                      <td>{value?.entryId}</td>
+                      <td>
+                        <Link to={`/admin/player-details/${value?.userId}`}>
+                          {value?.email}
+                        </Link>
+                      </td>
+                      <td>
+                        {getDateTime(
+                          convertToTimeZone(value?.registeredDate, timezoneOffset)
                         )}
                       </td>
                       <td>
@@ -169,15 +99,15 @@ const AmoeList = ({
                 })
               ) : (
                 <tr>
-                  <td colSpan={9} className="text-danger text-center">
+                  <td colSpan={headers.length} className="text-center py-4 amoe-empty">
                     No data Found
                   </td>
                 </tr>
               )}
             </tbody>
-          )}
-        </Table>
-      )}
+          </Table>
+        </div>
+      </div>
 
       {data?.amoeBonusHistory?.count !== 0 && (
         <PaginationComponent

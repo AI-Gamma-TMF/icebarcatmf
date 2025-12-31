@@ -1,82 +1,208 @@
+// Reuse the dashboard “modern” styling primitives
+@import "../../Dashboard/DashboardCharts/dashboardChart.scss";
+
+.bonus-report-page {
+  padding-bottom: 6px;
+}
+
+.bonus-report-page__title {
+  margin: 0;
+}
+
+.bonus-report-page__subtitle {
+  margin-top: 4px;
+  color: rgba(234, 250, 245, 0.68);
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+.bonus-report-page__card {
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.04) 0%, rgba(0, 0, 0, 0.22) 100%),
+    rgba(26, 26, 26, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.55),
+    0 14px 40px rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(12px) saturate(140%);
+  -webkit-backdrop-filter: blur(12px) saturate(140%);
+}
+
 .bonus-graph-container {
-  background-color: #fff;
-  padding: 20px 25px;
-  padding-bottom: 0 !important;
-  border-radius: 8px;
-  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
-  @media screen and (max-width: 768px) {
-    padding: 20px 10px !important;
+  background: transparent;
+  padding: 10px 6px 0;
+
+  label {
+    color: rgba(234, 250, 245, 0.88);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  // Datetime input (react-datetime)
+  .rdt input {
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.35);
+    color: rgba(255, 255, 255, 0.92);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 14px;
+    padding: 10px 12px;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  }
+
+  .rdtPicker {
+    background: rgba(18, 18, 18, 0.96);
+    border: 1px solid rgba(0, 229, 160, 0.18);
+    box-shadow: 0 18px 55px rgba(0, 0, 0, 0.55);
+    border-radius: 14px;
+    color: rgba(234, 250, 245, 0.92);
+    padding: 10px;
   }
 }
 
-.bonus-graph-container .form-label {
-  font-size: 12px;
-  font-weight: 600;
-  color: #333;
-  margin-bottom: 4px;
-
-  display: block;
+// react-select with classNamePrefix="bonus-select"
+.bonus-select__control {
+  background-color: rgba(0, 0, 0, 0.35) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  border-radius: 14px !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06) !important;
+  min-height: 44px !important;
 }
 
-.date-time-input {
-  border: 1px solid #dcdcdc;
-  border-radius: 6px;
-  padding: 6px 12px;
-  font-size: 14px;
-  min-width: 150px;
+.bonus-select__single-value,
+.bonus-select__input-container,
+.bonus-select__placeholder {
+  color: rgba(255, 255, 255, 0.92) !important;
+}
+
+.bonus-select__menu {
+  background: rgba(18, 18, 18, 0.98) !important;
+  border: 1px solid rgba(0, 229, 160, 0.18) !important;
+  box-shadow: 0 18px 55px rgba(0, 0, 0, 0.55) !important;
+}
+
+.bonus-select__option {
+  color: rgba(255, 255, 255, 0.92) !important;
+}
+
+.bonus-select__option--is-focused {
+  background: rgba(0, 229, 160, 0.12) !important;
 }
 
 .quick-range-wrapper {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 10px;
-  border: 1px solid #dcdcdc;
-  border-radius: 6px;
-  padding: 6px 10px;
-  background-color: #f9f9f9;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 14px;
+  padding: 10px 12px;
+  background: rgba(0, 0, 0, 0.25);
 }
 
 .quick-range-wrapper span {
   font-size: 13px;
-  color: #666;
+  color: rgba(234, 250, 245, 0.72);
   cursor: pointer;
+  font-weight: 700;
 }
 
 .quick-range-wrapper span.text-primary {
-  color: #0d6efd;
-  font-weight: 600;
+  color: rgba(0, 229, 160, 0.92) !important;
 }
 
-.reset-btn {
-  margin-top: 24px;
-  height: 36px;
-  padding: 0 12px;
-  font-size: 16px;
+.bonus-graph__clear-custom-btn.btn {
+  margin-top: 25px;
+  height: 38px;
+  width: 42px;
+  border-radius: 14px;
 }
 
-.auto-refresh-row {
-  margin-top: 16px;
+.bonus-auto-refresh {
+  position: relative;
+  top: 5px;
+}
+
+.bonus-auto-refresh__reset.btn {
+  border-radius: 24px 0 0 24px;
+  border: 2px solid rgba(var(--gs-cta-rgb), 0.35);
+  background: rgba(0, 0, 0, 0.28);
+  color: rgba(0, 229, 160, 0.92);
+  font-weight: 800;
+  padding: 6px 12px;
+}
+
+.bonus-auto-refresh__toggle.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-radius: 0 24px 24px 0;
+  border: 2px solid rgba(var(--gs-cta-rgb), 0.35);
+  background: rgba(0, 0, 0, 0.28);
+  color: rgba(0, 229, 160, 0.92);
+  font-weight: 900;
+  padding: 6px 16px;
+  border-left: none;
+}
+
+.bonus-auto-refresh__toggle.is-off {
+  min-width: 42px;
 }
 
 .progress-bar-track {
   height: 4px;
-  background-color: #e9ecef;
-  margin: 8px 0 16px 0;
+  background-color: rgba(255, 255, 255, 0.12);
+  margin: 10px 0 16px 0;
   border-radius: 4px;
   overflow: hidden;
 }
 
 .progress-bar-fill {
   height: 100%;
-  background-color: #0d6efd;
-  transition: width 0.3s ease;
+  background-color: rgba(0, 229, 160, 0.92);
+  transition: width 0.1s linear;
 }
 
-.graph-loader {
-  text-align: center;
-  padding: 50px;
-  height: 450px;
+.bonus-graph__info-wrap {
+  margin-top: 25px;
   display: flex;
+  justify-content: end;
+}
+
+.bonus-info-btn.btn {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.10) !important;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
+  color: rgba(255, 255, 255, 0.92) !important;
+  border: 1px solid rgba(255, 255, 255, 0.14) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.bonus-report-note {
+  margin: 0 0 10px;
+  color: rgba(255, 156, 198, 0.92);
+  font-weight: 800;
+  font-size: 0.9rem;
+}
+
+.bonus-report-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+.bonus-report-empty {
+  color: rgba(255, 156, 198, 0.92);
+  font-weight: 800;
 }

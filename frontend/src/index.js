@@ -37,7 +37,14 @@ try {
   const reduceData = window.matchMedia?.('(prefers-reduced-data: reduce)')?.matches
   const cores = navigator.hardwareConcurrency || 8
   const mem = navigator.deviceMemory || 8
-  const autoLowPower = !!reduceMotion || !!reduceData || cores <= 4 || mem <= 4
+  // Dev builds are significantly heavier (HMR, source maps, extra checks). Default to low-power on localhost
+  // unless the user explicitly forces it off.
+  const isDev = process.env.NODE_ENV !== 'production'
+  const isLocalhost =
+    window.location?.hostname === 'localhost' ||
+    window.location?.hostname === '127.0.0.1'
+  const autoLowPower =
+    !!reduceMotion || !!reduceData || cores <= 4 || mem <= 4 || (isDev && isLocalhost)
   const enabled =
     forced === '1' ? true : forced === '0' ? false : autoLowPower
   if (enabled) document.documentElement.classList.add('gs-low-power')
@@ -57,6 +64,10 @@ const root = ReactDOM.createRoot(document.getElementById('root'))
 const routerBaseName =
   process.env.NODE_ENV === 'production' ? process.env.PUBLIC_URL : '/'
 
+const ShowDevtools =
+  process.env.NODE_ENV !== 'production' &&
+  (window.localStorage?.getItem('gs:rqDevtools') === '1')
+
 root.render(
   <QueryClientProvider client={queryClient}>
     <Toaster 
@@ -73,8 +84,10 @@ root.render(
     }}
     />
     <BrowserRouter basename={routerBaseName}>
-       <MainRoute />
+      <MainRoute />
     </BrowserRouter>
-    <ReactQueryDevtools initialIsOpen={false} position={'bottom-right'} />
+    {ShowDevtools ? (
+      <ReactQueryDevtools initialIsOpen={false} position={'bottom-right'} />
+    ) : null}
   </QueryClientProvider>
 )

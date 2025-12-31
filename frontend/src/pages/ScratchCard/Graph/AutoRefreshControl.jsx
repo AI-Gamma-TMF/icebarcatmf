@@ -17,16 +17,17 @@ const AutoRefreshControl = ({
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   return (
-    <ButtonGroup className="mt-3 position-relative" style={{ top: "5px" }}>
+    <ButtonGroup className="mt-3 position-relative scratch-auto-refresh" style={{ top: "5px" }}>
       <Trigger message='reset' id={'reset'} />
       <Button
         id={'reset'}
         onClick={resetFilters}
         style={{
           borderRadius: "24px 0 0 24px",
-          border: "2px solid #0d6efd",
-          backgroundColor: "white",
-          color: "#0d6efd",
+          border: "1px solid rgba(var(--gs-cta-rgb), 0.22)",
+          background:
+            "linear-gradient(135deg, rgba(0, 0, 0, 0.18) 0%, rgba(0, 0, 0, 0.55) 100%)",
+          color: "rgba(234, 250, 245, 0.92)",
           fontWeight: 500,
           padding: "6px 12px",
         }}
@@ -45,9 +46,10 @@ const AutoRefreshControl = ({
             justifyContent: "center",
             gap: "8px",
             borderRadius: "0 24px 24px 0",
-            border: "2px solid #0d6efd",
-            backgroundColor: "white",
-            color: "#0d6efd",
+            border: "1px solid rgba(var(--gs-cta-rgb), 0.22)",
+            background:
+              "linear-gradient(135deg, rgba(0, 0, 0, 0.18) 0%, rgba(0, 0, 0, 0.55) 100%)",
+            color: "rgba(234, 250, 245, 0.92)",
             fontWeight: 500,
             padding: "6px 16px",
             minWidth: refreshInterval === "off" ? "42px" : "auto",

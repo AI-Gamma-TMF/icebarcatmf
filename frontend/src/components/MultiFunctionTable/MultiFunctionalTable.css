@@ -8,14 +8,114 @@
   z-index: 100;
 } */
 
+/* ============================================================
+   Modern table controls (Players -> MultiFunctionalTable)
+   Keeps behavior identical; upgrades visuals
+   ============================================================ */
+
 .resizer {
-  width: 5px;
+  width: 10px; /* bigger hit area */
   cursor: col-resize;
   position: absolute;
-  right: 0;
+  right: -4px;
   top: 0;
   height: 100%;
-  z-index: 1;
+  z-index: 2;
+}
+
+.mft-resizer::before {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 18%;
+  width: 2px;
+  height: 64%;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.10);
+  transition: background 140ms ease, box-shadow 140ms ease, opacity 140ms ease;
+  opacity: 0.9;
+}
+
+.dashboard-data-table thead th:hover .mft-resizer::before {
+  background: rgba(0, 229, 160, 0.55);
+  box-shadow: 0 0 0 4px rgba(0, 229, 160, 0.10);
+}
+
+/* Header cell content */
+.mft-th {
+  position: relative;
+  padding: 10px 12px !important;
+}
+
+.mft-th__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
+}
+
+.mft-th__label {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: rgba(0, 229, 160, 1);
+  font-weight: 900;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-size: 0.78rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  min-width: 0;
+}
+
+.mft-th__label:disabled {
+  cursor: default;
+  opacity: 0.9;
+}
+
+.mft-th__text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 0;
+}
+
+.mft-th__sort {
+  color: rgba(0, 229, 160, 0.92);
+  filter: drop-shadow(0 0 10px rgba(0, 229, 160, 0.14));
+}
+
+/* Drag handle pill */
+.mft-th__handle {
+  appearance: none;
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  background: rgba(0, 0, 0, 0.20);
+  color: rgba(234, 250, 245, 0.82);
+  width: 34px;
+  height: 34px;
+  border-radius: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: grab;
+  flex: 0 0 auto;
+  transition: transform 140ms ease, border-color 140ms ease, background 140ms ease;
+}
+
+.mft-th__handle:hover {
+  border-color: rgba(0, 229, 160, 0.22);
+  background: rgba(0, 229, 160, 0.08);
+  transform: translateY(-1px);
+}
+
+.mft-th__handle:active {
+  cursor: grabbing;
+  transform: translateY(0);
 }
 
 .custom-multiselect {

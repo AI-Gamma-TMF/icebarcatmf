@@ -1,0 +1,183 @@
+// Reuse the dashboard “modern” styling primitives
+@import "../../../scss/modern-theme.scss";
+
+.casino-transactions-page {
+  padding-bottom: 6px;
+}
+
+.casino-transactions-page__title {
+  margin: 0;
+}
+
+.casino-transactions-page__subtitle {
+  margin-top: 4px;
+  color: rgba(234, 250, 245, 0.68);
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+// Reuse dashboard filters card
+.casino-transactions-filters {
+  // @extend .dashboard-filters;
+}
+
+// Force full width for inputs and selects within the filter grid
+.casino-filters__control.form-control,
+.casino-filters__select.form-select {
+  width: 100%;
+}
+
+// React Datetime specific overrides for dark theme
+.casino-filters__date-wrapper {
+  .rdt input {
+    @extend .form-control;
+    background-color: rgba(0, 0, 0, 0.2) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    color: #eafaf5 !important;
+    
+    &:focus {
+      background-color: rgba(0, 0, 0, 0.3) !important;
+      border-color: rgba(0, 229, 160, 0.5) !important;
+      box-shadow: 0 0 0 2px rgba(0, 229, 160, 0.2) !important;
+    }
+  }
+}
+
+// Action buttons container in the filters area
+.casino-filters__actions {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+  height: 100%;
+  padding-bottom: 2px;
+}
+
+.casino-action-btn {
+  border-radius: 12px;
+  padding: 8px 16px;
+  font-weight: 800;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+  
+  &--reset {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #eafaf5;
+    
+    &:hover {
+      background: rgba(255, 255, 255, 0.1);
+      transform: translateY(-1px);
+      color: #fff;
+    }
+  }
+
+  &--download {
+    background: linear-gradient(135deg, rgba(0, 229, 160, 0.1) 0%, rgba(0, 229, 160, 0.2) 100%);
+    border: 1px solid rgba(0, 229, 160, 0.3);
+    color: #00e5a0;
+    
+    &:hover:not(:disabled) {
+      background: linear-gradient(135deg, rgba(0, 229, 160, 0.2) 0%, rgba(0, 229, 160, 0.3) 100%);
+      transform: translateY(-1px);
+      color: #fff;
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+}
+
+// Table specific styles
+.casino-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+// Ensure the creatable select matches the theme
+.casino-filters__select-creatable {
+  .prefix__control {
+    background-color: rgba(0, 0, 0, 0.2) !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+    border-radius: 10px;
+    min-height: 42px;
+
+    &:hover {
+      border-color: rgba(255, 255, 255, 0.2) !important;
+    }
+
+    &--is-focused {
+      border-color: rgba(0, 229, 160, 0.5) !important;
+      box-shadow: 0 0 0 1px rgba(0, 229, 160, 0.5) !important;
+    }
+  }
+
+  .prefix__menu {
+    background-color: #1a1a1a !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    z-index: 5;
+  }
+
+  .prefix__menu-list {
+    background-color: #1a1a1a !important;
+    color: #eafaf5 !important;
+  }
+  
+  .prefix__menu-notice {
+    color: rgba(234, 250, 245, 0.68) !important;
+    background-color: #1a1a1a !important;
+  }
+
+  .prefix__option {
+    background-color: transparent !important;
+    color: #eafaf5 !important;
+    cursor: pointer;
+
+    &--is-focused {
+      background-color: rgba(255, 255, 255, 0.1) !important;
+    }
+    
+    &--is-selected {
+      background-color: rgba(0, 229, 160, 0.2) !important;
+      color: #00e5a0 !important;
+    }
+  }
+
+  .prefix__single-value {
+    color: #eafaf5 !important;
+  }
+
+  .prefix__input-container {
+    color: #eafaf5 !important;
+  }
+  
+  .prefix__placeholder {
+    color: rgba(234, 250, 245, 0.5) !important;
+  }
+  
+  .prefix__indicator-separator {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+  }
+  
+  .prefix__dropdown-indicator {
+    color: rgba(234, 250, 245, 0.5) !important;
+    
+    &:hover {
+      color: #eafaf5 !important;
+    }
+  }
+  
+  .prefix__clear-indicator {
+    color: rgba(234, 250, 245, 0.5) !important;
+    
+    &:hover {
+      color: #ff6b6b !important;
+    }
+  }
+}

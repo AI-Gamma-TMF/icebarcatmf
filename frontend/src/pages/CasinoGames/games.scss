@@ -1,0 +1,48 @@
+// Reuse dashboard “modern” styling primitives (glass panels, dark inputs, table skin)
+@import "../Dashboard/DashboardCharts/dashboardChart.scss";
+
+.casino-games-page {
+  padding-bottom: 6px;
+}
+
+.casino-games-page__title {
+  margin: 0;
+}
+
+.casino-games-page__card {
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.04) 0%, rgba(0, 0, 0, 0.22) 100%),
+    rgba(26, 26, 26, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.55),
+    0 14px 40px rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(12px) saturate(140%);
+  -webkit-backdrop-filter: blur(12px) saturate(140%);
+}
+
+.casino-games-page__action-btn {
+  border-radius: 14px !important;
+  padding: 10px 14px !important;
+  font-weight: 900 !important;
+  letter-spacing: 0.04em !important;
+  text-transform: uppercase !important;
+}
+
+.casino-games-page__error {
+  color: rgba(255, 120, 120, 0.95);
+  margin-top: 6px;
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+.casino-games-table-wrap {
+  overflow-x: auto;
+}
+
+.casino-games-table {
+  min-width: max-content;
+}
+
+

@@ -1,0 +1,90 @@
+@import "../Dashboard/DashboardCharts/dashboardChart.scss";
+
+.crm-promo-bonus-page {
+  padding-bottom: 6px;
+}
+
+.crm-promo-bonus-page__title {
+  margin: 0;
+}
+
+.crm-promo-bonus-page__subtitle {
+  margin-top: 4px;
+  color: rgba(234, 250, 245, 0.68);
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+.crm-promo-bonus-page__actions {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.crm-promo-bonus-page__create-btn.btn {
+  border-radius: 14px;
+  padding: 10px 14px;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border: 1px solid rgba(var(--gs-cta-rgb), 0.22);
+  background: linear-gradient(135deg, var(--gs-cta-start) 0%, var(--gs-cta-end) 100%);
+  box-shadow:
+    0 10px 26px rgba(var(--gs-cta-rgb), 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.18);
+  color: #fff !important;
+}
+
+.crm-promo-bonus-page__create-btn.btn:hover {
+  filter: brightness(1.03);
+  transform: translateY(-1px);
+}
+
+.crm-promo-bonus-filters .card-body {
+  padding: 18px;
+}
+
+.crm-promo-bonus-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+.crm-promo-bonus-actions {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.crm-promo-bonus-icon-btn.btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 12px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.06) !important;
+  border: 1px solid rgba(255, 255, 255, 0.10) !important;
+  color: rgba(234, 250, 245, 0.92) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  transition: transform 140ms ease, background 140ms ease, border-color 140ms ease;
+}
+
+.crm-promo-bonus-icon-btn.btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+  border-color: rgba(var(--gs-cta-rgb), 0.18) !important;
+  background: rgba(var(--gs-cta-rgb), 0.08) !important;
+}
+
+.crm-promo-bonus-empty {
+  color: rgba(255, 156, 198, 0.92);
+  font-weight: 800;
+}
+
+

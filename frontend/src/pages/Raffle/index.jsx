@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Row, Col, Table } from "@themesberg/react-bootstrap";
+import { Button, Row, Col, Table, Card } from "@themesberg/react-bootstrap";
 import { AdminRoutes } from "../../routes";
 import useRaffleListing from "./hooks/useRaffleListing";
 import { tableHeaders } from "./constant";
@@ -26,6 +26,7 @@ import {
   getFormattedTimeZoneOffset,
 } from "../../utils/helper";
 import RaffleFilters from "./component/RaffleFilters";
+import "./raffleListing.scss";
 
 const Raffle = () => {
   const {
@@ -96,293 +97,259 @@ const Raffle = () => {
 
   return (
     <>
-      <>
-        <Row className="mb-2">
-          <Col>
-            <h3>Giveaways</h3>
-          </Col>
+      <div className="dashboard-typography raffle-page">
+        <div className="d-flex justify-content-between align-items-center mb-4">
+          <div>
+            <h3 className="raffle-page__title">Giveaways</h3>
+            <p className="raffle-page__subtitle">Manage raffles, status, and payouts</p>
+          </div>
 
-          <Col>
-            <div className="d-flex justify-content-end">
-              <Button
-                variant="success"
-                hidden={isHidden({ module: { key: "Raffles", value: "C" } })}
-                size="sm"
-                style={{ marginRight: "10px" }}
-                onClick={() => {
-                  setType("Create");
-                  navigate(AdminRoutes.RaffleCreate);
-                }}
-              >
-                Create
-              </Button>
-            </div>
-          </Col>
-        </Row>
+          <div className="d-flex justify-content-end">
+            <Button
+              variant="primary"
+              className="raffle-page__create-btn"
+              hidden={isHidden({ module: { key: "Raffles", value: "C" } })}
+              size="sm"
+              onClick={() => {
+                setType("Create");
+                navigate(AdminRoutes.RaffleCreate);
+              }}
+            >
+              Create
+            </Button>
+          </div>
+        </div>
 
-        <RaffleFilters
-          searchByTitle={searchByTitle}
-          setSearchByTitle={setSearchByTitle}
-          status={status}
-          setStatus={setStatus}
-          isActive={isActive}
-          setIsActive={setIsActive}
-          wgrBaseAmt={wgrBaseAmt}
-          setWgrBaseAmt={setWgrBaseAmt}
-          startDate={startDate}
-          setStartDate={setStartDate}
-          setEndDate={setEndDate}
-          endDate={endDate}
-          errorStart={errorStart}
-          errorEnd={errorEnd}
-          handleStartDateChange={handleStartDateChange}
-          handleEndDateChange={handleEndDateChange}
-          setPage={setPage}
-          setLimit={setLimit}
-        />
+        <Card className="dashboard-filters mb-4 raffle-filters">
+          <Card.Body>
+            <RaffleFilters
+              searchByTitle={searchByTitle}
+              setSearchByTitle={setSearchByTitle}
+              status={status}
+              setStatus={setStatus}
+              isActive={isActive}
+              setIsActive={setIsActive}
+              wgrBaseAmt={wgrBaseAmt}
+              setWgrBaseAmt={setWgrBaseAmt}
+              setPage={setPage}
+              setLimit={setLimit}
+            />
+          </Card.Body>
+        </Card>
 
-        <Table
-          bordered
-          striped
-          responsive
-          hover
-          size="sm"
-          className="text-center mt-4"
-        >
-          <thead className="thead-dark">
-            <tr>
-              {tableHeaders?.map((h, idx) => (
-                <th
-                  key={idx}
-                  onClick={() => h.value !== "" && setOrderBy(h.value)}
-                  style={{
-                    cursor: (h.value !== "" && "pointer"),
-                  }}
-                  className={selected(h) ? "border-3 border border-blue" : ""}
-                >
-                  {h.labelKey}{" "}
-                  {selected(h) &&
-                    (sort === "ASC" ? (
-                      <FontAwesomeIcon
-                        style={over ? { color: "red" } : {}}
-                        icon={faArrowAltCircleUp}
-                        onClick={() => setSort("DESC")}
-                        onMouseOver={() => setOver(true)}
-                        onMouseLeave={() => setOver(false)}
-                      />
-                    ) : (
-                      <FontAwesomeIcon
-                        style={over ? { color: "red" } : {}}
-                        icon={faArrowAltCircleDown}
-                        onClick={() => setSort("ASC")}
-                        onMouseOver={() => setOver(true)}
-                        onMouseLeave={() => setOver(false)}
-                      />
-                    ))}
-                </th>
-              ))}
-            </tr>
-          </thead>
-          {loading ? (
-            <tr>
-              <td colSpan={10} className="text-center">
-                <InlineLoader />
-              </td>
-            </tr>
-          ) : (
-            <tbody>
-              {raffleList?.count > 0 ? (
-                raffleList?.rows?.map(
-                  ({
-                    raffleId,
-                    title,
+        <div className="dashboard-data-table">
+          <div className="raffle-table-wrap">
+            <Table bordered hover responsive size="sm" className="mb-0 text-center">
+              <thead>
+                <tr>
+                  {tableHeaders?.map((h, idx) => (
+                    <th
+                      key={idx}
+                      onClick={() => h.value !== "" && setOrderBy(h.value)}
+                      style={{ cursor: h.value !== "" ? "pointer" : "default" }}
+                      className={selected(h) ? "sortable active" : "sortable"}
+                    >
+                      {h.labelKey}{" "}
+                      {selected(h) &&
+                        (sort === "ASC" ? (
+                          <FontAwesomeIcon
+                            style={over ? { color: "red" } : {}}
+                            icon={faArrowAltCircleUp}
+                            onClick={() => setSort("DESC")}
+                            onMouseOver={() => setOver(true)}
+                            onMouseLeave={() => setOver(false)}
+                          />
+                        ) : (
+                          <FontAwesomeIcon
+                            style={over ? { color: "red" } : {}}
+                            icon={faArrowAltCircleDown}
+                            onClick={() => setSort("ASC")}
+                            onMouseOver={() => setOver(true)}
+                            onMouseLeave={() => setOver(false)}
+                          />
+                        ))}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
 
-                    startDate,
-                    endDate,
-                    imageUrl,
+              <tbody>
+                {loading ? (
+                  <tr>
+                    <td colSpan={tableHeaders.length} className="text-center py-4">
+                      <InlineLoader />
+                    </td>
+                  </tr>
+                ) : raffleList?.count > 0 ? (
+                  raffleList?.rows?.map(
+                    ({
+                      raffleId,
+                      title,
+                      startDate,
+                      endDate,
+                      imageUrl,
+                      wagerBaseAmt,
+                      wagerBaseAmtType,
+                      isActive,
+                      status,
+                    }) => {
+                      const statusLabel =
+                        status === "ongoing"
+                          ? "On Going"
+                          : status === "upcoming"
+                          ? "Up Coming"
+                          : "Completed";
 
-                    wagerBaseAmt,
-                    wagerBaseAmtType,
-                    isActive,
-                    status,
-                  }) => {
-                    return (
-                      <tr key={raffleId}>
-                        <td>{raffleId}</td>
-                        <td>{title}</td>
+                      const statusClass =
+                        status === "ongoing"
+                          ? "raffle-pill raffle-pill--ongoing"
+                          : status === "upcoming"
+                          ? "raffle-pill raffle-pill--upcoming"
+                          : "raffle-pill raffle-pill--completed";
 
-                        <td>
-                          {formatDateMDY(
-                            convertToTimeZone(startDate, timezoneOffset)
-                          )}
-                        </td>
-                        <td>
-                          {formatDateMDY(
-                            convertToTimeZone(endDate, timezoneOffset)
-                          )}
-                        </td>
-                        <td>
-                          <img
-                            src={imageUrl}
-                            alt="..."
-                            width={100}
-                            height={100}
-                            className="img-thumbnail"
-                            // onClick={() => window.open(imageUrl)}
-                          ></img>
-                        </td>
+                      const activeClass = isActive
+                        ? "raffle-pill raffle-pill--active"
+                        : "raffle-pill raffle-pill--inactive";
 
-                        <td>
-                          {wagerBaseAmt} {wagerBaseAmtType}
-                        </td>
-                        <td>
-                          {status == "ongoing"
-                            ? "On Going"
-                            : status == "upcoming"
-                            ? "Up Coming"
-                            : "Completed"}
-                        </td>
-                        <td>{isActive == true ? "Active" : "In-Active"}</td>
-                        {!isHidden({
-                          module: { key: "Raffles", value: "U" },
-                        }) ||
-                        !isHidden({
-                          module: { key: "Raffles", value: "T" },
-                        }) ? (
+                      const canActions =
+                        !isHidden({ module: { key: "Raffles", value: "U" } }) ||
+                        !isHidden({ module: { key: "Raffles", value: "T" } });
+
+                      return (
+                        <tr key={raffleId}>
+                          <td>{raffleId}</td>
+                          <td>{title}</td>
+                          <td>{formatDateMDY(convertToTimeZone(startDate, timezoneOffset))}</td>
+                          <td>{formatDateMDY(convertToTimeZone(endDate, timezoneOffset))}</td>
                           <td>
-                            <Trigger message={"View"} id={raffleId + "view"} />
-                            <Button
-                              id={raffleId + "view"}
-                              className="m-1"
-                              size="sm"
-                              variant="info"
-                              onClick={() =>
-                                navigate(
-                                  `${AdminRoutes.RaffleView.split(
-                                    ":"
-                                  ).shift()}${raffleId}`
-                                )
-                              }
-                            >
-                              <FontAwesomeIcon icon={faEye} />
-                            </Button>
-                            {isActive && (
-                              <>
-                                {!isHidden({
-                                  module: { key: "Raffles", value: "R" },
-                                }) && (
-                                  <>
-                                    <Trigger
-                                      message="Payout"
-                                      id={raffleId + "payout"}
-                                    />
-                                    <Button
-                                      id={raffleId + "payout"}
-                                      className="m-1"
-                                      size="sm"
-                                      variant="warning"
-                                      hidden={isHidden({
-                                        module: {
-                                          key: "RafflePayout",
-                                          value: "R",
-                                        },
-                                      })}
-                                      onClick={() =>
-                                        navigate(
-                                          `${AdminRoutes.RafflePayout.split(
-                                            ":"
-                                          ).shift()}${raffleId}`
-                                        )
-                                      }
-                                    >
-                                      <FontAwesomeIcon icon={faPlayCircle} />
-                                    </Button>{" "}
-                                  </>
-                                )}
-                                <Trigger
-                                  message="Edit"
-                                  id={raffleId + "edit"}
-                                />
-                                <Button
-                                  id={raffleId + "edit"}
-                                  hidden={isHidden({
-                                    module: { key: "Raffles", value: "U" },
-                                  })}
-                                  className="m-1"
-                                  size="sm"
-                                  variant="warning"
-                                  disabled={status === "completed"}
-                                  onClick={() =>
-                                    navigate(
-                                      `${AdminRoutes.RaffleEdit.split(
-                                        ":"
-                                      ).shift()}${raffleId}`
-                                    )
-                                  }
-                                >
-                                  <FontAwesomeIcon icon={faEdit} />
-                                </Button>
-                              </>
-                            )}
-                            {!isActive ? (
-                              <>
-                                <Trigger
-                                  message="Set Status Active"
-                                  id={raffleId + "active"}
-                                />
-                                <Button
-                                  id={raffleId + "active"}
-                                  hidden={isHidden({
-                                    module: { key: "Raffles", value: "U" },
-                                  })}
-                                  className="m-1"
-                                  size="sm"
-                                  variant="success"
-                                  onClick={() => handleShow(raffleId, isActive)}
-                                  // disabled={isEditable}
-                                >
-                                  <FontAwesomeIcon icon={faCheckSquare} />
-                                </Button>
-                              </>
+                            {imageUrl ? (
+                              <img
+                                src={imageUrl}
+                                alt="raffle"
+                                width={56}
+                                height={56}
+                                className="img-thumbnail"
+                                style={{ cursor: "pointer" }}
+                                onClick={() => window.open(imageUrl)}
+                              />
                             ) : (
-                              <>
-                                <Trigger
-                                  message="Set Status In-Active"
-                                  id={raffleId + "inactive"}
-                                />
-                                <Button
-                                  id={raffleId + "inactive"}
-                                  hidden={isHidden({
-                                    module: { key: "Raffles", value: "U" },
-                                  })}
-                                  className="m-1"
-                                  size="sm"
-                                  variant="danger"
-                                  onClick={() => handleShow(raffleId, isActive)}
-                                  // disabled={isEditable}
-                                >
-                                  <FontAwesomeIcon icon={faWindowClose} />
-                                </Button>
-                              </>
+                              "—"
                             )}
                           </td>
-                        ) : (
-                          "NA"
-                        )}
-                      </tr>
-                    );
-                  }
-                )
-              ) : (
-                <tr>
-                  <td colSpan={7} className="text-danger text-center">
-                    No Data Found
-                  </td>
-                </tr>
-              )}
-            </tbody>
-          )}
-        </Table>
+                          <td>
+                            {wagerBaseAmt} {wagerBaseAmtType}
+                          </td>
+                          <td>
+                            <span className={statusClass}>{statusLabel}</span>
+                          </td>
+                          <td>
+                            <span className={activeClass}>{isActive ? "Active" : "In-Active"}</span>
+                          </td>
+                          <td>
+                            {canActions ? (
+                              <div className="raffle-actions">
+                                <Trigger message={"View"} id={raffleId + "view"} />
+                                <Button
+                                  id={raffleId + "view"}
+                                  className="raffle-icon-btn"
+                                  size="sm"
+                                  variant="info"
+                                  onClick={() =>
+                                    navigate(`${AdminRoutes.RaffleView.split(":").shift()}${raffleId}`)
+                                  }
+                                >
+                                  <FontAwesomeIcon icon={faEye} />
+                                </Button>
+
+                                {isActive && (
+                                  <>
+                                    {!isHidden({ module: { key: "Raffles", value: "R" } }) && (
+                                      <>
+                                        <Trigger message="Payout" id={raffleId + "payout"} />
+                                        <Button
+                                          id={raffleId + "payout"}
+                                          className="raffle-icon-btn"
+                                          size="sm"
+                                          variant="warning"
+                                          hidden={isHidden({
+                                            module: { key: "RafflePayout", value: "R" },
+                                          })}
+                                          onClick={() =>
+                                            navigate(`${AdminRoutes.RafflePayout.split(":").shift()}${raffleId}`)
+                                          }
+                                        >
+                                          <FontAwesomeIcon icon={faPlayCircle} />
+                                        </Button>
+                                      </>
+                                    )}
+
+                                    <Trigger message="Edit" id={raffleId + "edit"} />
+                                    <Button
+                                      id={raffleId + "edit"}
+                                      hidden={isHidden({ module: { key: "Raffles", value: "U" } })}
+                                      className="raffle-icon-btn"
+                                      size="sm"
+                                      variant="warning"
+                                      disabled={status === "completed"}
+                                      onClick={() =>
+                                        navigate(`${AdminRoutes.RaffleEdit.split(":").shift()}${raffleId}`)
+                                      }
+                                    >
+                                      <FontAwesomeIcon icon={faEdit} />
+                                    </Button>
+                                  </>
+                                )}
+
+                                {!isActive ? (
+                                  <>
+                                    <Trigger message="Set Status Active" id={raffleId + "active"} />
+                                    <Button
+                                      id={raffleId + "active"}
+                                      hidden={isHidden({ module: { key: "Raffles", value: "U" } })}
+                                      className="raffle-icon-btn"
+                                      size="sm"
+                                      variant="success"
+                                      onClick={() => handleShow(raffleId, isActive)}
+                                    >
+                                      <FontAwesomeIcon icon={faCheckSquare} />
+                                    </Button>
+                                  </>
+                                ) : (
+                                  <>
+                                    <Trigger message="Set Status In-Active" id={raffleId + "inactive"} />
+                                    <Button
+                                      id={raffleId + "inactive"}
+                                      hidden={isHidden({ module: { key: "Raffles", value: "U" } })}
+                                      className="raffle-icon-btn"
+                                      size="sm"
+                                      variant="danger"
+                                      onClick={() => handleShow(raffleId, isActive)}
+                                    >
+                                      <FontAwesomeIcon icon={faWindowClose} />
+                                    </Button>
+                                  </>
+                                )}
+                              </div>
+                            ) : (
+                              "NA"
+                            )}
+                          </td>
+                        </tr>
+                      );
+                    }
+                  )
+                ) : (
+                  <tr>
+                    <td colSpan={tableHeaders.length} className="text-center py-4 raffle-empty">
+                      No Data Found
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            </Table>
+          </div>
+        </div>
+
         {raffleList?.count !== 0 && (
           <PaginationComponent
             page={raffleList?.count < page ? setPage(1) : page}
@@ -392,7 +359,7 @@ const Raffle = () => {
             setLimit={setLimit}
           />
         )}
-      </>
+      </div>
       {show && (
         <ConfirmationModal
           setShow={setShow}

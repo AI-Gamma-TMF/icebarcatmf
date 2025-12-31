@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { Button, Row, Col, Table, Form } from "@themesberg/react-bootstrap";
+import { Button, Row, Col, Table, Form, Card } from "@themesberg/react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import PaginationComponent from "../../components/Pagination";
 import { ConfirmationModal } from "../../components/ConfirmationModal";
 import "./style.scss";
+import "./tournamentListing.scss";
 import {
   faEdit,
   faTrash,
@@ -65,357 +66,246 @@ const Tournaments = () => {
 
   return (
     <>
-      <>
-        <Row className="mb-2">
-          <Col>
-            <h3>{t("tournaments.title")}</h3>
-          </Col>
+      <div className="dashboard-typography tournament-list-page">
+        <div className="d-flex justify-content-between align-items-center mb-4">
+          <div>
+            <h3 className="tournament-list-page__title">{t("tournaments.title")}</h3>
+            <p className="tournament-list-page__subtitle">Manage tournaments, status, and schedules</p>
+          </div>
 
-          <Col>
-            <div className="d-flex justify-content-end gap-2">
-              <Button
-                variant="success"
-                size="md"
-                // style={{ marginRight: '10px' }}
-                hidden={isHidden({
-                  module: { key: "Tournaments", value: "C" },
-                })}
-                onClick={() => navigate(AdminRoutes.tournamentCreate)}
-              >
-                {t("tournaments.createButton")}
-              </Button>
-
-              <Button
-                variant="success"
-                className=""
-                size="md"
-                hidden={isHidden({
-                  module: { key: "Tournaments", value: "U" },
-                })}
-                onClick={() => navigate(AdminRoutes.ReordertournamentList)}
-              >
-                {t("tournaments.reorder")}
-              </Button>
-            </div>
-          </Col>
-        </Row>
-
-        <Row className="mb-3 w-100 m-auto">
-          <Col xs={12} md={3} lg="auto" className="mt-2 mt-lg-0">
-            <div className="d-flex justify-content-start align-items-center w-100 flex-wrap">
-              <Form.Label
-                column="sm"
-                style={{ marginBottom: "0", marginRight: "15px" }}
-              >
-                Search by Title, Id and Entry Coin
-              </Form.Label>
-
-              <Form.Control
-                type="search"
-                value={search}
-                placeholder={"Search..."}
-                onChange={(event) => {
-                  setPage(1);
-                  setSearch(
-                    event?.target?.value?.replace(/[~`!$%@^&*#=)()><?]+/g, "")
-                  );
-                }}
-                style={{ minWidth: "230px" }}
-              />
-            </div>
-          </Col>
-          <Col xs={12} md={3} lg="auto" className="mt-2 mt-lg-0">
-            <div className="d-flex justify-content-start align-items-center w-100 flex-wrap">
-              <Form.Label
-                column="sm"
-                style={{ marginBottom: "0", marginRight: "15px" }}
-              >
-                {t("casinoSubCategory.filters.status")}
-              </Form.Label>
-
-              <Form.Select
-                onChange={(e) => {
-                  setPage(1);
-                  setStatus(e?.target?.value);
-                }}
-                value={status}
-                style={{ minWidth: "230px" }}
-              >
-                <option value="all">
-                  {t("casinoSubCategory.filters.all")}
-                </option>
-                <option value="0">
-                  {t("casinoSubCategory.filters.upComing")}
-                </option>
-                <option value="1">
-                  {t("casinoSubCategory.filters.onGoing")}
-                </option>
-                <option value="2">
-                  {t("casinoSubCategory.filters.completed")}
-                </option>
-                <option value="3">
-                  {t("casinoSubCategory.filters.cancelled")}
-                </option>
-              </Form.Select>
-            </div>
-          </Col>
-
-          <Col xs={12} md={3} lg="auto" className="mt-2 mt-lg-0">
-            <div className="d-flex justify-content-start align-items-center w-100 flex-wrap">
-              <Form.Label
-                column="sm"
-                style={{ marginBottom: "0", marginRight: "15px" }}
-              >
-                Joining Amount
-              </Form.Label>
-
-              <Form.Control
-                type="search"
-                value={joiningAmount}
-                placeholder={"Joining Amount"}
-                onChange={(event) => {
-                  const inputValue = event?.target?.value;
-                  if (/^\d*\.?\d*$/.test(inputValue)) {
-                    setPage(1);
-                    setJoiningAmount(inputValue);
-                  }
-                }}
-                style={{ minWidth: "230px" }}
-              />
-            </div>
-          </Col>
-
-          <Col xs={12} md={3} lg="auto" style={{ marginTop: "28px" }}>
-            <Trigger message="Reset Filters" id={"redo"} />
+          <div className="d-flex justify-content-end gap-2 flex-wrap">
             <Button
-              id={"redo"}
-              variant="success"
-              className=""
-              onClick={resetFilters}
+              variant="primary"
+              size="sm"
+              className="tournament-list__action-btn"
+              hidden={isHidden({ module: { key: "Tournaments", value: "C" } })}
+              onClick={() => navigate(AdminRoutes.tournamentCreate)}
             >
-              <FontAwesomeIcon icon={faRedoAlt} />
+              {t("tournaments.createButton")}
             </Button>
-          </Col>
-        </Row>
 
-        <Table
-          bordered
-          striped
-          responsive
-          hover
-          size="sm"
-          className="text-center mt-4"
-        >
-          <thead className="thead-dark">
-            <tr>
-              {tableHeaders.map((h, idx) => (
-                <th
-                  key={idx}
-                  // onClick={() => h.value !== '' && setOrderBy(h.value)}
-                  // className={
-                  //   selected(h)
-                  //     ? 'border-3 border border-blue'
-                  //     : ''
-                  // }
-                  className="border-2 border "
+            <Button
+              variant="primary"
+              size="sm"
+              className="tournament-list__action-btn"
+              hidden={isHidden({ module: { key: "Tournaments", value: "U" } })}
+              onClick={() => navigate(AdminRoutes.ReordertournamentList)}
+            >
+              {t("tournaments.reorder")}
+            </Button>
+          </div>
+        </div>
+
+        <Card className="dashboard-filters mb-4">
+          <Card.Body>
+            <Row className="g-3 align-items-start">
+              <Col xs={12} md={6} lg={4}>
+                <Form.Label>Search</Form.Label>
+                <Form.Control
+                  className="tournament-filters__control"
+                  type="search"
+                  value={search}
+                  placeholder="Search by Title, Id and Entry Coin"
+                  onChange={(event) => {
+                    setPage(1);
+                    setSearch(event?.target?.value?.replace(/[~`!$%@^&*#=)()><?]+/g, ""));
+                  }}
+                />
+              </Col>
+
+              <Col xs={12} md={6} lg={3}>
+                <Form.Label>{t("casinoSubCategory.filters.status")}</Form.Label>
+                <Form.Select
+                  className="tournament-filters__select"
+                  onChange={(e) => {
+                    setPage(1);
+                    setStatus(e?.target?.value);
+                  }}
+                  value={status}
                 >
-                  {t(h.labelKey)}{" "}
-                  {/* {selected(h) &&
-                    (sort === 'ASC'
-                      ? (
-                        <FontAwesomeIcon
-                          style={over ? { color: 'red' } : {}}
-                          icon={faArrowCircleUp}
-                          onClick={() => setSort('DESC')}
-                          onMouseOver={() => setOver(true)}
-                          onMouseLeave={() => setOver(false)}
-                        />
-                      )
-                      : (
-                        <FontAwesomeIcon
-                          style={over ? { color: 'red' } : {}}
-                          icon={faArrowCircleDown}
-                          onClick={() => setSort('ASC')}
-                          onMouseOver={() => setOver(true)}
-                          onMouseLeave={() => setOver(false)}
-                        />
-                      ))} */}
-                </th>
-              ))}
-            </tr>
-          </thead>
+                  <option value="all">{t("casinoSubCategory.filters.all")}</option>
+                  <option value="0">{t("casinoSubCategory.filters.upComing")}</option>
+                  <option value="1">{t("casinoSubCategory.filters.onGoing")}</option>
+                  <option value="2">{t("casinoSubCategory.filters.completed")}</option>
+                  <option value="3">{t("casinoSubCategory.filters.cancelled")}</option>
+                </Form.Select>
+              </Col>
 
-          {loading ? (
-            <tr>
-              <td colSpan={10} className="text-center">
-                <InlineLoader />
-              </td>
-            </tr>
-          ) : (
-            <tbody>
-              {tournamentList && tournamentList.count > 0 ? (
-                tournamentList?.rows?.map(
-                  ({
-                    tournamentId,
-                    title,
-                    entryAmount,
-                    entryCoin,
-                    startDate,
-                    endDate,
-                    status,
-                  }) => {
-                    return (
-                      <tr key={tournamentId}>
-                        <td>{tournamentId}</td>
+              <Col xs={12} md={6} lg={3}>
+                <Form.Label>Joining Amount</Form.Label>
+                <Form.Control
+                  className="tournament-filters__control"
+                  type="search"
+                  value={joiningAmount}
+                  placeholder="Joining Amount"
+                  onChange={(event) => {
+                    const inputValue = event?.target?.value;
+                    if (/^\\d*\\.?\\d*$/.test(inputValue)) {
+                      setPage(1);
+                      setJoiningAmount(inputValue);
+                    }
+                  }}
+                />
+              </Col>
 
-                        <td>
-                          {getDateTime(
-                            convertToTimeZone(startDate, timezoneOffset)
-                          )}
-                        </td>
-                        <td>
-                          {getDateTime(
-                            convertToTimeZone(endDate, timezoneOffset)
-                          )}
-                        </td>
+              <Col xs={12} md={6} lg={2} className="d-flex align-items-end">
+                <div className="tournament-filters__actions w-100">
+                  <div className="flex-grow-1" />
+                  <Trigger message="Reset Filters" id={"redo"} />
+                  <Button id={"redo"} className="tournament-reset-btn" onClick={resetFilters}>
+                    <FontAwesomeIcon icon={faRedoAlt} />
+                  </Button>
+                </div>
+              </Col>
+            </Row>
+          </Card.Body>
+        </Card>
 
-                        <td>
-                          <span
-                            id={title}
-                            style={{
-                              // width: '100px',
-                              cursor: "pointer",
-                            }}
-                            className="d-inline-block text-truncate"
-                          >
-                            {title}
-                          </span>
-                        </td>
-
-                        <td>{formatPriceWithCommas(entryAmount)}</td>
-
-                        <td>
-                          {status === "0" ? (
-                            <span className="text-warning">Upcoming</span>
-                          ) : status === "1" ? (
-                            <span className="text-success">Ongoing</span>
-                          ) : status === "2" ? (
-                            <span className="text-muted">Completed</span>
-                          ) : status === "3" ? (
-                            <span className="text-danger">Cancelled</span>
-                          ) : (
-                            <span>----</span>
-                          )}
-                        </td>
-
-                        <td>
-                          {entryCoin}
-                          {/* ? (
-                            <span className='text-success'>{t('tournaments.activeStatus')}</span>
-                          )
-                          : (
-                            <span className='text-danger'>{t('tournaments.inActiveStatus')}</span>
-                          )} */}
-                        </td>
-
-                        <td>
-                          <Trigger
-                            message={"View"}
-                            id={tournamentId + "view"}
-                          />
-                          <Button
-                            id={tournamentId + "view"}
-                            className="m-1"
-                            size="sm"
-                            variant="info"
-                            onClick={() =>
-                              navigate(
-                                `${AdminRoutes.TournamentDetails.split(
-                                  ":"
-                                ).shift()}${tournamentId}`
-                              )
-                            }
-                            hidden={isHidden({
-                              module: { key: "Tournaments", value: "R" },
-                            })}
-                          >
-                            <FontAwesomeIcon icon={faEye} />
-                          </Button>
-
-                          <Trigger message="Edit" id={tournamentId + "edit"} />
-                          <Button
-                            id={tournamentId + "edit"}
-                            className="m-1"
-                            size="sm"
-                            variant="warning"
-                            hidden={isHidden({
-                              module: { key: "Tournaments", value: "U" },
-                            })}
-                            onClick={() => {
-                              navigate(
-                                `${AdminRoutes.TournamentEdit.split(
-                                  ":"
-                                ).shift()}${tournamentId}`
-                              );
-                            }}
-                            disabled={status === "3" || status === "2"} // Disable if cancelled
-                          >
-                            <FontAwesomeIcon icon={faEdit} />
-                          </Button>
-
-                          <Trigger
-                            message="Cancel Tournament"
-                            id={tournamentId + "cancel"}
-                          />
-                          <Button
-                            className="btn btn-danger m-1"
-                            id={tournamentId + "cancel"}
-                            hidden={isHidden({
-                              module: { key: "Tournaments", value: "D" },
-                            })}
-                            size="sm"
-                            onClick={() => handleActionClick(tournamentId)}
-                            disabled={status === "3" || status === "2"} // Disable if cancelled
-                          >
-                            <FontAwesomeIcon icon={faTrash} />
-                          </Button>
-
-                          <Trigger
-                            message="Duplicate Tournament"
-                            id={tournamentId + "duplicate"}
-                          />
-                          <Button
-                            className="btn btn-secondary m-1"
-                            id={tournamentId + "duplicate"}
-                            hidden={isHidden({
-                              module: { key: "Tournaments", value: "C" },
-                            })}
-                            size="sm"
-                            onClick={() => {
-                              navigate(AdminRoutes.duplicateTournamentCreate, {
-                                state: {
-                                  duplicateTournamentId: tournamentId,
-                                },
-                              });
-                            }}
-                          >
-                            <FontAwesomeIcon icon={faCopy} />
-                          </Button>
-                        </td>
-                      </tr>
-                    );
-                  }
-                )
-              ) : (
+        <div className="dashboard-data-table">
+          <div className="tournament-table-wrap">
+            <Table bordered hover responsive size="sm" className="mb-0 text-center">
+              <thead>
                 <tr>
-                  <td colSpan={7} className="text-danger text-center">
-                    {t("tournaments.noDataFound")}
-                  </td>
+                  {tableHeaders.map((h, idx) => (
+                    <th key={idx} className="sortable">
+                      {t(h.labelKey)}{" "}
+                    </th>
+                  ))}
                 </tr>
-              )}
-            </tbody>
-          )}
-        </Table>
+              </thead>
+
+              <tbody>
+                {loading ? (
+                  <tr>
+                    <td colSpan={tableHeaders.length} className="text-center py-4">
+                      <InlineLoader />
+                    </td>
+                  </tr>
+                ) : tournamentList && tournamentList.count > 0 ? (
+                  tournamentList?.rows?.map(
+                    ({
+                      tournamentId,
+                      title,
+                      entryAmount,
+                      entryCoin,
+                      startDate,
+                      endDate,
+                      status,
+                    }) => {
+                      const statusPill =
+                        status === "0"
+                          ? "tournament-status-pill tournament-status-pill--upcoming"
+                          : status === "1"
+                          ? "tournament-status-pill tournament-status-pill--ongoing"
+                          : status === "2"
+                          ? "tournament-status-pill tournament-status-pill--completed"
+                          : status === "3"
+                          ? "tournament-status-pill tournament-status-pill--cancelled"
+                          : "tournament-status-pill";
+
+                      const statusLabel =
+                        status === "0"
+                          ? "Upcoming"
+                          : status === "1"
+                          ? "Ongoing"
+                          : status === "2"
+                          ? "Completed"
+                          : status === "3"
+                          ? "Cancelled"
+                          : "—";
+
+                      return (
+                        <tr key={tournamentId}>
+                          <td>{tournamentId}</td>
+                          <td>{getDateTime(convertToTimeZone(startDate, timezoneOffset))}</td>
+                          <td>{getDateTime(convertToTimeZone(endDate, timezoneOffset))}</td>
+                          <td>
+                            <span className="d-inline-block text-truncate" style={{ maxWidth: 260 }}>
+                              {title}
+                            </span>
+                          </td>
+                          <td>{formatPriceWithCommas(entryAmount)}</td>
+                          <td>
+                            <span className={statusPill}>{statusLabel}</span>
+                          </td>
+                          <td>{entryCoin}</td>
+                          <td>
+                            <div className="tournament-actions">
+                              <Trigger message={"View"} id={tournamentId + "view"} />
+                              <Button
+                                id={tournamentId + "view"}
+                                className="tournament-icon-btn"
+                                size="sm"
+                                variant="info"
+                                onClick={() =>
+                                  navigate(`${AdminRoutes.TournamentDetails.split(":").shift()}${tournamentId}`)
+                                }
+                                hidden={isHidden({ module: { key: "Tournaments", value: "R" } })}
+                              >
+                                <FontAwesomeIcon icon={faEye} />
+                              </Button>
+
+                              <Trigger message="Edit" id={tournamentId + "edit"} />
+                              <Button
+                                id={tournamentId + "edit"}
+                                className="tournament-icon-btn"
+                                size="sm"
+                                variant="warning"
+                                hidden={isHidden({ module: { key: "Tournaments", value: "U" } })}
+                                onClick={() => {
+                                  navigate(`${AdminRoutes.TournamentEdit.split(":").shift()}${tournamentId}`);
+                                }}
+                                disabled={status === "3" || status === "2"}
+                              >
+                                <FontAwesomeIcon icon={faEdit} />
+                              </Button>
+
+                              <Trigger message="Cancel Tournament" id={tournamentId + "cancel"} />
+                              <Button
+                                className="tournament-icon-btn"
+                                id={tournamentId + "cancel"}
+                                hidden={isHidden({ module: { key: "Tournaments", value: "D" } })}
+                                size="sm"
+                                variant="danger"
+                                onClick={() => handleActionClick(tournamentId)}
+                                disabled={status === "3" || status === "2"}
+                              >
+                                <FontAwesomeIcon icon={faTrash} />
+                              </Button>
+
+                              <Trigger message="Duplicate Tournament" id={tournamentId + "duplicate"} />
+                              <Button
+                                className="tournament-icon-btn"
+                                id={tournamentId + "duplicate"}
+                                hidden={isHidden({ module: { key: "Tournaments", value: "C" } })}
+                                size="sm"
+                                variant="secondary"
+                                onClick={() => {
+                                  navigate(AdminRoutes.duplicateTournamentCreate, {
+                                    state: { duplicateTournamentId: tournamentId },
+                                  });
+                                }}
+                              >
+                                <FontAwesomeIcon icon={faCopy} />
+                              </Button>
+                            </div>
+                          </td>
+                        </tr>
+                      );
+                    }
+                  )
+                ) : (
+                  <tr>
+                    <td colSpan={tableHeaders.length} className="text-center py-4 tournament-empty">
+                      {t("tournaments.noDataFound")}
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            </Table>
+          </div>
+        </div>
+
         {tournamentList?.count !== 0 && (
           <PaginationComponent
             page={tournamentList?.count < page ? setPage(1) : page}
@@ -425,7 +315,7 @@ const Tournaments = () => {
             setLimit={setLimit}
           />
         )}
-      </>
+      </div>
 
       <ConfirmationModal
         setShow={setStatusShow}

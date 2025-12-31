@@ -1,3 +1,161 @@
+// Reuse dashboard “modern” primitives (glass panels, dark inputs, table skin)
+@import "../Dashboard/DashboardCharts/dashboardChart.scss";
+
+.jackpot-page {
+  padding-bottom: 6px;
+}
+
+.jackpot-page__title {
+  margin: 0;
+}
+
+.jackpot-page__card {
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.04) 0%, rgba(0, 0, 0, 0.22) 100%),
+    rgba(26, 26, 26, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.55),
+    0 14px 40px rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(12px) saturate(140%);
+  -webkit-backdrop-filter: blur(12px) saturate(140%);
+}
+
+.jackpot-history-table-wrap {
+  overflow-x: auto;
+}
+
+.jackpot-history-table {
+  min-width: max-content;
+}
+
+// Graph container for Jackpot (uses same class as ScratchCardGraph)
+.bonus-graph-container {
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.04) 0%, rgba(0, 0, 0, 0.22) 100%),
+    rgba(26, 26, 26, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.55),
+    0 14px 40px rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(12px) saturate(140%);
+  -webkit-backdrop-filter: blur(12px) saturate(140%);
+  padding: 18px 20px;
+  max-width: 100%;
+  // Allow control focus rings / shadows to render without getting clipped
+  overflow-x: visible;
+}
+
+.bonus-graph-container .row {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.jackpot-auto-refresh {
+  margin-right: 8px;
+}
+
+// Time duration quick-range pill (make it fluid so it never clips)
+.quick-range-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  width: 100%;
+  min-height: 44px;
+  padding: 10px 12px;
+  border-radius: 14px;
+  background: rgba(0, 0, 0, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.quick-range-wrapper span.text-primary {
+  color: rgba(var(--gs-cta-rgb), 0.95);
+  font-weight: 800;
+}
+
+// react-select dark theme for Jackpot Interval dropdown (scoped)
+.bonus-graph-container {
+  .jg-select__control {
+    min-height: 44px;
+    background-color: rgba(0, 0, 0, 0.35);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 14px;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  }
+
+  .jg-select__control:hover {
+    border-color: rgba(var(--gs-cta-rgb), 0.22);
+  }
+
+  .jg-select__control--is-focused {
+    border-color: rgba(0, 229, 160, 0.35) !important;
+    box-shadow:
+      0 0 0 0.2rem rgba(0, 229, 160, 0.18),
+      inset 0 1px 0 rgba(255, 255, 255, 0.06) !important;
+  }
+
+  .jg-select__value-container {
+    padding: 2px 12px;
+  }
+
+  .jg-select__single-value {
+    color: rgba(255, 255, 255, 0.92);
+    font-weight: 700;
+  }
+
+  .jg-select__placeholder {
+    color: rgba(234, 250, 245, 0.55);
+  }
+
+  .jg-select__menu {
+    background: rgba(18, 18, 18, 0.98);
+    border: 1px solid rgba(0, 229, 160, 0.18);
+    box-shadow: 0 18px 55px rgba(0, 0, 0, 0.55);
+    border-radius: 14px;
+    overflow: hidden;
+  }
+
+  .jg-select__option {
+    color: rgba(234, 250, 245, 0.92);
+    background: transparent;
+  }
+
+  .jg-select__option--is-focused {
+    background: rgba(0, 229, 160, 0.12);
+  }
+
+  .jg-select__option--is-selected {
+    background: rgba(var(--gs-cta-rgb), 0.18);
+  }
+
+  .jg-select__indicator-separator {
+    background-color: rgba(255, 255, 255, 0.10);
+  }
+
+  .jg-select__dropdown-indicator,
+  .jg-select__clear-indicator {
+    color: rgba(234, 250, 245, 0.75);
+  }
+}
+
+.progress-bar-track {
+  height: 4px;
+  background-color: rgba(255, 255, 255, 0.10);
+  margin: 8px 0 16px 0;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(135deg, var(--gs-cta-start) 0%, var(--gs-cta-end) 100%);
+  transition: width 0.3s ease;
+}
+
 .vip-card {
   padding: 21px 20px;
   border-radius: 8px;

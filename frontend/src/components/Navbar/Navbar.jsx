@@ -16,8 +16,6 @@ import {
   faBell,
   faUserAlt,
   faSignOutAlt,
-  faBars,
-  faXmark,
   faTriangleExclamation,
   faCalendarDays,
   faClock,
@@ -38,7 +36,7 @@ import CriticalNotifications from "../Notifications/CriticalNotifications";
 import useCriticalNotifications from "../../pages/NotificationCenter/hooks/useCriticalNotifications";
 import useCheckPermission from "../../utils/checkPermission";
 
-const Navbar = ({ open, setOpen, collapseSidebar, setCollapseSidebar }) => {
+const Navbar = ({ open, collapseSidebar, setCollapseSidebar }) => {
   const { t } = useTranslation(["sidebar"]);
   const navigate = useNavigate();
   const isUserAffiliate = useUserStore((state) => state.isUserAffiliate);
@@ -130,25 +128,6 @@ const Navbar = ({ open, setOpen, collapseSidebar, setCollapseSidebar }) => {
         </div>
 
         <div className="app-navbar__right d-flex align-items-center">
-          {/* Mobile menu toggle (hidden on desktop via CSS) */}
-          <OverlayTrigger
-            key="menu"
-            placement="bottom"
-            overlay={
-              <Tooltip id={`tooltip-menu`}>
-                {!open ? <strong>Open Menu</strong> : <strong>Close Menu</strong>}
-              </Tooltip>
-            }
-          >
-            <Button
-              onClick={() => setOpen((current) => !current)}
-              variant="link"
-              className={`btn menu-btn nav-icon-btn ${open ? 'menu-btn--active' : ''}`}
-            >
-              {!open ? <FontAwesomeIcon icon={faBars} /> : <FontAwesomeIcon icon={faXmark} />}
-            </Button>
-          </OverlayTrigger>
-
           <div className="app-navbar__group">
             <div className="notification-popup">
 

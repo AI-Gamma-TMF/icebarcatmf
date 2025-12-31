@@ -12,31 +12,29 @@ const StaffSCCreditFilters = ({
 }) => {
 
     return (
-        <Row className='mb-3 w-100 m-auto'>
-            <Col xs="12" lg="auto" className="mt-2 mt-lg-0">
-                <div className="d-flex justify-content-start mt-3 align-items-center w-100 flex-wrap">
-                    <Form.Label
-                        column="sm"
-                        style={{ marginBottom: "0", marginRight: "15px" }}
-                    >
-                        Search
-                    </Form.Label>
-                    <Form.Control
-                        type="search"
-                        value={search}
-                        placeholder={"Search by Email or Name"}
-                        onChange={(event) => {
-                            setPage(1);
-                            setSearch(event?.target?.value);
-                        }}
-                        style={{ minWidth: "230px" }}
-                    />
-                </div>
+        <Row className="dashboard-filters admin-coins-filters g-3 align-items-end">
+            <Col xs={12} md={10}>
+                <Form.Label className="form-label">Search</Form.Label>
+                <Form.Control
+                    className="admin-coins-filters__control"
+                    type="search"
+                    value={search}
+                    placeholder="Search by Email or Name"
+                    onChange={(event) => {
+                        setPage(1);
+                        setSearch(event?.target?.value);
+                    }}
+                />
             </Col>
 
-            <Col xs="12" lg="auto" className="mt-2 align-items-end d-flex mt-lg-0">
+            <Col xs={12} md={2} className="d-flex justify-content-end">
                 <Trigger message="Reset Filters" id={"redo"} />
-                <Button id={"redo"} variant="success" onClick={resetFilters}>
+                <Button
+                    id={"redo"}
+                    className="admin-coins-page__reset-btn"
+                    variant="success"
+                    onClick={resetFilters}
+                >
                     <FontAwesomeIcon icon={faRedoAlt} />
                 </Button>
             </Col>

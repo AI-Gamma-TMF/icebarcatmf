@@ -4,6 +4,7 @@ import useBonusReport from "./useBonusReport";
 import { InlineLoader } from "../../../components/Preloader";
 import BonusGraph from "./BonusGraph";
 import { formatAmountWithCommas } from "../../../utils/helper";
+import "./bonusReportStyle.scss";
 
 const BonusReport = () => {
     const {
@@ -13,6 +14,13 @@ const BonusReport = () => {
     } = useBonusReport();
 
     const [accordionOpen, setAccordionOpen] = useState(false);
+
+    const bonusTypes = bonusReportData ? Object.keys(bonusReportData) : [];
+    const firstTypeKey = bonusTypes?.[0];
+    const reportColumns = firstTypeKey
+        ? Object.keys(bonusReportData?.[firstTypeKey] || {})
+        : [];
+    const colCount = (bonusTypes.length > 0 ? 1 : 0) + reportColumns.length;
 
     const handleAccordionToggle = () => {
         setAccordionOpen((prev) => {
@@ -26,71 +34,100 @@ const BonusReport = () => {
 
     return (
         <>
-            <Row className="mb-3">
-                <Col sm={12}><h3>Bonus Report</h3></Col>
-            </Row>
+            <div className="bonus-report-page dashboard-typography">
+                <Row className="d-flex align-items-center mb-2">
+                    <Col sm={12}>
+                        <h3 className="bonus-report-page__title">Bonus Report</h3>
+                        <div className="bonus-report-page__subtitle">
+                            View bonus trends and SC bonus breakdown for the selected time window.
+                        </div>
+                    </Col>
+                </Row>
 
-            <Row className='mt-0'>
-                <Col md={12} sm={12} className='my-3'>
-                    <Card className=' tournament-card p-2'>
-                        <BonusGraph />
-                    </Card>
-                </Col>
-            </Row>
+                <Row className="mt-0">
+                    <Col md={12} sm={12} className="mb-2">
+                        <Card className="p-2 bonus-report-page__card">
+                            <BonusGraph />
+                        </Card>
+                    </Col>
+                </Row>
 
-            <Accordion className="mt-4" activeKey={accordionOpen ? "0" : null}>
-                <Accordion.Item eventKey="0">
-                    <Accordion.Header onClick={handleAccordionToggle}>
-                        Bonus Report Table
-                    </Accordion.Header>
-                    <Accordion.Body>
-                        <p className="text-danger ms-3 mt-1 mb-0" style={{ fontSize: "0.9rem" }}>
-                            Note: This table displays only SC Bonus data.
-                        </p>
-                        <Table bordered striped responsive hover size="sm" className="text-center">
-                            <thead className="thead-dark">
-                                <tr>
-                                    {bonusReportData && Object.keys(bonusReportData)?.length > 0 && (
-                                        <th>Bonus Type</th>
-                                    )}
-                                    {bonusReportData &&
-                                        Object.keys(bonusReportData?.[Object.keys(bonusReportData)[0]] || {})?.map((reportKey, idx) => (
-                                            <th key={idx}>{reportKey.replace(/_/g, ' ')}</th>
-                                        ))}
-                                </tr>
-                            </thead>                                                                                                                
-                            <tbody>                                       
-                                {loading ? (
-                                    <tr>
-                                        <td colSpan={10} className="text-center">
-                                            <InlineLoader />
-                                        </td>
-                                    </tr>
-                                ) : bonusReportData && Object.keys(bonusReportData).length > 0 ? (
-                                    Object.keys(bonusReportData)?.map((bonusTypeKey, idx) => (
-                                        <tr key={idx}>
-                                            <td className="text-capitalize">
-                                                {bonusTypeKey.replace(/([a-z])([A-Z])/g, '$1 $2')}
-                                            </td>
-                                            {Object.keys(bonusReportData[bonusTypeKey])?.map((reportKey, rIdx) => (
-                                                <td key={rIdx}>
-                                                    {formatAmountWithCommas(bonusReportData[bonusTypeKey][reportKey]?.scBonus ?? "-")}
-                                                </td>
+                <Accordion
+                    className="bonus-report-accordion mt-2"
+                    activeKey={accordionOpen ? "0" : null}
+                >
+                    <Accordion.Item eventKey="0">
+                        <Accordion.Header onClick={handleAccordionToggle}>
+                            Bonus Report Table
+                        </Accordion.Header>
+                        <Accordion.Body>
+                            <div className="bonus-report-note">
+                                Note: This table displays only SC Bonus data.
+                            </div>
+
+                            <div className="table-responsive bonus-report-table-wrap">
+                                <Table
+                                    hover
+                                    size="sm"
+                                    className="dashboard-data-table bonus-report-table text-center"
+                                >
+                                    <thead>
+                                        <tr>
+                                            {bonusTypes.length > 0 ? <th>Bonus Type</th> : null}
+                                            {reportColumns.map((reportKey, idx) => (
+                                                <th key={idx}>
+                                                    {reportKey.replace(/_/g, " ")}
+                                                </th>
                                             ))}
                                         </tr>
-                                    ))
-                                ) : (
-                                    <tr>
-                                        <td colSpan={10} className="text-danger text-center">
-                                            No data Found
-                                        </td>
-                                    </tr>
-                                )}
-                            </tbody>
-                        </Table>
-                    </Accordion.Body>
-                </Accordion.Item>
-            </Accordion>
+                                    </thead>
+
+                                    <tbody>
+                                        {loading && bonusTypes.length === 0 ? (
+                                            <tr>
+                                                <td colSpan={Math.max(colCount, 1)} className="text-center">
+                                                    <InlineLoader />
+                                                </td>
+                                            </tr>
+                                        ) : bonusTypes.length > 0 ? (
+                                            <>
+                                                {bonusTypes.map((bonusTypeKey) => (
+                                                    <tr key={bonusTypeKey}>
+                                                        <td className="text-capitalize">
+                                                            {bonusTypeKey.replace(/([a-z])([A-Z])/g, "$1 $2")}
+                                                        </td>
+                                                        {reportColumns.map((reportKey) => (
+                                                            <td key={reportKey}>
+                                                                {formatAmountWithCommas(
+                                                                    bonusReportData?.[bonusTypeKey]?.[reportKey]?.scBonus ?? "-"
+                                                                )}
+                                                            </td>
+                                                        ))}
+                                                    </tr>
+                                                ))}
+
+                                                {loading ? (
+                                                    <tr>
+                                                        <td colSpan={Math.max(colCount, 1)} className="text-center">
+                                                            <InlineLoader />
+                                                        </td>
+                                                    </tr>
+                                                ) : null}
+                                            </>
+                                        ) : (
+                                            <tr>
+                                                <td colSpan={Math.max(colCount, 1)} className="text-center">
+                                                    <span className="bonus-report-empty">No data Found</span>
+                                                </td>
+                                            </tr>
+                                        )}
+                                    </tbody>
+                                </Table>
+                            </div>
+                        </Accordion.Body>
+                    </Accordion.Item>
+                </Accordion>
+            </div>
         </>
     );
 };

@@ -34,6 +34,7 @@ import { formatNumber } from '../../../utils/helper'
 import useRedeemReport from './useRedeemReport'
 import RedeemGraphInfoPopup from './RedeemGraphInfo'
 import RedeemReport from './RedeemReport'
+import './redeemRateReport.scss'
 
 ChartJS.register(
   CategoryScale,
@@ -179,14 +180,9 @@ const RedeemGraph = () => {
 
   return (
     <>
-      <div className='bonus-graph-container'>
-        <Row className='mb-3'>
-          <Col
-            xs={12}
-            md={12}
-            lg={3}
-            className='mb-3'
-          >
+      <div className='redeem-graph-container'>
+        <Row className='mb-3 g-3 align-items-start'>
+          <Col xs={12} md={6} lg={4}>
             <label>Redemption Metrics</label>
             <GraphYDropDown
               jackpotMetrics={jackpotMetrics}
@@ -194,58 +190,34 @@ const RedeemGraph = () => {
             />
           </Col>
 
-          <Col
-            xs={12}
-            md={12}
-            lg={6}
-            xl={5}
-            className='mb-3'
-          >
-            <div className='d-flex flex-column gap-2'>
-              <div className='d-flex align-items-center gap-3'>
-                <div>
-                  <label>Start Date</label>
-                  <Datetime
-                    value={startDate ? startDate : ''}
-                    onChange={(date) => setStartDate(date)}
-                    dateFormat='MM-DD-YYYY'
-                    timeFormat={false}
-                    inputProps={{ readOnly: true }}
-                  />
-                </div>
-                <div>
-                  <label>End Date</label>
-                  <Datetime
-                    value={endDate ? endDate : ''}
-                    onChange={(date) => setEndDate(date)}
-                    dateFormat='MM-DD-YYYY'
-                    timeFormat={false}
-                    inputProps={{ readOnly: true }}
-                  />
-                </div>
-              </div>
-              {dateError && (
-                <div
-                  className='text-danger fw-bold'
-                  style={{ marginTop: '-8px', fontSize: '12px' }}
-                >
-                  {dateError}
-                </div>
-              )}
-            </div>
+          <Col xs={12} sm={6} md={6} lg={3}>
+            <label>Start Date</label>
+            <Datetime
+              value={startDate ? startDate : ''}
+              onChange={(date) => setStartDate(date)}
+              dateFormat='MM-DD-YYYY'
+              timeFormat={false}
+              inputProps={{ readOnly: true }}
+            />
           </Col>
-          <Col 
-          xs={12}
-            md={12}
-            lg={4}
-            xl={4}
-            className='mb-3'
-            >
+
+          <Col xs={12} sm={6} md={6} lg={3}>
+            <label>End Date</label>
+            <Datetime
+              value={endDate ? endDate : ''}
+              onChange={(date) => setEndDate(date)}
+              dateFormat='MM-DD-YYYY'
+              timeFormat={false}
+              inputProps={{ readOnly: true }}
+            />
+          </Col>
+
+          <Col xs={12} sm={6} md={6} lg={2} className="redeem-csv-col">
             <Trigger message="Download as CSV" id={"csv"} />
             <Button
               id={"csv"}
               variant="success"
-              style={{ marginTop: "18px" }}
+              className="redeem-csv-btn"
               disabled={
                 redeemReportData?.count === 0 ||
                 redeemReportData?.count === null ||
@@ -260,17 +232,26 @@ const RedeemGraph = () => {
                   aria-hidden="true"
                 ></span>
               ) : (
-                <FontAwesomeIcon icon={faFileDownload} />
+                <>
+                  <FontAwesomeIcon icon={faFileDownload} /> CSV
+                </>
               )}
             </Button>
           </Col>
+
+          {dateError && (
+            <Col xs={12}>
+              <div className='redeem-date-error text-danger fw-bold'>
+                {dateError}
+              </div>
+            </Col>
+          )}
         </Row>
       </div>
 
       <Col
         xs={12}
-        className='mb-3'
-        style={{ marginTop: '25px', display: 'flex', justifyContent: 'end' }}
+        className='redeem-graph__info-wrap mb-3'
       >
         <Trigger
           message='View Graph Info'
@@ -280,20 +261,7 @@ const RedeemGraph = () => {
           id='infoBoxTrigger'
           variant='outline-primary'
           onClick={() => setShowInfoBox((prev) => !prev)}
-          className='ms-2'
-          style={{
-            width: '32px',
-            height: '32px',
-            padding: 0,
-            borderRadius: '50%',
-            backgroundColor: '#CCCCCC',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            color: '#fff',
-            border: 'none',
-            boxShadow: '0 1px 2px rgba(0, 0, 0, 0.1)'
-          }}
+          className='redeem-info-btn ms-2'
         >
           <FontAwesomeIcon icon={faInfo} />
         </Button>
@@ -302,31 +270,11 @@ const RedeemGraph = () => {
       <Row>
         <Col xs={12}>
           {jackpotMetrics?.length === 0 ? (
-            <div
-              className='text-center'
-              style={{
-                padding: '50px',
-                height: '450px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                color: 'red'
-              }}
-            >
+            <div className='redeem-chart-empty'>
               No Metrics selected. Please select at least one.
             </div>
           ) : loading ? (
-            <div
-              className='loader'
-              style={{
-                textAlign: 'center',
-                padding: '50px',
-                height: '450px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center'
-              }}
-            >
+            <div className='redeem-chart-loader'>
               <Spinner animation='border' />
             </div>
           ) : (
@@ -347,7 +295,7 @@ const RedeemGraph = () => {
       </Row>
 
       <Row className='mt-5'>
-        <Accordion activeKey={isAccordionOpen ? '0' : null}>
+        <Accordion className="redeem-report-accordion" activeKey={isAccordionOpen ? '0' : null}>
           <Accordion.Item eventKey='0'>
             <Accordion.Header onClick={handleAccordionToggle}>
               Redeem Report

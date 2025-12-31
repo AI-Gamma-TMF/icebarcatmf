@@ -39,10 +39,7 @@ const customStyles = {
     ...provided,
     zIndex: 2000,
   }),
-  container: (provided) => ({
-    ...provided,
-    width: "500px",
-  }),
+  container: (provided) => ({ ...provided, width: "100%" }),
 };
 
 // ✅ Custom Multi-Select Value Editor
@@ -447,14 +444,13 @@ export const Queries = ({
       </Row>
 
       <Row>
-        <Col xs={4} className="mb-3">
+        <Col xs={12} md={6} className="mb-3">
           <OverlayTrigger
             placement="top"
             overlay={<Tooltip id="tooltip-active">Active</Tooltip>}
           >
             <div
-              className="d-flex align-items-center  rounded p-2 justify-content-between"
-              style={{ border: "0.0625rem solid #d1d7e0" }}
+              className="redeem-rule-toggle d-flex align-items-center rounded p-2 justify-content-between"
             >
               <p className="mb-0">Active</p>
 
@@ -476,14 +472,13 @@ export const Queries = ({
           />
         </Col>
 
-        <Col xs={4} className="mb-3">
+        <Col xs={12} md={6} className="mb-3">
           <OverlayTrigger
             placement="top"
             overlay={<Tooltip id="tooltip-subscribe">Subscribe</Tooltip>}
           >
             <div
-              className="d-flex align-items-center  rounded p-2 justify-content-between"
-              style={{ border: "0.0625rem solid #d1d7e0" }}
+              className="redeem-rule-toggle d-flex align-items-center rounded p-2 justify-content-between"
             >
               <p className="mb-0">Subscriber Only</p>
 
@@ -539,7 +534,7 @@ export const Queries = ({
             }
             onQueryChange={setQuery}
             controlClassnames={{
-              queryBuilder: "queryBuilder-branches justifiedLayout",
+              queryBuilder: "queryBuilder-branches justifiedLayout redeem-rule-builder",
             }}
             controlElements={{
               valueEditor: (props) => (
@@ -549,13 +544,6 @@ export const Queries = ({
                   setFocusedField={setFocusedField}
                 />
               ),
-            }}
-            // 🟢 Inject Multi-Select
-            style={{
-              backgroundColor: "#f8f9fa",
-              padding: "20px",
-              borderRadius: "10px",
-              border: "2px solid #007bff",
             }}
           />
         </QueryBuilderBootstrap>
@@ -570,34 +558,18 @@ export const Queries = ({
           <h5>Rules Preview:</h5>
         </Col>
       </Row>
-      <pre
-        style={{
-          backgroundColor: "#f4f4f4",
-          padding: "10px",
-          borderRadius: "5px",
-        }}
-      >
-        <p
-          style={{
-            fontFamily: "monospace",
-            fontSize: "16px",
-            color: "#333",
-            margin: 0,
-          }}
-        >
-          {formatQuery(query, "sql")}
-        </p>
+      <pre className="redeem-rule-preview">
+        <code>{formatQuery(query, "sql")}</code>
       </pre>
 
       {/* <pre>
         <code>{JSON.stringify(cleanQuery(query), null, 2)}</code>
       </pre> */}
 
-      <div className="mt-4 d-flex justify-content-between align-items-center">
+      <div className="mt-4 redeem-rule-actions">
         <Button
           variant="warning"
           onClick={() => navigate(AdminRoutes.RedeemRulelisting)}
-          style={{ height: "40px", width: "100px" }}
         >
           Cancel
         </Button>
@@ -608,7 +580,6 @@ export const Queries = ({
           disabled={
             createLoading || (tempdata ? (hasChanges() ? true : false) : false)
           }
-          style={{ height: "40px", width: "100px" }}
         >
           Submit
           {createLoading && (

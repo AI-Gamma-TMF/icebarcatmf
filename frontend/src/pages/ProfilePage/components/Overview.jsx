@@ -5,6 +5,7 @@ import { ErrorMessage, Form, Formik } from 'formik'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { adminProfileSchema } from '../schema'
+import '../profile.scss'
 
 const Overview = ({
   details,
@@ -25,14 +26,15 @@ const Overview = ({
     <>
       <Row className='my-n2 pt-3'>
         <Col sm={12} className='my-2'>
-          <div className='text-right m-n1'>
-            <button
-              type='button' className='m-1 btn btn-warning'
-              onClick={() => {
-                setEditable(true)
-              }}
-            >{t('editButton')}
-            </button>
+          <div className='profile-actions'>
+            <Button
+              type='button'
+              variant='success'
+              className='profile-action-btn'
+              onClick={() => setEditable(true)}
+            >
+              {t('editButton')}
+            </Button>
           </div>
         </Col>
 
@@ -65,7 +67,7 @@ const Overview = ({
                     {details && constant.map(({ key, value, subValue, edit }, index) => {
                       return (
                         <Col className="mb-3 col-lg-6 col-12" key={index} hidden={(details?.adminRoleId === 1 || details?.roleId === 1) ? key === 'group' : false}>
-                          <div className='bg-light py-2 px-3 rounded'>
+                          <div className='profile-field'>
                             <label className='fw-bold'>{t(`overviewHeaders.${key}`) || 'N/A'}</label>
                             <span className='mb-0'>
                               {key === 'status'
@@ -83,9 +85,10 @@ const Overview = ({
                                           value={values?.[value]}
                                           onChange={handleChange}
                                           onBlur={handleBlur}
+                                          className='profile-field__control'
                                         />
                                         {value.endsWith('Password') && (edit && editable) &&
-                                          <InputGroup.Text className='b-1'>
+                                          <InputGroup.Text className='profile-field__addon'>
                                             <FontAwesomeIcon
                                               icon={type[`${value}`] === 'password' ? faEyeSlash : faEye}
                                               onClick={() => {
@@ -120,11 +123,9 @@ const Overview = ({
                     <Button
                       variant='success'
                       onClick={handleSubmit}
-                      className='ml-2'
+                      className='profile-primary-btn'
                       hidden={!editable}
                       disabled={loading}
-                      style={{marginLeft:"18px"}}
-                     
                     >
                       {t('submitButton')}
                       {loading && (
@@ -144,13 +145,15 @@ const Overview = ({
           </Formik>
         }
         <Col sm={12} className='my-2'>
-          <div className='text-left m-n1'>
-            <button
-              type='button' className='btn btn-warning'
+          <div className='profile-actions profile-actions--left'>
+            <Button
+              type='button'
+              variant={adminDetails?.authEnable ? 'danger' : 'warning'}
+              className='profile-action-btn'
               onClick={adminDetails?.authEnable ? disable2FA : openQRModalToggle}
-                            
+              disabled={isGetOtpLoading}
             >
-              {isGetOtpLoading ?
+              {isGetOtpLoading ? (
                 <Spinner
                   as='span'
                   animation='border'
@@ -158,9 +161,12 @@ const Overview = ({
                   role='status'
                   aria-hidden='true'
                 />
-                : adminDetails?.authEnable ? 'Disable 2FA' : 'Enable 2FA'
-              }
-            </button>
+              ) : adminDetails?.authEnable ? (
+                'Disable 2FA'
+              ) : (
+                'Enable 2FA'
+              )}
+            </Button>
           </div>
         </Col>
       </Row>

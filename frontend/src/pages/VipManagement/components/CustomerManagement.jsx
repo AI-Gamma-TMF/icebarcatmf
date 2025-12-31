@@ -5,7 +5,7 @@ import {
   faFileUpload,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Row, Table, Button, Col, Form } from "@themesberg/react-bootstrap";
+import { Row, Table, Button, Col, Form, Card } from "@themesberg/react-bootstrap";
 import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -19,6 +19,7 @@ import Trigger from "../../../components/OverlayTrigger";
 import PaginationComponent from "../../../components/Pagination";
 import { InlineLoader } from "../../../components/Preloader";
 import "./_vip.scss";
+import "./vipCustomerManagement.scss";
 import { toast } from "../../../components/Toast";
 import {
   errorHandler,
@@ -117,91 +118,26 @@ const CustomerManagement = () => {
 
   return (
     <>
-      <Row className="d-flex justify-content-between align-items-center">
-        <Col sm={6} lg={3}>
-          <h3>Customer Management</h3>
-        </Col>
-      </Row>
-      <Row className="mt-3">
-        <Col sm={6} lg={3}>
-          <Form.Label>Search Player</Form.Label>
-          <SearchBar search={search} setSearch={setSearch} />
-        </Col>
-        <Col sm={6} lg={2}>
-          <Form.Group>
-            <Form.Label>Player Rating</Form.Label>
-            <Form.Select
-              onChange={(event) => {
-                setPage(1);
-                setRatingFilter(event?.target?.value);
-              }}
-            >
-              {internalTierRating.map((rating, _index) => (
-                <option key={rating.value} value={rating.value}>
-                  {rating.label}
-                </option>
-              ))}
-            </Form.Select>
-          </Form.Group>
-        </Col>
-        <Col sm={6} lg={2}>
-          <Form.Group>
-            <Form.Label>Final VIP status</Form.Label>
-            <Form.Select
-              onChange={(event) => {
-                setPage(1);
-                setVipStatus(event?.target?.value);
-              }}
-            >
-              <option value="">All</option>
-              <option value="approved">Approved VIP</option>
-              <option value="rejected">Revoked VIP</option>
-            </Form.Select>
-          </Form.Group>
-        </Col>
-        {!isHidden({ module: { key: "VipManagedBy", value: "U" } }) && (
-          <Col sm={6} lg={2}>
-            <Form.Group>
-              <Form.Label>Managed By</Form.Label>
-              <Form.Select
-                onChange={(event) => {
-                  setPage(1);
-                  setManagedBySearch(event?.target?.value);
-                }}
-              >
-                <option value="">All</option>
-                {!isVipManagersLoading &&
-                  vipManagers?.map((manager) => (
-                    <option
-                      key={manager?.adminUserId}
-                      value={manager?.adminUserId}
-                    >
-                      {manager.firstName} {manager?.lastName} (Staff Id -{" "}
-                      {manager?.adminUserId})
-                    </option>
-                  ))}
-              </Form.Select>
-            </Form.Group>
+      <div className="vip-customer-page dashboard-typography">
+        <Row className="vip-customer-page__header align-items-center mb-2">
+          <Col xs={12} md={8}>
+            <h3 className="vip-customer-page__title">Customer Management</h3>
+            <div className="vip-customer-page__subtitle">
+              Manage VIP statuses and managed-by assignments. Import CSV for bulk updates.
+            </div>
           </Col>
-        )}
-        {!isHidden({ module: { key: "VipManagedBy", value: "U" } }) && (
-          <>
-            <Col
-              sm={6}
-              lg={1}
-              style={{ marginTop: "1rem" }}
-              className="ms-auto d-flex justify-content-end align-items-center"
-            >
+          {!isHidden({ module: { key: "VipManagedBy", value: "U" } }) ? (
+            <Col xs={12} md={4} className="vip-customer-page__actions">
               <Trigger
                 message="Import .csv with column title userId and managedBy and both are mandatory for bulk user assignment"
-                id={"csvFileInput"}
+                id={"vip-customer-csv-import"}
               />
               <Button
                 variant="secondary"
-                // className="ml-4 me-4"
+                className="vip-customer-page__icon-btn"
                 onClick={handleReplaceCsvClick}
                 type="button"
-                id={"csvFileInput"}
+                id={"vip-customer-csv-import"}
               >
                 <FontAwesomeIcon icon={faFileUpload} />
               </Button>
@@ -210,163 +146,209 @@ const CustomerManagement = () => {
                 accept=".csv"
                 ref={fileInputRef}
                 onChange={handleImportChange}
-                style={{ display: "none" }} // Hide the file input
+                style={{ display: "none" }}
               />
-            </Col>
-            <Col sm={6} lg={1} style={{ marginTop: "2rem" }}>
+
               <SampleCSVManagedBy />
             </Col>
-          </>
-        )}
-      </Row>
-      <Table
-        bordered
-        striped
-        responsive
-        hover
-        size="sm"
-        className="text-center mt-3"
-      >
-        <thead className="thead-dark">
-          <tr style={{ boxShadow: "0 4px 4px 0 #797979", borderRadius: "7px" }}>
-            {customerHeaders.map((header, index) => (
-              <th
-                key={header.value}
-                onClick={() =>
-                  header.value !== "managedBy" &&
-                  header.value !== "status" &&
-                  setOrderBy(header.value)
-                }
-                className={
-                  selected(header) ? "border-3 border border-blue" : ""
-                }
-              >
-                {header.labelKey}{" "}
-                {selected(header) &&
-                  (sort === "asc" ? (
-                    <FontAwesomeIcon
-                      style={over ? { color: "red" } : {}}
-                      icon={faArrowCircleUp}
-                      onClick={() => setSort("desc")}
-                      onMouseOver={() => setOver(true)}
-                      onMouseLeave={() => setOver(false)}
-                    />
-                  ) : (
-                    <FontAwesomeIcon
-                      style={over ? { color: "red" } : {}}
-                      icon={faArrowCircleDown}
-                      onClick={() => setSort("asc")}
-                      onMouseOver={() => setOver(true)}
-                      onMouseLeave={() => setOver(false)}
-                    />
-                  ))}
-              </th>
-            ))}
-          </tr>
-        </thead>
+          ) : null}
+        </Row>
 
-        <tbody>
-          {isLoading ? (
-            <tr>
-              <td colSpan={10} className="text-center">
-                <InlineLoader />
-              </td>
-            </tr>
-          ) : vipPlayerListing && vipPlayerListing?.users?.rows.length > 0 ? (
-            vipPlayerListing?.users?.rows.map(
-              ({
-                userId,
-                username,
-                email,
-                UserInternalRating,
-                UserTier,
-                status,
-              }) => {
-                return (
-                  <tr key={userId}>
-                    <td
-                      className="text-link"
-                      style={{ cursor: "pointer" }}
-                      onClick={() => handleNavigatePlayerDetails(userId)}
-                    >
-                      {userId || "NA"}
-                    </td>
-                    <td
-                      className="text-link"
-                      style={{ cursor: "pointer" }}
-                      onClick={() => handleNavigatePlayerDetails(userId)}
-                    >
-                      {" "}
-                      {username || "NA"}
-                    </td>
-                    <td
-                      className="text-link"
-                      style={{ cursor: "pointer" }}
-                      onClick={() => handleNavigatePlayerDetails(userId)}
-                    >
-                      {email || "NA"}
-                    </td>
-                    <td>{UserInternalRating?.rating}</td>
-                    <td>{UserTier?.tierName || "NA"}</td>
-                    <td>
-                      <Form.Select
-                        className={`${UserInternalRating?.vipStatus}`}
-                        onChange={(e) => handleSelect(e, userId)}
-                        value={UserInternalRating?.vipStatus}
-                        disabled={isHidden({
-                          module: { key: "VipManagement", value: "U" },
-                        })}
-                      >
-                        <option value="" hidden>
-                          Select Status
+        <Card className="vip-customer-page__filters dashboard-filters p-3 mb-3">
+          <Row className="g-3 align-items-start">
+            <Col xs={12} md={6} lg={4}>
+              <Form.Label className="form-label">Search Player</Form.Label>
+              <SearchBar search={search} setSearch={setSearch} />
+            </Col>
+
+            <Col xs={12} md={6} lg={2}>
+              <Form.Group>
+                <Form.Label className="form-label">Player Rating</Form.Label>
+                <Form.Select
+                  className="vip-customer-page__select"
+                  onChange={(event) => {
+                    setPage(1);
+                    setRatingFilter(event?.target?.value);
+                  }}
+                >
+                  {internalTierRating.map((rating) => (
+                    <option key={rating.value} value={rating.value}>
+                      {rating.label}
+                    </option>
+                  ))}
+                </Form.Select>
+              </Form.Group>
+            </Col>
+
+            <Col xs={12} md={6} lg={2}>
+              <Form.Group>
+                <Form.Label className="form-label">Final VIP Status</Form.Label>
+                <Form.Select
+                  className="vip-customer-page__select"
+                  onChange={(event) => {
+                    setPage(1);
+                    setVipStatus(event?.target?.value);
+                  }}
+                >
+                  <option value="">All</option>
+                  <option value="approved">Approved VIP</option>
+                  <option value="rejected">Revoked VIP</option>
+                </Form.Select>
+              </Form.Group>
+            </Col>
+
+            {!isHidden({ module: { key: "VipManagedBy", value: "U" } }) ? (
+              <Col xs={12} md={6} lg={4}>
+                <Form.Group>
+                  <Form.Label className="form-label">Managed By</Form.Label>
+                  <Form.Select
+                    className="vip-customer-page__select"
+                    onChange={(event) => {
+                      setPage(1);
+                      setManagedBySearch(event?.target?.value);
+                    }}
+                  >
+                    <option value="">All</option>
+                    {!isVipManagersLoading &&
+                      vipManagers?.map((manager) => (
+                        <option
+                          key={manager?.adminUserId}
+                          value={manager?.adminUserId}
+                        >
+                          {manager.firstName} {manager?.lastName} (Staff Id - {manager?.adminUserId})
                         </option>
-                        <option value="approved">Approved VIP</option>
-                        <option value="rejected">Revoked VIP</option>
-                      </Form.Select>
-                    </td>
-                    <td
-                      className={
-                        status === "Active" ? "text-success" : "text-danger"
-                      }
-                    >
-                      {status}
-                    </td>
-                    <td>
-                      <Form.Select
-                        onChange={(e) => handleSelectManager(e, userId)}
-                        value={UserInternalRating?.managedBy || ""}
-                        disabled={isHidden({
-                          module: { key: "VipManagedBy", value: "U" },
-                        })}
+                      ))}
+                  </Form.Select>
+                </Form.Group>
+              </Col>
+            ) : null}
+          </Row>
+        </Card>
+
+        <div className="vip-customer-page__table-wrap table-responsive dashboard-table">
+          <Table hover size="sm" className="dashboard-data-table vip-customer-table text-center">
+            <thead>
+              <tr>
+                {customerHeaders.map((header) => (
+                  <th
+                    key={header.value}
+                    onClick={() =>
+                      header.value !== "managedBy" &&
+                      header.value !== "status" &&
+                      setOrderBy(header.value)
+                    }
+                    className={selected(header) ? "border-3 border border-blue" : ""}
+                    style={{ cursor: "pointer" }}
+                  >
+                    {header.labelKey}{" "}
+                    {selected(header) &&
+                      (sort === "asc" ? (
+                        <FontAwesomeIcon
+                          style={over ? { color: "red" } : {}}
+                          icon={faArrowCircleUp}
+                          onClick={() => setSort("desc")}
+                          onMouseOver={() => setOver(true)}
+                          onMouseLeave={() => setOver(false)}
+                        />
+                      ) : (
+                        <FontAwesomeIcon
+                          style={over ? { color: "red" } : {}}
+                          icon={faArrowCircleDown}
+                          onClick={() => setSort("asc")}
+                          onMouseOver={() => setOver(true)}
+                          onMouseLeave={() => setOver(false)}
+                        />
+                      ))}
+                  </th>
+                ))}
+              </tr>
+            </thead>
+
+            <tbody>
+              {isLoading ? (
+                <tr>
+                  <td colSpan={customerHeaders.length} className="text-center">
+                    <InlineLoader />
+                  </td>
+                </tr>
+              ) : vipPlayerListing && vipPlayerListing?.users?.rows.length > 0 ? (
+                vipPlayerListing?.users?.rows.map(
+                  ({ userId, username, email, UserInternalRating, UserTier, status }) => (
+                    <tr key={userId}>
+                      <td
+                        className="text-link"
+                        style={{ cursor: "pointer" }}
+                        onClick={() => handleNavigatePlayerDetails(userId)}
                       >
-                        <option value="" hidden>
-                          Select Admin
-                        </option>
-                        {!isVipManagersLoading &&
-                          vipManagers?.map((manager) => (
-                            <option
-                              key={manager?.adminUserId}
-                              value={manager?.adminUserId}
-                            >
-                              {manager.firstName} {manager?.lastName} (Staff Id
-                              - {manager?.adminUserId})
-                            </option>
-                          ))}
-                      </Form.Select>
-                    </td>
-                  </tr>
-                );
-              }
-            )
-          ) : (
-            <tr>
-              <td colSpan={7} className="text-danger text-center">
-                No data found
-              </td>
-            </tr>
-          )}
-        </tbody>
-      </Table>
+                        {userId || "NA"}
+                      </td>
+                      <td
+                        className="text-link"
+                        style={{ cursor: "pointer" }}
+                        onClick={() => handleNavigatePlayerDetails(userId)}
+                      >
+                        {username || "NA"}
+                      </td>
+                      <td
+                        className="text-link"
+                        style={{ cursor: "pointer" }}
+                        onClick={() => handleNavigatePlayerDetails(userId)}
+                      >
+                        {email || "NA"}
+                      </td>
+                      <td>{UserInternalRating?.rating}</td>
+                      <td>{UserTier?.tierName || "NA"}</td>
+                      <td>
+                        <Form.Select
+                          className={`vip-customer-page__row-select ${UserInternalRating?.vipStatus || ""}`}
+                          onChange={(e) => handleSelect(e, userId)}
+                          value={UserInternalRating?.vipStatus}
+                          disabled={isHidden({ module: { key: "VipManagement", value: "U" } })}
+                        >
+                          <option value="" hidden>
+                            Select Status
+                          </option>
+                          <option value="approved">Approved VIP</option>
+                          <option value="rejected">Revoked VIP</option>
+                        </Form.Select>
+                      </td>
+                      <td className={status === "Active" ? "text-success" : "text-danger"}>
+                        {status}
+                      </td>
+                      <td>
+                        <Form.Select
+                          className="vip-customer-page__row-select"
+                          onChange={(e) => handleSelectManager(e, userId)}
+                          value={UserInternalRating?.managedBy || ""}
+                          disabled={isHidden({ module: { key: "VipManagedBy", value: "U" } })}
+                        >
+                          <option value="" hidden>
+                            Select Admin
+                          </option>
+                          {!isVipManagersLoading &&
+                            vipManagers?.map((manager) => (
+                              <option
+                                key={manager?.adminUserId}
+                                value={manager?.adminUserId}
+                              >
+                                {manager.firstName} {manager?.lastName} (Staff Id - {manager?.adminUserId})
+                              </option>
+                            ))}
+                        </Form.Select>
+                      </td>
+                    </tr>
+                  )
+                )
+              ) : (
+                <tr>
+                  <td colSpan={customerHeaders.length} className="text-center">
+                    <span className="vip-customer-page__empty">No data found</span>
+                  </td>
+                </tr>
+              )}
+            </tbody>
+          </Table>
+        </div>
       {vipPlayerListing?.users?.count !== 0 && (
         <PaginationComponent
           page={vipPlayerListing?.users?.count < page ? setPage(1) : page}
@@ -376,6 +358,7 @@ const CustomerManagement = () => {
           setLimit={setLimit}
         />
       )}
+      </div>
       {vipStatusModal && (
         <VipStatusConfirmationModal
           setShow={setVipStatusModal}

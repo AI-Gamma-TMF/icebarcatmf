@@ -3,7 +3,8 @@ import {
   Button,
   Row,
   Col,
-  Table
+  Table,
+  Card
 } from "@themesberg/react-bootstrap";
 import { tableHeaders, STATUS_LABELS } from "./constant";
 import { getDateTime } from "../../utils/dateFormatter";
@@ -17,7 +18,7 @@ import PaginationComponent from "../../components/Pagination";
 import { InlineLoader } from "../../components/Preloader";
 import { ConfirmationModal, DeleteConfirmationModal } from "../../components/ConfirmationModal";
 import { ReuseConfirmationModal } from "./component/ReuseConfirmationModal";
-import { formatPriceWithCommas, getFormattedTimeZoneOffset } from "../../utils/helper";
+import { formatPriceWithCommas } from "../../utils/helper";
 import useCheckPermission from "../../utils/checkPermission";
 import usePromoCodeListing from "./hooks/usePromoCodeListing";
 import ImportCsvModal from "../EmailCenter/components/importCsvModel";
@@ -25,6 +26,7 @@ import ImportCsvModal from "../EmailCenter/components/importCsvModel";
 import { getItem } from "../../utils/storageUtils";
 import ImortedPromocodesCsvModel from "./component/ImortedPromocodesCsvModel";
 import PurchasePromocodeFilters from "./component/PromocodeFilters/PurchasePromocodeFilters";
+import "./promocodeListing.scss";
 
 const PromoCodeBonus = () => {
   const navigate = useNavigate()
@@ -103,35 +105,36 @@ const PromoCodeBonus = () => {
                                                           
   return (
     <>
-      <Row className="mb-2">
-        <Col>
-          <h3>Purchase Promo Codes</h3>
-        </Col>
-        <Col>
-          <div className="d-flex justify-content-end">
+      <div className="dashboard-typography purchase-promocode-page">
+        <div className="d-flex flex-wrap justify-content-between align-items-start gap-3 mb-3">
+          <div>
+            <h3 className="purchase-promocode-page__title">Purchase Promo Codes</h3>
+            <p className="purchase-promocode-page__subtitle">
+              Create and manage purchase promo codes and their status
+            </p>
+          </div>
+
+          <div className="purchase-promocode-page__actions">
             <Button
-              variant="success"
-              hidden={isHidden({ module: { key: 'Promocode', value: 'C' } })}
+              variant="primary"
+              className="purchase-promocode-page__create-btn"
+              hidden={isHidden({ module: { key: "Promocode", value: "C" } })}
               size="sm"
-              style={{ marginRight: "10px", width: "70px", height: "40px" }}
               onClick={() => {
                 navigate(AdminRoutes.PromoCodeCreate);
               }}
             >
               Create
             </Button>
-            <div style={{ marginRight: "10px" }}>
-              <Trigger message='Please download the CSV file, fill in the details, and then import it here.' id={"csvFileInput"} />
-              <Button
-                variant="primary"
-                style={{
-                  height: "40px",
-                  width: "100px",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
 
+            <div>
+              <Trigger
+                message="Please download the CSV file, fill in the details, and then import it here."
+                id={"csvFileInput"}
+              />
+              <Button
+                variant="secondary"
+                className="purchase-promocode-page__action-btn"
                 size="sm"
                 onClick={handleImportClick}
                 type="button"
@@ -147,15 +150,15 @@ const PromoCodeBonus = () => {
                 accept=".csv"
                 ref={fileInputRef}
                 onChange={handleImportChange}
-                style={{ display: "none" }} // Hide the file input
+                style={{ display: "none" }}
               />
             </div>
-            {/* </Col> */}
+
             <Button
-              variant="warning"
-              hidden={isHidden({ module: { key: 'Promocode', value: 'C' } })}
+              variant="outline-warning"
+              className="purchase-promocode-page__action-btn"
+              hidden={isHidden({ module: { key: "Promocode", value: "C" } })}
               size="sm"
-              style={{ marginRight: "10px", height: "40px" }}
               onClick={() => {
                 navigate(AdminRoutes.PromocodeArchived);
               }}
@@ -166,87 +169,85 @@ const PromoCodeBonus = () => {
             <Trigger message="Click to download a sample CSV file for reference" id="sampleCsvTooltip" />
             <Button
               id="sampleCsvTooltip"
-              variant=""
-              size="lg"
-              style={{ marginRight: "10px", height: "40px" }}
+              className="purchase-promocode-page__icon-btn"
+              variant="link"
+              size="sm"
               onClick={handleDownload}
               hidden={isHidden({
                 module: { key: "Promocode", value: "C" },
               })}
             >
-              <FontAwesomeIcon icon={faInfoCircle} className="me-2" />
+              <FontAwesomeIcon icon={faInfoCircle} />
             </Button>
           </div>
+        </div>
 
-        </Col>
+        <Card className="dashboard-filters purchase-promocode-filters mb-4">
+          <Card.Body>
+            <PurchasePromocodeFilters
+              setPage={setPage}
+              search={search}
+              setSearch={setSearch}
+              discountPercentage={discountPercentage}
+              setDiscountPercentage={setDiscountPercentage}
+              maxUsersAvailed={maxUsersAvailed}
+              setMaxUsersAvailed={setMaxUsersAvailed}
+              validTill={validTill}
+              setValidTill={setValidTill}
+              validFrom={validFrom}
+              setValidFrom={setValidFrom}
+              status={status}
+              setStatus={setStatus}
+            />
+          </Card.Body>
+        </Card>
 
-        <PurchasePromocodeFilters
-          setPage={setPage}
-          search={search}
-          setSearch={setSearch}
-          discountPercentage={discountPercentage}
-          setDiscountPercentage={setDiscountPercentage}
-          maxUsersAvailed={maxUsersAvailed}
-          setMaxUsersAvailed={setMaxUsersAvailed}
-          validTill={validTill}
-          setValidTill={setValidTill}
-          validFrom={validFrom}
-          setValidFrom={setValidFrom}
-          status={status}
-          setStatus={setStatus}
-        />
-      </Row>
-      <Table
-        bordered
-        striped
-        responsive
-        hover
-        size="sm"
-        className="text-center mt-4"
-      >
-        <thead className="thead-dark">
-          <tr>
-            {tableHeaders.map((h, idx) => (
-              <th
-                key={idx}
-                onClick={() => h.value !== "" && h.value !=='Action' && setOrderBy(h.value)}
-                style={{
-                  cursor: (h.value !== "" && h.value !=='Action' && "pointer"),
-                }}
-                className={selected(h) ? "border-3 border border-blue" : ""}
-              >
-                {h.labelKey}{" "}
-                {selected(h) &&
-                  (sort === "ASC" ? (
-                    <FontAwesomeIcon
-                      style={over ? { color: "red" } : {}}
-                      icon={faArrowAltCircleUp}
-                      onClick={() => setSort("DESC")}
-                      onMouseOver={() => setOver(true)}
-                      onMouseLeave={() => setOver(false)}
-                    />
-                  ) : (
-                    <FontAwesomeIcon
-                      style={over ? { color: "red" } : {}}
-                      icon={faArrowAltCircleDown}
-                      onClick={() => setSort("ASC")}
-                      onMouseOver={() => setOver(true)}
-                      onMouseLeave={() => setOver(false)}
-                    />
+        <div className="dashboard-data-table">
+          <div className="purchase-promocode-table-wrap">
+            <Table bordered hover responsive size="sm" className="mb-0 text-center">
+              <thead>
+                <tr>
+                  {tableHeaders.map((h, idx) => (
+                    <th
+                      key={idx}
+                      onClick={() => h.value !== "" && h.value !== "Action" && setOrderBy(h.value)}
+                      style={{
+                        cursor: h.value !== "" && h.value !== "Action" ? "pointer" : "default",
+                      }}
+                      className={selected(h) ? "sortable active" : "sortable"}
+                    >
+                      {h.labelKey}{" "}
+                      {selected(h) &&
+                        (sort === "ASC" ? (
+                          <FontAwesomeIcon
+                            style={over ? { color: "red" } : {}}
+                            icon={faArrowAltCircleUp}
+                            onClick={() => setSort("DESC")}
+                            onMouseOver={() => setOver(true)}
+                            onMouseLeave={() => setOver(false)}
+                          />
+                        ) : (
+                          <FontAwesomeIcon
+                            style={over ? { color: "red" } : {}}
+                            icon={faArrowAltCircleDown}
+                            onClick={() => setSort("ASC")}
+                            onMouseOver={() => setOver(true)}
+                            onMouseLeave={() => setOver(false)}
+                          />
+                        ))}
+                    </th>
                   ))}
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {loading ? (
-            <tr>
-              <td colSpan={10} className="text-center">
-                <InlineLoader />
-              </td>
-            </tr>
-          ) : promoCodeList?.promocodeDetail?.count > 0 ? (
-            promoCodeList?.promocodeDetail?.rows?.map(
+                </tr>
+              </thead>
+              <tbody>
+                {loading ? (
+                  <tr>
+                    <td colSpan={tableHeaders.length} className="text-center py-4">
+                      <InlineLoader />
+                    </td>
+                  </tr>
+                ) : promoCodeList?.promocodeDetail?.count > 0 ? (
+                  promoCodeList?.promocodeDetail?.rows?.map(
               ({
                 promocodeId,
                 promocode,
@@ -281,52 +282,64 @@ const PromoCodeBonus = () => {
                   {/* <td>{formatDateMDY(createdAt)}</td> */}
                   <td>{validFrom === null ? "-" : getDateTime(validFrom)}</td>
                   <td>{validTill === null ? "-" : getDateTime(validTill)}</td>
-                  <td>{STATUS_LABELS[status] || '-'}</td>
+                  <td>
+                    <span
+                      className={[
+                        "purchase-promocode-pill",
+                        status === 1
+                          ? "purchase-promocode-pill--active"
+                          : status === 0
+                            ? "purchase-promocode-pill--upcoming"
+                            : "purchase-promocode-pill--expired",
+                      ].join(" ")}
+                    >
+                      {STATUS_LABELS[status] || "-"}
+                    </span>
+                  </td>
 
                   {/* <td>{validFrom === null ? "-" : getDateTime(convertToTimeZone(validFrom, timezoneOffset))}</td> */}
                   {/* <td>{validTill === null ? "-" : getDateTime(convertToTimeZone(validTill, timezoneOffset))}</td> */}
                   <td>
-                    <Trigger message={"View"} id={promocodeId + "view"} />
-                    <Button
-                      id={promocodeId + "view"}
-                      className="m-1"
-                      size="sm"
-                      variant="info"
-                      onClick={() =>
-                        navigate(
-                          `${AdminRoutes.PromoCodeView.split(":").shift()}${promocodeId}`
-                        )
-                      }
-                    >
-                      <FontAwesomeIcon icon={faEye} />
-                    </Button>
-                    <Trigger message="Edit" id={promocodeId + "edit"} />
-                    <Button
-                      id={promocodeId + "edit"}
-                      hidden={isHidden({ module: { key: 'Promocode', value: 'U' } })}
-                      disabled={status === 2 || status === 3}
-                      className="m-1"
-                      size="sm"
-                      variant="warning"
-                      onClick={() =>
-                        navigate(
-                          `${AdminRoutes.PromoCodeEdit.split(":").shift()}${promocodeId}`
-                        )
-                      }
-                    >
-                      <FontAwesomeIcon icon={faEdit} />
-                    </Button>
-                    <Trigger message="Delete" id={promocodeId + "delete"} />
-                    <Button
-                      id={promocodeId + "delete"}
-                      hidden={isHidden({ module: { key: 'Promocode', value: 'D' } })}
-                      className="m-1"
-                      size="sm"
-                      variant="warning"
-                      onClick={() => handleDelete(promocode)}
-                    >
-                      <FontAwesomeIcon icon={faTrash} />
-                    </Button>
+                    <div className="purchase-promocode-actions">
+                      <Trigger message={"View"} id={promocodeId + "view"} />
+                      <Button
+                        id={promocodeId + "view"}
+                        className="purchase-promocode-icon-btn"
+                        size="sm"
+                        variant="info"
+                        onClick={() =>
+                          navigate(`${AdminRoutes.PromoCodeView.split(":").shift()}${promocodeId}`)
+                        }
+                      >
+                        <FontAwesomeIcon icon={faEye} />
+                      </Button>
+
+                      <Trigger message="Edit" id={promocodeId + "edit"} />
+                      <Button
+                        id={promocodeId + "edit"}
+                        hidden={isHidden({ module: { key: "Promocode", value: "U" } })}
+                        disabled={status === 2 || status === 3}
+                        className="purchase-promocode-icon-btn"
+                        size="sm"
+                        variant="warning"
+                        onClick={() =>
+                          navigate(`${AdminRoutes.PromoCodeEdit.split(":").shift()}${promocodeId}`)
+                        }
+                      >
+                        <FontAwesomeIcon icon={faEdit} />
+                      </Button>
+
+                      <Trigger message="Delete" id={promocodeId + "delete"} />
+                      <Button
+                        id={promocodeId + "delete"}
+                        hidden={isHidden({ module: { key: "Promocode", value: "D" } })}
+                        className="purchase-promocode-icon-btn"
+                        size="sm"
+                        variant="danger"
+                        onClick={() => handleDelete(promocode)}
+                      >
+                        <FontAwesomeIcon icon={faTrash} />
+                      </Button>
                     {/* {!isActive ? (
                       <>
                         <Trigger
@@ -366,7 +379,7 @@ const PromoCodeBonus = () => {
                       <Trigger message="Reuse promocode" id={promocodeId + "resuePromocode"} />
                       <Button
                         id={promocodeId + "resuePromocode"}
-                        className="m-1"
+                        className="purchase-promocode-icon-btn"
                         size="sm"
                         variant="warning"
                         onClick={() =>
@@ -380,20 +393,23 @@ const PromoCodeBonus = () => {
                         <FontAwesomeIcon icon={faRecycle} />
                       </Button>
                     </>
+                    </div>
                   </td>
                 </tr>
               ))
           ) : (
             <tr>
-              <td colSpan={10} className="text-danger text-center">
+              <td colSpan={tableHeaders.length} className="text-center py-4 purchase-promocode-empty">
                 No Data Found
               </td>
             </tr>
           )
           }
-        </tbody>
+              </tbody>
+            </Table>
+          </div>
+        </div>
 
-      </Table>
       {promoCodeList?.promocodeDetail?.count !== 0 && (
         <PaginationComponent
           page={promoCodeList?.count < page ? setPage(1) : page}
@@ -457,6 +473,7 @@ const PromoCodeBonus = () => {
 
         />
       )}
+      </div>
     </>
   );
 };

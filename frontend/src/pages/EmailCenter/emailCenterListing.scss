@@ -1,0 +1,94 @@
+@import "../Dashboard/DashboardCharts/dashboardChart.scss";
+
+.email-center-page {
+  padding-bottom: 6px;
+}
+
+.email-center-page__title {
+  margin: 0;
+}
+
+.email-center-page__subtitle {
+  margin-top: 4px;
+  color: rgba(234, 250, 245, 0.68);
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+.email-center-page__actions {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.email-center-page__create-btn.btn {
+  border-radius: 14px;
+  padding: 10px 14px;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border: 1px solid rgba(var(--gs-cta-rgb), 0.22);
+  background: linear-gradient(135deg, var(--gs-cta-start) 0%, var(--gs-cta-end) 100%);
+  box-shadow:
+    0 10px 26px rgba(var(--gs-cta-rgb), 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.18);
+  color: #fff !important;
+}
+
+.email-center-page__create-btn.btn:hover {
+  filter: brightness(1.03);
+  transform: translateY(-1px);
+}
+
+.email-center-filters .card-body {
+  padding: 18px;
+}
+
+.email-center-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+.email-center-name {
+  max-width: 220px;
+}
+
+.email-center-actions {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.email-center-icon-btn.btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 12px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.06) !important;
+  border: 1px solid rgba(255, 255, 255, 0.10) !important;
+  color: rgba(234, 250, 245, 0.92) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  transition: transform 140ms ease, background 140ms ease, border-color 140ms ease;
+}
+
+.email-center-icon-btn.btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+  border-color: rgba(var(--gs-cta-rgb), 0.18) !important;
+  background: rgba(var(--gs-cta-rgb), 0.08) !important;
+}
+
+.email-center-empty {
+  color: rgba(255, 156, 198, 0.92);
+  font-weight: 800;
+}
+
+

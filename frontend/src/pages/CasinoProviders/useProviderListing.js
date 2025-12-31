@@ -32,24 +32,26 @@ const useProviderListing = () => {
   const [freeSpinstatus, setFreeSpinStatus] = useState()
   const [freeSpinStatusShow,setFreeSpinStatusShow] = useState(false)
 
-  const { data: casinoProvidersData,isLoading: loading } = useQuery({
+  const { data: casinoProvidersData, isLoading: loading, isFetching } = useQuery({
     queryKey: ['providersList', limit, page, debouncedSearch, orderBy, sort, statusFilter, aggregatorsFilter],
     queryFn: ({ queryKey }) => {
       const params = {pageNo: queryKey[2], limit: queryKey[1]};
       if (queryKey[3]) params.search = queryKey[3]
       if (queryKey[4]) params.orderBy = queryKey[4]
       if (queryKey[5]) params.sort = queryKey[5]
-      if (queryKey[6]) params.isActive = statusFilter
-      if (queryKey[7]) params.masterGameAggregatorId = aggregatorsFilter
+      if (queryKey[6] && queryKey[6] !== 'all') params.isActive = statusFilter
+      if (queryKey[7] && queryKey[7] !== 'all') params.masterGameAggregatorId = aggregatorsFilter
             return getAllCasinoProviders(params)
     },
     select: (res) => res?.data?.casinoProvider,
-    refetchOnWindowFocus: false
+    refetchOnWindowFocus: false,
+    keepPreviousData: true,
+    staleTime: 15000
   })
 
   const resetFilters = () => {
     setSearch('')
-    setAggregatorsFilter('all')
+    setAggregatorsFilter('')
     setStatusFilter('all')
 };
 
@@ -204,6 +206,7 @@ const useProviderListing = () => {
     handleStatusShow,
     handleYes,
     loading,
+    isFetching,
     createProvider,
     updateProvider,
     status,

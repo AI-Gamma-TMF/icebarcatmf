@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Table, Col, Row, Card, Accordion } from "@themesberg/react-bootstrap";
+import { Col, Row, Card } from "@themesberg/react-bootstrap";
 import SubscriptionSummaryCard from "./SubscriptionSummaryCard";
 import useSubscriptionDetail from "./useSubscriptionDetail";
 import RevenueByPlanGraph from "./RevenueByPlanGraph";
@@ -103,39 +103,51 @@ const SubscriptionReport = () => {
 
     return (
         <>
-            <Row>
-                <Col sm={12}><h3>Subscription Report</h3></Col>
-            </Row>
+            <div className="dashboard-typography">
+                <div className="d-flex flex-wrap justify-content-between align-items-start gap-3 mb-3">
+                    <div>
+                        <h3>Subscription Report</h3>
+                        <p className="text-muted mb-0">
+                            Overview of subscription revenue and signups
+                        </p>
+                    </div>
+                </div>
 
-            <Row>
-                <SubscriptionSummaryCard
-                    subscriptionSummaryData={SubscriptionReportData?.data} />
-            </Row>
+                <Card className="tournament-card dashboard-viz-panel mb-4">
+                    <Card.Body>
+                        <SubscriptionSummaryCard subscriptionSummaryData={SubscriptionReportData?.data} />
+                    </Card.Body>
+                </Card>
 
-            <Row>
-                <Col lg={6} md={6} sm={6} className='mt-3'>
-                    <Card className='p-2'>
-                        <Last7DaysLineGraph
-                            labels={last7DaysLine.labels}
-                            monthlyData={last7DaysLine.monthlyData}
-                            yearlyData={last7DaysLine.yearlyData}
-                            metaInfo={last7DaysLine.metaInfo}
-                            loading={isLoading}
-                        />
-                    </Card>
-                </Col>
-                <Col lg={6} md={6} sm={6} className='mt-3'>
-                    <Card className='p-2'>
-                        <RevenueByPlanGraph
-                            labels={revenuePerPlan.labels}
-                            monthlyData={revenuePerPlan.monthlyData}
-                            yearlyData={revenuePerPlan.yearlyData}
-                            subscriptionIds={revenuePerPlan.subscriptionIds}
-                            loading={isLoading}
-                        />
-                    </Card>
-                </Col>
-            </Row>
+                <Row className="g-3">
+                    <Col lg={6} md={12}>
+                        <Card className="tournament-card dashboard-viz-panel">
+                            <Card.Body>
+                                <Last7DaysLineGraph
+                                    labels={last7DaysLine.labels}
+                                    monthlyData={last7DaysLine.monthlyData}
+                                    yearlyData={last7DaysLine.yearlyData}
+                                    metaInfo={last7DaysLine.metaInfo}
+                                    loading={isLoading}
+                                />
+                            </Card.Body>
+                        </Card>
+                    </Col>
+                    <Col lg={6} md={12}>
+                        <Card className="tournament-card dashboard-viz-panel">
+                            <Card.Body>
+                                <RevenueByPlanGraph
+                                    labels={revenuePerPlan.labels}
+                                    monthlyData={revenuePerPlan.monthlyData}
+                                    yearlyData={revenuePerPlan.yearlyData}
+                                    subscriptionIds={revenuePerPlan.subscriptionIds}
+                                    loading={isLoading}
+                                />
+                            </Card.Body>
+                        </Card>
+                    </Col>
+                </Row>
+            </div>
 
         </>
     );

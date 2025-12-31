@@ -1,0 +1,102 @@
+@import "../../Dashboard/DashboardCharts/dashboardChart.scss";
+
+.create-email-page {
+  padding-bottom: 6px;
+}
+
+.create-email-page__title {
+  margin: 0;
+}
+
+.create-email-page__subtitle {
+  margin-top: 4px;
+  color: rgba(234, 250, 245, 0.68);
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+.create-email-page__card .card-body {
+  padding: 18px;
+}
+
+.create-email-page__card.card,
+.create-email-page__card .card-body {
+  overflow: visible !important;
+}
+
+.create-email-page__hint {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: rgba(234, 250, 245, 0.62);
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+// react-select with classNamePrefix="email-create-select"
+.email-create-select__control {
+  background-color: rgba(0, 0, 0, 0.35) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  border-radius: 14px !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06) !important;
+  min-height: 48px !important;
+}
+
+.email-create-select__single-value,
+.email-create-select__input-container,
+.email-create-select__placeholder {
+  color: rgba(255, 255, 255, 0.92) !important;
+}
+
+.email-create-select__menu {
+  background: rgba(18, 18, 18, 0.98) !important;
+  border: 1px solid rgba(0, 229, 160, 0.18) !important;
+  box-shadow: 0 18px 55px rgba(0, 0, 0, 0.55) !important;
+  z-index: 9999 !important;
+}
+
+.email-create-select__option {
+  color: rgba(255, 255, 255, 0.92) !important;
+}
+
+.email-create-select__option--is-focused {
+  background: rgba(0, 229, 160, 0.12) !important;
+}
+
+.email-create-select__multi-value {
+  background: rgba(0, 229, 160, 0.12) !important;
+  border: 1px solid rgba(0, 229, 160, 0.22) !important;
+  border-radius: 999px !important;
+}
+
+.email-create-select__multi-value__label {
+  color: rgba(234, 250, 245, 0.92) !important;
+  font-weight: 800;
+}
+
+.email-create-select__multi-value__remove {
+  color: rgba(234, 250, 245, 0.92) !important;
+}
+
+.email-create-select__multi-value__remove:hover {
+  background: rgba(255, 107, 107, 0.18) !important;
+  color: rgba(255, 156, 198, 0.92) !important;
+}
+
+// EditEmailTemplate button overrides (remove fixed widths)
+.create-email-page .edit-email-template__actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.create-email-page .edit-email-template__btn.btn {
+  border-radius: 14px;
+  padding: 10px 14px;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  min-width: 120px;
+}
+
+

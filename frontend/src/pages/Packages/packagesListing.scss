@@ -1,0 +1,50 @@
+@import "../Dashboard/DashboardCharts/dashboardChart.scss";
+
+.packages-page {
+  padding-bottom: 6px;
+}
+
+.packages-page__title {
+  margin: 0;
+}
+
+.packages-page__subtitle {
+  margin-top: 4px;
+  color: rgba(234, 250, 245, 0.68);
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+.packages-page__actions {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.packages-page__action-btn.btn {
+  border-radius: 14px;
+  padding: 10px 14px;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.packages-filters .card-body {
+  padding: 18px;
+}
+
+.packages-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+.packages-empty {
+  color: rgba(255, 156, 198, 0.92);
+  font-weight: 800;
+}
+
+

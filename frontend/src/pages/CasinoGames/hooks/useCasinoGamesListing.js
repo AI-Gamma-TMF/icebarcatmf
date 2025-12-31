@@ -120,7 +120,7 @@ const useCasinoGamesListing = () => {
     select: (res) => res?.data?.subCategory,
   });
 
-  const { data: casinoGames, isLoading: loading } = useQuery({
+  const { data: casinoGames, isLoading: loading, isFetching } = useQuery({
     queryKey: [
       'casinoGames',
       limit,
@@ -156,6 +156,7 @@ const useCasinoGamesListing = () => {
     refetchOnWindowFocus: false,
     enabled: Boolean(!filterBy || (operator && debouncedFilterValue)),
     keepPreviousData: true,
+    staleTime: 15000,
   });
 
   const totalPages = Math.ceil(casinoGames?.count / limit);
@@ -264,6 +265,7 @@ const useCasinoGamesListing = () => {
     limit,
     page,
     loading,
+    isFetching,
     setLimit,
     setPage,
     totalPages,

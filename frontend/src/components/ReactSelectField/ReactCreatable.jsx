@@ -9,7 +9,8 @@ const ReactCreatable = (props) => {
     setValue,
     isLoading,
     handleCreateOption,
-    isMulti=false
+    isMulti=false,
+    ...rest
   } = props
   return (
     <CreatableSelect
@@ -21,6 +22,7 @@ const ReactCreatable = (props) => {
       options={options || []}
       value={value}
       isMulti={isMulti}
+      {...rest}
     />
   )
 }

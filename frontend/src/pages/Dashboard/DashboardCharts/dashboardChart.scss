@@ -1233,6 +1233,26 @@ html.gs-low-power {
     animation: none !important;
     background-size: 100% 100% !important;
   }
+
+  // Pages that reuse dashboard primitives (Staff / Admin Added Coins / Players)
+  .staff-page__card,
+  .admin-coins-page__card,
+  .players-page__card,
+  .admin-coins-highlight,
+  .ticker-container {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    box-shadow:
+      0 1px 2px rgba(0, 0, 0, 0.55),
+      0 10px 26px rgba(0, 0, 0, 0.30) !important;
+  }
+
+  // Cut expensive hover glows in low power mode
+  .dashboard-box::after,
+  .ticker-container::after,
+  .dashboard-viz-panel__chart::after {
+    opacity: 0 !important;
+  }
 }
 
 // While actively scrolling: reduce GPU-heavy blur on big dashboard surfaces.

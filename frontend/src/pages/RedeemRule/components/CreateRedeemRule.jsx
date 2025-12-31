@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Formik, Form } from 'formik';
-import { Col, Row } from '@themesberg/react-bootstrap';
+import { Col, Row, Card } from '@themesberg/react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import {
   errorHandler,
@@ -12,9 +12,8 @@ import { toast } from '../../../components/Toast/index.jsx';
 import { AdminRoutes } from '../../../routes.js';
 import { validationSchema } from '../schemas.js';
 
-
-
 import { Queries } from './Queries.jsx';
+import '../redeemRuleCreate.scss';
 
 const transformToOperatorConditions = (data) => {
   if (!data) return null;
@@ -125,13 +124,17 @@ const CreateRedeemRule = (editdata) => {
   };
 
   return (
-    <div>
-      <Row>
-
-        <Col sm={8}>
-          <h3>{tempdata ? "Edit Redeem Rule" : "Create Redeem Rule"} </h3>
-        </Col>
-      </Row>
+    <div className="dashboard-typography redeem-rule-page">
+      <div className="d-flex justify-content-between align-items-center mb-4">
+        <div>
+          <h3 className="redeem-rule-page__title">
+            {tempdata ? "Edit Redeem Rule" : "Create Redeem Rule"}
+          </h3>
+          <p className="redeem-rule-page__subtitle">
+            Build rule conditions with the query builder and save.
+          </p>
+        </div>
+      </div>
 
       <Formik
         enableReinitialize
@@ -150,27 +153,29 @@ const CreateRedeemRule = (editdata) => {
       >
         {({ values, handleChange, handleSubmit, handleBlur, setFieldValue }) => (
           <Form>
-            <div className='mt-5'>
-              <Queries
-                setFieldValue={setFieldValue}
-                handleChange={handleChange}
-                handleBlur={handleBlur}
-                values={values}
-                handleSubmit={handleSubmit}
-                createLoading={createLoading}
-                tempdata={tempdata}
-                ruleName={ruleName}
-                setRuleName={setRuleName}
-                completionTime={completionTime}
-                setCompletionTime={setCompletionTime}
-                isActive={isActive}
-                setIsActive={setIsActive}
-                isSubscriberOnly={isSubscriberOnly}
-                setIsSubscriberOnly={setIsSubscriberOnly}
-                ruleConditon={ruleConditon}
-                setRuleConditon={setRuleConditon}
-              />
-            </div>
+            <Card className="redeem-rule-card">
+              <Card.Body>
+                <Queries
+                  setFieldValue={setFieldValue}
+                  handleChange={handleChange}
+                  handleBlur={handleBlur}
+                  values={values}
+                  handleSubmit={handleSubmit}
+                  createLoading={createLoading}
+                  tempdata={tempdata}
+                  ruleName={ruleName}
+                  setRuleName={setRuleName}
+                  completionTime={completionTime}
+                  setCompletionTime={setCompletionTime}
+                  isActive={isActive}
+                  setIsActive={setIsActive}
+                  isSubscriberOnly={isSubscriberOnly}
+                  setIsSubscriberOnly={setIsSubscriberOnly}
+                  ruleConditon={ruleConditon}
+                  setRuleConditon={setRuleConditon}
+                />
+              </Card.Body>
+            </Card>
           </Form>
         )}
       </Formik>

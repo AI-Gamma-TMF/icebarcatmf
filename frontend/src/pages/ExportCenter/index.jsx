@@ -5,6 +5,7 @@ import {
   Table,
   Form,
   Button,
+  Card,
 } from '@themesberg/react-bootstrap';
 import { statusOptions, tableHeaders, typeOptions } from './constants';
 import useExportCenterListing from './hooks/useExportCenterListing';
@@ -86,132 +87,142 @@ const ExportCenter = () => {
 
   return (
     <>
-      <Row>
-        <Col>
-          <h3>{t('title')}</h3>
-        </Col>
-      </Row>
-      <Row className='g-3 align-items-center'>
-        <Col xs={12} sm={6} md={3}>
-          <Form.Label>{t('filter.type')}</Form.Label>
-          <Form.Select
-            onChange={(e) => {
-              setPage(1);
-              setType(e.target.value);
-            }}
-            value={type}
-          >
-            {typeOptions.map((type, _idx) => (
-              <option key={type.label} value={type.value}>
-                {type.label}
-              </option>
-            ))}
-          </Form.Select>
-        </Col>
-        <Col xs={12} sm={6} md={3}>
-          <Form.Label>{t('filter.status')}</Form.Label>
+      <div className='dashboard-typography export-center-page'>
+        <div className='d-flex flex-wrap justify-content-between align-items-start gap-3 mb-3'>
+          <div>
+            <h3 className='export-center-page__title'>{t('title')}</h3>
+            <p className='export-center-page__subtitle'>
+              View, filter, and download generated exports
+            </p>
+          </div>
 
-          <Form.Select
-            onChange={(e) => {
-              setPage(1);
-              setStatusFilter(e.target.value);
-            }}
-            value={statusFilter}
-          >
-            {statusOptions.map((status, _idx) => (
-              <option key={status.label} value={status.value}>
-                {status.label}
-              </option>
-            ))}
-          </Form.Select>
-        </Col>
-        <Col xs={12} sm={6} md={3}>
-          <Form.Label>{t('filter.startDate')}</Form.Label>
-          <Datetime
-            value={startDate}
-            onChange={(date) => setStartDate(date)}
-            timeFormat={false}
-            className='w-100'
-            inputProps={{readOnly:true}}
-          />
-        </Col>
-        <Col xs={12} sm={6} md={3}>
-          <Form.Label>{t('filter.endDate')}</Form.Label>
-          <Datetime
-            value={endDate}
-            timeFormat={false}
-            onChange={(date) => setEndDate(date)}
-            className='w-100'
-            inputProps={{readOnly:true}}
-          />
-        </Col>
-        <Col xs={12} className='text-end'>
-          <Button onClick={handleReset} variant='success' className='mt-4 me-4'>
-            Reset
-          </Button>
+          <div className='export-center-page__actions'>
+            <Trigger message='Refresh' id={`refresh`} />
+            <Button
+              onClick={handleRefresh}
+              variant='secondary'
+              className='export-center-page__icon-btn'
+              id={`refresh`}
+            >
+              <FontAwesomeIcon icon={faRefresh} />
+            </Button>
+          </div>
+        </div>
 
-          <Trigger message='Refresh' id={`refresh`} />
-          <Button
-            onClick={handleRefresh}
-            variant='success'
-            className='mt-4'
-            id={`refresh`}
-          >
-            <FontAwesomeIcon icon={faRefresh} />
-          </Button>
-        </Col>
-      </Row>
-      <Table
-        bordered
-        striped
-        responsive
-        hover
-        size='sm'
-        className='text-center mt-4'
-      >
-        <thead className='thead-dark'>
-          <tr>
-            {tableHeaders.map((h, idx) => (
-              <th
-                key={idx}
-                onClick={() => h.value !== '' && handlePlayerTableSorting(h)}
-                style={{
-                  cursor: (h.value !== '' && 'pointer'),
-                }}
-                className={selected(h) ? 'border-3 border border-blue' : ''}
-              >
-                {t(h.labelKey)}{' '}
-                {selected(h) &&
-                  (sortBy === 'asc' ? (
-                    <FontAwesomeIcon
-                      style={over ? { color: 'red' } : {}}
-                      icon={faArrowCircleUp}
-                      onClick={() => setSortBy('desc')}
-                      onMouseOver={() => setOver(true)}
-                      onMouseLeave={() => setOver(false)}
-                    />
-                  ) : (
-                    <FontAwesomeIcon
-                      style={over ? { color: 'red' } : {}}
-                      icon={faArrowCircleDown}
-                      onClick={() => setSortBy('asc')}
-                      onMouseOver={() => setOver(true)}
-                      onMouseLeave={() => setOver(false)}
-                    />
+        <Card className='dashboard-filters export-center-filters mb-4'>
+          <Card.Body>
+            <Row className='g-3 align-items-end'>
+              <Col xs={12} sm={6} md={3}>
+                <Form.Label>{t('filter.type')}</Form.Label>
+                <Form.Select
+                  onChange={(e) => {
+                    setPage(1);
+                    setType(e.target.value);
+                  }}
+                  value={type}
+                >
+                  {typeOptions.map((type, _idx) => (
+                    <option key={type.label} value={type.value}>
+                      {type.label}
+                    </option>
                   ))}
-              </th>
-            ))}
-          </tr>
-        </thead>
-        {loading ? (
-          <tr>
-            <td colSpan={10} className='text-center'>
-              <InlineLoader />
-            </td>
-          </tr>
-        ) : (
-          <tbody>
-            {exportCenterList?.rows?.map((exportData) => {
+                </Form.Select>
+              </Col>
+
+              <Col xs={12} sm={6} md={3}>
+                <Form.Label>{t('filter.status')}</Form.Label>
+                <Form.Select
+                  onChange={(e) => {
+                    setPage(1);
+                    setStatusFilter(e.target.value);
+                  }}
+                  value={statusFilter}
+                >
+                  {statusOptions.map((status, _idx) => (
+                    <option key={status.label} value={status.value}>
+                      {status.label}
+                    </option>
+                  ))}
+                </Form.Select>
+              </Col>
+
+              <Col xs={12} sm={6} md={3}>
+                <Form.Label>{t('filter.startDate')}</Form.Label>
+                <Datetime
+                  value={startDate}
+                  onChange={(date) => setStartDate(date)}
+                  timeFormat={false}
+                  className='w-100'
+                  inputProps={{ readOnly: true }}
+                />
+              </Col>
+
+              <Col xs={12} sm={6} md={3}>
+                <Form.Label>{t('filter.endDate')}</Form.Label>
+                <Datetime
+                  value={endDate}
+                  timeFormat={false}
+                  onChange={(date) => setEndDate(date)}
+                  className='w-100'
+                  inputProps={{ readOnly: true }}
+                />
+              </Col>
+
+              <Col xs={12} className='text-end'>
+                <Button onClick={handleReset} variant='primary' className='export-center-page__reset-btn'>
+                  Reset
+                </Button>
+              </Col>
+            </Row>
+          </Card.Body>
+        </Card>
+        <div className='dashboard-data-table'>
+          <div className='export-center-table-wrap'>
+            <Table bordered hover responsive size='sm' className='mb-0 text-center'>
+              <thead>
+                <tr>
+                  {tableHeaders.map((h, idx) => (
+                    <th
+                      key={idx}
+                      onClick={() => h.value !== '' && handlePlayerTableSorting(h)}
+                      style={{
+                        cursor: h.value !== '' ? 'pointer' : 'default',
+                      }}
+                      className={selected(h) ? 'sortable active' : 'sortable'}
+                    >
+                      {t(h.labelKey)}{' '}
+                      {selected(h) &&
+                        (sortBy === 'asc' ? (
+                          <FontAwesomeIcon
+                            style={over ? { color: 'red' } : {}}
+                            icon={faArrowCircleUp}
+                            onClick={() => setSortBy('desc')}
+                            onMouseOver={() => setOver(true)}
+                            onMouseLeave={() => setOver(false)}
+                          />
+                        ) : (
+                          <FontAwesomeIcon
+                            style={over ? { color: 'red' } : {}}
+                            icon={faArrowCircleDown}
+                            onClick={() => setSortBy('asc')}
+                            onMouseOver={() => setOver(true)}
+                            onMouseLeave={() => setOver(false)}
+                          />
+                        ))}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {loading ? (
+                  <tr>
+                    <td colSpan={tableHeaders.length} className='text-center py-4'>
+                      <InlineLoader />
+                    </td>
+                  </tr>
+                ) : (
+                  <>
+                    {exportCenterList?.rows?.map((exportData) => {
               const {
                 id,
                 type,
@@ -236,7 +247,7 @@ const ExportCenter = () => {
                   <td>{type}</td>
                   <td>{getDateTimeinSeconds(updatedAt)}</td>
                   <td>
-                    <span className={`status ${status}`}>
+                    <span className={`export-status-pill ${status}`}>
                       {capitalizeFirstLetter(status)}
                     </span>
                   </td>
@@ -245,14 +256,13 @@ const ExportCenter = () => {
                       <InlineLoader />
                     ) : (
                       <>
-                        {' '}
                         <Trigger
                           message={type === 'casino_transactions_csv_download' ? 'Download CSV in Zip' : 'Download CSV'}
                           id={`csv-${id}`}
                         />
                         <Button
                           id={`csv-${id}`}
-                          className='m-1'
+                          className='export-center-icon-btn'
                           size='sm'
                           variant='warning'
                           disabled={status !== 'completed'}
@@ -267,28 +277,32 @@ const ExportCenter = () => {
                   </td>
                 </tr>
               );
-            })}
+                    })}
 
-            {exportCenterList?.count === 0 && (
-              <tr>
-                <td colSpan={6} className='text-danger text-center'>
-                  {t('noDataFound')}
-                </td>
-              </tr>
-            )}
-          </tbody>
+                    {exportCenterList?.count === 0 && (
+                      <tr>
+                        <td colSpan={tableHeaders.length} className='text-center py-4 export-center-empty'>
+                          {t('noDataFound')}
+                        </td>
+                      </tr>
+                    )}
+                  </>
+                )}
+              </tbody>
+            </Table>
+          </div>
+        </div>
+
+        {exportCenterList?.rows?.length !== 0 && (
+          <PaginationComponent
+            page={exportCenterList?.count < page ? setPage(1) : page}
+            totalPages={totalPages}
+            setPage={setPage}
+            limit={limit}
+            setLimit={setLimit}
+          />
         )}
-      </Table>
-
-      {exportCenterList?.rows?.length !== 0 && (
-        <PaginationComponent
-          page={exportCenterList?.count < page ? setPage(1) : page}
-          totalPages={totalPages}
-          setPage={setPage}
-          limit={limit}
-          setLimit={setLimit}
-        />
-      )}
+      </div>
     </>
   );
 };

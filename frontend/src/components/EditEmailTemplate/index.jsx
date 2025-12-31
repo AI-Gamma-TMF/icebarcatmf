@@ -254,13 +254,11 @@ const EditEmailTemplate = ({
         </Row>
       )}
       <Row>
-        <Col className="d-flex justify-content-between">
+        <Col className="edit-email-template__actions d-flex justify-content-between">
           <Button
             variant="warning"
-            className="m-2"
+            className="m-2 edit-email-template__btn"
             onClick={() => navigate(AdminRoutes.EmailCenter)}
-            
-            style={{ height: "40px", width: "100px" }}
           >
             Cancel
           </Button>
@@ -272,9 +270,8 @@ const EditEmailTemplate = ({
                 details ||
                 (create && values?.content?.[selectedTab] !== undefined)
               }
-              style={{ height: "40px", width: "100px" }}
               onClick={onSubmitButtonClick}
-              className="m-2"
+              className="m-2 edit-email-template__btn"
               disabled={loading || content?.[selectedTab] === ""}
             >
             Submit

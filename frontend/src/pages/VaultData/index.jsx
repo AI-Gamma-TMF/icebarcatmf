@@ -4,8 +4,9 @@ import Vault from '../PlayerDetails/components/Vault'
 
 const VaultData = () => {
     return (
-      
-        <Vault isAllUser={true}/>
+        <div className="dashboard-typography">
+            <Vault isAllUser={true}/>
+        </div>
     )
 }
 

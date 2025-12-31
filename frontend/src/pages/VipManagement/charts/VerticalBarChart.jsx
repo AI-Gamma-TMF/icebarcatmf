@@ -60,16 +60,7 @@ export function VerticalBarChart({ reinvestmentPercentage }) {
     ],
   };
   return (
-    <div
-      style={{
-        marginTop: '1rem',
-        boxShadow: '0px 4px 4px 0px #00000040',
-        borderRadius: '10px',
-        padding: '2.7rem',
-        width: '100%',
-        margin: 'auto',
-      }}
-    >
+    <div className="vip-dashboard-viz-panel">
       <div style={{ width: '100%', height: '340px' }}>
         <Bar options={options} data={data} />
       </div>

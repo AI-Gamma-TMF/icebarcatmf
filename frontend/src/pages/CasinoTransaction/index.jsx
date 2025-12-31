@@ -3,7 +3,9 @@ import CasinoTransactions from '../PlayerDetails/components/CasinoTransactions'
 
 const CasinoTransaction = () => {
     return (
-        <CasinoTransactions isAllUser={true} />
+        <div className="dashboard-typography">
+            <CasinoTransactions isAllUser={true} />
+        </div>
     )
 }
 

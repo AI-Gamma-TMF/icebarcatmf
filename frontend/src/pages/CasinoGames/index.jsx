@@ -27,12 +27,14 @@ import { getDateTime } from '../../utils/dateFormatter';
 import { convertToTimeZone, getFormattedTimeZoneOffset, formatNumber } from '../../utils/helper';
 import { getItem } from '../../utils/storageUtils';
 import { timeZones } from '../Dashboard/constants';
+import './games.scss';
 
 const CasinoGames = () => {
   const {
     limit,
     page,
     loading,
+    isFetching,
     setLimit,
     setPage,
     totalPages,
@@ -111,47 +113,38 @@ const CasinoGames = () => {
   };
 
   return (
-    <>
-      <>
-        <Row className='Casino Games'>
+    <div className="casino-games-page dashboard-typography">
+      <Row className="d-flex align-items-center mb-2">
+        <Col sm={7}>
+          <h3 className="casino-games-page__title">{t('title')}</h3>
+        </Col>
+        <Col className="d-flex justify-content-end gap-2">
+          <Button
+            className="casino-games-page__action-btn"
+            variant='success'
+            size='sm'
+            onClick={() => {
+              handleShowModal('Add');
+            }}
+          >
+            Add game
+          </Button>
+          <Button
+            hidden={isHidden({ module: { key: 'CasinoManagement', value: 'U' } })}
+            className="casino-games-page__action-btn"
+            variant='success'
+            size='sm'
+            onClick={() => navigate(AdminRoutes.ReorderGames)}
+          >
+            {t('reorder')}
+          </Button>
+        </Col>
+      </Row>
+
+      <Card className="p-2 mb-2 casino-games-page__card">
+        <Row className="dashboard-filters casino-games-filters g-3 align-items-end">
           <Col xs='12' sm='6'>
-            <h3>{t('title')}</h3>
-          </Col>
-          <Col xs='12' sm='6' style={{ display: 'flex', justifyContent: 'end' }}>
-            <ListGroup.Item>
-              <Card.Text className='text-sm-right'>
-                <Button
-                  hidden={isHidden({ module: { key: 'CasinoManagement', value: 'U' } })}
-                  className='m-1'
-                  variant='success'
-                  size='sm'
-                  onClick={() => navigate(AdminRoutes.ReorderGames)}
-                >
-                  {t('reorder')}
-                </Button>
-              </Card.Text>
-            </ListGroup.Item>
-            <ListGroup.Item>
-              <Card.Text className='text-sm-right'>
-                <Button
-                  className='m-1'
-                  variant='success'
-                  size='sm'
-                  onClick={() => {
-                    handleShowModal('Add');
-                  }}
-                >
-                  Add game
-                </Button>
-              </Card.Text>
-            </ListGroup.Item>
-          </Col>
-        </Row>
-
-        <Row className='mt-3'>
-          <Col sm={6} lg={2}>
-            <Form.Label column='sm'>{t('filter.search.title')}</Form.Label>
-
+            <Form.Label className="form-label">{t('filter.search.title')}</Form.Label>
             <Form.Control
               type='search'
               value={search}
@@ -162,9 +155,9 @@ const CasinoGames = () => {
               }}
             />
           </Col>
-          <Col sm={6} lg={2}>
-            <Form.Label column='sm'>{t('filter.provider.title')}</Form.Label>
 
+          <Col sm={6} lg={2}>
+            <Form.Label className="form-label">{t('filter.provider.title')}</Form.Label>
             <Form.Select
               onChange={(e) => {
                 setPage(1);
@@ -181,10 +174,11 @@ const CasinoGames = () => {
                 ))}
             </Form.Select>
           </Col>
+        </Row>
 
+        <Row className='mt-3 dashboard-filters casino-games-filters g-3 align-items-end'>
           <Col sm={6} lg={2}>
-            <Form.Label column='sm'>{t('filter.status.title')}</Form.Label>
-
+            <Form.Label className="form-label">{t('filter.status.title')}</Form.Label>
             <Form.Select
               onChange={(e) => {
                 setPage(1);
@@ -199,62 +193,7 @@ const CasinoGames = () => {
           </Col>
 
           <Col sm={6} lg={2}>
-            <Form.Label column='sm'>{t('filter.filterBy.title')}</Form.Label>
-
-            <Form.Select
-              onChange={(e) => {
-                setPage(1);
-                setFilterBy(e.target.value);
-              }}
-              value={filterBy}
-            >
-              <option hidden>Select value</option>
-              <option value='returnToPlayer'>{t('filter.filterBy.options.returnToPlayer')}</option>
-              {/* <option value='systemRtp'>{t('filter.filterBy.options.systemRtp')}</option> */}
-              {/* <option value='betSum'>{t('filter.filterBy.options.betSum')}</option> */}
-              {/* <option value='winSum'>{t('filter.filterBy.options.winSum')}</option> */}
-              {/* <option value='GGR'>{t('filter.filterBy.options.GGR')}</option> */}
-            </Form.Select>
-          </Col>
-
-          <Col sm={6} lg={2}>
-            <Form.Label column='sm'>{t('filter.operator.title')}</Form.Label>
-
-            <Form.Select
-              onChange={(e) => {
-                setPage(1);
-                setOperator(e.target.value);
-              }}
-              value={operator}
-              disabled={!filterBy}
-            >
-              <option hidden>Select Operator</option>
-              <option value='='>{t('filter.operator.options.equal')}</option>
-              <option value='>'>{t('filter.operator.options.gt')}</option>
-              <option value='>='>{t('filter.operator.options.gte')}</option>{' '}
-              <option value='<'>{t('filter.operator.options.lt')}</option>{' '}
-              <option value='<='>{t('filter.operator.options.lte')}</option>
-            </Form.Select>
-          </Col>
-
-          <Col sm={6} lg={2}>
-            <Form.Label>{t('filter.filterValue.title')}</Form.Label>
-            <Form.Control
-              type='number'
-              onKeyDown={(evt) => ['e', 'E', '+'].includes(evt.key) && evt.preventDefault()}
-              name='filterValue'
-              value={filterValue}
-              onChange={(e) => {
-                setFilterValue(e?.target?.value);
-              }}
-              placeholder={t('filter.filterValue.place')}
-              disabled={!operator}
-            />
-          </Col>
-        </Row>
-        <Row className='mt-3 d-flex align-items-end'>
-          <Col sm={6} lg={2}>
-            <Form.Label>{t('filter.gameActiveOnSite.title')}</Form.Label>
+            <Form.Label className="form-label">{t('filter.gameActiveOnSite.title')}</Form.Label>
             <Form.Select
               onChange={(e) => {
                 setPage(1);
@@ -267,9 +206,9 @@ const CasinoGames = () => {
               <option value='false'>{t('filter.gameActiveOnSite.options.inActive')}</option>
             </Form.Select>
           </Col>
-          <Col sm={6} lg={2}>
-            <Form.Label column='sm'>Game Id</Form.Label>
 
+          <Col sm={6} lg={2}>
+            <Form.Label className="form-label">Game Id</Form.Label>
             <Form.Control
               type='search'
               value={gameId}
@@ -287,7 +226,60 @@ const CasinoGames = () => {
                 }
               }}
             />
-            {error && <div style={{ color: 'red', marginTop: '5px' }}>{error}</div>}
+            {error && <div className="casino-games-page__error">{error}</div>}
+          </Col>
+
+          <Col sm={6} lg={2}>
+            <Form.Label className="form-label">{t('filter.filterBy.title')}</Form.Label>
+            <Form.Select
+              onChange={(e) => {
+                setPage(1);
+                setFilterBy(e.target.value);
+              }}
+              value={filterBy}
+            >
+              <option value=''>Select value</option>
+              <option value='returnToPlayer'>{t('filter.filterBy.options.returnToPlayer')}</option>
+              {/* <option value='systemRtp'>{t('filter.filterBy.options.systemRtp')}</option> */}
+              {/* <option value='betSum'>{t('filter.filterBy.options.betSum')}</option> */}
+              {/* <option value='winSum'>{t('filter.filterBy.options.winSum')}</option> */}
+              {/* <option value='GGR'>{t('filter.filterBy.options.GGR')}</option> */}
+            </Form.Select>
+          </Col>
+
+          <Col sm={6} lg={2}>
+            <Form.Label className="form-label">{t('filter.operator.title')}</Form.Label>
+
+            <Form.Select
+              onChange={(e) => {
+                setPage(1);
+                setOperator(e.target.value);
+              }}
+              value={operator}
+              disabled={!filterBy}
+            >
+              <option value=''>Select Operator</option>
+              <option value='='>{t('filter.operator.options.equal')}</option>
+              <option value='>'>{t('filter.operator.options.gt')}</option>
+              <option value='>='>{t('filter.operator.options.gte')}</option>{' '}
+              <option value='<'>{t('filter.operator.options.lt')}</option>{' '}
+              <option value='<='>{t('filter.operator.options.lte')}</option>
+            </Form.Select>
+          </Col>
+
+          <Col sm={6} lg={2}>
+            <Form.Label className="form-label">{t('filter.filterValue.title')}</Form.Label>
+            <Form.Control
+              type='number'
+              onKeyDown={(evt) => ['e', 'E', '+'].includes(evt.key) && evt.preventDefault()}
+              name='filterValue'
+              value={filterValue}
+              onChange={(e) => {
+                setFilterValue(e?.target?.value);
+              }}
+              placeholder={t('filter.filterValue.place')}
+              disabled={!operator}
+            />
           </Col>
           <Col className='ms-auto' sm='auto'>
             <Button variant='secondary' onClick={handleReset}>
@@ -296,9 +288,11 @@ const CasinoGames = () => {
           </Col>
         </Row>
 
+        <div className="dashboard-section-divider" />
 
-        <Table bordered striped responsive hover size='sm' className='text-center mt-4'>
-          <thead className='thead-dark'>
+        <div className="table-responsive casino-games-table-wrap">
+          <Table hover size='sm' className='dashboard-data-table casino-games-table text-center'>
+          <thead>
             <tr>
               {tableHeaders?.map((h, idx) => (
                 <th
@@ -335,6 +329,14 @@ const CasinoGames = () => {
           </thead>
 
           <tbody>
+            {loading && !casinoGames?.rows?.length ? (
+              <tr>
+                <td colSpan={tableHeaders.length} className='text-center'>
+                  <InlineLoader />
+                </td>
+              </tr>
+            ) : (
+              <>
             {casinoGames?.count > 0 &&
               casinoGames?.rows?.map(
                 (
@@ -561,29 +563,39 @@ const CasinoGames = () => {
 
             {casinoGames?.count === 0 && (
               <tr>
-                <td colSpan={8} className='text-danger text-center'>
+                <td colSpan={tableHeaders.length} className='text-danger text-center'>
                   {t('noDataFound')}
                 </td>
               </tr>
             )}
+            {isFetching && (
+              <tr>
+                <td colSpan={tableHeaders.length} className='text-center'>
+                  <InlineLoader />
+                </td>
+              </tr>
+            )}
+              </>
+            )}
           </tbody>
         </Table>
+        </div>
 
-        {loading && <InlineLoader />}
-        {casinoGames?.count !== 0 && (
-          <PaginationComponent
-            page={casinoGames?.count < page ? setPage(1) : page}
-            totalPages={totalPages}
-            setPage={setPage}
-            limit={limit}
-            setLimit={setLimit}
-          />
-        )}
+      </Card>
 
-        <Row className='ms-1 mt-1 fw-bold'>
-          * Note: If the game is not customer-facing, it is either because the game itself, its provider, or its aggregator is turned off.
-        </Row>
-      </>
+      {casinoGames?.count !== 0 && !loading && (
+        <PaginationComponent
+          page={casinoGames?.count < page ? setPage(1) : page}
+          totalPages={totalPages}
+          setPage={setPage}
+          limit={limit}
+          setLimit={setLimit}
+        />
+      )}
+
+      <Row className='ms-1 mt-1 fw-bold'>
+        * Note: If the game is not customer-facing, it is either because the game itself, its provider, or its aggregator is turned off.
+      </Row>
 
       {show && (
         <ConfirmationModal
@@ -642,7 +654,7 @@ const CasinoGames = () => {
           providerId={providerId}
         />
       )}
-    </>
+    </div>
   );
 };
 

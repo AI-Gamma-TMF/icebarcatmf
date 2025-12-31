@@ -4,7 +4,7 @@ import {
   faArrowCircleDown,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Button, Table, Row, Col, Form } from "@themesberg/react-bootstrap";
+import { Button, Card, Table, Row, Col, Form } from "@themesberg/react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
 import { internalTierRating, tableHeaders } from "../constants";
@@ -13,6 +13,7 @@ import PaginationComponent from "../../../components/Pagination";
 import { InlineLoader } from "../../../components/Preloader";
 import { AdminRoutes } from "../../../routes";
 import "./_vip.scss";
+import "./vipPending.scss";
 import { formatNumber } from "../../../utils/helper";
 import useVipPlayerListing from "../hooks/useVipPlayerListing";
 
@@ -45,103 +46,95 @@ const PendingVipPlayers = () => {
   };
   return (
     <>
-      <Row className="d-flex justify-content-between align-items-center">
-        <Col sm={6} lg={2}>
-          <h3>Pending - VIP</h3>
-        </Col>
-      </Row>
-      <Row className="mt-3">
-        <Col sm={6} lg={3}>
-          <Form.Label>Search Player</Form.Label>
-          <SearchBar search={search} setSearch={setSearch} />
-        </Col>
-        <Col sm={6} lg={2}>
-          <Form.Group>
-            <Form.Label>Player Rating</Form.Label>
-            <Form.Select
-              onChange={(event) => {
-                setPage(1);
-                setRatingFilter(event?.target?.value);
-              }}
-            >
-              {internalTierRating
-                .filter((rating) => rating.value <= 3 || rating.value === "all")
-                .map((rating, index) => (
-                  <option key={rating.value} value={rating.value}>
-                    {rating.label}
-                  </option>
+      <div className="vip-pending-page dashboard-typography">
+        <Row className="align-items-center mb-2">
+          <Col xs={12}>
+            <h3 className="vip-pending-page__title">Pending - VIP</h3>
+            <div className="vip-pending-page__subtitle">
+              Review pending VIP players, filter by rating, and open player profiles.
+            </div>
+          </Col>
+        </Row>
+
+        <Card className="vip-pending-page__filters dashboard-filters p-3 mb-3">
+          <Row className="g-3 align-items-start">
+            <Col xs={12} md={6} lg={4}>
+              <Form.Label className="form-label">Search Player</Form.Label>
+              <SearchBar search={search} setSearch={setSearch} />
+            </Col>
+            <Col xs={12} md={6} lg={3}>
+              <Form.Group>
+                <Form.Label className="form-label">Player Rating</Form.Label>
+                <Form.Select
+                  className="vip-pending-page__select"
+                  onChange={(event) => {
+                    setPage(1);
+                    setRatingFilter(event?.target?.value);
+                  }}
+                >
+                  {internalTierRating
+                    .filter((rating) => rating.value <= 3 || rating.value === "all")
+                    .map((rating) => (
+                      <option key={rating.value} value={rating.value}>
+                        {rating.label}
+                      </option>
+                    ))}
+                </Form.Select>
+              </Form.Group>
+            </Col>
+          </Row>
+        </Card>
+
+        <div className="vip-pending-page__table-wrap table-responsive dashboard-table">
+          <Table hover size="sm" className="dashboard-data-table vip-pending-table text-center">
+            <thead>
+              <tr>
+                {tableHeaders.map((header) => (
+                  <th
+                    key={header.value}
+                    onClick={() =>
+                      header.value !== "userProfile" &&
+                      header.value !== "ngr" &&
+                      header.value !== "managedBy" &&
+                      header.value !== "status" &&
+                      setOrderBy(header.value)
+                    }
+                    className={selected(header) ? "border-3 border border-blue" : ""}
+                    style={{ cursor: "pointer" }}
+                  >
+                    {header.labelKey}{" "}
+                    {selected(header) &&
+                      (sort === "asc" ? (
+                        <FontAwesomeIcon
+                          style={over ? { color: "red" } : {}}
+                          icon={faArrowCircleUp}
+                          onClick={() => setSort("desc")}
+                          onMouseOver={() => setOver(true)}
+                          onMouseLeave={() => setOver(false)}
+                        />
+                      ) : (
+                        <FontAwesomeIcon
+                          style={over ? { color: "red" } : {}}
+                          icon={faArrowCircleDown}
+                          onClick={() => setSort("asc")}
+                          onMouseOver={() => setOver(true)}
+                          onMouseLeave={() => setOver(false)}
+                        />
+                      ))}
+                  </th>
                 ))}
-            </Form.Select>
-          </Form.Group>
-        </Col>
-      </Row>
-      <Table
-        bordered
-        striped
-        responsive
-        hover
-        size="sm"
-        className="text-center mt-3"
-      >
-        <thead className="thead-dark">
-          <tr style={{ boxShadow: "0 4px 4px 0 #797979", borderRadius: "7px" }}>
-            {tableHeaders.map((header, index) => (
-              <th
-                key={header.value}
-                onClick={() =>
-                  header.value !== "userProfile" &&
-                  header.value !== "ngr" &&
-                  header.value !== "managedBy" &&
-                  header.value !== "status" &&
-                  setOrderBy(header.value)
-                }
-                className={
-                  selected(header) ? "border-3 border border-blue" : ""
-                }
-              >
-                {header.labelKey}{" "}
-                {selected(header) &&
-                  (sort === "asc" ? (
-                    <FontAwesomeIcon
-                      style={over ? { color: "red" } : {}}
-                      icon={faArrowCircleUp}
-                      onClick={() => setSort("desc")}
-                      onMouseOver={() => setOver(true)}
-                      onMouseLeave={() => setOver(false)}
-                    />
-                  ) : (
-                    <FontAwesomeIcon
-                      style={over ? { color: "red" } : {}}
-                      icon={faArrowCircleDown}
-                      onClick={() => setSort("asc")}
-                      onMouseOver={() => setOver(true)}
-                      onMouseLeave={() => setOver(false)}
-                    />
-                  ))}
-              </th>
-            ))}
-          </tr>
-        </thead>
-        {isLoading ? (
-          <tr>
-            <td colSpan={10} className="text-center">
-              <InlineLoader />
-            </td>
-          </tr>
-        ) : (
-          <tbody>
-            {vipPlayerListing && vipPlayerListing?.users?.rows.length > 0 ? (
-              vipPlayerListing?.users?.rows.map(
-                ({
-                  userId,
-                  username,
-                  email,
-                  UserReport,
-                  UserInternalRating,
-                  ngr,
-                  status,
-                }) => {
-                  return (
+              </tr>
+            </thead>
+            <tbody>
+              {isLoading ? (
+                <tr>
+                  <td colSpan={tableHeaders.length} className="text-center">
+                    <InlineLoader />
+                  </td>
+                </tr>
+              ) : vipPlayerListing && vipPlayerListing?.users?.rows.length > 0 ? (
+                vipPlayerListing?.users?.rows.map(
+                  ({ userId, username, email, UserReport, UserInternalRating, ngr, status }) => (
                     <tr key={userId}>
                       <td
                         className="text-link"
@@ -164,64 +157,36 @@ const PendingVipPlayers = () => {
                       >
                         {email || "NA"}
                       </td>
-                      <td>
-                        {formatNumber(UserReport?.totalGgr, {
-                          isDecimal: true,
-                        })}
-                      </td>
+                      <td>{formatNumber(UserReport?.totalGgr, { isDecimal: true })}</td>
                       <td>{formatNumber(ngr, { isDecimal: true })}</td>
-                      <td>
-                        {formatNumber(UserReport?.totalPurchaseAmount, {
-                          isDecimal: true,
-                        })}
-                      </td>
-                      <td>
-                        {formatNumber(UserReport?.totalRedemptionAmount, {
-                          isDecimal: true,
-                        })}
-                      </td>
+                      <td>{formatNumber(UserReport?.totalPurchaseAmount, { isDecimal: true })}</td>
+                      <td>{formatNumber(UserReport?.totalRedemptionAmount, { isDecimal: true })}</td>
                       <td>{UserInternalRating?.rating}</td>
                       <td>
                         <Button
                           onClick={() => handleNavigatePlayerDetails(userId)}
-                          // variant='success'
-                          style={{
-                            width: "6rem",
-                            padding: "5px 10px",
-                            backgroundColor: "#219653",
-                            color: "#FFFFFF",
-                            border: "none",
-                          }}
+                          className="vip-pending-page__profile-btn"
                         >
                           Profile
                         </Button>
                       </td>
-
-                      <td
-                        className={
-                          status === "Active" ? "text-success" : "text-danger"
-                        }
-                      >
+                      <td className={status === "Active" ? "text-success" : "text-danger"}>
                         {status}
                       </td>
-                      <td>
-                        {UserInternalRating?.moreDetails?.managedBy ||
-                          "Not Available"}
-                      </td>
+                      <td>{UserInternalRating?.moreDetails?.managedBy || "Not Available"}</td>
                     </tr>
-                  );
-                }
-              )
-            ) : (
-              <tr>
-                <td colSpan={10} className="text-danger text-center">
-                  No data found
-                </td>
-              </tr>
-            )}
-          </tbody>
-        )}
-      </Table>
+                  )
+                )
+              ) : (
+                <tr>
+                  <td colSpan={tableHeaders.length} className="text-center">
+                    <span className="vip-pending-page__empty">No data found</span>
+                  </td>
+                </tr>
+              )}
+            </tbody>
+          </Table>
+        </div>
       {vipPlayerListing?.users?.count !== 0 && (
         <PaginationComponent
           page={vipPlayerListing?.users?.count < page ? setPage(1) : page}
@@ -231,6 +196,7 @@ const PendingVipPlayers = () => {
           setLimit={setLimit}
         />
       )}
+      </div>
     </>
   );
 };

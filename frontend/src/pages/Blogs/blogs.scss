@@ -1,0 +1,141 @@
+// Reuse the dashboard “modern” styling primitives
+@import "../../scss/modern-theme.scss";
+
+.blog-page {
+  padding-bottom: 6px;
+}
+
+.blog-page__title {
+  margin: 0;
+}
+
+.blog-page__subtitle {
+  margin-top: 4px;
+  color: rgba(234, 250, 245, 0.68);
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+.blog-page__card {
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.04) 0%, rgba(0, 0, 0, 0.22) 100%),
+    rgba(26, 26, 26, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.55),
+    0 14px 40px rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(12px) saturate(140%);
+  -webkit-backdrop-filter: blur(12px) saturate(140%);
+}
+
+.blog-page__create-btn {
+  border-radius: 14px;
+  padding: 10px 14px;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border: 1px solid rgba(var(--gs-cta-rgb), 0.22);
+  background: linear-gradient(135deg, var(--gs-cta-start) 0%, var(--gs-cta-end) 100%);
+  box-shadow:
+    0 10px 26px rgba(var(--gs-cta-rgb), 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.18);
+  color: #fff !important;
+}
+
+.blog-page__create-btn:hover {
+  filter: brightness(1.03);
+  transform: translateY(-1px);
+}
+
+.blog-filters__control.form-control, .blog-filters__select.form-select {
+  width: 100%;
+}
+
+.blog-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+.blog-table__title {
+  max-width: 250px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: pointer;
+  color: #00e5a0;
+  font-weight: 700;
+}
+
+.blog-table__description {
+    max-width: 300px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.blog-table__actions {
+  text-align: right;
+  white-space: nowrap;
+}
+
+.blog-actions {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.blog-icon-btn.btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 12px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.06) !important;
+  border: 1px solid rgba(255, 255, 255, 0.10) !important;
+  color: rgba(234, 250, 245, 0.92) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  transition: transform 140ms ease, background 140ms ease, border-color 140ms ease;
+}
+
+.blog-icon-btn.btn:hover {
+  transform: translateY(-1px);
+  border-color: rgba(var(--gs-cta-rgb), 0.18) !important;
+  background: rgba(var(--gs-cta-rgb), 0.08) !important;
+}
+
+.blog-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-size: 0.65rem;
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  background: rgba(0, 0, 0, 0.22);
+}
+
+.blog-pill--active {
+  border-color: rgba(0, 229, 160, 0.26);
+  color: rgba(0, 229, 160, 0.92);
+}
+
+.blog-pill--inactive {
+  border-color: rgba(255, 107, 107, 0.26);
+  color: rgba(255, 156, 198, 0.92);
+}
+
+.blog-empty {
+  color: rgba(255, 156, 198, 0.92);
+  font-weight: 800;
+}
+

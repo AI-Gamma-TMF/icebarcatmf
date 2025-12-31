@@ -1,11 +1,12 @@
 import React, { useEffect } from "react";
-import { Row, Col, Form, Table } from "@themesberg/react-bootstrap";
+import { Row, Col, Form, Table, Card } from "@themesberg/react-bootstrap";
 import Datetime from "react-datetime";
 import useCommissionReport from "../hooks/useCommissionReport";
 import { InlineLoader } from "../../../components/Preloader";
 import { commissionHeader } from "../constants";
 import moment from "moment";
 import { formatNumber } from "../../../utils/helper";
+import "./vipCommissionReport.scss";
 
 const VipManagerCommissionReport = () => {
   const {
@@ -39,183 +40,135 @@ const VipManagerCommissionReport = () => {
   }, [startDate, endDate]);
   return (
     <>
-      <Row className="mt-3">
-        <h3 className="w-auto">Manager Commission Report</h3>
-      </Row>
-      <Row className="mt-3">
-        <Col className="col-lg-3 col-sm-6 col-6 mt-2 mt-sm-0">
-          <Form.Label column="sm" className="mx-auto text-nowrap px-2">
-            Start Date
-          </Form.Label>
-          <Datetime
-            value={startDate}
-            onChange={(date) => setStartDate(date)}
-            timeFormat={false}
-            inputProps={{ readOnly: true }}
-          />
-          {dateError && (
-            <div className="text-danger fw-bold" style={{ fontSize: "12px" }}>
-              {dateError}
+      <div className="vip-commission-page dashboard-typography">
+        <Row className="align-items-center mb-2">
+          <Col xs={12}>
+            <h3 className="vip-commission-page__title">Manager Commission Report</h3>
+            <div className="vip-commission-page__subtitle">
+              Compare VIP manager performance across custom range, last week/month, MTD and YTD.
             </div>
-          )}
-        </Col>
-        <Col className="col-lg-3 col-sm-6 col-6 mt-2 mt-sm-0">
-          <Form.Label column="sm" className="mx-auto text-nowrap px-2">
-            End Date
-          </Form.Label>
-          <Datetime
-            value={endDate}
-            onChange={(date) => setEndDate(date)}
-            timeFormat={false}
-            inputProps={{ readOnly: true }}
-          />
-        </Col>
-        <Col sm={6} lg={2}>
-          <Form.Group>
-            <Form.Label>Final VIP status</Form.Label>
-            <Form.Select
-              onChange={(event) => {
-                setVipStatus(event?.target?.value);
-              }}
-            >
-              <option value="">All</option>
-              <option value="approved">Approved VIP</option>
-              <option value="rejected">Revoked VIP</option>
-            </Form.Select>
-          </Form.Group>
-        </Col>
-        <Col sm={6} lg={2}>
-          <Form.Group>
-            <Form.Label>Managed By</Form.Label>
-            <Form.Select
-              onChange={(event) => {
-                setManagedBySearch(event?.target?.value);
-              }}
-            >
-              <option value="all">All</option>
-              {!isLoadingManagers &&
-                vipManagersList?.map((manager) => (
-                  <option
-                    key={manager?.adminUserId}
-                    value={manager?.adminUserId}
-                  >
-                    {manager.firstName} {manager?.lastName} (Staff Id -{" "}
-                    {manager?.adminUserId})
-                  </option>
-                ))}
-            </Form.Select>
-          </Form.Group>
-        </Col>
-      </Row>
+          </Col>
+        </Row>
 
-      <Table
-        bordered
-        striped
-        responsive
-        hover
-        size="sm"
-        className="text-center mt-3"
-      >
-        <thead className="thead-dark">
-          <tr>
-            {commissionHeader.map((header, index) => (
-              <th key={header.value}>{header.label}</th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {isLoading ? (
-            <tr>
-              <td colSpan={10} className="text-center">
-                <InlineLoader />
-              </td>
-            </tr>
-          ) : (
-            VipcommissionReport && (
-              <>
+        <Card className="vip-commission-page__filters dashboard-filters p-3 mb-3">
+          <Row className="g-3 align-items-start">
+            <Col xs={12} sm={6} lg={3}>
+              <Form.Label className="form-label">Start Date</Form.Label>
+              <Datetime
+                value={startDate}
+                onChange={(date) => setStartDate(date)}
+                timeFormat={false}
+                inputProps={{ readOnly: true }}
+              />
+            </Col>
+
+            <Col xs={12} sm={6} lg={3}>
+              <Form.Label className="form-label">End Date</Form.Label>
+              <Datetime
+                value={endDate}
+                onChange={(date) => setEndDate(date)}
+                timeFormat={false}
+                inputProps={{ readOnly: true }}
+              />
+            </Col>
+
+            <Col xs={12} sm={6} lg={3}>
+              <Form.Group>
+                <Form.Label className="form-label">Final VIP Status</Form.Label>
+                <Form.Select
+                  className="vip-commission-page__select"
+                  onChange={(event) => {
+                    setVipStatus(event?.target?.value);
+                  }}
+                >
+                  <option value="">All</option>
+                  <option value="approved">Approved VIP</option>
+                  <option value="rejected">Revoked VIP</option>
+                </Form.Select>
+              </Form.Group>
+            </Col>
+
+            <Col xs={12} sm={6} lg={3}>
+              <Form.Group>
+                <Form.Label className="form-label">Managed By</Form.Label>
+                <Form.Select
+                  className="vip-commission-page__select"
+                  onChange={(event) => {
+                    setManagedBySearch(event?.target?.value);
+                  }}
+                >
+                  <option value="all">All</option>
+                  {!isLoadingManagers &&
+                    vipManagersList?.map((manager) => (
+                      <option
+                        key={manager?.adminUserId}
+                        value={manager?.adminUserId}
+                      >
+                        {manager.firstName} {manager?.lastName} (Staff Id - {manager?.adminUserId})
+                      </option>
+                    ))}
+                </Form.Select>
+              </Form.Group>
+            </Col>
+
+            {dateError ? (
+              <Col xs={12}>
+                <div className="vip-commission-page__error text-danger fw-bold">
+                  {dateError}
+                </div>
+              </Col>
+            ) : null}
+          </Row>
+        </Card>
+
+        <div className="vip-commission-page__table-wrap table-responsive dashboard-table">
+          <Table hover size="sm" className="dashboard-data-table vip-commission-table text-center">
+            <thead>
+              <tr>
+                {commissionHeader.map((header) => (
+                  <th key={header.value}>{header.label}</th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {isLoading ? (
                 <tr>
-                  <td>GGR (SC) </td>
-                  <td>
-                    {formatNumber(
-                      VipcommissionReport?.SC_GGR_TOTAL?.CUSTOM_DATE,
-                      { isDecimal: true }
-                    )}
-                  </td>
-                  <td>
-                    {formatNumber(
-                      VipcommissionReport?.SC_GGR_TOTAL?.LAST_MONTH,
-                      { isDecimal: true }
-                    )}
-                  </td>
-                  <td>
-                    {formatNumber(
-                      VipcommissionReport?.SC_GGR_TOTAL?.LAST_WEEK,
-                      { isDecimal: true }
-                    )}
-                  </td>
-                  <td>
-                    {formatNumber(
-                      VipcommissionReport?.SC_GGR_TOTAL?.MONTHLY_AVERAGE,
-                      { isDecimal: true }
-                    )}
-                  </td>
-                  <td>
-                    {formatNumber(
-                      VipcommissionReport?.SC_GGR_TOTAL?.MONTH_TO_DATE,
-                      { isDecimal: true }
-                    )}
-                  </td>
-                  <td>
-                    {formatNumber(
-                      VipcommissionReport?.SC_GGR_TOTAL?.YEAR_TO_DATE,
-                      { isDecimal: true }
-                    )}
+                  <td colSpan={commissionHeader.length} className="text-center">
+                    <InlineLoader />
                   </td>
                 </tr>
+              ) : VipcommissionReport ? (
+                <>
+                  <tr>
+                    <td>GGR (SC)</td>
+                    <td>{formatNumber(VipcommissionReport?.SC_GGR_TOTAL?.CUSTOM_DATE, { isDecimal: true })}</td>
+                    <td>{formatNumber(VipcommissionReport?.SC_GGR_TOTAL?.LAST_MONTH, { isDecimal: true })}</td>
+                    <td>{formatNumber(VipcommissionReport?.SC_GGR_TOTAL?.LAST_WEEK, { isDecimal: true })}</td>
+                    <td>{formatNumber(VipcommissionReport?.SC_GGR_TOTAL?.MONTHLY_AVERAGE, { isDecimal: true })}</td>
+                    <td>{formatNumber(VipcommissionReport?.SC_GGR_TOTAL?.MONTH_TO_DATE, { isDecimal: true })}</td>
+                    <td>{formatNumber(VipcommissionReport?.SC_GGR_TOTAL?.YEAR_TO_DATE, { isDecimal: true })}</td>
+                  </tr>
+                  <tr>
+                    <td>NGR (SC)</td>
+                    <td>{formatNumber(VipcommissionReport?.SC_NGR_TOTAL?.CUSTOM_DATE, { isDecimal: true })}</td>
+                    <td>{formatNumber(VipcommissionReport?.SC_NGR_TOTAL?.LAST_MONTH, { isDecimal: true })}</td>
+                    <td>{formatNumber(VipcommissionReport?.SC_NGR_TOTAL?.LAST_WEEK, { isDecimal: true })}</td>
+                    <td>{formatNumber(VipcommissionReport?.SC_NGR_TOTAL?.MONTHLY_AVERAGE, { isDecimal: true })}</td>
+                    <td>{formatNumber(VipcommissionReport?.SC_NGR_TOTAL?.MONTH_TO_DATE, { isDecimal: true })}</td>
+                    <td>{formatNumber(VipcommissionReport?.SC_NGR_TOTAL?.YEAR_TO_DATE, { isDecimal: true })}</td>
+                  </tr>
+                </>
+              ) : (
                 <tr>
-                  <td>NGR (SC)</td>
-                  <td>
-                    {formatNumber(
-                      VipcommissionReport?.SC_NGR_TOTAL?.CUSTOM_DATE,
-                      { isDecimal: true }
-                    )}
-                  </td>
-                  <td>
-                    {formatNumber(
-                      VipcommissionReport?.SC_NGR_TOTAL?.LAST_MONTH,
-                      { isDecimal: true }
-                    )}
-                  </td>
-                  <td>
-                    {formatNumber(
-                      VipcommissionReport?.SC_NGR_TOTAL?.LAST_WEEK,
-                      { isDecimal: true }
-                    )}
-                  </td>
-                  <td>
-                    {formatNumber(
-                      VipcommissionReport?.SC_NGR_TOTAL?.MONTHLY_AVERAGE,
-                      { isDecimal: true }
-                    )}
-                  </td>
-                  <td>
-                    {formatNumber(
-                      VipcommissionReport?.SC_NGR_TOTAL?.MONTH_TO_DATE,
-                      { isDecimal: true }
-                    )}
-                  </td>
-                  <td>
-                    {formatNumber(
-                      VipcommissionReport?.SC_NGR_TOTAL?.YEAR_TO_DATE,
-                      { isDecimal: true }
-                    )}
+                  <td colSpan={commissionHeader.length} className="text-center">
+                    <span className="vip-commission-page__empty">No data found</span>
                   </td>
                 </tr>
-              </>
-            )
-          )}
-        </tbody>
-      </Table>
+              )}
+            </tbody>
+          </Table>
+        </div>
+      </div>
     </>
   );
 };

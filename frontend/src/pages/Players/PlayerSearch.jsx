@@ -52,7 +52,7 @@ const PlayerSearch = (props) => {
   };
 
   return (
-    <PlayerSearchContainer>
+    <PlayerSearchContainer className="players-search">
       <Formik
         initialValues={{
           // unifiedSearch: '',
@@ -284,15 +284,16 @@ const PlayerSearch = (props) => {
             <Row>
               <Col>
                 <div className='buttonDiv'>
-                  <Button variant='primary' type='submit' >
+                  <Button className='players-search__btn players-search__btn--primary' variant='primary' type='submit' >
                     {loading && btnClick ? <InlineLoader /> : 'Search'}</Button>
 
                   <div>
-                    <Button variant='secondary' onClick={() => resetToggler(resetForm)} type='button'>Reset</Button>
+                    <Button className='players-search__btn players-search__btn--secondary' variant='secondary' onClick={() => resetToggler(resetForm)} type='button'>Reset</Button>
 
                     <Trigger message='Download as CSV' id={'csv'} />
                     <Button
                       id={'csv'}
+                      className='players-search__btn players-search__btn--icon'
                       variant='success' style={{ marginLeft: '10px' }}
                       onClick={() => handleDownloadClick(values)}
                       disabled={downloadInProgress || playersData ===undefined || playersData?.count === 0}
@@ -306,7 +307,7 @@ const PlayerSearch = (props) => {
                   </div>
 
                 </div>
-                <div style={{ fontSize: '12px', fontWeight: 'bold' }}>Note: Press search to load the data.</div>
+                <div className="players-search__note">Note: Press search to load the data.</div>
               </Col>
             </Row>
           </Form>)}

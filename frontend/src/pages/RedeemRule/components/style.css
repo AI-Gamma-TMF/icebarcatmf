@@ -1,173 +1,125 @@
-@import 'react-querybuilder/dist/query-builder.css';
+/* Redeem Rule Query Builder - dark dashboard skin (scoped) */
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
-}
-/* General Query Builder Styles */
-.queryBuilder-branches {
-  background-color: #f8f9fa; /* Light gray background */
-  padding: 20px;
-  border-radius: 8px;
-  border: 1px solid #dee2e6; /* Bootstrap border color */
-  font-family: 'Arial', sans-serif;
+.redeem-rule-page .redeem-rule-toggle {
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  background: rgba(0, 0, 0, 0.18);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
 }
 
-/* Rule Group Styling */
-.queryBuilder .ruleGroup {
-  background-color: #ffffff;
-  border: 2px solid #959da7; /* Bootstrap primary color */
-  border-radius: 8px;
+.redeem-rule-page .redeem-rule-toggle p {
+  color: rgba(234, 250, 245, 0.9);
+  font-weight: 700;
+}
+
+.redeem-rule-page .redeem-rule-builder {
+  background: rgba(0, 0, 0, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 14px;
+}
+
+.redeem-rule-page .queryBuilder .ruleGroup {
+  background: rgba(0, 0, 0, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  border-radius: 12px;
   padding: 10px;
-  margin-bottom: 10px;
 }
 
-/* Rule Group Header */
-.queryBuilder .ruleGroup-header {
-  background-color: transparent;
-  color: #ffffff;
-  font-weight: bold;
-  padding: 6px;
-  border-radius: 6px;
+.redeem-rule-page .queryBuilder .ruleGroup-header {
+  color: rgba(234, 250, 245, 0.92);
 }
 
-/* Individual Rule Styling */
-.queryBuilder .rule {
-  border: 1px solid #2a479650; /* Green for rules */
-  padding: 8px;
-  margin: 5px 0;
-  background-color: transparent;
-  border-radius: 5px;
+.redeem-rule-page .queryBuilder .rule {
+  border: 1px solid rgba(0, 229, 160, 0.14);
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 12px;
 }
 
-/* Dropdowns and Inputs */
-.queryBuilder .fieldSelector,
-.queryBuilder .operatorSelector,
-.queryBuilder .valueEditor {
-  /* background-color: #f8f9fa; */
-  background-color: #22c014;
-  border: 1px solid #d7dbdf;
-  padding: 5px;
-  border-radius: 5px;
-  width: 100px;
+.redeem-rule-page .queryBuilder select,
+.redeem-rule-page .queryBuilder input {
+  background: rgba(0, 0, 0, 0.22) !important;
+  border: 1px solid rgba(255, 255, 255, 0.10) !important;
+  color: rgba(234, 250, 245, 0.92) !important;
+  border-radius: 10px !important;
 }
 
-.queryBuilder .form-select{
-  width: 550px;
-  border-radius: 5px;
- 
+.redeem-rule-page .queryBuilder select:focus,
+.redeem-rule-page .queryBuilder input:focus {
+  border-color: rgba(0, 229, 160, 0.45) !important;
+  box-shadow: 0 0 0 2px rgba(0, 229, 160, 0.18) !important;
 }
 
-.queryBuilder .form-control{
-  width: 500px;
- 
-}
-.queryBuilder .form-control-sm
-  {
-    min-height: calc(1.5em + 0.625rem);
-    padding: 0.01rem 0.01rem;
-    border-radius : 0.2rem;
-    font-size: 1.2rem;
-}
-/* .queryBuilder .btn-secondary {
-  background-color:#f5b759; 
-  color:black;
-  border-radius: 5px;
-  padding: 5px 10px;
-  border: none;
-  cursor: pointer;
-} */
-.queryBuilder .btn-secondary {
-  background-color: #f5b759; /* Warm yellow-orange */
-  color: black;
-  border-radius: 5px;
-  padding: 5px 10px;
-  border: none;
-  cursor: pointer;
- 
-  font-weight: bold;
- 
+.redeem-rule-page .queryBuilder .btn {
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(234, 250, 245, 0.92);
+  font-weight: 800;
 }
 
-.queryBuilder .btn-secondary:hover {
-  background-color: #e0a247; /* Slightly darker shade on hover */
-  transform: scale(1.05); /* Subtle pop effect */
+.redeem-rule-page .queryBuilder .btn:hover {
+  border-color: rgba(0, 229, 160, 0.22);
+  background: rgba(0, 229, 160, 0.08);
 }
 
-.queryBuilder .btn-secondary:active {
-  background-color: #c98c39; /* Even darker on click */
-  transform: scale(0.98); /* Slight press effect */
+.redeem-rule-page .redeem-rule-preview {
+  background: rgba(0, 0, 0, 0.22);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  border-radius: 12px;
+  padding: 12px 14px;
+  overflow: auto;
+  color: rgba(234, 250, 245, 0.9);
 }
 
-.queryBuilder .btn-primary {
-  background-color:#05a677; /* Green color */
-  color:white;
-  border-radius: 5px;
-  padding: 5px 10px;
-  border: none;
-  cursor: pointer;
+.redeem-rule-page .redeem-rule-preview code {
+  color: rgba(234, 250, 245, 0.92);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 0.95rem;
 }
 
-.queryBuilder .btn-danger:hover {
-  background-color: #b71c1c; /* Darker red on hover */
-  transform: scale(1.05);
+/* react-select dark theme (classNamePrefix=select) */
+.redeem-rule-page .select__control {
+  background: rgba(0, 0, 0, 0.22) !important;
+  border: 1px solid rgba(255, 255, 255, 0.10) !important;
+  border-radius: 12px !important;
+  min-height: 44px;
 }
 
-.queryBuilder .btn-danger:active {
-  background-color: #9a0007; /* Even darker red on click */
-  transform: scale(0.98);
+.redeem-rule-page .select__control--is-focused {
+  border-color: rgba(0, 229, 160, 0.45) !important;
+  box-shadow: 0 0 0 2px rgba(0, 229, 160, 0.18) !important;
 }
 
-/* Remove Rule Button */
-.queryBuilder .rule .removeRule {
-  background-color: #dc3545; /* Red color */
-  color: white;
-  border-radius: 5px;
-  padding: 5px 10px;
-  border: none;
-  cursor: pointer;
+.redeem-rule-page .select__menu {
+  background: #161616 !important;
+  border: 1px solid rgba(255, 255, 255, 0.10) !important;
+  z-index: 3000;
 }
 
-.queryBuilder .rule .removeRule:hover {
-  background-color: #c82333;
-}
-                                                                   
-/* Add Rule Button */
-.queryBuilder .addRule {
-  background-color: #17a2b8; /* Bootstrap info color */
-  color: white;
-  padding: 5px 10px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
+.redeem-rule-page .select__option {
+  color: rgba(234, 250, 245, 0.92) !important;
 }
 
-.queryBuilder .addRule:hover {
-  background-color: #138496;
+.redeem-rule-page .select__option--is-focused {
+  background: rgba(255, 255, 255, 0.08) !important;
 }
 
-/* Custom Scrollbar for Large Queries */
-.queryBuilder {
-  max-height: 500px;
-  overflow-y: auto;
+.redeem-rule-page .select__option--is-selected {
+  background: rgba(0, 229, 160, 0.18) !important;
+  color: #00e5a0 !important;
 }
 
-/* Preview Box */
-.query-preview {
-  background-color: #f8f9fa;
-  border: 1px solid #dee2e6;
-  padding: 15px;
-  border-radius: 8px;
-  margin-top: 20px;
+.redeem-rule-page .select__multi-value {
+  background: rgba(0, 229, 160, 0.14) !important;
+  border: 1px solid rgba(0, 229, 160, 0.22) !important;
 }
 
-.queryBuilder .form-select:nth-of-type(1) {
-  width: 550px; /* First form select */
+.redeem-rule-page .select__multi-value__label {
+  color: rgba(234, 250, 245, 0.92) !important;
+  font-weight: 700;
 }
 
-.queryBuilder .form-select:nth-of-type(2) {
-  width: 100px; /* Second form select */
-}
-
-.queryBuilder .form-select {
-  border-radius: 5px;
+.redeem-rule-page .select__placeholder,
+.redeem-rule-page .select__single-value {
+  color: rgba(234, 250, 245, 0.80) !important;
 }

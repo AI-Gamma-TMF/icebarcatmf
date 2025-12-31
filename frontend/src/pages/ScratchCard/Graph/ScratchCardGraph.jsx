@@ -193,12 +193,12 @@ const ScratchCardGraph = () => {
       </Row>
 
       <div className="bonus-graph-container">
-        <Row>
+        <Row className="mx-0">
           <Col>
-            <h3>Graph Filter</h3>
+            <h5>Graph Filter</h5>
           </Col>
         </Row>
-        <Row>
+        <Row className="g-3 mx-0">
           <Col xs={12} md={12} lg={6} xl={4} className="mb-3">
             <label>Scratchcard</label>
             <ScratchCardTypeDropdown
@@ -258,8 +258,7 @@ const ScratchCardGraph = () => {
               <>
                 <label>Time Duration</label>
                 <div
-                  className="d-flex position-relative justify-content-between gap-2 border rounded px-2 py-2 align-items-center"
-                  style={{ top: "-3px" }}
+                  className="quick-range-wrapper"
                 >
                   {/* Other ranges */}
                   <div className="d-flex gap-2">
@@ -318,6 +317,8 @@ const ScratchCardGraph = () => {
           <Col xs={12} md={6} lg={4} xl={3}>
             <label>Interval</label>
             <Select
+              className="scg-select"
+              classNamePrefix="scg-select"
               value={intervalTime}
               onChange={setIntervalTime}
               options={intervalOptions}
@@ -325,7 +326,7 @@ const ScratchCardGraph = () => {
               isClearable={false}
             />
           </Col>
-          <Col xs={12} md={6} lg={2} xl={1} className="mb-3">
+          <Col xs={12} md="auto" className="mb-3">
             <AutoRefreshControl
               resetFilters={resetFilters}
               refreshInterval={refreshInterval}
@@ -334,27 +335,16 @@ const ScratchCardGraph = () => {
           </Col>
         </Row>
 
-        <Row>
+        <Row className="mx-0">
           <Col xs={12} md={12} lg={12}>
             {refreshInterval !== "off" && (
               <div
-                style={{
-                  height: "4px",
-                  width: "100%",
-                  backgroundColor: "#e9ecef",
-
-                  borderRadius: "4px",
-                  overflow: "hidden",
-                }}
+                className="progress-bar-track"
               >
                 <div
                   key={countdownKey}
-                  style={{
-                    height: "100%",
-                    width: `${progress}%`,
-                    backgroundColor: "#0d6efd",
-                    transition: "width 0.1s linear",
-                  }}
+                  className="progress-bar-fill"
+                  style={{ width: `${progress}%`, transition: "width 0.1s linear" }}
                 />
               </div>
             )}
@@ -435,14 +425,15 @@ const ScratchCardGraph = () => {
           )}
         </Col>
       </Row>
-      <Row>
-        <Row className="mt-4">
-          <Col sm={8}>
-            <h4>User Details</h4>
+      <div className="scratch-user-details-container mt-4">
+        <Row className="mx-0">
+          <Col>
+            <h4 className="mb-0">User Details</h4>
           </Col>
         </Row>
-        <Row className="mt-4">
-          <Col xs="12" sm="6" lg="2" className="mb-3">
+
+        <Row className="g-3 mx-0 mt-2 dashboard-filters scratch-user-filters align-items-end">
+          <Col xs={12} sm={6} lg={3}>
             <Form.Label>Scratchcard</Form.Label>
             <ScratchCardTypeDropdown
               scratchCardId={userScratchCardId}
@@ -450,7 +441,7 @@ const ScratchCardGraph = () => {
               scratchCardDropdownList={scratchCardDropdownList}
             />
           </Col>
-          <Col xs="12" sm="6" lg="2" className="mb-3">
+          <Col xs={12} sm={6} lg={2}>
             <Form.Label>User Id</Form.Label>
             <Form.Control
               type="number"
@@ -464,7 +455,7 @@ const ScratchCardGraph = () => {
               }}
             />
           </Col>
-          <Col xs="12" sm="6" lg="3" className="mb-3">
+          <Col xs={12} sm={6} lg={3}>
             <Form.Label>Search</Form.Label>
             <Form.Control
               type="search"
@@ -474,18 +465,11 @@ const ScratchCardGraph = () => {
               isInvalid={!!error}
             />
             {error && (
-              <div style={{ color: "red", marginTop: "5px" }}>{error}</div>
+              <div className="scratch-card-error">{error}</div>
             )}
           </Col>
-          <Col
-            xs="12"
-            sm="6"
-            lg="2"
-            className="col-lg-2 col-sm-6 col-12 mt-2 mt-sm-0"
-          >
-            <Form.Label column="sm" className="mx-auto text-nowrap px-2">
-              Start Date
-            </Form.Label>
+          <Col xs={12} sm={6} lg={2}>
+            <Form.Label className="text-nowrap">Start Date</Form.Label>
             <Datetime
               value={userStartDate}
               onChange={handleStartDateChange}
@@ -493,19 +477,12 @@ const ScratchCardGraph = () => {
               inputProps={{ readOnly: true }}
             />
             {errorStart && (
-              <div style={{ color: "red", marginTop: "5px" }}>{errorStart}</div>
+              <div className="scratch-card-error">{errorStart}</div>
             )}
           </Col>
 
-          <Col
-            xs="12"
-            sm="6"
-            lg="2"
-            className="col-lg-2 col-sm-6 col-12 mt-2 mt-sm-0"
-          >
-            <Form.Label column="sm" className="mx-auto text-nowrap px-2">
-              End Date
-            </Form.Label>
+          <Col xs={12} sm={6} lg={2}>
+            <Form.Label className="text-nowrap">End Date</Form.Label>
             <Datetime
               value={userEndDate}
               onChange={handleEndDateChange}
@@ -513,18 +490,21 @@ const ScratchCardGraph = () => {
               inputProps={{ readOnly: true }}
             />
             {errorEnd && (
-              <div style={{ color: "red", marginTop: "5px" }}>{errorEnd}</div>
+              <div className="scratch-card-error">{errorEnd}</div>
             )}
           </Col>
         </Row>
-        <div className="mt-4">
+
+        <div className="dashboard-section-divider" />
+
+        <div className="scratch-user-table-wrap table-responsive mt-3">
           <Table
             bordered
             striped
             responsive
             hover
             size="sm"
-            className="text-center mt-4"
+            className="dashboard-data-table scratch-user-table text-center"
           >
             <thead className="thead-dark">
               <tr>
@@ -543,7 +523,7 @@ const ScratchCardGraph = () => {
               {userDetail?.rows?.map((data, index) => {
                 return (
                   <tr key={data.scratch_card_id}>
-                    <td >{data.user_id}</td>
+                    <td>{data.user_id}</td>
                     <td>{data.email}</td>
                     <td>{data.username}</td>
                     <td>{formatAmountWithCommas(data.total_claimed_count)}</td>
@@ -557,13 +537,14 @@ const ScratchCardGraph = () => {
               })}
               {userDetail?.count === 0 && (
                 <tr>
-                  <td colSpan={7} className="text-danger text-center">
+                  <td colSpan={9} className="text-danger text-center">
                     No Data Found
                   </td>
                 </tr>
               )}
             </tbody>
           </Table>
+        </div>
           {userDetail?.count !== 0 && (
             <PaginationComponent
               page={userDetail?.count < page ? setPage(1) : page}
@@ -573,8 +554,7 @@ const ScratchCardGraph = () => {
               setLimit={setLimit}
             />
           )}
-        </div>
-      </Row>
+      </div>
     </>
   );
 };

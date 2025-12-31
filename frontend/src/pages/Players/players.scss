@@ -1,0 +1,155 @@
+// Reuse the dashboard “modern” styling primitives (glass panels, dark inputs, card-row table skin)
+@import "../Dashboard/DashboardCharts/dashboardChart.scss";
+
+// ============================================================
+// Players page: match Dashboard/Staff look
+// ============================================================
+.players-page {
+  padding-bottom: 6px;
+}
+
+.players-page__card {
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.04) 0%, rgba(0, 0, 0, 0.22) 100%),
+    rgba(26, 26, 26, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.55),
+    0 14px 40px rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(12px) saturate(140%);
+  -webkit-backdrop-filter: blur(12px) saturate(140%);
+}
+
+// Search/filters panel (uses dashboard-viz-panel look)
+.players-controls-panel {
+  margin-top: 10px;
+}
+
+.players-search {
+  .form-label {
+    color: rgba(234, 250, 245, 0.88) !important;
+    font-size: 0.72rem !important;
+    text-transform: uppercase !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.06em !important;
+  }
+
+  .form-control,
+  .form-select {
+    background-color: rgba(0, 0, 0, 0.35) !important;
+    color: rgba(255, 255, 255, 0.92) !important;
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    border-radius: 14px !important;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  }
+
+  .form-control {
+    padding: 12px 14px !important;
+  }
+
+  .form-control::placeholder {
+    color: rgba(234, 250, 245, 0.55) !important;
+  }
+
+  .form-control:focus,
+  .form-select:focus {
+    border-color: rgba(var(--gs-cta-rgb), 0.35) !important;
+    box-shadow:
+      0 0 0 0.2rem rgba(var(--gs-cta-rgb), 0.14),
+      inset 0 1px 0 rgba(255, 255, 255, 0.06) !important;
+  }
+
+  .buttonDiv {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .players-search__btn {
+    border-radius: 14px !important;
+    padding: 10px 16px !important;
+    font-weight: 900 !important;
+    letter-spacing: 0.04em !important;
+    text-transform: uppercase !important;
+  }
+
+  .players-search__btn--primary {
+    border: 1px solid rgba(var(--gs-cta-rgb), 0.22) !important;
+    background: linear-gradient(135deg, var(--gs-cta-start) 0%, var(--gs-cta-end) 100%) !important;
+    box-shadow:
+      0 10px 26px rgba(var(--gs-cta-rgb), 0.12),
+      inset 0 1px 0 rgba(255, 255, 255, 0.18) !important;
+  }
+
+  .players-search__btn--secondary {
+    background: rgba(255, 255, 255, 0.06) !important;
+    border: 1px solid rgba(255, 255, 255, 0.10) !important;
+    color: rgba(234, 250, 245, 0.92) !important;
+  }
+
+  .players-search__btn--icon {
+    width: 44px;
+    height: 44px;
+    padding: 0 !important;
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .players-search__note {
+    margin-top: 8px;
+    color: rgba(234, 250, 245, 0.70);
+    font-size: 0.8rem;
+    font-weight: 700;
+  }
+}
+
+// Column selector (MultiSelect) – make it dark + rounded like dashboard controls
+.players-page {
+  .custom-multiselect .dropdown-container {
+    background: rgba(0, 0, 0, 0.32);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 14px !important;
+    color: rgba(255, 255, 255, 0.92);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  }
+
+  .custom-multiselect .search input {
+    background: transparent !important;
+    color: rgba(255, 255, 255, 0.92) !important;
+  }
+}
+
+// Players table wrapper
+.players-table {
+  width: 100%;
+  // Players has many columns; always allow horizontal scrolling so last columns never get clipped.
+  overflow-x: auto !important;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+
+  // Subtle dark scrollbar (matches dashboard)
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 229, 160, 0.22) transparent;
+  &::-webkit-scrollbar {
+    height: 10px;
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: rgba(0, 229, 160, 0.18);
+    border-radius: 999px;
+  }
+}
+
+.players-table .dashboard-data-table {
+  // Let the table be as wide as it needs (lots of columns)
+  min-width: max-content;
+  table-layout: auto;
+}
+
+

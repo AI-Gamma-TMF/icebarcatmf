@@ -5,6 +5,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { AdminRoutes } from "../../routes";
 import PromotionBonus from "./index";
 import PromotionBonusDashboard from "./Graph/PromotionBonusDashboard";
+import "./promotionBonusListing.scss";
 
 
 const PromotionBonusComponent = () => {
@@ -25,13 +26,24 @@ const PromotionBonusComponent = () => {
 
 
   return (
-    <>
+    <div className="dashboard-typography affiliate-promo-page">
+      <div className="d-flex justify-content-between align-items-center mb-4">
+        <div>
+          <h3 className="affiliate-promo-page__title">Affiliate Promo Codes</h3>
+          <p className="affiliate-promo-page__subtitle">
+            Create and manage affiliate promo codes and their status
+          </p>
+        </div>
+      </div>
+
       <Row className="mb-2">
-        <Col>
-          <h3>Affiliate Promo Codes</h3>
-        </Col>
         <Col lg={12}>
-          <Tabs activeKey={key} onSelect={handleTabChange} className='ps-2' id='amoe-tabs'>
+          <Tabs
+            activeKey={key}
+            onSelect={handleTabChange}
+            className="affiliate-promo-page__tabs"
+            id="affiliate-promo-tabs"
+          >
             {/* Dashboard Tab */}
             <Tab eventKey='dashboard' title='Dashboard'>
               <PromotionBonusDashboard isHitoricalTab={key} />
@@ -44,7 +56,7 @@ const PromotionBonusComponent = () => {
           </Tabs>
         </Col>
       </Row>
-    </>
+    </div>
   );
 };
 

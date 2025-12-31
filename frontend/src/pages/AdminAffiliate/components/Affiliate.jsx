@@ -54,11 +54,15 @@ const Affiliate = ({
     }
     return []
   };
+
+  const selectStyles = {
+    menuPortal: (provided) => ({ ...provided, zIndex: 99999 }),
+  }
   
   return (
     <>
       <Form>
-        <Row>
+        <Row className='g-3'>
           <Col md={6} sm={12}>
             <BForm.Label>First Name</BForm.Label>
             <BForm.Control
@@ -100,7 +104,7 @@ const Affiliate = ({
           
         </Row>
 
-        <Row className='mt-3'>
+        <Row className='g-3 mt-1'>
           <Col md={6} sm={12}>
             <BForm.Label>Email</BForm.Label>
             <BForm.Control
@@ -122,7 +126,6 @@ const Affiliate = ({
           <Col md={6} sm={12}>
             <BForm.Label>Phone Number</BForm.Label>
             <PhoneInput
-              inputStyle={{width:"100%"}}
               country={'us'}
               value={selectPhone}
               onChange={handlePhone}
@@ -137,14 +140,15 @@ const Affiliate = ({
             />
           </Col>
         </Row>
-        <Row className='mt-3'>
+        <Row className='g-3 mt-1'>
           <Col md={6} sm={12}>
             <BForm.Label>State</BForm.Label>
               <Select
               placeholder='State'
               isDisabled={isEdit}
-              className={'react-select custom-select'}
-              classNamePrefix={'react-select'}
+              classNamePrefix={'affiliate-select'}
+              menuPortalTarget={typeof document !== 'undefined' ? document.body : null}
+              menuPosition='fixed'
               options={stateListConst(stateData)}
               onChange={(SelectedValue) => {
                 setSelectState(SelectedValue)
@@ -152,6 +156,7 @@ const Affiliate = ({
               }}
               isLoading={isGetStateLoading}
               value={findOptionByValue(stateListConst(stateData),selectState)}
+              styles={selectStyles}
             />
             <ErrorMessage
               component='div'
@@ -181,7 +186,7 @@ const Affiliate = ({
           </Col>
         </Row>
 
-        <Row className='mt-3'>
+        <Row className='g-3 mt-1'>
           <Col md={6} sm={12}>
             <BForm.Label>Traffic source (provide Description and Link)</BForm.Label>
             <BForm.Control
@@ -224,20 +229,21 @@ const Affiliate = ({
           </Col>
         </Row>
 
-        <div className='mt-4 d-flex justify-content-between align-items-center'>
+        <div className='create-affiliate-actions'>
           <Button
-            variant='warning'
+            variant='secondary'
+            className='create-affiliate-btn'
             onClick={() => navigate(AdminRoutes.Affiliate)}
           >
             Cancel
           </Button>
 
           <Button
-            variant='success'
+            variant='primary'
+            className='create-affiliate-btn create-affiliate-btn--primary'
             onClick={() => {
               handleSubmit()
             }}
-            className='ml-2'
             disabled={isEdit}
           >
             Submit

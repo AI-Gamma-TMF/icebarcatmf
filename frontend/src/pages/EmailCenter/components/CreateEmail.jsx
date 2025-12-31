@@ -5,13 +5,17 @@ import { Formik, Form } from "formik";
 import {
   Col,
   Row,
-  Form as BForm} from "@themesberg/react-bootstrap";
+  Form as BForm,
+  Card,
+  Button,
+} from "@themesberg/react-bootstrap";
 import EditEmailTemplate from "../../../components/EditEmailTemplate";
 import useCreateTemplate from "../hooks/useCreateEmail";
 import useTemplateListing from "../hooks/useTemplateListing";
-import "./DropdownStyles.scss";
 import Select from "react-select";
 import makeAnimated from "react-select/animated";
+import { AdminRoutes } from "../../../routes";
+import "./createEmail.scss";
 
 const CreateEmail = ({ tempdata, _editfetch }) => {
   const navigate = useNavigate();
@@ -76,22 +80,37 @@ const CreateEmail = ({ tempdata, _editfetch }) => {
   //   setTemplateType(selectedOption);
   // };
 
-  const customStyles = {
-    container: (provided) => ({
-      ...provided,
-      width: "500px",
-    }),
+  const selectStyles = {
     menu: (provided) => ({
       ...provided,
-      zIndex: 999,
+      zIndex: 9999,
+    }),
+    menuPortal: (provided) => ({
+      ...provided,
+      zIndex: 99999,
     }),
   };
   return (
-    <>
-      <Row className="">
-        <Col>
-          <h3>{tempdata ? "Edit Email Template" : "Create Email Template"} </h3>
-        </Col>
+    <div className="dashboard-typography create-email-page">
+      <div className="d-flex justify-content-between align-items-center mb-4">
+        <div>
+          <h3 className="create-email-page__title">
+            {tempdata ? "Edit Email Template" : "Create Email Template"}
+          </h3>
+          <p className="create-email-page__subtitle">
+            Build the template content and validate selected dynamic keys
+          </p>
+        </div>
+        <div className="d-flex gap-2">
+          <Button
+            variant="secondary"
+            size="sm"
+            onClick={() => navigate(AdminRoutes.EmailCenter)}
+          >
+            Back
+          </Button>
+        </div>
+      </div>
         {/* <Col className="col-2 text-end">
           <Button
             variant="success"
@@ -104,53 +123,60 @@ const CreateEmail = ({ tempdata, _editfetch }) => {
             Test
           </Button>
         </Col> */}
-      </Row>
 
-      <Row className="mt-4">
-        <Col>
-          <div>
-            <BForm.Label className="w-50">Email Template Type</BForm.Label>
-            <Select
-              options={[
-                { label: "Default", value: null },
-                { label: "Free Spin", value: "freeSpin" },
-              ]}
-              onChange={(selectedOption) =>
-                setTemplateType(selectedOption?.value ?? null)
-              }
-              value={
-                templateType !== null
-                  ? { label: "Free Spin", value: "freeSpin" }
-                  : { label: "Default", value: null }
-              }
-              placeholder="Select Template Type"
-              isClearable
-              styles={customStyles}
-            />
-          </div>
-        </Col>
-        <Col>
-          <div>
-            <BForm.Label className="w-50">
-              Select Dynamic Keys <span>{`(Put dynamic keys in {{}}*)`}</span>
-            </BForm.Label>
-            <Select
-              closeMenuOnSelect={false}
-              components={makeAnimated()}
-              isMulti
-              options={options}
-              onChange={handleSelectionChange}
-              value={options.filter((option) =>
-                selectedOptions.includes(option.value)
-              )}
-              placeholder={`Select Dynamic Keys`}
-              isClearable
-              styles={customStyles}
-            />
-          </div>
-        </Col>
-        
-      </Row>
+      <Card className="dashboard-filters create-email-page__card mb-4">
+        <Card.Body>
+          <Row className="g-3 align-items-start">
+            <Col xs={12} md={6} lg={4}>
+              <BForm.Label>Email Template Type</BForm.Label>
+              <Select
+                classNamePrefix="email-create-select"
+                menuPortalTarget={typeof document !== "undefined" ? document.body : null}
+                menuPosition="fixed"
+                options={[
+                  { label: "Default", value: null },
+                  { label: "Free Spin", value: "freeSpin" },
+                ]}
+                onChange={(selectedOption) =>
+                  setTemplateType(selectedOption?.value ?? null)
+                }
+                value={
+                  templateType !== null
+                    ? { label: "Free Spin", value: "freeSpin" }
+                    : { label: "Default", value: null }
+                }
+                placeholder="Select Template Type"
+                isClearable
+                styles={selectStyles}
+              />
+            </Col>
+            <Col xs={12} md={6} lg={8}>
+              <BForm.Label>
+                Select Dynamic Keys{" "}
+                <span className="create-email-page__hint">
+                  {"(Put dynamic keys in {{}}*)"}
+                </span>
+              </BForm.Label>
+              <Select
+                classNamePrefix="email-create-select"
+                menuPortalTarget={typeof document !== "undefined" ? document.body : null}
+                menuPosition="fixed"
+                closeMenuOnSelect={false}
+                components={makeAnimated()}
+                isMulti
+                options={options}
+                onChange={handleSelectionChange}
+                value={options.filter((option) =>
+                  selectedOptions.includes(option.value)
+                )}
+                placeholder="Select Dynamic Keys"
+                isClearable
+                styles={selectStyles}
+              />
+            </Col>
+          </Row>
+        </Card.Body>
+      </Card>
 
       <Formik
         initialValues={{
@@ -191,33 +217,32 @@ const CreateEmail = ({ tempdata, _editfetch }) => {
           setFieldValue,
         }) => (
           <Form>
-            <Row className="mb-3 align-items-center justify-content-between"></Row>
-
-            <div className="mt-5">
-              <EditEmailTemplate
-                selectedOptions={selectedOptions}
-                values={values}
-                setFieldValue={setFieldValue}
-                handleChange={handleChange}
-                handleBlur={handleBlur}
-                // setTemp={setTemplate}
-                handleSubmit={handleSubmit}
-                navigate={navigate}
-                initValues={values}
-                errors={errors}
-                title={title}
-                setTitle={setTitle}
-                Subject={Subject}
-                setSubject={setSubject}
-                content={content}
-                setContent={setContent}
-                loading={createloading}
-              />
-            </div>
+            <Card className="dashboard-filters create-email-page__card">
+              <Card.Body>
+                <EditEmailTemplate
+                  selectedOptions={selectedOptions}
+                  values={values}
+                  setFieldValue={setFieldValue}
+                  handleChange={handleChange}
+                  handleBlur={handleBlur}
+                  handleSubmit={handleSubmit}
+                  navigate={navigate}
+                  initValues={values}
+                  errors={errors}
+                  title={title}
+                  setTitle={setTitle}
+                  Subject={Subject}
+                  setSubject={setSubject}
+                  content={content}
+                  setContent={setContent}
+                  loading={createloading}
+                />
+              </Card.Body>
+            </Card>
           </Form>
         )}
       </Formik>
-    </>
+    </div>
   );
 };
 

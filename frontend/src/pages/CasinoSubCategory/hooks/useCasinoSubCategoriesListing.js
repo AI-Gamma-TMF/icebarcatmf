@@ -45,24 +45,26 @@ const useCasinoCategoriesListing = () => {
 
   const resetFilters = () => {
     setSearch('')
-    setCategoryFilter('all')
+    setCategoryFilter('')
     setStatusFilter('all')
-};
+  };
 
 
-  const { data: subCategories, isLoading: loading } = useQuery({
+  const { data: subCategories, isLoading: loading, isFetching } = useQuery({
     queryKey: ['casinoSubCategories', limit, page, debouncedSearch, orderBy, sort, statusFilter, categoryFilter],
     queryFn: ({ queryKey }) => {
       const params = {pageNo: queryKey[2], limit: queryKey[1]};
       if (queryKey[3]) params.search = queryKey[3]
       if (queryKey[4]) params.orderBy = queryKey[4]
       if (queryKey[5]) params.sort = queryKey[5]
-      if (queryKey[6]) params.isActive = statusFilter
+      if (queryKey[6] && queryKey[6] !== 'all') params.isActive = statusFilter
       // if (queryKey[7]) params.masterGameCategoryId = categoryFilter
       return getAllCasinoSubCategories(params)
     },
     select: (res) => res?.data?.subCategory,
-    refetchOnWindowFocus: false
+    refetchOnWindowFocus: false,
+    keepPreviousData: true,
+    staleTime: 15000
   })
 
   const totalPages = Math.ceil(subCategories?.count / limit)
@@ -147,6 +149,7 @@ const useCasinoCategoriesListing = () => {
     limit,
     page,
     loading,
+    isFetching,
     subCategories,
     // casinoCategories,
     show,

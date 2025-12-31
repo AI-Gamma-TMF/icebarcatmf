@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom'
-import { Row, Col, Button, Table, Form } from '@themesberg/react-bootstrap'
+import { Row, Col, Button, Table, Form, Card } from '@themesberg/react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faArrowCircleUp, faArrowCircleDown, faEdit, faCheckSquare, faWindowClose, faEye } from '@fortawesome/free-solid-svg-icons';
 import { formBuilderHeader, getFieldLabel, statusOptions } from '../../constants';
@@ -11,6 +11,7 @@ import { InlineLoader } from '../../../../components/Preloader';
 import Trigger from '../../../../components/OverlayTrigger';
 import { ConfirmationModal, DeleteConfirmationModal } from '../../../../components/ConfirmationModal';
 import { AdminRoutes } from '../../../../routes';
+import './vipQuestions.scss';
 
 const VipformQuestions = () => {
 	const { isHidden } = useCheckPermission();
@@ -20,76 +21,80 @@ const VipformQuestions = () => {
 
 	return (
 		<>
-			<Row>
-				<Col>
-					<h3>Vip Questions</h3>
-				</Col>
+			<div className="vip-questions-page dashboard-typography">
+				<Row className="vip-questions-page__header align-items-center mb-2">
+					<Col xs={12} md={7}>
+						<h3 className="vip-questions-page__title">Vip Questions</h3>
+						<div className="vip-questions-page__subtitle">
+							Create, reorder, preview, and manage VIP questionnaire items.
+						</div>
+					</Col>
 
-				<Col>
-					<div className='d-flex justify-content-end'>
+					<Col xs={12} md={5} className="vip-questions-page__actions">
 						<Button
-							variant='success'
-							className='mb-2 m-1'
-							size='sm'
+							variant="success"
+							className="vip-questions-page__action-btn"
+							size="sm"
 							onClick={() => navigate(AdminRoutes.VipCreateQuestion)}
 							hidden={isHidden({ module: { key: 'VipManagement', value: 'C' } })}
-
 						>
 							Create Questions
 						</Button>
 						<Button
-							variant='warning'
-							className='mb-2 m-1'
-							size='sm'
+							variant="warning"
+							className="vip-questions-page__action-btn vip-questions-page__action-btn--warning"
+							size="sm"
 							onClick={() => navigate(AdminRoutes.VipReorderQuestion)}
 							hidden={isHidden({ module: { key: 'VipManagement', value: 'U' } })}
-
 						>
 							Reorder
 						</Button>
-						<Button variant='secondary' className='mb-2 m-1' size='sm' onClick={()=>navigate(AdminRoutes.VipViewForm)}
-							hidden={isHidden({module:{key:'VipManagement', value:'R'}})}>
-								Form Preview
+						<Button
+							variant="secondary"
+							className="vip-questions-page__action-btn vip-questions-page__action-btn--secondary"
+							size="sm"
+							onClick={() => navigate(AdminRoutes.VipViewForm)}
+							hidden={isHidden({ module: { key: 'VipManagement', value: 'R' } })}
+						>
+							Form Preview
 						</Button>
-					</div>
-					
-				</Col>
-			</Row>
-			<Row className='mt-3'>
-				<Col sm={6} lg={3}>
-					<Form.Label>Search</Form.Label>
-					<Form.Control
-						type='search'
-						value={search}
-						placeholder='Search question'
-						onChange={(event) => setSearch(event.target.value.replace(/[~`!$%^&*#=)()><?]+/g, ''))}
-					/>
-				</Col>
-				<Col sm={6} lg={3}>
-					<Form.Label
+					</Col>
+				</Row>
 
-					>
-						Status
-					</Form.Label>
-					<Form.Select
+				<Card className="vip-questions-page__filters dashboard-filters p-3 mb-3">
+					<Row className="g-3 align-items-start">
+						<Col xs={12} md={6} lg={4}>
+							<Form.Label className="form-label">Search</Form.Label>
+							<Form.Control
+								className="vip-questions-page__input"
+								type="search"
+								value={search}
+								placeholder="Search question"
+								onChange={(event) => setSearch(event.target.value.replace(/[~`!$%^&*#=)()><?]+/g, ''))}
+							/>
+						</Col>
+						<Col xs={12} md={6} lg={3}>
+							<Form.Label className="form-label">Status</Form.Label>
+							<Form.Select
+								className="vip-questions-page__select"
+								onChange={(event) => {
+									setPage(1)
+									setIsActive(event.target.value);
+								}}
+							>
+								{statusOptions.map((status) => (
+									<option key={status.label} value={status.value}>
+										{status.label}
+									</option>
+								))}
+							</Form.Select>
+						</Col>
+					</Row>
+				</Card>
 
-						onChange={(event) => {
-							setPage(1)
-							setIsActive(event.target.value);
-						}}
-					>
-						{statusOptions.map((status, _idx) => (
-							<option key={status.label} value={status.value}>
-								{status.label}
-							</option>
-						))}
-					</Form.Select>
-				</Col>
-
-			</Row>
-
-			<Table bordered striped responsive hover size='sm' className='text-center mt-4'>
-				<thead className='thead-dark'>
+				<div className="vip-questions-page__table-wrap table-responsive dashboard-table">
+					<Table hover size="sm" className="dashboard-data-table vip-questions-table text-center">
+						<thead>
 					<tr>
 						{
 							formBuilderHeader.map((header, idx) => (
@@ -115,7 +120,7 @@ const VipformQuestions = () => {
 							</th>
 							))}
 					</tr>
-				</thead>
+						</thead>
 
 				<tbody>
 
@@ -241,8 +246,8 @@ const VipformQuestions = () => {
 						)
 							:
 							<tr>
-								<td colSpan={9} className='text-danger text-center'>
-									No Data Found
+								<td colSpan={formBuilderHeader.length} className='text-center'>
+									<span className="vip-questions-page__empty">No Data Found</span>
 								</td>
 							</tr>
 
@@ -250,7 +255,8 @@ const VipformQuestions = () => {
 					}
 				</tbody>
 
-			</Table>
+					</Table>
+				</div>
 			{vipQuestionsList?.questions?.count !== 0 && <PaginationComponent
 				page={vipQuestionsList?.questions?.count < page ? setPage(1) : page}
 				totalPages={totalPages}
@@ -270,6 +276,7 @@ const VipformQuestions = () => {
 				statusShow && <ConfirmationModal show={statusShow} setShow={setStatusShow} handleYes={handleYes} active={status} loading={updateLoading} />
 			}
 
+			</div>
 		</>
 	)
 }

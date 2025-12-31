@@ -3,7 +3,9 @@ import TransactionBanking from '../PlayerDetails/components/TransactionBanking'
 
 const BankingTransaction = () => {
     return (
-        <TransactionBanking isAllUser={true} />
+        <div className="dashboard-typography">
+            <TransactionBanking isAllUser={true} />
+        </div>
     )
 }
 

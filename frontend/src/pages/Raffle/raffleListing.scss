@@ -1,0 +1,125 @@
+// Reuse dashboard theme primitives
+@import "../Dashboard/DashboardCharts/dashboardChart.scss";
+
+.raffle-page {
+  padding-bottom: 6px;
+}
+
+.raffle-page__title {
+  margin: 0;
+}
+
+.raffle-page__subtitle {
+  margin-top: 4px;
+  color: rgba(234, 250, 245, 0.68);
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+.raffle-page__create-btn.btn {
+  border-radius: 14px;
+  padding: 10px 14px;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border: 1px solid rgba(var(--gs-cta-rgb), 0.22);
+  background: linear-gradient(135deg, var(--gs-cta-start) 0%, var(--gs-cta-end) 100%);
+  box-shadow:
+    0 10px 26px rgba(var(--gs-cta-rgb), 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.18);
+  color: #fff !important;
+}
+
+.raffle-page__create-btn.btn:hover {
+  filter: brightness(1.03);
+  transform: translateY(-1px);
+}
+
+.raffle-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+.raffle-actions {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.raffle-icon-btn.btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 12px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.06) !important;
+  border: 1px solid rgba(255, 255, 255, 0.10) !important;
+  color: rgba(234, 250, 245, 0.92) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  transition: transform 140ms ease, background 140ms ease, border-color 140ms ease;
+}
+
+.raffle-icon-btn.btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+  border-color: rgba(var(--gs-cta-rgb), 0.18) !important;
+  background: rgba(var(--gs-cta-rgb), 0.08) !important;
+}
+
+.raffle-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-size: 0.65rem;
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  background: rgba(0, 0, 0, 0.22);
+}
+
+.raffle-pill--active {
+  border-color: rgba(0, 229, 160, 0.26);
+  color: rgba(0, 229, 160, 0.92);
+}
+
+.raffle-pill--inactive {
+  border-color: rgba(255, 107, 107, 0.26);
+  color: rgba(255, 156, 198, 0.92);
+}
+
+.raffle-pill--upcoming {
+  border-color: rgba(255, 201, 107, 0.30);
+  color: rgba(255, 201, 107, 0.95);
+}
+
+.raffle-pill--ongoing {
+  border-color: rgba(0, 229, 160, 0.26);
+  color: rgba(0, 229, 160, 0.92);
+}
+
+.raffle-pill--completed {
+  border-color: rgba(160, 174, 192, 0.22);
+  color: rgba(200, 214, 230, 0.80);
+}
+
+.raffle-empty {
+  color: rgba(255, 156, 198, 0.92);
+  font-weight: 800;
+}
+
+.raffle-filters .btn.btn-success {
+  width: 44px;
+  height: 44px;
+  border-radius: 14px !important;
+  padding: 0 !important;
+}
+
+

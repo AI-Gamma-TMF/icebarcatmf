@@ -13,6 +13,7 @@ import PlayerSearch from './PlayerSearch'
 import { PromocodeBlockModal } from './Components/PromocodeBlockModal'
 import { toast } from '../../components/Toast'
 import ImportCsvModal from './Components/ImportCsvModal'
+import './promocodeBlocking.scss'
 
 const PromoCodeBlocking = () => {
   const { t, navigate, selected, loading, sort, setStatusShow, statusShow, handleYes, status,
@@ -123,236 +124,238 @@ const PromoCodeBlocking = () => {
 
   return (
     <>
-      <Card className='p-2 mb-2'>
-        <Row>
-          <Col>
-            <h3>{t('Promocode Restricted Players')}</h3>
-          </Col>
-        </Row>
-        <PlayerSearch
-          globalSearch={globalSearch}
-          setGlobalSearch={setGlobalSearch}
-          getCsvDownloadUrl={getCsvDownloadUrl}
-          playersData={playersData}
-          setSelectAll={setSelectAll}
-          setMultiSelectPlayers={setMultiSelectPlayers}
-          setPage={setPage}
-          setImportedFile={setImportedFile}
-          setImportModalShow={setImportModalShow}
-          promocodeStatus={promocodeStatus}
-          setPromocodeStatus={setPromocodeStatus}
-        />
-        <Row className='mt-3 pagination justify-content-center align-items-center'>
-          <Col className='col-lg-1 col-sm-4 col-12 p-0'>
+      <div className='dashboard-typography promocode-blocking-page'>
+        <div className='d-flex flex-wrap justify-content-between align-items-start gap-3 mb-3'>
+          <div>
+            <h3 className='promocode-blocking-page__title'>{t('Promocode Restricted Players')}</h3>
+            <p className='promocode-blocking-page__subtitle'>
+              Block or unblock players from applying promo codes
+            </p>
+          </div>
+
+          <div className='promocode-blocking-page__actions'>
             <Button
-              variant='success'
+              variant='outline-success'
+              className='promocode-blocking-page__action-btn'
               onClick={() => handleMultipleUnblock()}
-              style={{ width: '90%' }}
               hidden={isHidden({ module: { key: 'BlockUsers', value: 'C' } })}
             >
               Unblock
             </Button>
-          </Col>
-          <Col className='col-lg-1 col-sm-4 col-12 p-0'>
             <Button
-              variant='danger'
+              variant='outline-danger'
+              className='promocode-blocking-page__action-btn'
               onClick={() => handleMultipleBlock()}
-              style={{ width: '90%' }}
               hidden={isHidden({ module: { key: 'BlockUsers', value: 'C' } })}
             >
               Block
             </Button>
-          </Col>
-        </Row>
-        <Table bordered striped responsive hover size='sm' className='text-center mt-4'>
-          <thead className='thead-dark'>
-            <tr>
-              <th>
-                <input
-                  type="checkbox"
-                  checked={selectAll}
-                  onChange={handleSelectAll}
-                />
-              </th>
-              {tableHeaders.map((h, idx) => (
-                <th
-                  key={idx}
-                  onClick={() => h.value !== '' && handlePlayerTableSorting(h)}
-                  style={{
-                    cursor: (h.value !== 'actions' && 'pointer')
-                  }}
-                  className={
-                    selected(h)
-                      ? 'border-3 border border-blue'
-                      : ''
-                  }
-                >
-                  {t(h.labelKey)}{' '}
-                  {selected(h) &&
-                    (sort === 'asc'
-                      ? (
-                        <FontAwesomeIcon
-                          style={over ? { color: 'red' } : {}}
-                          icon={faArrowCircleUp}
-                          onClick={() => setSort('desc')}
-                          onMouseOver={() => setOver(true)}
-                          onMouseLeave={() => setOver(false)}
-                        />
-                      )
-                      : (
-                        <FontAwesomeIcon
-                          style={over ? { color: 'red' } : {}}
-                          icon={faArrowCircleDown}
-                          onClick={() => setSort('asc')}
-                          onMouseOver={() => setOver(true)}
-                          onMouseLeave={() => setOver(false)}
-                        />
-                      ))}
-                </th>
-              ))}
-            </tr>
-          </thead>
+          </div>
+        </div>
 
-          {loading ? (
-            <tr>
-              <td colSpan={10} className="text-center">
-                <InlineLoader />
-              </td>
-            </tr>
-          ) : (
-            <tbody>
-              {playersData && playersData.rows.length > 0 ? (
-                playersData?.rows.map((player) => {
-                  return (
-                    <tr key={player.userId}
-                      onContextMenu={(e) => {
-                        e.preventDefault();
-                        const contextMenu = document.getElementById(`contextMenu-${player.userId}`);
-                        contextMenu.style.top = `${e.clientY}px`;
-                        contextMenu.style.left = `${e.clientX}px`;
-                        contextMenu.style.display = 'block';
-                      }}>
-                      <td>
-                        <input
-                          type="checkbox"
-                          id={`${player.userId}-multiple`}
-                          name="multi-select"
-                          checked={multiSelectPlayers.includes(player.userId)}
-                          onChange={() => {
-                            handleMultiSelect(player)
-                          }}
-                        ></input>
-                      </td>
-                      <td>{player.userId}</td>
-                      <td>{player.email}</td>
-                      <td>{player.username || 'NA'}</td>
-                      <td>
-                        {(player.firstName && player.lastName) ? `${player.firstName} ${player.lastName}` : 'NA'}
-                      </td>
-                      <td>
-                        {player.isAvailPromocodeBlocked === true ? <span className='text-danger'>Blocked</span> : <span className='text-success'>Unblocked</span>}
-                      </td>
-                      <td>
-                        <Trigger message='View' id={player.userId + 'view'} />
-                        <Button
-                          id={player.userId + 'view'}
-                          className='m-1'
-                          size='sm'
-                          variant='info'
-                          onClick={() => {
-                            navigate(
-                              `${AdminRoutes.PlayerDetails.split(':').shift()}${player.userId}`
-                            )
-                          }}
-                        >
-                          <FontAwesomeIcon icon={faEye} />
-                        </Button>
-                        <div
-                          id={`contextMenu-${player.userId}`}
-                          style={{
-                            position: 'fixed',
-                            display: 'none',
-                            backgroundColor: 'white',
-                            boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.1)',
-                            borderRadius: '5px',
-                            padding: '5px',
-                            zIndex: '9999',
-                          }}
-                        >
-                          <div
-                            onClick={() => {
-                              window.open(
-                                `${AdminRoutes.PlayerDetails.split(':').shift()}${player.userId}`,
-                                '_blank'
-                              );
-                              document.getElementById(`contextMenu-${player.userId}`).style.display = 'none';
-                            }}
-                            style={{
-                              cursor: 'pointer',
-                              padding: '5px',
-                            }}
-                          >
-                            Open in new tab
-                          </div>
-                        </div>
-                        {/* Code to set Player Promocode Block   */}
-                        {player.isAvailPromocodeBlocked === true
-                          ? (
-                            <>
-                              <Trigger message='Set Promocode Unblock' id={player.userId + 'active'} />
-                              <Button
-                                id={player.userId + 'active'}
-                                className='m-1'
-                                size='sm'
-                                variant='success'
-                                onClick={() =>
-                                  handleStatusShow(
-                                    player.userId,
-                                    player.isAvailPromocodeBlocked,
-                                    player?.statusDetails,
-                                    player
-                                  )}
-                                hidden={isHidden({ module: { key: 'Users', value: 'T' } })}
-                              >
-                                <FontAwesomeIcon icon={faCheckSquare} />
-                              </Button>
-                            </>) : (
-                            <>
-                              <Trigger message='Set Promocode Block' id={player.userId + 'inactive'} />
-                              <Button
-                                id={player.userId + 'inactive'}
-                                className='m-1'
-                                size='sm'
-                                variant='danger'
-                                onClick={() =>
-                                  handleStatusShow(
-                                    player.userId,
-                                    player.isAvailPromocodeBlocked,
-                                    player?.statusDetails,
-                                    player
-                                  )}
-                                hidden={isHidden({ module: { key: 'Users', value: 'T' } })}
-                              >
-                                <FontAwesomeIcon icon={faWindowClose} />
-                              </Button>
-                            </>
-                          )}
-                      </td>
-                    </tr>
-                  )
-                }
-                )
-              ) : (
+        <Card className='dashboard-filters promocode-blocking-filters mb-4'>
+          <Card.Body>
+            <PlayerSearch
+              globalSearch={globalSearch}
+              setGlobalSearch={setGlobalSearch}
+              getCsvDownloadUrl={getCsvDownloadUrl}
+              playersData={playersData}
+              setSelectAll={setSelectAll}
+              setMultiSelectPlayers={setMultiSelectPlayers}
+              setPage={setPage}
+              setImportedFile={setImportedFile}
+              setImportModalShow={setImportModalShow}
+              promocodeStatus={promocodeStatus}
+              setPromocodeStatus={setPromocodeStatus}
+            />
+          </Card.Body>
+        </Card>
+
+        <div className='dashboard-data-table'>
+          <div className='promocode-blocking-table-wrap'>
+            <Table bordered hover responsive size='sm' className='mb-0 text-center'>
+              <thead>
                 <tr>
-                  <td colSpan={6} className='text-danger text-center'>
-                    {t('No Data Found')}
-                  </td>
+                  <th className='text-center'>
+                    <input type="checkbox" checked={selectAll} onChange={handleSelectAll} />
+                  </th>
+                  {tableHeaders.map((h, idx) => (
+                    <th
+                      key={idx}
+                      onClick={() => h.value !== '' && handlePlayerTableSorting(h)}
+                      style={{
+                        cursor: h.value !== 'actions' ? 'pointer' : 'default'
+                      }}
+                      className={selected(h) ? 'sortable active' : 'sortable'}
+                    >
+                      {t(h.labelKey)}{' '}
+                      {selected(h) &&
+                        (sort === 'asc'
+                          ? (
+                            <FontAwesomeIcon
+                              style={over ? { color: 'red' } : {}}
+                              icon={faArrowCircleUp}
+                              onClick={() => setSort('desc')}
+                              onMouseOver={() => setOver(true)}
+                              onMouseLeave={() => setOver(false)}
+                            />
+                          )
+                          : (
+                            <FontAwesomeIcon
+                              style={over ? { color: 'red' } : {}}
+                              icon={faArrowCircleDown}
+                              onClick={() => setSort('asc')}
+                              onMouseOver={() => setOver(true)}
+                              onMouseLeave={() => setOver(false)}
+                            />
+                          ))}
+                    </th>
+                  ))}
                 </tr>
-              )
-              }
-            </tbody>
-          )}
-        </Table>
+              </thead>
+
+              <tbody>
+                {loading ? (
+                  <tr>
+                    <td colSpan={tableHeaders.length + 1} className="text-center py-4">
+                      <InlineLoader />
+                    </td>
+                  </tr>
+                ) : playersData && playersData.rows.length > 0 ? (
+                  playersData?.rows.map((player) => {
+                    return (
+                      <tr
+                        key={player.userId}
+                        onContextMenu={(e) => {
+                          e.preventDefault();
+                          const contextMenu = document.getElementById(`contextMenu-${player.userId}`);
+                          contextMenu.style.top = `${e.clientY}px`;
+                          contextMenu.style.left = `${e.clientX}px`;
+                          contextMenu.style.display = 'block';
+                        }}
+                      >
+                        <td>
+                          <input
+                            type="checkbox"
+                            id={`${player.userId}-multiple`}
+                            name="multi-select"
+                            checked={multiSelectPlayers.includes(player.userId)}
+                            onChange={() => {
+                              handleMultiSelect(player)
+                            }}
+                          />
+                        </td>
+                        <td>{player.userId}</td>
+                        <td>{player.email}</td>
+                        <td>{player.username || 'NA'}</td>
+                        <td>
+                          {(player.firstName && player.lastName) ? `${player.firstName} ${player.lastName}` : 'NA'}
+                        </td>
+                        <td>
+                          <span
+                            className={
+                              player.isAvailPromocodeBlocked === true
+                                ? 'promocode-blocking-pill promocode-blocking-pill--blocked'
+                                : 'promocode-blocking-pill promocode-blocking-pill--unblocked'
+                            }
+                          >
+                            {player.isAvailPromocodeBlocked === true ? 'Blocked' : 'Unblocked'}
+                          </span>
+                        </td>
+                        <td>
+                          <div className='promocode-blocking-actions'>
+                            <Trigger message='View' id={player.userId + 'view'} />
+                            <Button
+                              id={player.userId + 'view'}
+                              className='promocode-blocking-icon-btn'
+                              size='sm'
+                              variant='info'
+                              onClick={() => {
+                                navigate(
+                                  `${AdminRoutes.PlayerDetails.split(':').shift()}${player.userId}`
+                                )
+                              }}
+                            >
+                              <FontAwesomeIcon icon={faEye} />
+                            </Button>
+
+                            <div
+                              id={`contextMenu-${player.userId}`}
+                              className='promocode-blocking-context-menu'
+                            >
+                              <button
+                                type="button"
+                                className='promocode-blocking-context-item'
+                                onClick={() => {
+                                  window.open(
+                                    `${AdminRoutes.PlayerDetails.split(':').shift()}${player.userId}`,
+                                    '_blank'
+                                  );
+                                  document.getElementById(`contextMenu-${player.userId}`).style.display = 'none';
+                                }}
+                              >
+                                Open in new tab
+                              </button>
+                            </div>
+
+                            {player.isAvailPromocodeBlocked === true ? (
+                              <>
+                                <Trigger message='Set Promocode Unblock' id={player.userId + 'active'} />
+                                <Button
+                                  id={player.userId + 'active'}
+                                  className='promocode-blocking-icon-btn'
+                                  size='sm'
+                                  variant='success'
+                                  onClick={() =>
+                                    handleStatusShow(
+                                      player.userId,
+                                      player.isAvailPromocodeBlocked,
+                                      player?.statusDetails,
+                                      player
+                                    )}
+                                  hidden={isHidden({ module: { key: 'Users', value: 'T' } })}
+                                >
+                                  <FontAwesomeIcon icon={faCheckSquare} />
+                                </Button>
+                              </>
+                            ) : (
+                              <>
+                                <Trigger message='Set Promocode Block' id={player.userId + 'inactive'} />
+                                <Button
+                                  id={player.userId + 'inactive'}
+                                  className='promocode-blocking-icon-btn'
+                                  size='sm'
+                                  variant='danger'
+                                  onClick={() =>
+                                    handleStatusShow(
+                                      player.userId,
+                                      player.isAvailPromocodeBlocked,
+                                      player?.statusDetails,
+                                      player
+                                    )}
+                                  hidden={isHidden({ module: { key: 'Users', value: 'T' } })}
+                                >
+                                  <FontAwesomeIcon icon={faWindowClose} />
+                                </Button>
+                              </>
+                            )}
+                          </div>
+                        </td>
+                      </tr>
+                    )
+                  })
+                ) : (
+                  <tr>
+                    <td colSpan={tableHeaders.length + 1} className='text-center py-4 promocode-blocking-empty'>
+                      {t('No Data Found')}
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            </Table>
+          </div>
+        </div>
+
         {playersData?.rows?.length !== 0 && (
           <PaginationComponent
             page={playersData?.count < page ? setPage(1) : page}
@@ -362,7 +365,7 @@ const PromoCodeBlocking = () => {
             setLimit={setLimit}
           />
         )}
-      </Card>
+      </div>
       {statusShow && <PromocodeBlockModal
         setShow={setStatusShow}
         show={statusShow}

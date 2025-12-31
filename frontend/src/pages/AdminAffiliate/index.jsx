@@ -36,6 +36,7 @@ import {
 } from "../../reactQuery/hooks/customMutationHook";
 import CustomModal from "../../components/CustomModal";
 import { toast } from "../../components/Toast";
+import "./adminAffiliateListing.scss";
 
 const AdminAffiliate = () => {
   const {
@@ -172,157 +173,147 @@ const AdminAffiliate = () => {
 
   return (
     <>
-      <Card className="p-2 mb-2">
-        <Row>
-          <Col>
-            <h3>Affiliate</h3>
-          </Col>
+      <div className="dashboard-typography admin-affiliate-page">
+        <div className="d-flex flex-wrap justify-content-between align-items-start gap-3 mb-3">
+          <div>
+            <h3 className="admin-affiliate-page__title">Affiliate</h3>
+            <p className="admin-affiliate-page__subtitle">
+              Create and manage affiliate accounts
+            </p>
+          </div>
 
-          <Col className="col-4">
-            <div className="d-flex justify-content-end">
-              <Button
-                variant="success"
-                className="m-1"
-                size="sm"
-                onClick={() => navigate(AdminRoutes.CreateAffiliate)}
-                hidden={isHidden({ module: { key: "Admins", value: "C" } })}
-              >
-                {t("create")}
-              </Button>
-            </div>
-          </Col>
-        </Row>
+          <div className="admin-affiliate-page__actions">
+            <Button
+              variant="primary"
+              className="admin-affiliate-page__create-btn"
+              size="sm"
+              onClick={() => navigate(AdminRoutes.CreateAffiliate)}
+              hidden={isHidden({ module: { key: "Admins", value: "C" } })}
+            >
+              {t("create")}
+            </Button>
+          </div>
+        </div>
 
-        <PlayerSearch
-          globalSearch={globalSearch}
-          setGlobalSearch={setGlobalSearch}
-        />
-        <Table
-          bordered
-          striped
-          responsive
-          hover
-          size="sm"
-          className="text-center mt-4"
-        >
-          <thead className="thead-dark">
-            <tr>
-              {tableHeaders.map((h, idx) => (
-                <th
-                  key={idx}
-                  onClick={() => h.value !== "" && handlePlayerTableSorting(h)}
-                  style={{
-                    cursor: "pointer",
-                  }}
-                  className={selected(h) ? "border-3 border border-blue" : ""}
-                >
-                  {t(h.labelKey)}{" "}
-                  {selected(h) &&
-                    (sort === "asc" ? (
-                      <FontAwesomeIcon
-                        style={over ? { color: "red" } : {}}
-                        icon={faArrowCircleUp}
-                        onClick={() => setSort("desc")}
-                        onMouseOver={() => setOver(true)}
-                        onMouseLeave={() => setOver(false)}
-                      />
-                    ) : (
-                      <FontAwesomeIcon
-                        style={over ? { color: "red" } : {}}
-                        icon={faArrowCircleDown}
-                        onClick={() => setSort("asc")}
-                        onMouseOver={() => setOver(true)}
-                        onMouseLeave={() => setOver(false)}
-                      />
-                    ))}
-                </th>
-              ))}
-            </tr>
-          </thead>
+        <Card className="dashboard-filters admin-affiliate-filters mb-4">
+          <Card.Body>
+            <PlayerSearch globalSearch={globalSearch} setGlobalSearch={setGlobalSearch} />
+          </Card.Body>
+        </Card>
 
-          {!loading && (
-            <tbody>
-              {playersData &&
-                playersData?.rows.map((player) => {
-                  return (
-                    <tr key={player.affiliateId}>
-                      <td>{player.affiliateId}</td>
-                      <td>{player.email}</td>
-                      <td>{player.firstName}</td>
-                      <td>{player.lastName}</td>
-                      <td>{player.phone}</td>
-                      <td>{player.state}</td>
-                      <td>{player.preferredContact}</td>
-                      <td>
-                        {player.affiliate_status === "pending" ? (
-                          <Button
-                            variant="secondary"
-                            style={{ padding: "5px" }}
-                            onClick={() => handleApproveAffiliateModal(player)}
-                          >
-                            Pending
-                          </Button>
-                        ) : (
-                          <Button
-                            variant="success"
-                            className="m-1"
-                            size="sm"
-                            style={{ padding: "5px", color: "white" }}
-                          >
-                            {" "}
-                            Approve
-                          </Button>
-                        )}
-                      </td>
-
-                      <td>
-                        <>
-                          <Trigger message="View" id={player.userId + "view"} />
-                          <Button
-                            id={player.userId + "view"}
-                            className="m-1"
-                            size="sm"
-                            variant="info"
-                            onClick={() => {
-                              navigate(AdminRoutes.AffiliateDetail, {
-                                state: player,
-                              });
-                            }}
-                          >
-                            <FontAwesomeIcon icon={faEye} />
-                          </Button>
-
-                          <Button
-                            id={player.userId + "inactive"}
-                            className="m-1"
-                            size="sm"
-                            variant="danger"
-                            onClick={() =>
-                              handleDeleteAffiliateModal(player.affiliateId)
-                            }
-                            hidden={isHidden({
-                              module: { key: "Users", value: "T" },
-                            })}
-                          >
-                            <FontAwesomeIcon icon={faTrash} />
-                          </Button>
-                        </>
-                      </td>
-                    </tr>
-                  );
-                })}
-
-              {playersData?.rows?.length === 0 && !loading && (
+        <div className="dashboard-data-table">
+          <div className="admin-affiliate-table-wrap">
+            <Table bordered hover responsive size="sm" className="mb-0 text-center">
+              <thead>
                 <tr>
-                  <td colSpan={6} className="text-danger text-center">
-                    {t("noDataFound")}
-                  </td>
+                  {tableHeaders.map((h, idx) => (
+                    <th
+                      key={idx}
+                      onClick={() => h.value !== "" && handlePlayerTableSorting(h)}
+                      style={{
+                        cursor: h.value !== "" ? "pointer" : "default",
+                      }}
+                      className={selected(h) ? "sortable active" : "sortable"}
+                    >
+                      {t(h.labelKey)}{" "}
+                      {selected(h) &&
+                        (sort === "asc" ? (
+                          <FontAwesomeIcon
+                            style={over ? { color: "red" } : {}}
+                            icon={faArrowCircleUp}
+                            onClick={() => setSort("desc")}
+                            onMouseOver={() => setOver(true)}
+                            onMouseLeave={() => setOver(false)}
+                          />
+                        ) : (
+                          <FontAwesomeIcon
+                            style={over ? { color: "red" } : {}}
+                            icon={faArrowCircleDown}
+                            onClick={() => setSort("asc")}
+                            onMouseOver={() => setOver(true)}
+                            onMouseLeave={() => setOver(false)}
+                          />
+                        ))}
+                    </th>
+                  ))}
                 </tr>
-              )}
-            </tbody>
-          )}
-        </Table>
-        {loading && <InlineLoader />}
+              </thead>
+              <tbody>
+                {loading ? (
+                  <tr>
+                    <td colSpan={tableHeaders.length} className="text-center py-4">
+                      <InlineLoader />
+                    </td>
+                  </tr>
+                ) : playersData?.rows?.length > 0 ? (
+                  playersData?.rows.map((player) => {
+                    return (
+                      <tr key={player.affiliateId}>
+                        <td>{player.affiliateId}</td>
+                        <td>{player.email}</td>
+                        <td>{player.firstName}</td>
+                        <td>{player.lastName}</td>
+                        <td>{player.phone}</td>
+                        <td>{player.state}</td>
+                        <td>{player.preferredContact}</td>
+                        <td>
+                          {player.affiliate_status === "pending" ? (
+                            <Button
+                              variant="secondary"
+                              className="admin-affiliate-status-btn admin-affiliate-status-btn--pending"
+                              onClick={() => handleApproveAffiliateModal(player)}
+                            >
+                              Pending
+                            </Button>
+                          ) : (
+                            <span className="admin-affiliate-pill admin-affiliate-pill--approved">
+                              Approved
+                            </span>
+                          )}
+                        </td>
+                        <td>
+                          <div className="admin-affiliate-actions">
+                            <Trigger message="View" id={player.userId + "view"} />
+                            <Button
+                              id={player.userId + "view"}
+                              className="admin-affiliate-icon-btn"
+                              size="sm"
+                              variant="info"
+                              onClick={() => {
+                                navigate(AdminRoutes.AffiliateDetail, { state: player });
+                              }}
+                            >
+                              <FontAwesomeIcon icon={faEye} />
+                            </Button>
+
+                            <Trigger message="Delete" id={player.userId + "delete"} />
+                            <Button
+                              id={player.userId + "delete"}
+                              className="admin-affiliate-icon-btn"
+                              size="sm"
+                              variant="danger"
+                              onClick={() => handleDeleteAffiliateModal(player.affiliateId)}
+                              hidden={isHidden({ module: { key: "Users", value: "T" } })}
+                            >
+                              <FontAwesomeIcon icon={faTrash} />
+                            </Button>
+                          </div>
+                        </td>
+                      </tr>
+                    );
+                  })
+                ) : (
+                  <tr>
+                    <td colSpan={tableHeaders.length} className="text-center py-4 admin-affiliate-empty">
+                      {t("noDataFound")}
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            </Table>
+          </div>
+        </div>
+
         {playersData?.rows?.length !== 0 && (
           <PaginationComponent
             page={playersData?.count < page ? setPage(1) : page}
@@ -332,7 +323,7 @@ const AdminAffiliate = () => {
             setLimit={setLimit}
           />
         )}
-      </Card>
+      </div>
       {showConfirmModal && (
         <CustomModal
           showModal={showConfirmModal}

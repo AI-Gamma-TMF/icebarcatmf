@@ -16,24 +16,16 @@ const options = {
 
 const CustomLegend = ({ labels, labelsData, colors }) => {
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '15px', marginLeft: '20px' }}>
+    <div className="vip-dashboard-viz-legend">
       {labels.map((label, index) => (
-        <div key={index} style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+        <div key={index} className="vip-dashboard-viz-legend__row">
           <div
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              width: '126px',
-              height: '58px',
-              backgroundColor: colors[index],
-              borderRadius: '20px',
-              boxShadow: '0 4px 4px rgba(0,0,0,0.2)',
-            }}
+            className="vip-dashboard-viz-legend__pill"
+            style={{ backgroundColor: colors[index] }}
           >
             {label}%
           </div>
-          <div style={{ fontWeight: 'bold', color: '#333', fontSize: '14px' }}>{labelsData[index]}</div>
+          <div className="vip-dashboard-viz-legend__label">{labelsData[index]}</div>
         </div>
       ))}
     </div>
@@ -59,17 +51,10 @@ export function PieChart({ redemptionToPurchaseRatio }) {
     ],
   };
   return (
-    <div
-      style={{
-        padding: '25px',
-        borderRadius: '10px',
-        boxShadow: '0px 4px 4px 0px #00000040',
-        marginTop: '1rem',
-      }}
-    >
+    <div className="vip-dashboard-viz-panel">
       <h4>Redemption to Purchase Ratio</h4>
       <div className='pie-chart'>
-        <div style={{ width: '300px', height: '300px' }}>
+        <div className="vip-dashboard-viz-chart" style={{ width: '300px', height: '300px' }}>
           <Pie data={data} options={options} />
         </div>
 

@@ -1,5 +1,4 @@
 import React from "react";
-import { Card, Col } from "@themesberg/react-bootstrap";
 import { InlineLoader } from "../../../components/Preloader";
 import { formatNumber } from "../../../utils/helper";
 import maxRevenue from "../../../assets/img/max-revenue.svg";
@@ -21,65 +20,53 @@ const JackpotDashbaordSummary = ({ isLoading, jackpotInfo }) => {
       {isLoading ? (
         <InlineLoader />
       ) : (
-        <>
-          <Col xl={3} lg={4} md={6} sm={6} className="mt-1">
-            <Card className="vip-card light-pink">
-              <img src={masterWallet} alt="wallet-credit" loading="lazy" />
-              <div className="card-text">
-                <p>Master Wallet Credit</p>
-                <h5>
-                  {displayValue(jackpotInfo?.masterWalletCreditSum, true)}
-                </h5>
+        <div className="jackpot-summary dashboard-boxes-container">
+          {[
+            {
+              label: "Master Wallet Credit",
+              value: displayValue(jackpotInfo?.masterWalletCreditSum, true),
+              icon: masterWallet,
+            },
+            {
+              label: "Seed Amount Total",
+              value: displayValue(jackpotInfo?.seedAmountSum, true),
+              icon: totalSeed,
+            },
+            {
+              label: "Net Revenue",
+              value: displayValue(jackpotInfo?.netRevenue, true),
+              icon: netRevenue,
+            },
+            {
+              label: "Hourly Earning Rate",
+              value: displayValue(jackpotInfo?.hourlyEarningRate, true),
+              icon: hourlyEarning,
+            },
+            {
+              label: "Max Revenue",
+              value: displayValue(jackpotInfo?.maxRevenue, true),
+              icon: maxRevenue,
+            },
+            {
+              label: "Total Spins",
+              value: displayValue(jackpotInfo?.totalSpinCounts),
+              icon: totalSpins,
+            },
+          ].map((tile) => (
+            <div key={tile.label} className="dashboard-box">
+              <div className="ticker-label">
+                <img src={tile.icon} alt={tile.label} loading="lazy" />
+                <label>{tile.label}</label>
               </div>
-            </Card>
-          </Col>
-          <Col xl={3} lg={4} md={6} sm={6} className="mt-1">
-            <Card className="vip-card light-blue">
-              <img src={totalSeed} alt="seed-amount" loading="lazy" />
-              <div className="card-text">
-                <p>Seed Amount Total</p>
-                <h5>{displayValue(jackpotInfo?.seedAmountSum, true)} </h5>
+              <div className="value-wrap">
+                <div className="live-report-data">{tile.value}</div>
+                <div className="new-icon">
+                  <img src={tile.icon} alt="" loading="lazy" />
+                </div>
               </div>
-            </Card>
-          </Col>
-          <Col xl={3} lg={4} md={6} sm={6} className="mt-1">
-            <Card className="vip-card light-green">
-              <img src={netRevenue} alt="net-revenue" loading="lazy" />
-              <div className="card-text">
-                <p>Net Revenue</p>
-                <h5>{displayValue(jackpotInfo?.netRevenue, true)} </h5>
-              </div>
-            </Card>
-          </Col>
-          <Col xl={3} lg={4} md={6} sm={6} className="mt-1">
-            <Card className="vip-card light-purple">
-              <img src={hourlyEarning} alt="hourly-earning" loading="lazy" />
-              <div className="card-text">
-                <p>Hourly Earning Rate</p>
-                <h5>{displayValue(jackpotInfo?.hourlyEarningRate, true)}</h5>
-              </div>
-            </Card>
-          </Col>
-
-          <Col xl={3} lg={4} md={6} sm={6} className="mt-1">
-            <Card className="vip-card light-red">
-              <img src={maxRevenue} alt="max-revenue" loading="lazy" />
-              <div className="card-text">
-                <p>Max Revenue</p>
-                <h5>{displayValue(jackpotInfo?.maxRevenue, true)} </h5>
-              </div>
-            </Card>
-          </Col>
-          <Col xl={3} lg={4} md={6} sm={6} className="mt-1">
-            <Card className="vip-card light-yellow">
-              <img src={totalSpins} alt="total-spins" loading="lazy" />
-              <div className="card-text">
-                <p>Total Spins</p>
-                <h5>{displayValue(jackpotInfo?.totalSpinCounts)}</h5>
-              </div>
-            </Card>
-          </Col>
-        </>
+            </div>
+          ))}
+        </div>
       )}
     </>
   );

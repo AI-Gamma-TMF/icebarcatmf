@@ -1,4 +1,4 @@
-import { Button, Form, Row, Col, Table } from "@themesberg/react-bootstrap";
+import { Button, Form, Row, Col, Table, Card } from "@themesberg/react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCheckSquare,
@@ -24,6 +24,7 @@ import useCheckPermission from "../../utils/checkPermission";
 import { useTranslation } from "react-i18next";
 import { searchRegEx } from "../../utils/helper";
 import { InlineLoader } from "../../components/Preloader";
+import "./staff.scss";
 
 const Staff = () => {
   const {
@@ -67,385 +68,348 @@ const Staff = () => {
 
   return (
     <>
-      <Row className="staff-section">
-        <Col className="col-8">
-          <h3>{t("title")}</h3>
-        </Col>
+      <div className="staff-page dashboard-typography">
+        <Row className="d-flex align-items-center mb-2">
+          <Col sm={8}>
+            <h3 className="staff-page__title">{t("title")}</h3>
+          </Col>
 
-        <Col className="col-4">
-          <div className="d-flex justify-content-end">
-            {/* Button to create new admin */}
+          <Col sm={4} className="d-flex justify-content-end">
             <Button
               variant="success"
-              className="m-1"
+              className="staff-page__create-btn"
               size="sm"
               onClick={() => navigate(AdminRoutes.CreateAdmin)}
               hidden={isHidden({ module: { key: "Admins", value: "C" } })}
             >
               {t("createButton")}
             </Button>
-          </div>
-        </Col>
-        <Col xs={12} md={3} className="mb-3">
-          <div className="d-flex justify-content-start align-items-center w-100 flex-wrap">
-            <Form.Label>Search by Email, Name or Group</Form.Label>
+          </Col>
+        </Row>
 
-            <Form.Control
-              type="search"
-              placeholder="Search..."
-              value={search}
-              onChange={(event) => {
-                setPage(1);
-                const mySearch = event.target.value.replace(searchRegEx, "");
-                setSearch(mySearch);
-              }}
-            />
-          </div>
-        </Col>
-
-        <Col xs={12} md={3} className="mb-3">
-          <div className="d-flex justify-content-start align-items-center w-100 flex-wrap">
-            <Form.Label>Role</Form.Label>
-
-            <Form.Select
-              onChange={(e) => {
-                setPage(1);
-                setRole(e.target.value);
-              }}
-              value={role}
-            >
-              <option value="all">All</option>
-              <option value="1">Admin</option>
-              <option value="2">Manager</option>
-              <option value="3">Support</option>
-            </Form.Select>
-          </div>
-        </Col>
-
-        <Col xs={12} md={3} className="mb-3">
-          <div className="d-flex justify-content-start align-items-center w-100 flex-wrap">
-            <Form.Label>Status</Form.Label>
-
-            <Form.Select
-              onChange={(e) => {
-                setPage(1);
-                setStatus(e.target.value);
-              }}
-              value={status}
-            >
-              <option value="all">All</option>
-              <option value="true">Active</option>
-              <option value="false">In-active</option>
-            </Form.Select>
-          </div>
-        </Col>
-
-        <Col xs={12} md={3} className="mb-3" style={{ marginTop: "30px" }}>
-          <Trigger message="Reset Filters" id={"redo"} />
-          <Button id={"redo"} variant="success" onClick={resetFilters}>
-            <FontAwesomeIcon icon={faRedoAlt} />
-          </Button>
-        </Col>
-      </Row>
-
-      <Table
-        bordered
-        striped
-        responsive
-        hover
-        size="sm"
-        className="mt-4 text-center"
-      >
-        <thead className="thead-dark text-center">
-          <tr>
-            {tableHeaders.map((h, idx) => (
-              <th
-                key={idx}
-                //onClick={() => setOrderBy(h.value)}
-                onClick={() =>
-                  ["adminUserId", "email", "firstName"].includes(h.value) &&
-                  setOrderBy(h.value)
-                }
-                style={{
-                  cursor:
-                    h.value === "adminUserId" ||
-                    h.value === "email" ||
-                    h.value === "firstName"
-                      ? "pointer"
-                      : "default",
+        <Card className="p-2 mb-2 staff-page__card">
+          <Row className="dashboard-filters staff-filters g-3 align-items-end">
+            <Col xs={12} md={4}>
+              <Form.Label className="form-label">Search</Form.Label>
+              <Form.Control
+                className="staff-filters__control"
+                type="search"
+                placeholder="Email / Name / Group"
+                value={search}
+                onChange={(event) => {
+                  setPage(1);
+                  const mySearch = event.target.value.replace(searchRegEx, "");
+                  setSearch(mySearch);
                 }}
-                className={selected(h) ? "border-3 border border-blue" : ""}
+              />
+            </Col>
+
+            <Col xs={12} md={3}>
+              <Form.Label className="form-label">Role</Form.Label>
+              <Form.Select
+                onChange={(e) => {
+                  setPage(1);
+                  setRole(e.target.value);
+                }}
+                value={role}
               >
-                {t(h.labelKey)}{" "}
-                {selected(h) &&
-                  (sort === "asc" ? (
-                    <FontAwesomeIcon
-                      style={over ? { color: "red" } : {}}
-                      icon={faArrowCircleUp}
-                      onClick={() => setSort("desc")}
-                      onMouseOver={() => setOver(true)}
-                      onMouseLeave={() => setOver(false)}
-                    />
-                  ) : (
-                    <FontAwesomeIcon
-                      style={over ? { color: "red" } : {}}
-                      icon={faArrowCircleDown}
-                      onClick={() => setSort("asc")}
-                      onMouseOver={() => setOver(true)}
-                      onMouseLeave={() => setOver(false)}
-                    />
-                  ))}
-              </th>
-            ))}
-          </tr>
-        </thead>
+                <option value="all">All</option>
+                <option value="1">Admin</option>
+                <option value="2">Manager</option>
+                <option value="3">Support</option>
+              </Form.Select>
+            </Col>
 
-        <tbody>
-          {data &&
-            data?.rows?.map(
-              ({
-                adminUserId,
-                email,
-                firstName,
-                lastName,
-                roleId,
-                isActive,
-                group,
-              }) => {
-                return (
-                  <tr key={email} className="text-center">
-                    <td>{adminUserId}</td>
-                    <td>
-                      <span
-                        onClick={() =>
-                          navigate(
-                            `${AdminRoutes.AdminDetails.split(
-                              ":"
-                            ).shift()}${adminUserId}`
-                          )
-                        }
-                        className="text-link"
-                        style={{ cursor: "pointer" }}
+            <Col xs={12} md={3}>
+              <Form.Label className="form-label">Status</Form.Label>
+              <Form.Select
+                onChange={(e) => {
+                  setPage(1);
+                  setStatus(e.target.value);
+                }}
+                value={status}
+              >
+                <option value="all">All</option>
+                <option value="true">Active</option>
+                <option value="false">In-active</option>
+              </Form.Select>
+            </Col>
+
+            <Col xs={12} md={2} className="d-flex justify-content-end">
+              <Trigger message="Reset Filters" id={"redo"} />
+              <Button
+                id={"redo"}
+                className="staff-page__reset-btn"
+                variant="success"
+                onClick={resetFilters}
+              >
+                <FontAwesomeIcon icon={faRedoAlt} />
+              </Button>
+            </Col>
+          </Row>
+
+          <div className="dashboard-section-divider" />
+
+          <div className="dashboard-table staff-table">
+            <Table responsive className="dashboard-data-table staff-table__table">
+              <thead>
+                <tr>
+                  {tableHeaders.map((h, idx) => {
+                    const isSortable = ["adminUserId", "email", "firstName"].includes(
+                      h.value
+                    );
+                    return (
+                      <th
+                        key={idx}
+                        onClick={() => isSortable && setOrderBy(h.value)}
+                        className={[
+                          isSortable ? "staff-table__th--sortable" : "",
+                          selected(h) ? "staff-table__th--active" : "",
+                        ].join(" ")}
+                        style={{ cursor: isSortable ? "pointer" : "default" }}
                       >
-                        {email}
-                      </span>
-                    </td>
-                    <td>
-                      <Trigger
-                        message={`${firstName} ${lastName}`}
-                        id={adminUserId}
-                      />
-                      <span
-                        id={adminUserId}
-                        style={{
-                          width: "100px",
-                          cursor: "pointer",
-                        }}
-                        className="d-inline-block text-truncate "
-                      >
-                        {firstName} {lastName}
-                      </span>
-                    </td>
-                    <td>{getRole(roleId)}</td>
+                        <span className="staff-table__th-label">{t(h.labelKey)}</span>
+                        {selected(h) && (
+                          <span className="staff-table__sort-icon">
+                            {sort === "asc" ? (
+                              <FontAwesomeIcon
+                                icon={faArrowCircleUp}
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  setSort("desc");
+                                }}
+                                onMouseOver={() => setOver(true)}
+                                onMouseLeave={() => setOver(false)}
+                                className={over ? "is-hover" : ""}
+                              />
+                            ) : (
+                              <FontAwesomeIcon
+                                icon={faArrowCircleDown}
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  setSort("asc");
+                                }}
+                                onMouseOver={() => setOver(true)}
+                                onMouseLeave={() => setOver(false)}
+                                className={over ? "is-hover" : ""}
+                              />
+                            )}
+                          </span>
+                        )}
+                      </th>
+                    );
+                  })}
+                </tr>
+              </thead>
 
-                    <td>{group || "-"}</td>
-
-                    <td>
-                      {isActive ? (
-                        <span className="text-success">
-                          {t("activeStatus")}
-                        </span>
-                      ) : (
-                        <span className="text-danger">
-                          {t("inActiveStatus")}
-                        </span>
-                      )}
-                    </td>
-                    <td>
-                      <>
-                        {getRole(roleId) !== "Admin" && (
-                          <>
-                            <Trigger message="Edit" id={adminUserId + "edit"} />
-                            <Button
-                              className="m-1"
-                              size="sm"
-                              variant="warning"
+              <tbody>
+                {data &&
+                  data?.rows?.map(
+                    ({
+                      adminUserId,
+                      email,
+                      firstName,
+                      lastName,
+                      roleId,
+                      isActive,
+                      group,
+                    }) => {
+                      return (
+                        <tr key={email}>
+                          <td className="staff-table__id">{adminUserId}</td>
+                          <td className="staff-table__email">
+                            <button
+                              type="button"
+                              className="staff-table__link"
                               onClick={() =>
                                 navigate(
-                                  `${AdminRoutes.EditAdmin.split(
-                                    ":"
-                                  ).shift()}${adminUserId}`
+                                  `${AdminRoutes.AdminDetails.split(":").shift()}${adminUserId}`
                                 )
                               }
-                              hidden={isHidden({
-                                module: { key: "Admins", value: "U" },
-                              })}
                             >
-                              <FontAwesomeIcon icon={faEdit} />
-                            </Button>
-                          </>
-                        )}
-
-                        <Trigger
-                          message="View Details"
-                          id={adminUserId + "view"}
-                        />
-                        <Button
-                          id={adminUserId + "view"}
-                          className="m-1"
-                          size="sm"
-                          variant="info"
-                          onClick={() =>
-                            navigate(
-                              `${AdminRoutes.AdminDetails.split(
-                                ":"
-                              ).shift()}${adminUserId}`
-                            )
-                          }
-                          hidden={isHidden({
-                            module: { key: "Admins", value: "R" },
-                          })}
-                        >
-                          <FontAwesomeIcon icon={faEye} />
-                        </Button>
-
-                        {/* <Button
-                                    className='m-1'
-                                    size='sm'
-                                    variant='secondary'
+                              {email}
+                            </button>
+                          </td>
+                          <td className="staff-table__name">
+                            <Trigger message={`${firstName} ${lastName}`} id={adminUserId} />
+                            <span id={adminUserId} className="d-inline-block text-truncate">
+                              {firstName} {lastName}
+                            </span>
+                          </td>
+                          <td>{getRole(roleId)}</td>
+                          <td>{group || "-"}</td>
+                          <td>
+                            {isActive ? (
+                              <span className="staff-pill staff-pill--active">
+                                {t("activeStatus")}
+                              </span>
+                            ) : (
+                              <span className="staff-pill staff-pill--inactive">
+                                {t("inActiveStatus")}
+                              </span>
+                            )}
+                          </td>
+                          <td className="staff-table__actions">
+                            <div className="staff-actions">
+                              {getRole(roleId) !== "Admin" && (
+                                <>
+                                  <Trigger message="Edit" id={adminUserId + "edit"} />
+                                  <Button
+                                    className="staff-icon-btn"
+                                    size="sm"
+                                    variant="warning"
+                                    onClick={() =>
+                                      navigate(
+                                        `${AdminRoutes.EditAdmin.split(":").shift()}${adminUserId}`
+                                      )
+                                    }
+                                    hidden={isHidden({
+                                      module: { key: "Admins", value: "U" },
+                                    })}
                                   >
-                                    <FontAwesomeIcon icon={faSitemap} />
-                                  </Button> */}
+                                    <FontAwesomeIcon icon={faEdit} />
+                                  </Button>
+                                </>
+                              )}
 
-                        {!isActive ? (
-                          <>
-                            {getRole(roleId) !== "Admin" && (
-                              <>
-                                <Trigger
-                                  message="Set Status Active"
-                                  id={adminUserId + "active"}
-                                />
-                                <Button
-                                  id={adminUserId + "active"}
-                                  className="m-1"
-                                  size="sm"
-                                  variant="success"
-                                  onClick={() =>
-                                    handleShow(adminUserId, isActive)
-                                  }
-                                  hidden={isHidden({
-                                    module: { key: "Admins", value: "T" },
-                                  })}
-                                >
-                                  <FontAwesomeIcon icon={faCheckSquare} />
-                                </Button>
-                              </>
-                            )}
-                          </>
-                        ) : (
-                          <>
-                            {getRole(roleId) !== "Admin" && (
-                              <>
-                                <Trigger
-                                  message="Set Status In-Active"
-                                  id={adminUserId + "inactive"}
-                                />
-                                <Button
-                                  id={adminUserId + "inactive"}
-                                  className="m-1"
-                                  size="sm"
-                                  variant="danger"
-                                  onClick={() =>
-                                    handleShow(adminUserId, isActive)
-                                  }
-                                  hidden={isHidden({
-                                    module: { key: "Admins", value: "T" },
-                                  })}
-                                >
-                                  <FontAwesomeIcon icon={faWindowClose} />
-                                </Button>
-                              </>
-                            )}
-                          </>
-                        )}
-                        {getRole(roleId) !== "Support" && (
-                          <>
-                            <Trigger
-                              message="View Tree"
-                              id={adminUserId + "tree"}
-                            />
-                            <Button
-                              id={adminUserId + "tree"}
-                              className="m-1"
-                              size="sm"
-                              variant="secondary"
-                              style={{ width: "35px" }}
-                              onClick={() =>
-                                navigate(
-                                  `${AdminRoutes.AdminDetails.split(
-                                    ":"
-                                  ).shift()}${adminUserId}`,
-                                  {
-                                    state: {
-                                      isTreeView: true,
-                                    },
-                                  }
-                                )
-                              }
-                              hidden={isHidden({
-                                module: { key: "Admins", value: "R" },
-                              })}
-                            >
-                              <img height="20px" src={packageTreeIcon} />
-                            </Button>
-                          </>
-                        )}
-                        {getRole(roleId) !== "Admin" && (
-                          <>
-                            <Trigger
-                              message={"Delete"}
-                              id={adminUserId + "delete"}
-                            />
-                            <Button
-                              id={adminUserId + "delete"}
-                              className="m-1"
-                              size="sm"
-                              variant="danger"
-                              hidden={isHidden({
-                                module: { key: "Admins", value: "D" },
-                              })}
-                              onClick={() => handleDeleteModal(adminUserId)}
-                            >
-                              <FontAwesomeIcon icon={faTrash} />
-                            </Button>
-                          </>
-                        )}
-                      </>
+                              <Trigger message="View Details" id={adminUserId + "view"} />
+                              <Button
+                                id={adminUserId + "view"}
+                                className="staff-icon-btn"
+                                size="sm"
+                                variant="info"
+                                onClick={() =>
+                                  navigate(
+                                    `${AdminRoutes.AdminDetails.split(":").shift()}${adminUserId}`
+                                  )
+                                }
+                                hidden={isHidden({
+                                  module: { key: "Admins", value: "R" },
+                                })}
+                              >
+                                <FontAwesomeIcon icon={faEye} />
+                              </Button>
+
+                              {!isActive ? (
+                                <>
+                                  {getRole(roleId) !== "Admin" && (
+                                    <>
+                                      <Trigger
+                                        message="Set Status Active"
+                                        id={adminUserId + "active"}
+                                      />
+                                      <Button
+                                        id={adminUserId + "active"}
+                                        className="staff-icon-btn"
+                                        size="sm"
+                                        variant="success"
+                                        onClick={() => handleShow(adminUserId, isActive)}
+                                        hidden={isHidden({
+                                          module: { key: "Admins", value: "T" },
+                                        })}
+                                      >
+                                        <FontAwesomeIcon icon={faCheckSquare} />
+                                      </Button>
+                                    </>
+                                  )}
+                                </>
+                              ) : (
+                                <>
+                                  {getRole(roleId) !== "Admin" && (
+                                    <>
+                                      <Trigger
+                                        message="Set Status In-Active"
+                                        id={adminUserId + "inactive"}
+                                      />
+                                      <Button
+                                        id={adminUserId + "inactive"}
+                                        className="staff-icon-btn"
+                                        size="sm"
+                                        variant="danger"
+                                        onClick={() => handleShow(adminUserId, isActive)}
+                                        hidden={isHidden({
+                                          module: { key: "Admins", value: "T" },
+                                        })}
+                                      >
+                                        <FontAwesomeIcon icon={faWindowClose} />
+                                      </Button>
+                                    </>
+                                  )}
+                                </>
+                              )}
+
+                              {getRole(roleId) !== "Support" && (
+                                <>
+                                  <Trigger message="View Tree" id={adminUserId + "tree"} />
+                                  <Button
+                                    id={adminUserId + "tree"}
+                                    className="staff-icon-btn"
+                                    size="sm"
+                                    variant="secondary"
+                                    onClick={() =>
+                                      navigate(
+                                        `${AdminRoutes.AdminDetails.split(":").shift()}${adminUserId}`,
+                                        { state: { isTreeView: true } }
+                                      )
+                                    }
+                                    hidden={isHidden({
+                                      module: { key: "Admins", value: "R" },
+                                    })}
+                                  >
+                                    <img height="18px" src={packageTreeIcon} alt="Tree" />
+                                  </Button>
+                                </>
+                              )}
+
+                              {getRole(roleId) !== "Admin" && (
+                                <>
+                                  <Trigger message={"Delete"} id={adminUserId + "delete"} />
+                                  <Button
+                                    id={adminUserId + "delete"}
+                                    className="staff-icon-btn"
+                                    size="sm"
+                                    variant="danger"
+                                    hidden={isHidden({
+                                      module: { key: "Admins", value: "D" },
+                                    })}
+                                    onClick={() => handleDeleteModal(adminUserId)}
+                                  >
+                                    <FontAwesomeIcon icon={faTrash} />
+                                  </Button>
+                                </>
+                              )}
+                            </div>
+                          </td>
+                        </tr>
+                      );
+                    }
+                  )}
+
+                {data?.count === 0 && (
+                  <tr>
+                    <td colSpan={7} className="text-center">
+                      <span className="staff-empty">{t("noDataFound")}</span>
                     </td>
                   </tr>
-                );
-              }
-            )}
+                )}
+              </tbody>
+            </Table>
+          </div>
 
-          {data?.count === 0 && (
-            <tr>
-              <td colSpan={7} className="text-danger text-center">
-                {t("noDataFound")}
-              </td>
-            </tr>
+          {loading && <InlineLoader />}
+          {data?.count !== 0 && (
+            <div className="staff-page__pagination">
+              <PaginationComponent
+                page={data?.count < page ? setPage(1) : page}
+                totalPages={totalPages}
+                setPage={setPage}
+                limit={limit}
+                setLimit={setLimit}
+              />
+            </div>
           )}
-        </tbody>
-      </Table>
-      {loading && <InlineLoader />}
-      {data?.count !== 0 && (
-        <PaginationComponent
-          page={data?.count < page ? setPage(1) : page}
-          totalPages={totalPages}
-          setPage={setPage}
-          limit={limit}
-          setLimit={setLimit}
-        />
-      )}
+        </Card>
+      </div>
 
       {show && (
         <ConfirmationModal

@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import useNotificationsCenter from './hooks/useNotificationsCenter';
 import { Formik, Form, ErrorMessage } from "formik";
-import { Row, Col, Form as BForm, OverlayTrigger, Tooltip, Button, Spinner } from '@themesberg/react-bootstrap'
+import { Row, Col, Form as BForm, OverlayTrigger, Tooltip, Button, Spinner, Card } from '@themesberg/react-bootstrap'
 import { notificationSettingsSchema } from './schemas';
 import useCheckPermission from '../../utils/checkPermission'
+import './notificationCenter.scss'
 const NotificationCenter = () => {
   const { isHidden } = useCheckPermission()
   const { notificationSettings, setNotificationSettings, settingsLoading } = useNotificationsCenter()
@@ -72,11 +73,15 @@ const NotificationCenter = () => {
 
   return (
     <>
-      <Row>
-        <Col>
-          <h3>Notification Center</h3>
-        </Col>
-      </Row>
+      <div className="dashboard-typography notification-center-page">
+        <div className="d-flex flex-wrap justify-content-between align-items-start gap-3 mb-3">
+          <div>
+            <h3 className="notification-center-page__title">Notification Center</h3>
+            <p className="notification-center-page__subtitle">
+              Configure admin alert thresholds and activation toggles
+            </p>
+          </div>
+        </div>
       <Formik
         enableReinitialize={true}
         initialValues={initialValues}
@@ -110,11 +115,13 @@ const NotificationCenter = () => {
           resetForm
         }) => (
           <Form>
-            <Row>
-              <Col>
-                <BForm.Label>Max Win
-                  <span className="text-danger"> *</span>
-                </BForm.Label>
+            <Card className="dashboard-form-card notification-center-card">
+              <Card.Body>
+                <Row className="g-3">
+                  <Col md={4}>
+                    <BForm.Label>
+                      Max Win <span className="text-danger">*</span>
+                    </BForm.Label>
                 <OverlayTrigger
                   placement="top"
                   overlay={
@@ -146,9 +153,9 @@ const NotificationCenter = () => {
                   className="text-danger"
                 />
               </Col>
-              <Col>
-                <BForm.Label>Slots Max Bet
-                  <span className="text-danger"> *</span>
+              <Col md={4}>
+                <BForm.Label>
+                  Slots Max Bet <span className="text-danger">*</span>
                 </BForm.Label>
                 <OverlayTrigger
                   placement="top"
@@ -181,9 +188,9 @@ const NotificationCenter = () => {
                   className="text-danger"
                 />
               </Col>
-              <Col>
-                <BForm.Label>Table Max Bet
-                  <span className="text-danger"> *</span>
+              <Col md={4}>
+                <BForm.Label>
+                  Table Max Bet <span className="text-danger">*</span>
                 </BForm.Label>
                 <OverlayTrigger
                   placement="top"
@@ -217,8 +224,8 @@ const NotificationCenter = () => {
                 />
               </Col>
             </Row>
-            <Row className='mt-3'>
-              <Col>
+            <Row className="g-3 mt-2">
+              <Col md={4}>
                 <BForm.Label>Package Notifications</BForm.Label>
                 <BForm.Check
                   type="switch"
@@ -228,7 +235,7 @@ const NotificationCenter = () => {
                   onBlur={handleBlur}
                 />
               </Col>
-              <Col>
+              <Col md={4}>
                 <BForm.Label>Tournament Notifications</BForm.Label>
                 <BForm.Check
                   type="switch"
@@ -238,7 +245,7 @@ const NotificationCenter = () => {
                   onBlur={handleBlur}
                 />
               </Col>
-              <Col>
+              <Col md={4}>
                 <BForm.Label>Giveaway Notifications</BForm.Label>
                 <BForm.Check
                   type="switch"
@@ -251,13 +258,10 @@ const NotificationCenter = () => {
 
 
             </Row>
-            <Row className='mt-5'>
-              <Col>
-                <h3>Critical Notification</h3>
-              </Col>
-            </Row>
-            <Row >
-              <Col>
+            <div className="notification-center-section">
+              <h5 className="notification-center-section__title">Critical Notifications</h5>
+              <Row className="g-3">
+                <Col md={3}>
                 <BForm.Label>Login Notifications</BForm.Label>
 
                 <BForm.Control
@@ -278,7 +282,7 @@ const NotificationCenter = () => {
                 />
               </Col>
 
-              <Col>
+              <Col md={3}>
                 <BForm.Label>SignUp Notifications</BForm.Label>
 
                 <BForm.Control
@@ -298,7 +302,7 @@ const NotificationCenter = () => {
                   className="text-danger"
                 />
               </Col>
-              <Col>
+              <Col md={3}>
                 <BForm.Label>Deposit Notifications</BForm.Label>
 
                 <BForm.Control
@@ -319,7 +323,7 @@ const NotificationCenter = () => {
                   className="text-danger"
                 />
               </Col>
-              <Col>
+              <Col md={3}>
                 <BForm.Label>Provider Based Notifications</BForm.Label>
 
                 <BForm.Control
@@ -341,13 +345,12 @@ const NotificationCenter = () => {
               </Col>
 
             </Row>
-            <Row className='mt-5'>
-              <Col>
-                <h3>Live Winners Notification</h3>
-              </Col>
-            </Row>
-            <Row className='mt-2'>
-              <Col xs={3}>
+            </div>
+
+            <div className="notification-center-section">
+              <h5 className="notification-center-section__title">Live Winners Notification</h5>
+              <Row className="g-3">
+              <Col md={3}>
                 <BForm.Label>Live Winner GC limit</BForm.Label>
 
                 <BForm.Control
@@ -368,7 +371,7 @@ const NotificationCenter = () => {
                   className="text-danger"
                 />
               </Col>
-              <Col xs={3}>
+              <Col md={3}>
                 <BForm.Label>Live Winner SC limit</BForm.Label>
 
                 <BForm.Control
@@ -390,19 +393,21 @@ const NotificationCenter = () => {
                 />
               </Col>
             </Row>
+            </div>
 
-            <Col className="mt-3 mb-2 d-flex justify-content-between align-items-center">
+            <div className="notification-center-actions mt-3">
               <Button
                 onClick={() => resetForm()}
                 disabled={!dirty}
-                className="m-2 text-dark"
-                variant="warning"
+                className="dashboard-secondary-btn"
+                variant="secondary"
               >
                 Cancel
               </Button>
 
               <Button
-                variant="success"
+                variant="primary"
+                className="dashboard-primary-btn"
                 onClick={handleSubmit}
                 disabled={settingsLoading || !dirty}
                 hidden={isHidden({ module: { key: "NotificationCenter", value: "U" } })}
@@ -415,14 +420,18 @@ const NotificationCenter = () => {
                     size="sm"
                     role="status"
                     aria-hidden="true"
+                    className="ms-2"
                   />
                 )}
               </Button>
-            </Col>
+            </div>
+              </Card.Body>
+            </Card>
           </Form>
         )}
       </Formik>
 
+      </div>
     </>
   )
 }

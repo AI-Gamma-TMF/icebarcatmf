@@ -209,5 +209,6 @@
 	"ScratchCardExistsErrorType": "ScratchCardExistsErrorType",
 	"Scratch Card already exists": "Scratch Card already exists",
 	"JackpotBreakEvenErrorType": "JackpotBreakEvenErrorType",
-	"Admin share from ticket sales is insufficient to cover the seed amount. Please adjust the admin share, entry amount, or max ticket size to ensure no loss.": "Admin share from ticket sales is insufficient to cover the seed amount. Please adjust the admin share, entry amount, or max ticket size to ensure no loss."
+	"Admin share from ticket sales is insufficient to cover the seed amount. Please adjust the admin share, entry amount, or max ticket size to ensure no loss.": "Admin share from ticket sales is insufficient to cover the seed amount. Please adjust the admin share, entry amount, or max ticket size to ensure no loss.",
+	"MaxRetriesPerRequestError": "MaxRetriesPerRequestError"
 }

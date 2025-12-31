@@ -11,11 +11,12 @@ import PaginationComponent from '../../components/Pagination'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import useWithdrawTransactions from './hooks/useWithdrawTransactions'
 import { formattedDate, getDateTime } from '../../utils/dateFormatter'
-import { Col, Row, Form, Button, Table } from '@themesberg/react-bootstrap'
+import { Col, Row, Form, Button, Table, Card } from '@themesberg/react-bootstrap'
 import { paymentProviderName, statusOptions, tableHeaders } from './constants'
 import { faArrowCircleUp, faArrowCircleDown , faCheck, faFileDownload, faRedoAlt, faTimesSquare } from '@fortawesome/free-solid-svg-icons'
 import { ApproveRedeemConfirmation, RedeemMoreDetail } from '../../components/ConfirmationModal'
 import { convertTimeZone, convertToTimeZone, formatPriceWithCommas, onDownloadCsvClick } from '../../utils/helper'
+import './withdrawRequest.scss'
 
 const WithdrawRequests = () => {
   const { isHidden } = useCheckPermission()
@@ -162,296 +163,283 @@ const WithdrawRequests = () => {
   };
 
   return (
-    <RedeemTableContainer>
-      <Row className="mb-3">
-        <Col xs={12}>
-          <h3>Redeem Requests</h3>
-        </Col>
-      </Row>
+    <RedeemTableContainer className="dashboard-typography withdraw-requests-page">
+      <div className="d-flex justify-content-between align-items-center mb-4">
+        <div>
+          <h3 className="withdraw-requests-page__title">Redeem Requests</h3>
+          <p className="withdraw-requests-page__subtitle">
+            Review, filter, and manage redemption withdrawals
+          </p>
+        </div>
+      </div>
 
       <DashboardCard dashboardData={dashboardData} />
 
-      <Row className="mt-4">
-        <Col xs="12" sm="6" lg="2" className="mb-3">
-          <Form.Label>User Id</Form.Label>
-          <Form.Control
-            type="number"
-            value={userId}
-            placeholder="Search By User Id"
-            onChange={(event) => {
-              setPage(1);
-              setUserId(event.target.value.replace(/[~`!$%^&*#=)()><?]+/g, ""));
-            }}
-          />
-        </Col>
-
-        <Col xs="12" sm="6" lg="3" className="mb-3">
-          <Form.Label>Search</Form.Label>
-          <Form.Control
-            type="search"
-            value={search}
-            placeholder="Search By Full Email"
-            onChange={handleChange}
-            isInvalid={!!error}
-          />
-          {error && (
-            <div style={{ color: "red", marginTop: "5px" }}>{error}</div>
-          )}
-        </Col>
-
-        {/* <Col xs='12' sm='6' lg='3' className='mb-3'>
-            <Form.Label>Transaction Id</Form.Label>
-            <Form.Control
-              type='search'
-              value={transactionId}
-              placeholder='Search By TransactionId'
-              onChange={(event) => {
-                setPage(1)
-                setTransactionId(event.target.value.replace(/[~`!$%^&*#=)()><?]+/g, ''))
-              }}
-            />
-          </Col> */}
-
-        <Col
-          xs="12"
-          sm="6"
-          lg="2"
-          className="col-lg-2 col-sm-6 col-12 mt-2 mt-sm-0"
-        >
-          <Form.Label column="sm" className="mx-auto text-nowrap px-2">
-            Start Date
-          </Form.Label>
-          <Datetime
-            value={startDate}
-            onChange={handleStartDateChange}
-            inputProps={{ readOnly: true }}
-            timeFormat={false}
-          />
-          {errorStart && (
-            <div style={{ color: "red", marginTop: "5px" }}>{errorStart}</div>
-          )}
-        </Col>
-
-        <Col
-          xs="12"
-          sm="6"
-          lg="2"
-          className="col-lg-2 col-sm-6 col-12 mt-2 mt-sm-0"
-        >
-          <Form.Label column="sm" className="mx-auto text-nowrap px-2">
-            End Date
-          </Form.Label>
-          <Datetime
-            value={endDate}
-            onChange={handleEndDateChange}
-            inputProps={{ readOnly: true }}
-            timeFormat={false}
-          />
-          {errorEnd && (
-            <div style={{ color: "red", marginTop: "5px" }}>{errorEnd}</div>
-          )}
-        </Col>
-      </Row>
-      <Row className="mt-0">
-        <Col xs="12" sm="6" lg="2" className="mb-3">
-          <Form.Label column="sm" className="mx-auto text-nowrap px-2">
-            Status
-          </Form.Label>
-          <Form.Select
-            onChange={(e) => {
-              setPage(1);
-              setSelectedAction(e.target.value);
-            }}
-            value={selectedAction}
-          >
-            {statusOptions &&
-              statusOptions?.map(({ label, value }) => (
-                <option key={label} value={value}>
-                  {label}
-                </option>
-              ))}
-          </Form.Select>
-        </Col>
-
-        <Col xs="12" sm="6" lg="2" className="mb-3">
-          <Form.Label column="sm" className="mx-auto text-nowrap px-2">
-            Payment Provider
-          </Form.Label>
-          <Form.Select
-            onChange={(e) => {
-              setPage(1);
-              setPaymentProvider(e.target.value);
-            }}
-            value={paymentProvider}
-          >
-            {paymentProviderName &&
-              paymentProviderName?.map(({ label, value }) => (
-                <option key={label} value={value}>
-                  {label}
-                </option>
-              ))}
-          </Form.Select>
-        </Col>
-
-        <Col sm={6} lg={2}>
-          <Form.Label column="sm">Filter By</Form.Label>
-          <Form.Select
-            onChange={(e) => {
-              setPage(1);
-              setFilterBy(e.target.value);
-            }}
-            value={filterBy}
-          >
-            <option hidden>Select value</option>
-            <option value="NGR">NGR</option>
-            <option value="playThrough">Play Through</option>
-            <option value="amount">Amount</option>
-            <option value="last30daysRollingRedeemAmount">30 days Rolling Amount</option>
-          </Form.Select>
-        </Col>
-
-        <Col sm={6} lg={2}>
-          <Form.Label column="sm">Operator</Form.Label>
-          <Form.Select
-            onChange={(e) => {
-              setPage(1);
-              setOperator(e.target.value);
-            }}
-            value={operator}
-            disabled={!filterBy}
-          >
-            <option hidden>Select Operator</option>
-            <option value="=">=</option>
-            <option value=">">{`>`}</option>
-            <option value=">=">{`>=`}</option> <option value="<">{`<`}</option>{" "}
-            <option value="<=">{`<=`}</option>
-          </Form.Select>
-        </Col>
-
-        <Col sm={6} lg={2}>
-          <Form.Label>Value</Form.Label>
-          <Form.Control
-            type="number"
-            onKeyDown={(evt) =>
-              ["e", "E", "+"].includes(evt.key) && evt.preventDefault()
-            }
-            name="filterValue"
-            value={filterValue}
-            onChange={(e) => {
-              setFilterValue(e?.target?.value);
-            }}
-            placeholder="Enter Value"
-            disabled={!operator}
-          />
-        </Col>
-
-        <Col
-          xs="12"
-          sm="6"
-          lg="1"
-          className="d-flex align-items-center mt-3 mb-0"
-        >
-          <Trigger message="Reset Filters" id={"redo"} />
-          <Button
-            id={"redo"}
-            variant="success"
-            onClick={() => {
-              setSearch("");
-              setSelectedAction("pending");
-              setLimit(15);
-              setPage(1),
-                setErrorStart(""),
-                setErrorEnd(""),
-                setStartDate(convertTimeZone(new Date(), timeZoneCode)),
-                setEndDate(convertTimeZone(new Date(), timeZoneCode));
-              setTransactionId("");
-              setUserId("");
-              setFilterBy("");
-              setOperator("");
-              setFilterValue("");
-            }}
-          >
-            <FontAwesomeIcon icon={faRedoAlt} />
-          </Button>
-
-          <Trigger message="Download as CSV" id={"csv"} />
-          <Button
-            id={"csv"}
-            variant="success"
-            style={{ marginLeft: "10px" }}
-            onClick={handleDownloadClick}
-            disabled={downloadInProgress || transactionData?.count === 0}
-          >
-            {downloadInProgress ? (
-              <span
-                className="spinner-border spinner-border-sm"
-                role="status"
-                aria-hidden="true"
-              ></span>
-            ) : (
-              <FontAwesomeIcon icon={faFileDownload} />
-            )}
-          </Button>
-        </Col>
-      </Row>
-
-      <div className="table-wrapper">
-        <Table
-          bordered
-          striped
-          responsive
-          hover
-          size="sm"
-          className="text-center mt-4"
-        >
-          <thead className="thead-dark table-scroll">
-            <tr>
-              {tableHeaders.map((h, idx) => (
-                <th
-                  key={idx}
-                  onClick={() => h.value !== "" && handlePlayerTableSorting(h)}
-                  style={{
-                  cursor: (h.value !== '')
-                   ? 'pointer' : 'default',
+      <Card className="dashboard-filters mt-4">
+        <Card.Body>
+          {/* Row 1 (fills 12 columns) */}
+          <Row className="g-3 align-items-start">
+            <Col xs={12} sm={6} lg={2}>
+              <Form.Label>User Id</Form.Label>
+              <Form.Control
+                className="withdraw-filters__control"
+                type="number"
+                value={userId}
+                placeholder="Search By User Id"
+                onChange={(event) => {
+                  setPage(1);
+                  setUserId(event.target.value.replace(/[~`!$%^&*#=)()><?]+/g, ""));
                 }}
-                  className={selected(h) ? "border-3 border border-blue" : ""}
+              />
+            </Col>
+
+            <Col xs={12} sm={6} lg={4}>
+              <Form.Label>Search</Form.Label>
+              <Form.Control
+                className="withdraw-filters__control"
+                type="search"
+                value={search}
+                placeholder="Search By Full Email"
+                onChange={handleChange}
+                isInvalid={!!error}
+              />
+              {error && (
+                <div style={{ color: "red", marginTop: "5px" }}>{error}</div>
+              )}
+            </Col>
+
+            <Col xs={12} sm={6} lg={2}>
+              <Form.Label className="text-nowrap">Start Date</Form.Label>
+              <div className="withdraw-filters__date-wrapper">
+                <Datetime
+                  value={startDate}
+                  onChange={handleStartDateChange}
+                  inputProps={{ readOnly: true }}
+                  timeFormat={false}
+                />
+              </div>
+              {errorStart && (
+                <div style={{ color: "red", marginTop: "5px" }}>{errorStart}</div>
+              )}
+            </Col>
+
+            <Col xs={12} sm={6} lg={2}>
+              <Form.Label className="text-nowrap">End Date</Form.Label>
+              <div className="withdraw-filters__date-wrapper">
+                <Datetime
+                  value={endDate}
+                  onChange={handleEndDateChange}
+                  inputProps={{ readOnly: true }}
+                  timeFormat={false}
+                />
+              </div>
+              {errorEnd && (
+                <div style={{ color: "red", marginTop: "5px" }}>{errorEnd}</div>
+              )}
+            </Col>
+
+            <Col xs={12} sm={6} lg={2}>
+              <Form.Label className="text-nowrap">Status</Form.Label>
+              <Form.Select
+                className="withdraw-filters__select"
+                onChange={(e) => {
+                  setPage(1);
+                  setSelectedAction(e.target.value);
+                }}
+                value={selectedAction}
+              >
+                {statusOptions &&
+                  statusOptions?.map(({ label, value }) => (
+                    <option key={label} value={value}>
+                      {label}
+                    </option>
+                  ))}
+              </Form.Select>
+            </Col>
+          </Row>
+
+          {/* Row 2 (fills 12 columns) */}
+          <Row className="g-3 align-items-start mt-0">
+            <Col xs={12} sm={6} lg={3}>
+              <Form.Label className="text-nowrap">Payment Provider</Form.Label>
+              <Form.Select
+                className="withdraw-filters__select"
+                onChange={(e) => {
+                  setPage(1);
+                  setPaymentProvider(e.target.value);
+                }}
+                value={paymentProvider}
+              >
+                {paymentProviderName &&
+                  paymentProviderName?.map(({ label, value }) => (
+                    <option key={label} value={value}>
+                      {label}
+                    </option>
+                  ))}
+              </Form.Select>
+            </Col>
+
+            <Col xs={12} sm={6} lg={3}>
+              <Form.Label className="text-nowrap">Filter By</Form.Label>
+              <Form.Select
+                className="withdraw-filters__select"
+                onChange={(e) => {
+                  setPage(1);
+                  setFilterBy(e.target.value);
+                }}
+                value={filterBy}
+              >
+                <option hidden>Select value</option>
+                <option value="NGR">NGR</option>
+                <option value="playThrough">Play Through</option>
+                <option value="amount">Amount</option>
+                <option value="last30daysRollingRedeemAmount">
+                  30 days Rolling Amount
+                </option>
+              </Form.Select>
+            </Col>
+
+            <Col xs={12} sm={6} lg={3}>
+              <Form.Label className="text-nowrap">Operator</Form.Label>
+              <Form.Select
+                className="withdraw-filters__select"
+                onChange={(e) => {
+                  setPage(1);
+                  setOperator(e.target.value);
+                }}
+                value={operator}
+                disabled={!filterBy}
+              >
+                <option hidden>Select Operator</option>
+                <option value="=">=</option>
+                <option value=">">{`>`}</option>
+                <option value=">=">{`>=`}</option>
+                <option value="<">{`<`}</option>{" "}
+                <option value="<=">{`<=`}</option>
+              </Form.Select>
+            </Col>
+
+            <Col xs={12} sm={6} lg={3}>
+              <Form.Label className="text-nowrap">Value</Form.Label>
+              <Form.Control
+                className="withdraw-filters__control"
+                type="number"
+                onKeyDown={(evt) =>
+                  ["e", "E", "+"].includes(evt.key) && evt.preventDefault()
+                }
+                name="filterValue"
+                value={filterValue}
+                onChange={(e) => {
+                  setFilterValue(e?.target?.value);
+                }}
+                placeholder="Enter Value"
+                disabled={!operator}
+              />
+            </Col>
+          </Row>
+
+          {/* Actions Row (right aligned) */}
+          <Row className="g-3 mt-0">
+            <Col xs={12}>
+              <div className="withdraw-filters__actions">
+                <Trigger message="Reset Filters" id={"redo"} />
+                <Button
+                  id={"redo"}
+                  className="withdraw-action-btn withdraw-action-btn--reset"
+                  onClick={() => {
+                    setSearch("");
+                    setSelectedAction("pending");
+                    setLimit(15);
+                    setPage(1),
+                      setErrorStart(""),
+                      setErrorEnd(""),
+                      setStartDate(convertTimeZone(new Date(), timeZoneCode)),
+                      setEndDate(convertTimeZone(new Date(), timeZoneCode));
+                    setTransactionId("");
+                    setUserId("");
+                    setFilterBy("");
+                    setOperator("");
+                    setFilterValue("");
+                  }}
                 >
-                  {h.labelKey}
+                  <FontAwesomeIcon icon={faRedoAlt} /> Reset
+                </Button>
 
-                  {selected(h) &&
-                    (sort === "asc" ? (
-                      <FontAwesomeIcon
-                        style={over ? { color: "red" } : {}}
-                        icon={faArrowCircleUp}
-                        onClick={() => setSort("desc")}
-                        onMouseOver={() => setOver(true)}
-                        onMouseLeave={() => setOver(false)}
-                      />
-                    ) : (
-                      <FontAwesomeIcon
-                        style={over ? { color: "red" } : {}}
-                        icon={faArrowCircleDown}
-                        onClick={() => setSort("asc")}
-                        onMouseOver={() => setOver(true)}
-                        onMouseLeave={() => setOver(false)}
-                      />
-                    ))}
-                </th>
-              ))}
-            </tr>
-          </thead>
+                <Trigger message="Download as CSV" id={"csv"} />
+                <Button
+                  id={"csv"}
+                  className="withdraw-action-btn withdraw-action-btn--download"
+                  onClick={handleDownloadClick}
+                  disabled={downloadInProgress || transactionData?.count === 0}
+                >
+                  {downloadInProgress ? (
+                    <span
+                      className="spinner-border spinner-border-sm"
+                      role="status"
+                      aria-hidden="true"
+                    ></span>
+                  ) : (
+                    <>
+                      <FontAwesomeIcon icon={faFileDownload} /> Export CSV
+                    </>
+                  )}
+                </Button>
+              </div>
+            </Col>
+          </Row>
+        </Card.Body>
+      </Card>
 
-          <tbody>
-            {loading ? (
+      <div className="dashboard-data-table mt-4">
+        <div className="table-wrapper withdraw-table-wrap">
+          <Table bordered responsive hover size="sm" className="mb-0 withdraw-table text-center">
+            <thead className="table-scroll">
               <tr>
-                <td colSpan={10} className="text-center">
-                  <InlineLoader />
-                </td>
+                {tableHeaders.map((h, idx) => (
+                  <th
+                    key={idx}
+                    onClick={() => h.value !== "" && handlePlayerTableSorting(h)}
+                    style={{
+                      cursor: h.value !== "" ? "pointer" : "default",
+                    }}
+                    className={selected(h) ? "sortable active" : "sortable"}
+                  >
+                    {h.labelKey}
+
+                    {selected(h) &&
+                      (sort === "asc" ? (
+                        <FontAwesomeIcon
+                          style={over ? { color: "red" } : {}}
+                          icon={faArrowCircleUp}
+                          onClick={() => setSort("desc")}
+                          onMouseOver={() => setOver(true)}
+                          onMouseLeave={() => setOver(false)}
+                        />
+                      ) : (
+                        <FontAwesomeIcon
+                          style={over ? { color: "red" } : {}}
+                          icon={faArrowCircleDown}
+                          onClick={() => setSort("asc")}
+                          onMouseOver={() => setOver(true)}
+                          onMouseLeave={() => setOver(false)}
+                        />
+                      ))}
+                  </th>
+                ))}
               </tr>
-            ) : (
-              <>
-                {transactionData && transactionData?.rows?.length > 0 ? (
-                  transactionData.rows.map(
+            </thead>
+
+            <tbody>
+              {loading ? (
+                <tr>
+                  <td colSpan={tableHeaders.length} className="text-center py-4">
+                    <InlineLoader />
+                  </td>
+                </tr>
+              ) : (
+                <>
+                  {transactionData && transactionData?.rows?.length > 0 ? (
+                    transactionData.rows.map(
                     ({
                       transactionId,
                       email,
@@ -472,9 +460,7 @@ const WithdrawRequests = () => {
                     }) => (
                       <tr
                         key={transactionId}
-                        style={{
-                          background: isFloridaOrNewYorkUser ? "#ffa8a8" : "",
-                        }}
+                        className={isFloridaOrNewYorkUser ? "withdraw-row-flagged" : ""}
                       >
                         <td>
                           {+NGR > 0 ? (
@@ -545,7 +531,7 @@ const WithdrawRequests = () => {
                                   updateLoading
                                 }
                                 id={`${transactionId}edit`}
-                                className="m-1"
+                                className="withdraw-icon-btn m-1"
                                 size="sm"
                                 variant="success"
                                 onClick={() => {
@@ -564,14 +550,15 @@ const WithdrawRequests = () => {
                           ) : status === 7 ? (
                             paymentProvider === "SKRILL" ||
                             paymentProvider === "PAY_BY_BANK" ? (
-                              <button
-                                className="btn btn-success btn-sm"
+                              <Button
+                                size="sm"
+                                className="dashboard-table-btn"
                                 onClick={() =>
                                   handelFetchStatus(withdrawRequestId)
                                 }
                               >
                                 Check Status
-                              </button>
+                              </Button>
                             ) : (
                               <span className="info">N/A</span>
                             )
@@ -591,7 +578,7 @@ const WithdrawRequests = () => {
                                   updateLoading
                                 }
                                 id={`${transactionId}Cancel`}
-                                className="m-1"
+                                className="withdraw-icon-btn m-1"
                                 size="sm"
                                 variant="danger"
                                 onClick={() => {
@@ -632,7 +619,8 @@ const WithdrawRequests = () => {
                             <InlineLoader />
                           ) : (
                             <Button
-                              style={{ padding: "3px 8px" }}
+                              className="dashboard-table-btn"
+                              style={{ padding: "6px 10px" }}
                               onClick={() => {
                                 getMoreDetail({ transactionId, userId });
                                 setLoadingRows({ [transactionId]: true });
@@ -647,15 +635,16 @@ const WithdrawRequests = () => {
                   )
                 ) : (
                   <tr>
-                    <td colSpan={12} className="text-danger text-center">
+                    <td colSpan={tableHeaders.length} className="text-danger text-center py-4">
                       No Data Found
                     </td>
                   </tr>
                 )}
               </>
             )}
-          </tbody>
-        </Table>
+            </tbody>
+          </Table>
+        </div>
       </div>
 
       {transactionData?.count !== 0 && !loading && (

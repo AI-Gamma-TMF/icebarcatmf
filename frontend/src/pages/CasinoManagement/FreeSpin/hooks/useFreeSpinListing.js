@@ -36,6 +36,7 @@ const [searchRound, setSearchRound] = useState("");
 
   const {
     isLoading: listLoading,
+    isFetching,
     data: FreeSpingList,
     refetch: SpinRefetch,
   } = useQuery({
@@ -56,6 +57,8 @@ const [searchRound, setSearchRound] = useState("");
     },
     select: (res) => res?.data?.data,
     refetchOnWindowFocus: false,
+    keepPreviousData: true,
+    staleTime: 15000,
   });
   const totalPages = Math.ceil(FreeSpingList?.count / limit);
  const {
@@ -107,6 +110,7 @@ const selected = (h) => orderBy === h.value && h.labelKey !== "Action";
   return {
     FreeSpingList,
     listLoading,
+    isFetching,
     timezoneOffset,
     totalPages,
     page,

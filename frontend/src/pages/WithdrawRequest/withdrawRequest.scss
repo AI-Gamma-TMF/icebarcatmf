@@ -1,0 +1,131 @@
+// Reuse the dashboard “modern” styling primitives
+@import "../../scss/modern-theme.scss";
+
+.withdraw-requests-page {
+  padding-bottom: 6px;
+}
+
+.withdraw-requests-page__title {
+  margin: 0;
+}
+
+.withdraw-requests-page__subtitle {
+  margin-top: 4px;
+  color: rgba(234, 250, 245, 0.68);
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+.withdraw-filters__control.form-control,
+.withdraw-filters__select.form-select {
+  width: 100%;
+}
+
+.withdraw-filters__date-wrapper {
+  .rdt input {
+    @extend .form-control;
+    background-color: rgba(0, 0, 0, 0.2) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    color: #eafaf5 !important;
+
+    &:focus {
+      background-color: rgba(0, 0, 0, 0.3) !important;
+      border-color: rgba(0, 229, 160, 0.5) !important;
+      box-shadow: 0 0 0 2px rgba(0, 229, 160, 0.2) !important;
+    }
+  }
+}
+
+.withdraw-filters__actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.withdraw-action-btn {
+  border-radius: 12px;
+  padding: 8px 16px;
+  font-weight: 800;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+}
+
+.withdraw-action-btn--reset {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  color: #eafaf5 !important;
+}
+
+.withdraw-action-btn--reset:hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+  transform: translateY(-1px);
+  color: #fff !important;
+}
+
+.withdraw-action-btn--download {
+  background: linear-gradient(
+    135deg,
+    rgba(0, 229, 160, 0.1) 0%,
+    rgba(0, 229, 160, 0.2) 100%
+  ) !important;
+  border: 1px solid rgba(0, 229, 160, 0.3) !important;
+  color: #00e5a0 !important;
+}
+
+.withdraw-action-btn--download:hover:not(:disabled) {
+  background: linear-gradient(
+    135deg,
+    rgba(0, 229, 160, 0.2) 0%,
+    rgba(0, 229, 160, 0.3) 100%
+  ) !important;
+  transform: translateY(-1px);
+  color: #fff !important;
+}
+
+.withdraw-action-btn--download:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.withdraw-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+.withdraw-table {
+  min-width: 1400px;
+}
+
+.withdraw-icon-btn.btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.06) !important;
+  border: 1px solid rgba(255, 255, 255, 0.10) !important;
+  color: rgba(234, 250, 245, 0.92) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  transition: transform 140ms ease, background 140ms ease, border-color 140ms ease;
+}
+
+.withdraw-icon-btn.btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+  border-color: rgba(var(--gs-cta-rgb), 0.18) !important;
+  background: rgba(var(--gs-cta-rgb), 0.08) !important;
+}
+
+.withdraw-row-flagged {
+  background: rgba(255, 107, 107, 0.14) !important;
+}
+
+

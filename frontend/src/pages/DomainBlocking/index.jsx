@@ -5,6 +5,7 @@ import {
   Col,
   Table,
   Form,
+  Card,
 } from "@themesberg/react-bootstrap";
 import { tableHeaders } from "./constant";
 import { formatDateMDY } from "../../utils/dateFormatter";
@@ -20,6 +21,7 @@ import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { searchRegEx } from "../../utils/helper";
 import useCheckPermission from "../../utils/checkPermission";
 import useDomainBlocking from "./hooks/useDomainBlocking";
+import "./domainBlocking.scss";
 
 
 const DomainBlocking = () => {
@@ -30,17 +32,21 @@ const DomainBlocking = () => {
 
   return (
     <>
-      <Row className="mb-2">
-        <Col>
-          <h3>Domain Blocking</h3>
-        </Col>
-        <Col>
-          <div className="d-flex justify-content-end">
+      <div className="dashboard-typography domain-blocking-page">
+        <div className="d-flex flex-wrap justify-content-between align-items-start gap-3 mb-3">
+          <div>
+            <h3 className="domain-blocking-page__title">Domain Blocking</h3>
+            <p className="domain-blocking-page__subtitle">
+              Block domains and manage access restrictions
+            </p>
+          </div>
+
+          <div className="domain-blocking-page__actions">
             <Button
-              variant="success"
-              hidden={isHidden({ module: { key: 'DomainBlock', value: 'C' } })}
+              variant="primary"
+              className="domain-blocking-page__create-btn"
+              hidden={isHidden({ module: { key: "DomainBlock", value: "C" } })}
               size="sm"
-              style={{ marginRight: "10px" }}
               onClick={() => {
                 navigate(AdminRoutes.DomainBlockCreate);
               }}
@@ -48,141 +54,120 @@ const DomainBlocking = () => {
               Block Domain
             </Button>
           </div>
-        </Col>
-        <Row className="mb-2">
-          <Col xs={12} md={6} lg={6}>
-            <Form.Label style={{ marginBottom: '0', marginRight: '15px', marginTop: '8px' }}>
-              Search
-            </Form.Label>
-            <Form.Control
-              type='search'
-              placeholder='Search blocked domain'
-              value={search}
-              style={{ maxWidth: '330px', marginRight: '10px', marginTop: '5px' }}
-              onChange={(event) => {
-                setPage(1)
-                const mySearch = event.target.value.replace(searchRegEx, '')
-                setSearch(mySearch)
-              }}
-            />
-          </Col>
-        </Row>
+        </div>
 
-      </Row>
-      <Table
-        bordered
-        striped
-        responsive
-        hover
-        size="sm"
-        className="text-center mt-4"
-      >
-        <thead className="thead-dark">
-          <tr>
-            {tableHeaders.map((h, idx) => (
-              <th
-                key={idx}
-                onClick={() => h.value !== "action" && setOrderBy(h.value)}
-                style={{
-                  cursor: (h.value !== "action" && "pointer"),
-                }}
-                className={selected(h) ? "border-3 border border-blue" : ""}
-              >
-                {h.labelKey}{" "}
-                {selected(h) &&
-                  (sort === "ASC" ? (
-                    <FontAwesomeIcon
-                      style={over ? { color: "red" } : {}}
-                      icon={faArrowAltCircleUp}
-                      onClick={() => setSort("DESC")}
-                      onMouseOver={() => setOver(true)}
-                      onMouseLeave={() => setOver(false)}
-                    />
-                  ) : (
-                    <FontAwesomeIcon
-                      style={over ? { color: "red" } : {}}
-                      icon={faArrowAltCircleDown}
-                      onClick={() => setSort("ASC")}
-                      onMouseOver={() => setOver(true)}
-                      onMouseLeave={() => setOver(false)}
-                    />
+        <Card className="dashboard-filters domain-blocking-filters mb-4">
+          <Card.Body>
+            <Row className="g-3 align-items-end">
+              <Col xs={12} md={6} lg={6}>
+                <Form.Label>Search</Form.Label>
+                <Form.Control
+                  type="search"
+                  placeholder="Search blocked domain"
+                  value={search}
+                  onChange={(event) => {
+                    setPage(1);
+                    const mySearch = event.target.value.replace(searchRegEx, "");
+                    setSearch(mySearch);
+                  }}
+                />
+              </Col>
+            </Row>
+          </Card.Body>
+        </Card>
+
+        <div className="dashboard-data-table">
+          <div className="domain-blocking-table-wrap">
+            <Table bordered hover responsive size="sm" className="mb-0 text-center">
+              <thead>
+                <tr>
+                  {tableHeaders.map((h, idx) => (
+                    <th
+                      key={idx}
+                      onClick={() => h.value !== "action" && setOrderBy(h.value)}
+                      style={{
+                        cursor: h.value !== "action" ? "pointer" : "default",
+                      }}
+                      className={selected(h) ? "sortable active" : "sortable"}
+                    >
+                      {h.labelKey}{" "}
+                      {selected(h) &&
+                        (sort === "ASC" ? (
+                          <FontAwesomeIcon
+                            style={over ? { color: "red" } : {}}
+                            icon={faArrowAltCircleUp}
+                            onClick={() => setSort("DESC")}
+                            onMouseOver={() => setOver(true)}
+                            onMouseLeave={() => setOver(false)}
+                          />
+                        ) : (
+                          <FontAwesomeIcon
+                            style={over ? { color: "red" } : {}}
+                            icon={faArrowAltCircleDown}
+                            onClick={() => setSort("ASC")}
+                            onMouseOver={() => setOver(true)}
+                            onMouseLeave={() => setOver(false)}
+                          />
+                        ))}
+                    </th>
                   ))}
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {loading ? (
-            <tr>
-              <td colSpan={10} className="text-center">
-                <InlineLoader />
-              </td>
-            </tr>
-
-
-          ) : blockedDomainList?.blockedDomains?.count > 0 ? (
-            blockedDomainList.blockedDomains.rows.map(
-              ({
-                domainId,
-                domainName,
-                createdAt,
-                updatedAt,
-              }) => (
-                <tr key={domainId}>
-                  <td>{domainId}</td>
-                  <td>{domainName}</td>                 
-                  <td>{formatDateMDY(createdAt)}</td>
-                  <td>{formatDateMDY(updatedAt)}</td>
-                  <td>
-                    {/* <Trigger message="Edit" id={domainId + "edit"} />
-                    <Button
-                      id={domainId + "edit"}
-                      hidden={isHidden({ module: { key: 'GeoComply', value: 'U' } })}
-                      className="m-1"
-                      size="sm"
-                      variant="warning"
-                      onClick={() =>
-                        navigate(
-                          `${AdminRoutes.DomainBlockEdit.split(":").shift()}${domainId}`
-                        )
-                      }
-                    >
-                      <FontAwesomeIcon icon={faEdit} />
-                    </Button> */}
-                    <Trigger message="Delete" id={domainId + "delete"} />
-                    <Button
-                      id={domainId + "delete"}
-                      hidden={isHidden({ module: { key: 'DomainBlock', value: 'D' } })}
-                      className="m-1"
-                      size="sm"
-                      variant="warning"
-                      onClick={() => handleDelete(domainId)}
-                    >
-                      <FontAwesomeIcon icon={faTrash} />
-                    </Button>                    
-                  </td>
                 </tr>
-              ))
-          ) : (
-            <tr>
-              <td colSpan={10} className="text-danger text-center">
-                No Data Found
-              </td>
-            </tr>
-          )
-          }
-        </tbody>
+              </thead>
+              <tbody>
+                {loading ? (
+                  <tr>
+                    <td colSpan={tableHeaders.length} className="text-center py-4">
+                      <InlineLoader />
+                    </td>
+                  </tr>
+                ) : blockedDomainList?.blockedDomains?.count > 0 ? (
+                  blockedDomainList.blockedDomains.rows.map(
+                    ({ domainId, domainName, createdAt, updatedAt }) => (
+                      <tr key={domainId}>
+                        <td>{domainId}</td>
+                        <td>{domainName}</td>
+                        <td>{formatDateMDY(createdAt)}</td>
+                        <td>{formatDateMDY(updatedAt)}</td>
+                        <td>
+                          <div className="domain-blocking-actions">
+                            <Trigger message="Delete" id={domainId + "delete"} />
+                            <Button
+                              id={domainId + "delete"}
+                              hidden={isHidden({ module: { key: "DomainBlock", value: "D" } })}
+                              className="domain-blocking-icon-btn"
+                              size="sm"
+                              variant="danger"
+                              onClick={() => handleDelete(domainId)}
+                            >
+                              <FontAwesomeIcon icon={faTrash} />
+                            </Button>
+                          </div>
+                        </td>
+                      </tr>
+                    )
+                  )
+                ) : (
+                  <tr>
+                    <td colSpan={tableHeaders.length} className="text-center py-4 domain-blocking-empty">
+                      No Data Found
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            </Table>
+          </div>
+        </div>
 
-      </Table>
-      {blockedDomainList?.blockedDomains?.count !== 0 && (
-        <PaginationComponent
-          page={blockedDomainList?.blockedDomains?.count < page ? setPage(1) : page}
-          totalPages={totalPages}
-          setPage={setPage}
-          limit={limit}
-          setLimit={setLimit}
-        />
-      )}
+        {blockedDomainList?.blockedDomains?.count !== 0 && (
+          <PaginationComponent
+            page={blockedDomainList?.blockedDomains?.count < page ? setPage(1) : page}
+            totalPages={totalPages}
+            setPage={setPage}
+            limit={limit}
+            setLimit={setLimit}
+          />
+        )}
+      </div>
       {deleteModalShow &&
         (
           <DeleteConfirmationModal

@@ -26,6 +26,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faArrowCircleUp,
   faArrowCircleDown,
+  faGripVertical,
 } from "@fortawesome/free-solid-svg-icons";
 import PlayerSearch from "../../pages/Players/PlayerSearch";
 import "./MultiFunctionalTable.css";
@@ -39,17 +40,12 @@ export const DraggableHeader = ({ header, id, setIsResizing }) => {
   const style = {
     transform: CSS.Transform.toString(transform),
     transition,
-    cursor: "grab",
-    padding: "8px",
-    border: "1px solid #ccc",
     position: "relative",
     userSelect: "none",
     width: header.getSize(),
     minWidth: header.column.columnDef.minSize,
     maxWidth: header.column.columnDef.maxSize,
     overflow: "hidden",
-    whiteSpace: "nowrap",
-    textOverflow: "ellipsis",
   };
 
   const isSorted = header.column.getIsSorted();
@@ -57,7 +53,7 @@ export const DraggableHeader = ({ header, id, setIsResizing }) => {
 
   const resizer = header.column.getCanResize() ? (
     <div
-      className="resizer"
+      className="resizer mft-resizer"
       onMouseDown={(e) => {
         setIsResizing(true);
         e.stopPropagation();
@@ -69,42 +65,38 @@ export const DraggableHeader = ({ header, id, setIsResizing }) => {
   ) : null;
 
   return (
-    <th ref={setNodeRef} style={style}>
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-around",
-        }}
-      >
-        <span
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: "6px",
-            cursor: canSort ? "pointer" : "default",
-          }}
+    <th ref={setNodeRef} style={style} className="mft-th">
+      <div className="mft-th__inner">
+        <button
+          type="button"
+          className="mft-th__label"
           onClick={() => {
-            if (canSort) {
-              header.column.toggleSorting();
-            }
+            if (canSort) header.column.toggleSorting();
           }}
+          disabled={!canSort}
+          title={canSort ? "Sort" : undefined}
         >
-          {flexRender(header.column.columnDef.header, header.getContext())}
+          <span className="mft-th__text">
+            {flexRender(header.column.columnDef.header, header.getContext())}
+          </span>
           {isSorted && (
             <FontAwesomeIcon
+              className="mft-th__sort"
               icon={isSorted === "asc" ? faArrowCircleUp : faArrowCircleDown}
-              style={{ color: "#007bff", marginLeft: "5px" }}
             />
           )}
-        </span>
-        <span
+        </button>
+
+        <button
+          type="button"
+          className="mft-th__handle"
           {...attributes}
           {...listeners}
-          style={{ cursor: "grab", paddingLeft: "8px" }}
+          aria-label="Drag to reorder column"
+          title="Drag to reorder"
         >
-          ⠿
-        </span>
+          <FontAwesomeIcon icon={faGripVertical} />
+        </button>
       </div>
       {resizer}
     </th>
@@ -273,15 +265,8 @@ const MultiFunctionalTable = () => {
         collisionDetection={closestCenter}
         onDragEnd={handleDragEnd}
       >
-        <div style={{ overflowX: "auto", width: "100%" }}>
-          <Table
-            bordered
-            striped
-            responsive
-            hover
-            size="sm"
-            className="mt-4 text-center"
-          >
+        <div className="table-responsive dashboard-table players-table mt-3">
+          <Table size="sm" className="text-center dashboard-data-table">
             <thead className="thead-dark">
               <SortableContext
                 items={columnIds}

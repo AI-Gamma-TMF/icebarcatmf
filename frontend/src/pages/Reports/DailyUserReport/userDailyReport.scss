@@ -1,0 +1,191 @@
+// Reuse the dashboard “modern” styling primitives (glass panels, dark inputs, table skin)
+@import "../../Dashboard/DashboardCharts/dashboardChart.scss";
+
+.users-daily-report-page {
+  padding-bottom: 6px;
+}
+
+.users-daily-report-page__title {
+  margin: 0;
+}
+
+.users-daily-report-page__subtitle {
+  margin-top: 4px;
+  color: rgba(234, 250, 245, 0.68);
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+.users-daily-report-page__card {
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.04) 0%, rgba(0, 0, 0, 0.22) 100%),
+    rgba(26, 26, 26, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.55),
+    0 14px 40px rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(12px) saturate(140%);
+  -webkit-backdrop-filter: blur(12px) saturate(140%);
+}
+
+.users-daily-report-page__action-btn {
+  border-radius: 14px;
+  padding: 10px 14px;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border: 1px solid rgba(var(--gs-cta-rgb), 0.22);
+  background: linear-gradient(135deg, var(--gs-cta-start) 0%, var(--gs-cta-end) 100%);
+  box-shadow:
+    0 10px 26px rgba(var(--gs-cta-rgb), 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.18);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.users-daily-report-page__icon-btn.btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.06) !important;
+  border: 1px solid rgba(255, 255, 255, 0.10) !important;
+  color: rgba(234, 250, 245, 0.92) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.users-daily-report-page__icon-btn.btn:hover {
+  transform: translateY(-1px);
+  border-color: rgba(var(--gs-cta-rgb), 0.18) !important;
+  background: rgba(var(--gs-cta-rgb), 0.08) !important;
+}
+
+.users-daily-report-page__error {
+  min-height: 1.25rem;
+  margin-top: 0.5rem;
+  color: rgba(255, 156, 198, 0.92);
+  font-weight: 800;
+  font-size: 0.85rem;
+}
+
+// Column selector (MultiSelect) – make it dark + rounded like dashboard controls
+.users-daily-report-page {
+  .users-daily-report-multiselect {
+    width: 100%;
+  }
+
+  // Ensure MultiSelect stretches and matches the dashboard input sizing
+  .users-daily-report-multiselect.custom-multiselect {
+    width: 100% !important;
+    max-width: 100%;
+  }
+
+  .custom-multiselect .dropdown-container {
+    background: rgba(0, 0, 0, 0.32);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 14px !important;
+    color: rgba(255, 255, 255, 0.92);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    width: 100% !important;
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+  }
+
+  .custom-multiselect .dropdown-heading {
+    width: 100%;
+  }
+
+  .custom-multiselect .dropdown-heading-dropdown-arrow {
+    margin-left: auto;
+  }
+
+  .custom-multiselect .search input {
+    background: transparent !important;
+    color: rgba(255, 255, 255, 0.92) !important;
+  }
+
+  // Dropdown panel (react-multi-select-component)
+  .custom-multiselect .dropdown-content {
+    background: rgba(18, 18, 18, 0.98);
+    border: 1px solid rgba(0, 229, 160, 0.18);
+    border-radius: 14px;
+    box-shadow: 0 18px 55px rgba(0, 0, 0, 0.55);
+    overflow: hidden;
+    z-index: 1050;
+  }
+
+  .custom-multiselect .panel-content {
+    background: transparent;
+    color: rgba(255, 255, 255, 0.92);
+  }
+
+  .custom-multiselect .search {
+    padding: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(0, 0, 0, 0.22);
+  }
+
+  .custom-multiselect .search input {
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    border-radius: 12px !important;
+    padding: 10px 12px !important;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06) !important;
+  }
+
+  .custom-multiselect .select-panel {
+    background: transparent;
+  }
+
+  .custom-multiselect .select-panel::-webkit-scrollbar {
+    height: 10px;
+    width: 10px;
+  }
+  .custom-multiselect .select-panel::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.12);
+    border-radius: 999px;
+  }
+
+  .custom-multiselect .select-item {
+    padding: 10px 12px;
+    color: rgba(255, 255, 255, 0.9);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    background: transparent;
+  }
+
+  .custom-multiselect .select-item:hover {
+    background: rgba(0, 229, 160, 0.10);
+  }
+
+  .custom-multiselect .select-item.selected {
+    background: rgba(0, 229, 160, 0.14);
+  }
+
+  .custom-multiselect input[type="checkbox"] {
+    accent-color: rgba(0, 229, 160, 0.95);
+  }
+}
+
+.users-daily-report-table-wrap {
+  width: 100%;
+  // This report has many columns; always allow horizontal scroll.
+  overflow-x: auto !important;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+.users-daily-report-empty {
+  color: rgba(255, 156, 198, 0.92);
+  font-weight: 800;
+}
+
+.users-daily-report-page__pagination {
+  margin-top: 10px;
+}
+
+// (Intentionally no manual vertical nudges here)

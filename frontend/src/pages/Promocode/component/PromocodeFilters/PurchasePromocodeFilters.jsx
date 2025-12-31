@@ -32,8 +32,8 @@ const PurchasePromocodeFilters = ({
   };
 
   return (
-    <Row>
-      <Col xs={12} md={3} className="mb-3">
+    <Row className="g-3 align-items-end">
+      <Col xs={12} md={6} lg={4}>
         <Form.Label>Search By Promocode / Promocode Id</Form.Label>
         <Form.Control
           type="search"
@@ -47,7 +47,7 @@ const PurchasePromocodeFilters = ({
         />
       </Col>
 
-      <Col xs={12} md={3} className="mb-3">
+      <Col xs={12} md={6} lg={4}>
         <Form.Label>Discount / Bonus Percentage</Form.Label>
         <Form.Control
           type="search"
@@ -63,7 +63,7 @@ const PurchasePromocodeFilters = ({
         />
       </Col>
 
-      <Col xs={12} md={3} className="mb-3">
+      <Col xs={12} md={6} lg={4}>
         <Form.Label>Max Users Availed</Form.Label>
         <Form.Control
           type="search"
@@ -79,7 +79,7 @@ const PurchasePromocodeFilters = ({
         />
       </Col>
 
-      <Col xs={12} md={3} className="mb-3">
+      <Col xs={12} md={6} lg={3}>
         <Form.Label>Status</Form.Label>
         <Form.Select
           // size="sm"
@@ -98,48 +98,37 @@ const PurchasePromocodeFilters = ({
         </Form.Select>
       </Col>
 
-      <Col xs={12} md={3} className="mb-3">
+      <Col xs={12} md={6} lg={3}>
         <Form.Label>Valid From</Form.Label>
-        <div>
-          <Datetime
-            key={validFrom}
-            inputProps={{
-              placeholder: "MM-DD-YYYY",
-              readOnly: true,
-            }}
-            style={{ width: "100%" }}
-            value={validFrom}
-            onChange={(date) => setValidFrom(date)}
-            timeFormat={false}
-          />
-        </div>
+        <Datetime
+          key={validFrom}
+          inputProps={{
+            placeholder: "MM-DD-YYYY",
+            readOnly: true,
+          }}
+          value={validFrom}
+          onChange={(date) => setValidFrom(date)}
+          timeFormat={false}
+        />
       </Col>
 
-      <Col xs={12} md={3} className="mb-3">
+      <Col xs={12} md={6} lg={3}>
         <Form.Label>Valid Till</Form.Label>
-        <div>
-          <Datetime
-            key={validTill}
-            inputProps={{
-              placeholder: "MM-DD-YYYY",
-              readOnly: true,
-            }}
-            style={{ width: "100%" }}
-            value={validTill}
-            onChange={(date) => setValidTill(date)}
-            timeFormat={false}
-          />
-        </div>
+        <Datetime
+          key={validTill}
+          inputProps={{
+            placeholder: "MM-DD-YYYY",
+            readOnly: true,
+          }}
+          value={validTill}
+          onChange={(date) => setValidTill(date)}
+          timeFormat={false}
+        />
       </Col>
 
-      <Col xs={12} md={3} className="mb-3" style={{ marginTop: "30px" }}>
+      <Col xs={12} md={6} lg="auto">
         <Trigger message="Reset Filters" id={"redo"} />
-        <Button
-          id={"redo"}
-          variant="success"
-          className=""
-          onClick={resetFilters}
-        >
+        <Button id={"redo"} variant="secondary" onClick={resetFilters}>
           <FontAwesomeIcon icon={faRedoAlt} />
         </Button>
       </Col>

@@ -169,6 +169,7 @@ const PromotionBonusGraph = () => {
           <Col xs={12} md={12} lg={2} className="mb-3">
             <label>Interval</label>
             <Select
+              classNamePrefix="promo-bonus-select"
               value={intervalTime}
               onChange={setIntervalTime}
               options={intervalOptions}

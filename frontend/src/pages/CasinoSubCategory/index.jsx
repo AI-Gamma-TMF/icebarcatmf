@@ -4,7 +4,8 @@ import {
   Row,
   Col,
   Table,
-  Form
+  Form,
+  Card
 } from '@themesberg/react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import PaginationComponent from '../../components/Pagination'
@@ -27,6 +28,7 @@ import { InlineLoader } from '../../components/Preloader'
 import { allowedKeysforOrder, tableHeaders } from './constants'
 import useCheckPermission from '../../utils/checkPermission'
 import { AdminRoutes } from '../../routes'
+import './subCategories.scss'
 
 const CasinoSubCategory = () => {
   const {
@@ -34,6 +36,7 @@ const CasinoSubCategory = () => {
     limit,
     page,
     loading,
+    isFetching,
     subCategories,
     casinoCategories,
     show,
@@ -72,38 +75,37 @@ const CasinoSubCategory = () => {
   const { isHidden } = useCheckPermission()
   // if(loading) return (<Preloader />)
   return (
-    <>
-      <>
-        <Row className='mb-3'>
-          <Col sm={8}>
-            <h3>{t('casinoSubCategory.title')}</h3>
-          </Col>
+    <div className="subcats-page dashboard-typography">
+      <Row className="d-flex align-items-center mb-2">
+        <Col sm={8}>
+          <h3 className="subcats-page__title">{t('casinoSubCategory.title')}</h3>
+        </Col>
 
-          <Col sm={4}>
-            <div className='d-flex justify-content-start justify-content-sm-end'>
-              <Button
-                variant='success'
-                size='sm'
-                style={{ marginRight: '10px' }}
-                hidden={isHidden({ module: { key: 'CasinoManagement', value: 'C' } })}
-                onClick={() => handleShowModal('Create')}
-              >
-                {t('casinoSubCategory.createButton')}
-              </Button>
+        <Col sm={4} className="d-flex justify-content-end gap-2">
+          <Button
+            variant="success"
+            size="sm"
+            className="subcats-page__action-btn"
+            hidden={isHidden({ module: { key: 'CasinoManagement', value: 'C' } })}
+            onClick={() => handleShowModal('Create')}
+          >
+            {t('casinoSubCategory.createButton')}
+          </Button>
 
-              <Button
-                variant='success'
-                size='sm'
-                hidden={isHidden({ module: { key: 'CasinoManagement', value: 'U' } })}
-                onClick={() => navigate(AdminRoutes.ReorderCasinoSubCategories)}
-              >
-                {t('casinoSubCategory.reorder')}
-              </Button>
-            </div>
-          </Col>
-        </Row>
+          <Button
+            variant="success"
+            size="sm"
+            className="subcats-page__action-btn"
+            hidden={isHidden({ module: { key: 'CasinoManagement', value: 'U' } })}
+            onClick={() => navigate(AdminRoutes.ReorderCasinoSubCategories)}
+          >
+            {t('casinoSubCategory.reorder')}
+          </Button>
+        </Col>
+      </Row>
 
-        <Row className='mb-3 w-100 m-auto'>
+      <Card className="p-2 mb-2 subcats-page__card">
+        <Row className="dashboard-filters subcats-filters g-3 align-items-end">
           {/* <Col xs='12' lg='auto'>
             <div className='d-flex justify-content-start align-items-center w-100 mb-2 flex-wrap'>
               <Form.Label column='sm' style={{ marginBottom: '0', marginRight: '15px' }}>
@@ -127,52 +129,40 @@ const CasinoSubCategory = () => {
             </div>
           </Col> */}
 
-          <Col xs='12' lg='auto'>
-            <div className='d-flex justify-content-start align-items-center w-100 flex-wrap'>
-              <Form.Label column='sm' style={{ marginBottom: '0', marginRight: '15px' }}>
-                {t('casinoSubCategory.filters.status')}
-              </Form.Label>
-
-              <Form.Select
-                onChange={(e) => {
-                  setPage(1)
-                  setStatusFilter(e.target.value)
-                }}
-                value={statusFilter}
-                style={{ minWidth: '230px' }}
-              >
-                <option value='all'>{t('casinoSubCategory.filters.all')}</option>
-                <option value='true'>{t('casinoSubCategory.filters.active')}</option>
-                <option value='false'>{t('casinoSubCategory.filters.inactive')}</option>
-              </Form.Select>
-            </div>
+          <Col xs={12} md={3}>
+            <Form.Label className="form-label">{t('casinoSubCategory.filters.status')}</Form.Label>
+            <Form.Select
+              onChange={(e) => {
+                setPage(1)
+                setStatusFilter(e.target.value)
+              }}
+              value={statusFilter}
+            >
+              <option value='all'>{t('casinoSubCategory.filters.all')}</option>
+              <option value='true'>{t('casinoSubCategory.filters.active')}</option>
+              <option value='false'>{t('casinoSubCategory.filters.inactive')}</option>
+            </Form.Select>
           </Col>
 
-          <Col xs='12' lg='auto' className='mt-2 mt-lg-0'>
-            <div className='d-flex justify-content-start align-items-center w-100 flex-wrap'>
-              <Form.Label column='sm' style={{ marginBottom: '0', marginRight: '15px' }}>
-                {t('casinoSubCategory.filters.search')}
-              </Form.Label>
-
-              <Form.Control
-                type='search'
-                value={search}
-                placeholder={t('casinoSubCategory.filters.searchPlace')}
-                onChange={(event) => {
-                  setPage(1)
-                  setSearch(
-                    event.target.value.replace(/[~`!$%@^&*#=)()><?]+/g, '')
-                  )
-                }}
-                style={{ minWidth: '230px' }}
-              />
-            </div>
+          <Col xs={12} md={6}>
+            <Form.Label className="form-label">{t('casinoSubCategory.filters.search')}</Form.Label>
+            <Form.Control
+              type='search'
+              value={search}
+              placeholder={t('casinoSubCategory.filters.searchPlace')}
+              onChange={(event) => {
+                setPage(1)
+                setSearch(event.target.value.replace(/[~`!$%@^&*#=)()><?]+/g, ''))
+              }}
+            />
           </Col>
-          <Col xs="12" sm="6" lg="1" className="d-flex align-items-end mt-2 mt-sm-0 mb-0" style={{ marginBottom: "0.55rem" }}>
+
+          <Col xs={12} md="auto" className="ms-auto d-flex justify-content-end">
             <Trigger message="Reset Filters" id={"redo"} />
             <Button
               id={"redo"}
               variant="success"
+              className="subcats-page__reset-btn"
               onClick={resetFilters}
             >
               <FontAwesomeIcon icon={faRedoAlt} />
@@ -180,8 +170,11 @@ const CasinoSubCategory = () => {
           </Col>
         </Row>
 
-        <Table bordered striped responsive hover size='sm' className='text-center mt-3'>
-          <thead className='thead-dark'>
+        <div className="dashboard-section-divider" />
+
+        <div className="table-responsive subcats-table-wrap">
+          <Table hover size='sm' className='dashboard-data-table subcats-table text-center'>
+          <thead>
             <tr>
               {tableHeaders.map((h, idx) => (
                 <th
@@ -194,11 +187,7 @@ const CasinoSubCategory = () => {
                   cursor: (allowedKeysforOrder.includes(h.value))
                    ? 'pointer' : 'default',
                 }}
-                  className={
-                    selected(h)
-                      ? 'border-3 border border-secondary'
-                      : ''
-                  }
+                  className={selected(h) ? 'border-3 border border-blue' : ''}
                 >
                   {t(h.label)} &nbsp;
                   {selected(h) &&
@@ -227,6 +216,14 @@ const CasinoSubCategory = () => {
           </thead>
 
           <tbody>
+            {loading && !subCategories?.rows?.length ? (
+              <tr>
+                <td colSpan={tableHeaders.length} className="text-center">
+                  <InlineLoader />
+                </td>
+              </tr>
+            ) : (
+              <>
             {subCategories?.count > 0 &&
               subCategories?.rows?.map(
                 ({
@@ -248,11 +245,8 @@ const CasinoSubCategory = () => {
                         <Trigger message={subName} id={i + 'sub'} />
                         <span
                           id={i + 'sub'}
-                          style={{
-                            width: '100px',
-                            cursor: 'pointer'
-                          }}
-                          className='d-inline-block text-truncate'
+                          className='d-inline-block text-truncate subcats-table__name'
+                          style={{ cursor: 'pointer' }}
                         >
                           {subName}
                         </span>
@@ -290,7 +284,7 @@ const CasinoSubCategory = () => {
                       </td>
                       {(!isHidden({ module: { key: 'CasinoManagement', value: 'U' } }) || !isHidden({ module: { key: 'CasinoManagement', value: 'T' } }))
                         ? (
-                          <td>
+                          <td className="subcats-table__actions">
                             <>
                               <Trigger message='Edit' id={i + 'edit'} />
                               <Button
@@ -388,27 +382,36 @@ const CasinoSubCategory = () => {
               (
                 <tr>
                   <td
-                    colSpan={7}
+                    colSpan={tableHeaders.length}
                     className='text-danger text-center'
                   >
                     {t('casinoSubCategory.noDataFound')}
                   </td>
                 </tr>
               )}
+            {isFetching && (
+              <tr>
+                <td colSpan={tableHeaders.length} className="text-center">
+                  <InlineLoader />
+                </td>
+              </tr>
+            )}
+              </>
+            )}
           </tbody>
         </Table>
-        {loading && <InlineLoader />}
-        {subCategories?.count !== 0 &&
-          (
-            <PaginationComponent
-              page={subCategories?.count < page ? setPage(1) : page}
-              totalPages={totalPages}
-              setPage={setPage}
-              limit={limit}
-              setLimit={setLimit}
-            />
-          )}
-      </>
+        </div>
+      </Card>
+
+      {subCategories?.count !== 0 && !loading && (
+        <PaginationComponent
+          page={subCategories?.count < page ? setPage(1) : page}
+          totalPages={totalPages}
+          setPage={setPage}
+          limit={limit}
+          setLimit={setLimit}
+        />
+      )}
 
       {show && (
         <ConfirmationModal
@@ -459,7 +462,7 @@ const CasinoSubCategory = () => {
             casinoCategories={casinoCategories}
           />
         )}
-    </>
+    </div>
   )
 }
 

@@ -1,0 +1,270 @@
+// VIP Dashboard modern theme overrides (scoped to this page only)
+@import "../../Dashboard/DashboardCharts/dashboardChart.scss";
+
+.vip-dashboard-page {
+  padding-bottom: 6px;
+}
+
+.vip-dashboard-page__title {
+  margin: 0;
+}
+
+.vip-dashboard-page__subtitle {
+  margin-top: 4px;
+  color: rgba(234, 250, 245, 0.68);
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+.vip-dashboard-page__actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+
+  @media (min-width: 768px) {
+    margin-top: 0;
+  }
+}
+
+.vip-dashboard-page__icon-btn.btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.06) !important;
+  border: 1px solid rgba(255, 255, 255, 0.10) !important;
+  color: rgba(234, 250, 245, 0.92) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.vip-dashboard-page__icon-btn.btn:hover {
+  transform: translateY(-1px);
+  border-color: rgba(var(--gs-cta-rgb), 0.18) !important;
+  background: rgba(var(--gs-cta-rgb), 0.08) !important;
+}
+
+.vip-dashboard-page__filters {
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.04) 0%, rgba(0, 0, 0, 0.22) 100%),
+    rgba(26, 26, 26, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.55),
+    0 14px 40px rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(12px) saturate(140%);
+  -webkit-backdrop-filter: blur(12px) saturate(140%);
+}
+
+.vip-dashboard-page__filter-label {
+  color: rgba(234, 250, 245, 0.88);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  margin-bottom: 8px;
+}
+
+.vip-dashboard-page__section {
+  margin-top: 12px;
+}
+
+// GlobalSearchBar input skin
+.vip-dashboard-page {
+  .search-container .input-group {
+    margin-bottom: 0 !important;
+  }
+
+  .search-container .input-group-text {
+    background: rgba(0, 0, 0, 0.35);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-right: none;
+    border-radius: 14px 0 0 14px;
+  }
+
+  .search-container .form-control {
+    background: rgba(0, 0, 0, 0.35);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-left: none;
+    border-radius: 0 14px 14px 0;
+    color: rgba(255, 255, 255, 0.92);
+    padding: 12px 12px;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  }
+
+  .search-container .form-control::placeholder {
+    color: rgba(255, 255, 255, 0.45);
+    font-weight: 700;
+  }
+
+  .search-results {
+    background: rgba(18, 18, 18, 0.98);
+    border: 1px solid rgba(0, 229, 160, 0.18);
+    border-radius: 14px;
+    box-shadow: 0 18px 55px rgba(0, 0, 0, 0.55);
+    overflow: hidden;
+  }
+
+  .search-results li {
+    color: rgba(255, 255, 255, 0.92);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .search-results li:hover {
+    background: rgba(0, 229, 160, 0.10);
+  }
+}
+
+// Summary cards: convert pastel blocks to dark glass cards with subtle accents
+.vip-dashboard-page {
+  .vip-card {
+    background:
+      linear-gradient(135deg, rgba(255, 255, 255, 0.04) 0%, rgba(0, 0, 0, 0.26) 100%),
+      rgba(18, 18, 18, 0.72) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 18px;
+    box-shadow:
+      0 1px 2px rgba(0, 0, 0, 0.55),
+      0 14px 40px rgba(0, 0, 0, 0.35);
+    color: rgba(255, 255, 255, 0.92);
+  }
+
+  .vip-card p {
+    color: rgba(234, 250, 245, 0.70);
+    font-weight: 800;
+  }
+
+  .vip-card h5 {
+    color: rgba(255, 255, 255, 0.94);
+    font-weight: 900;
+  }
+
+  .vip-card .card-text::before {
+    background: rgba(255, 255, 255, 0.10) !important;
+  }
+
+  .vip-card.light-blue {
+    border-color: rgba(35, 168, 252, 0.22);
+  }
+  .vip-card.light-green {
+    border-color: rgba(0, 229, 160, 0.22);
+  }
+  .vip-card.light-yellow {
+    border-color: rgba(255, 165, 56, 0.22);
+  }
+  .vip-card.light-purple {
+    border-color: rgba(114, 38, 200, 0.22);
+  }
+  .vip-card.light-red {
+    border-color: rgba(252, 35, 39, 0.22);
+  }
+}
+
+// Accordions: dark + glass
+.vip-dashboard-page {
+  .vip-dashboard .accordion-item {
+    background: rgba(18, 18, 18, 0.72) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow:
+      0 1px 2px rgba(0, 0, 0, 0.55),
+      0 14px 40px rgba(0, 0, 0, 0.35);
+  }
+
+  .vip-dashboard .accordion-button {
+    background: rgba(0, 0, 0, 0.18) !important;
+    color: rgba(255, 255, 255, 0.92) !important;
+    box-shadow: none !important;
+    font-weight: 900;
+    letter-spacing: 0.02em;
+    height: auto !important;
+    padding: 14px 16px;
+  }
+
+  .vip-dashboard .accordion-button::after {
+    filter: invert(1);
+    opacity: 0.85;
+  }
+
+  .vip-dashboard .accordion-body {
+    background: rgba(0, 0, 0, 0.08);
+    color: rgba(255, 255, 255, 0.92);
+  }
+
+  .accordion-card {
+    background: rgba(0, 0, 0, 0.28);
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    border-radius: 16px;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  }
+
+  .accordion-card p {
+    color: rgba(234, 250, 245, 0.70);
+  }
+}
+
+// Winner/Loser cards
+.vip-dashboard-page {
+  .winner-cards {
+    border-right: 1px solid rgba(255, 255, 255, 0.08);
+  }
+}
+
+// Chart panels (used by PieChart/VerticalBarChart)
+.vip-dashboard-page {
+  .vip-dashboard-viz-panel {
+    background:
+      linear-gradient(135deg, rgba(255, 255, 255, 0.04) 0%, rgba(0, 0, 0, 0.26) 100%),
+      rgba(18, 18, 18, 0.72);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 18px;
+    box-shadow:
+      0 1px 2px rgba(0, 0, 0, 0.55),
+      0 14px 40px rgba(0, 0, 0, 0.35);
+    padding: 18px;
+  }
+
+  .vip-dashboard-viz-panel h4 {
+    margin: 0 0 12px 0;
+    font-weight: 900;
+    color: rgba(255, 255, 255, 0.92);
+  }
+
+  .vip-dashboard-viz-legend {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .vip-dashboard-viz-legend__row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .vip-dashboard-viz-legend__pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 126px;
+    height: 48px;
+    border-radius: 16px;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14);
+    color: rgba(0, 0, 0, 0.88);
+    font-weight: 900;
+  }
+
+  .vip-dashboard-viz-legend__label {
+    font-weight: 800;
+    color: rgba(255, 255, 255, 0.80);
+    font-size: 0.9rem;
+  }
+}
+
+

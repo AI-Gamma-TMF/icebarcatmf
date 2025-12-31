@@ -17,19 +17,12 @@ const AutoRefreshControl = ({
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   return (
-    <ButtonGroup className="mt-3 position-relative" style={{ top: "5px" }}>
+    <ButtonGroup className="bonus-auto-refresh mt-3">
       <Trigger message='reset' id={'reset'} />
       <Button
         id={'reset'}
         onClick={resetFilters}
-        style={{
-          borderRadius: "24px 0 0 24px",
-          border: "2px solid #0d6efd",
-          backgroundColor: "white",
-          color: "#0d6efd",
-          fontWeight: 500,
-          padding: "6px 12px",
-        }}
+        className="bonus-auto-refresh__reset"
       >
         <FontAwesomeIcon icon={faRedoAlt} />
       </Button>
@@ -39,20 +32,10 @@ const AutoRefreshControl = ({
         <Dropdown.Toggle
           variant="outline-primary"
           id="dropdown-split-refresh"
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            gap: "8px",
-            borderRadius: "0 24px 24px 0",
-            border: "2px solid #0d6efd",
-            backgroundColor: "white",
-            color: "#0d6efd",
-            fontWeight: 500,
-            padding: "6px 16px",
-            minWidth: refreshInterval === "off" ? "42px" : "auto",
-            borderLeft: "none",
-          }}
+          className={[
+            "bonus-auto-refresh__toggle",
+            refreshInterval === "off" ? "is-off" : "",
+          ].join(" ")}
         >
           {refreshInterval !== "off" && (
             <span style={{ whiteSpace: "nowrap" }}>

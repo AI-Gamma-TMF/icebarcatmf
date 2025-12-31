@@ -1,11 +1,10 @@
-
 import React, { useState } from 'react'
 import { Table } from '@themesberg/react-bootstrap'
 import { InlineLoader } from '../../../components/Preloader'
-import Datetime from 'react-datetime'
 import moment from 'moment'
 import { formatAmountWithCommas } from '../../../utils/helper'
 import PaginationComponent from '../../../components/Pagination'
+import './redeemRateReport.scss'
 
 const RedeemReport = ({ redeemReportData, loading }) => {
   const [pageNo, setPageNo] = useState(1)
@@ -22,15 +21,9 @@ const RedeemReport = ({ redeemReportData, loading }) => {
 
   return (
     <>
-      <Table
-        bordered
-        striped
-        responsive
-        hover
-        size='sm'
-        className='text-center mt-4'
-      >
-        <thead className='thead-dark'>
+      <div className="table-responsive redeem-report-table-wrap">
+        <Table hover size="sm" className="dashboard-data-table redeem-report-table text-center">
+        <thead>
           <tr>
             {[
               'Date',
@@ -49,54 +42,49 @@ const RedeemReport = ({ redeemReportData, loading }) => {
             ))}
           </tr>
         </thead>
-        {loading ? (
-          <tr>
-            <td colSpan={11} className='text-center'>
-              <InlineLoader />
-            </td>
-          </tr>
-        ) : (
-          <tbody>
-            {currentData && currentData?.length > 0 ? (
-              currentData.map((data, index) => {
-                return (
-                  <tr key={index} className='text-center'>
-                    <td>
-                      {data?.date
-                        ? moment(data?.date).format('MM/DD/YYYY')
-                        : 'NA'}
-                    </td>
-                    <td>{formatAmountWithCommas(data?.revenue)}</td>
-                    <td>{formatAmountWithCommas(data?.redemptions)}</td>
-                    <td>{formatAmountWithCommas(data?.pendingRedemptions)}</td>
-                    <td>
-                      {formatAmountWithCommas(data?.inProcessRedemptions)}
-                    </td>
-                    <td>{formatAmountWithCommas(data?.totalRevenue)}</td>
-                    <td>{formatAmountWithCommas(data?.totalRedemptions)}</td>
-                    <td>
-                      {formatAmountWithCommas(data?.totalPendingRedemptions)}
-                    </td>
-                    <td>
-                      {formatAmountWithCommas(
-                        data?.totalInprocessRedemptions
-                      )}
-                    </td>
-                    <td>{data?.redemptionsRate}</td>
-                    <td>{data?.lifetimeRedemptionsRate}</td>
-                  </tr>
-                )
-              })
-            ) : (
-              <tr>
-                <td colSpan={11} className='text-danger text-center'>
-                  No data Found
-                </td>
-              </tr>
-            )}
-          </tbody>
-        )}
+        <tbody>
+          {loading && !currentData?.length ? (
+            <tr>
+              <td colSpan={11} className="text-center">
+                <InlineLoader />
+              </td>
+            </tr>
+          ) : currentData?.length > 0 ? (
+            <>
+              {currentData.map((data, index) => (
+                <tr key={index} className="text-center">
+                  <td>{data?.date ? moment(data?.date).format('MM/DD/YYYY') : 'NA'}</td>
+                  <td>{formatAmountWithCommas(data?.revenue)}</td>
+                  <td>{formatAmountWithCommas(data?.redemptions)}</td>
+                  <td>{formatAmountWithCommas(data?.pendingRedemptions)}</td>
+                  <td>{formatAmountWithCommas(data?.inProcessRedemptions)}</td>
+                  <td>{formatAmountWithCommas(data?.totalRevenue)}</td>
+                  <td>{formatAmountWithCommas(data?.totalRedemptions)}</td>
+                  <td>{formatAmountWithCommas(data?.totalPendingRedemptions)}</td>
+                  <td>{formatAmountWithCommas(data?.totalInprocessRedemptions)}</td>
+                  <td>{data?.redemptionsRate}</td>
+                  <td>{data?.lifetimeRedemptionsRate}</td>
+                </tr>
+              ))}
+
+              {loading ? (
+                <tr>
+                  <td colSpan={11} className="text-center">
+                    <InlineLoader />
+                  </td>
+                </tr>
+              ) : null}
+            </>
+          ) : (
+            <tr>
+              <td colSpan={11} className="text-center">
+                <span className="redeem-report-empty">No data Found</span>
+              </td>
+            </tr>
+          )}
+        </tbody>
       </Table>
+      </div>
 
       {/* Pagination Below Table */}
       {redeemReportData?.rows?.length > 0 && (
