@@ -71,6 +71,12 @@ const config = convict({
       default: 'postgres',
       env: 'DB_PASSWORD'
     },
+    ssl: {
+      doc: 'Enable SSL for Postgres connections (needed for many managed Postgres providers, including DigitalOcean)',
+      format: Boolean,
+      default: false,
+      env: 'DB_SSL'
+    },
     readHost: {
       doc: 'DB read host',
       format: String,

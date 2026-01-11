@@ -18,7 +18,15 @@ const commonSetting = {
   },
   dialect: 'postgres',
   dialectOptions: {
-    application_name: config.get('app.name')
+    application_name: config.get('app.name'),
+    ...(config.get('db.ssl')
+      ? {
+          ssl: {
+            require: true,
+            rejectUnauthorized: false
+          }
+        }
+      : {})
   },
   define: {
     underscored: true,
