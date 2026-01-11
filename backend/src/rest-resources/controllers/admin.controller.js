@@ -55,7 +55,8 @@ export default class AdminController {
         res.cookie('adminAccessToken', adminDetail.accessToken, { httpOnly: true })
 
         // Alert tickets Counts w.r.t. admin
-        if (adminDetail.userPermission.permission.Alert?.includes('R')) {
+        const permissions = adminDetail.userPermission?.permission || {}
+        if (permissions.Alert?.includes('R')) {
           let ticketQuery
           if (+(adminDetail.adminUserId) !== 1) {
             ticketQuery = { assignTo: adminDetail.adminUserId }
