@@ -20,7 +20,8 @@
     "seed": "npm run babel-node node_modules/.bin/sequelize-cli db:seed:all",
     "seed:undo": "npm run babel-node node_modules/.bin/sequelize-cli db:seed:undo",
     "migrate:prod": "npx sequelize-cli db:migrate",
-    "seed:prod": "npx sequelize-cli db:seed:all"
+    "seed:prod": "npx sequelize-cli db:seed:all",
+    "migrate-seed:prod": "npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all"
   },
   "husky": {
     "hooks": {
