@@ -31,9 +31,9 @@ ENV PORT $PORT
 EXPOSE $PORT 9229 9230
 
 # install dependencies first, in a different location for easier app bind mounting for local development
-
+# NOTE: We MUST install devDependencies (babel) to build, so force NODE_ENV=development for npm install
 COPY ./package*.json ./
-RUN npm install
+RUN NODE_ENV=development npm install
 
 # copy in our source code last, as it changes the most
 COPY . .
