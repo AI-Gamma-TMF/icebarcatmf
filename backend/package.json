@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "prepare": "husky install",
+    "prepare": "[ \"$HUSKY\" = \"0\" ] || husky install",
     "start": "node ./dist/index.js",
     "babel-node": "babel-node --inspect=0.0.0.0:9229",
     "lint": "standard --fix",
