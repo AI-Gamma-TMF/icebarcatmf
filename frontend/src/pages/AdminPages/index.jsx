@@ -209,7 +209,14 @@ const AdminPages = () => (
       path={AdminRoutes.Profile}
       element={
         <PrivateRoute>
-          <ProfilePage />
+          {typeof window !== 'undefined' &&
+          window.location.hostname.includes('icebarcatmf-admin-demo')
+            ? (
+              <Navigate replace to={AdminRoutes.Dashboard} />
+              )
+            : (
+              <ProfilePage />
+              )}
         </PrivateRoute>
       }
     />
