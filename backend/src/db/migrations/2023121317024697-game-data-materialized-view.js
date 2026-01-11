@@ -9,8 +9,28 @@ const s3Prefix = config.get('s3.S3_DOMAIN_KEY_PREFIX')
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     try {
+      // Check if the slug column exists in master_game_sub_categories
+      const [columns] = await queryInterface.sequelize.query(`
+        SELECT column_name
+        FROM information_schema.columns
+        WHERE table_schema = 'public'
+        AND table_name = 'master_game_sub_categories'
+        AND column_name = 'slug';
+      `)
+      const hasSlugColumn = columns.length > 0
+
+      // If slug column doesn't exist, use a modified view SQL that doesn't reference it
+      let viewSql = views.gameDataView
+      if (!hasSlugColumn) {
+        // Replace the slug column reference with NULL
+        viewSql = viewSql.replace(
+          /"masterGameSubCategory"\.slug AS sub_category_slug,/g,
+          'NULL::varchar AS sub_category_slug,'
+        )
+      }
+
       // Create views
-      await queryInterface.sequelize.query(views.gameDataView, { replacements: { s3Prefix } })
+      await queryInterface.sequelize.query(viewSql, { replacements: { s3Prefix } })
 
       await Promise.all([
         // Create Function
