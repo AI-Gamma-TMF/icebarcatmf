@@ -1,27 +1,19 @@
 'use strict'
-import db, { sequelize } from '../models'
-import { THUMBNAIL_TYPE } from '../../utils/constants/constant'
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    const {
-      MasterCasinoGame: MasterCasinoGameModel,
-      MasterCasinoGamesThumbnail: MasterCasinoGamesThumbnailModel
-    } = db
-
-    const transaction = await sequelize.transaction()
+    // Use raw SQL to update game images from thumbnails
+    // THUMBNAIL_TYPE.LONG = 1
+    const transaction = await queryInterface.sequelize.transaction()
     try {
-      const thumbnails = await MasterCasinoGamesThumbnailModel.findAll({
-        where: {
-          thumbnailType: THUMBNAIL_TYPE.LONG
-        },
-        raw: true,
-        transaction
-      })
-
-      await Promise.all(thumbnails.map(async thumbnail => {
-        return await MasterCasinoGameModel.update({ imageUrl: thumbnail?.thumbnail }, { where: { masterCasinoGameId: thumbnail.masterCasinoGameId }, transaction })
-      }))
+      // Update master_casino_games.image_url from master_casino_games_thumbnails where thumbnail_type = 1 (LONG)
+      await queryInterface.sequelize.query(`
+        UPDATE master_casino_games mcg
+        SET image_url = mcgt.thumbnail
+        FROM master_casino_games_thumbnails mcgt
+        WHERE mcg.master_casino_game_id = mcgt.master_casino_game_id
+          AND mcgt.thumbnail_type = 1
+      `, { transaction })
 
       await transaction.commit()
     } catch (error) {
