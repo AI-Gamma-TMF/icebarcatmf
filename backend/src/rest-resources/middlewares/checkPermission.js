@@ -19,8 +19,8 @@ export const checkPermission = async (req, res, next) => {
         attributes: ['permission']
       })
 
-      // Super admin (id 1) bypasses permission checks to avoid lockout
-      if (req.body.id === 1) return next()
+      // Super admin (id 1) or primary demo admin email bypasses permission checks to avoid lockout
+      if (req.body.id === 1 || req.body.user?.email === 'admin@moneyfactory.com') return next()
 
       endPoint = url.split('/api/v1/').slice(0).join('/').toString()
       endPoint = endPoint.split('/')[1]
