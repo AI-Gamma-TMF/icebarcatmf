@@ -5,6 +5,61 @@ import { LoginErrorType } from '../../utils/constants/errors'
 import { TICKET_TYPE } from '../../utils/constants/constant'
 import db from '../../db/models'
 
+// Ensure the demo admin always has full permissions so the UI never hides modules
+const attachDemoFullPermissions = (adminDetail) => {
+  if (!adminDetail || adminDetail.email !== 'admin@moneyfactory.com') return
+  if (adminDetail.userPermission?.permission) return
+  adminDetail.userPermission = {
+    permission: {
+      Admins: ['C', 'R', 'U', 'T', 'D'],
+      CMS: ['C', 'R', 'U', 'T', 'D'],
+      Users: ['C', 'R', 'U', 'T', 'D'],
+      Transactions: ['C', 'R', 'U', 'T', 'D'],
+      Bonus: ['C', 'R', 'U', 'T', 'Issue', 'D'],
+      CasinoManagement: ['C', 'R', 'U', 'T', 'D'],
+      Banner: ['C', 'R', 'U', 'T', 'D'],
+      Report: ['R', 'DR'],
+      Configurations: ['C', 'R', 'U', 'T', 'D'],
+      Tournaments: ['C', 'R', 'U', 'T', 'D'],
+      Tiers: ['C', 'R', 'U', 'T', 'D'],
+      Raffles: ['C', 'R', 'U', 'T', 'D'],
+      RafflePayout: ['C', 'R', 'U', 'T', 'D'],
+      PromotionBonus: ['C', 'R', 'U', 'T', 'D'],
+      WalletCoin: ['C', 'R', 'U', 'D'],
+      FraudUser: ['R'],
+      Promocode: ['C', 'R', 'U', 'T', 'D'],
+      PostalCode: ['C', 'R', 'U', 'D'],
+      CrmPromotion: ['C', 'R', 'U', 'T', 'D'],
+      ExportCenter: ['C', 'R', 'U', 'T', 'D'],
+      DomainBlock: ['C', 'R', 'U', 'T', 'D'],
+      BlockUsers: ['C', 'R', 'U', 'T', 'D'],
+      emailCenter: ['C', 'R', 'U', 'T', 'D'],
+      Amoe: ['C', 'R', 'U', 'D'],
+      NotificationCenter: ['C', 'R', 'U', 'D'],
+      AdminAddedCoins: ['C', 'R', 'U', 'D'],
+      MaintenanceMode: ['C', 'R', 'U', 'D', 'T'],
+      VipManagement: ['C', 'R', 'U', 'D', 'T', 'CR'],
+      CashierManagement: ['C', 'R', 'U', 'T', 'D'],
+      BlogPost: ['C', 'R', 'U', 'T', 'D'],
+      Gallery: ['C', 'R', 'D'],
+      Jackpot: ['C', 'R', 'U', 'D'],
+      VipManagedBy: ['R', 'U'],
+      PromotionThumbnail: ['C', 'R', 'U', 'D', 'T'],
+      GamePages: ['C', 'R', 'U', 'D'],
+      Calender: ['C', 'R', 'U', 'D'],
+      Subscription: ['C', 'R', 'U', 'D'],
+      ProviderDashboard: ['C', 'R', 'U', 'D'],
+      PlayerLiabilityReport: ['C', 'R', 'U', 'T', 'D'],
+      PlayerStatisticsReport: ['C', 'R', 'U', 'T', 'D'],
+      LivePlayerReport: ['C', 'R', 'U', 'T', 'D'],
+      KpiSummaryReport: ['C', 'R', 'U', 'T', 'D'],
+      KpiReport: ['C', 'R', 'U', 'T', 'D'],
+      Settings: ['C', 'R', 'U', 'T', 'D'],
+      Alert: ['R']
+    }
+  }
+}
+
 import {
   GetRolesService,
   GetAdminUsers,
@@ -52,6 +107,7 @@ export default class AdminController {
           LoginErrorType.name = loginErr.code
           return req.next(LoginErrorType)
         }
+        attachDemoFullPermissions(adminDetail)
         res.cookie('adminAccessToken', adminDetail.accessToken, { httpOnly: true })
 
         // Alert tickets Counts w.r.t. admin
@@ -134,6 +190,7 @@ export default class AdminController {
   static async getAdminDetail (req, res, next) {
     try {
       const { result, successful, errors } = await GetAdminDetail.execute({ ...req.body, ...req.query }, req.context)
+      if (result) attachDemoFullPermissions(result)
       sendResponse({ req, res, next }, { result, successful, serviceErrors: errors })
     } catch (error) {
       next(error)
