@@ -18,7 +18,9 @@
     "migrate:status": "npm run babel-node node_modules/.bin/sequelize-cli db:migrate:status",
     "db:reset": "npm run babel-node node_modules/.bin/sequelize-cli db:drop && npm run babel-node node_modules/.bin/sequelize-cli db:create && npm run babel-node node_modules/.bin/sequelize-cli db:migrate && npm run babel-node node_modules/.bin/sequelize-cli db:seed:all",
     "seed": "npm run babel-node node_modules/.bin/sequelize-cli db:seed:all",
-    "seed:undo": "npm run babel-node node_modules/.bin/sequelize-cli db:seed:undo"
+    "seed:undo": "npm run babel-node node_modules/.bin/sequelize-cli db:seed:undo",
+    "migrate:prod": "npx sequelize-cli db:migrate",
+    "seed:prod": "npx sequelize-cli db:seed:all"
   },
   "husky": {
     "hooks": {
