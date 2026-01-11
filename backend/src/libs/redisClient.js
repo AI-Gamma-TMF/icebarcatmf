@@ -4,7 +4,8 @@ import config from '../configs/app.config'
 const connection = {
   host: config.get('redis_db.host'),
   port: config.get('redis_db.port'),
-  password: config.get('redis_db.password')
+  password: config.get('redis_db.password'),
+  ...(config.get('redis_db.tls') ? { tls: {} } : {})
 }
 
 export default {

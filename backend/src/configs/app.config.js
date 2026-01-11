@@ -130,6 +130,12 @@ const config = convict({
       format: 'port',
       default: 6379,
       env: 'REDIS_DB_PORT'
+    },
+    tls: {
+      doc: 'Enable TLS for Redis connection (needed for many managed Redis providers, including DigitalOcean)',
+      format: Boolean,
+      default: false,
+      env: 'REDIS_DB_TLS'
     }
   },
 
@@ -205,6 +211,12 @@ const config = convict({
       format: String,
       default: 'us-east-1',
       env: 'S3_REGION'
+    },
+    endpoint: {
+      doc: 'Optional S3-compatible endpoint (e.g., DigitalOcean Spaces: https://nyc3.digitaloceanspaces.com)',
+      format: String,
+      default: '',
+      env: 'S3_ENDPOINT'
     },
     bucket: {
       doc: 'Bucket used in S3',
