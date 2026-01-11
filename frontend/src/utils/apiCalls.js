@@ -1,6 +1,7 @@
 import { deleteParamsRequest, deleteRequest, getRequest, patchRequest, postRequest, putRequest } from './axios';
 
-const { REACT_APP_API_URL, REACT_APP_CRON_URL, REACT_APP_CRON_AUTH } = process.env;
+const { REACT_APP_CRON_URL, REACT_APP_CRON_AUTH } = process.env;
+const REACT_APP_API_URL = process.env.REACT_APP_API_URL || '';
 
 // Get request
 const getAllPlayers = (params) => getRequest(`${REACT_APP_API_URL}/api/v1/user/`, params);
