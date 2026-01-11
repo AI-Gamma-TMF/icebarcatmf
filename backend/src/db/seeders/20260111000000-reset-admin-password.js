@@ -3,7 +3,12 @@
 module.exports = {
   async up (queryInterface, DataTypes) {
     const email = 'admin@moneyfactory.com'
-    // Delete existing admin with same email, then reinsert with known password
+    // Remove dependent permissions first to satisfy FK, then remove the admin row
+    await queryInterface.sequelize.query(
+      `DELETE FROM admin_user_permissions
+       WHERE admin_user_id IN (SELECT admin_user_id FROM admin_users WHERE email = :email);`,
+      { replacements: { email } }
+    )
     await queryInterface.bulkDelete('admin_users', { email })
     await queryInterface.bulkInsert('admin_users', [{
       first_name: 'admin',
