@@ -50,9 +50,9 @@ const CustomerTable = ({
     <>
       <Row className="mt-4 dashboard-section-heading">
         <div className="dashboard-section-heading__row">
-          <h5 className="mb-0">
-            {t(`headers.customerDataKeys`)} {t("headers.data")}
-          </h5>
+              <h5 className="mb-0">
+                {t(`headers.customerDataKeys`)} {t("headers.data")}
+              </h5>
           <div className="dashboard-view-tabs">
             <button
               type="button"
@@ -77,8 +77,8 @@ const CustomerTable = ({
               Chart
             </button>
           </div>
-        </div>
-      </Row>
+            </div>
+        </Row>
 
         <hr className="dashboard-section-divider" />
 

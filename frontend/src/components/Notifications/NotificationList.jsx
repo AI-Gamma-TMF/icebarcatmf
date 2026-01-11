@@ -80,9 +80,9 @@ const NotificationList = ({
         const el = scrollContainerRef.current;
         if (!el || !hasMore) return;
         const { scrollTop, scrollHeight, clientHeight } = el;
-        if (scrollTop + clientHeight >= scrollHeight - 10) {
-          handleLoadMore();
-        }
+      if (scrollTop + clientHeight >= scrollHeight - 10) {
+        handleLoadMore();
+      }
       });
     };
 

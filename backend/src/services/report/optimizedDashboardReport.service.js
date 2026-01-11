@@ -586,8 +586,8 @@ export class DashboardReportService extends ServiceBase {
     // which can cause the whole dashboard request to "spin" indefinitely. Fail fast + fall back to DB.
     if (redisReady) {
       try {
-        const internalUsers = await client.get('internalUsers')
-        if (internalUsers) return JSON.parse(internalUsers)
+    const internalUsers = await client.get('internalUsers')
+    if (internalUsers) return JSON.parse(internalUsers)
       } catch (_) {
         // ignore redis errors and fall back to DB
       }
@@ -598,7 +598,7 @@ export class DashboardReportService extends ServiceBase {
     if (internalUsersArray.length === 0) internalUsersArray.push('-1') // For Fail Safety
     if (redisReady) {
       try {
-        await client.set('internalUsers', JSON.stringify(internalUsersArray))
+    await client.set('internalUsers', JSON.stringify(internalUsersArray))
       } catch (_) {
         // ignore redis errors
       }
@@ -774,9 +774,9 @@ export class DashboardReportService extends ServiceBase {
 
       do {
         try {
-          const [nextCursor, keys] = await client.scan(cursor, 'MATCH', pattern, 'COUNT', 5000)
-          cursor = nextCursor
-          total += keys.length
+        const [nextCursor, keys] = await client.scan(cursor, 'MATCH', pattern, 'COUNT', 5000)
+        cursor = nextCursor
+        total += keys.length
         } catch (_) {
           return total
         }

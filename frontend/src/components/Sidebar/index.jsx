@@ -53,18 +53,18 @@ const Sidebar = (props) => {
         scrollEl.scrollTop + scrollEl.clientHeight >= scrollEl.scrollHeight - 2;
 
       if (lastAtTop !== atTop) {
-        scrollEl.classList.toggle('sb-at-top', atTop);
+      scrollEl.classList.toggle('sb-at-top', atTop);
         scrollEl.classList.toggle('sb-is-scrolled', !atTop);
         lastAtTop = atTop;
       }
       if (lastAtBottom !== atBottom) {
-        scrollEl.classList.toggle('sb-at-bottom', atBottom);
+      scrollEl.classList.toggle('sb-at-bottom', atBottom);
         lastAtBottom = atBottom;
       }
 
       // Brief pulse while actively scrolling (avoid re-adding unnecessarily)
       if (!scrollEl.classList.contains('sb-is-scrolling')) {
-        scrollEl.classList.add('sb-is-scrolling');
+      scrollEl.classList.add('sb-is-scrolling');
       }
       if (scrollEndTimerRef.current) clearTimeout(scrollEndTimerRef.current);
       scrollEndTimerRef.current = setTimeout(() => {
