@@ -36,6 +36,11 @@ import CriticalNotifications from "../Notifications/CriticalNotifications";
 import useCriticalNotifications from "../../pages/NotificationCenter/hooks/useCriticalNotifications";
 import useCheckPermission from "../../utils/checkPermission";
 
+// Check if running on demo host
+const isDemoHost = () =>
+  typeof window !== "undefined" &&
+  window.location.hostname.includes("icebarcatmf-admin-demo");
+
 const Navbar = ({ open, collapseSidebar, setCollapseSidebar }) => {
   const { t } = useTranslation(["sidebar"]);
   const navigate = useNavigate();
@@ -85,6 +90,20 @@ const Navbar = ({ open, collapseSidebar, setCollapseSidebar }) => {
   };
 
   const { mutate: logout } = useLogoutUser({ onSuccess: () => logoutUser() });
+
+  // Handle logout - on demo, just clear storage and redirect without API call
+  const handleLogout = () => {
+    if (isDemoHost()) {
+      // On demo, skip the API call and just clear local storage
+      removeLoginToken();
+      localStorage.clear();
+      sessionStorage.clear();
+      toast(t("logoutSuccessToast"), "success", "logoutToast");
+      navigate(AdminRoutes.AdminSignin);
+    } else {
+      logout();
+    }
+  };
 
   const selectedTz = timeZones?.find((x) => x.value === timeStamp);
   const filteredTimeZones = (timeZones || []).filter(({ labelKey, code, value }) => {
@@ -334,7 +353,7 @@ const Navbar = ({ open, collapseSidebar, setCollapseSidebar }) => {
                 </Tooltip>
               }
             >
-          <Button onClick={() => logout()} variant="link" className="btn navbar-logout-btn nav-icon-btn">
+          <Button onClick={handleLogout} variant="link" className="btn navbar-logout-btn nav-icon-btn">
             <FontAwesomeIcon
               icon={faSignOutAlt}
             />
