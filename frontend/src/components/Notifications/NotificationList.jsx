@@ -97,8 +97,8 @@ const NotificationList = ({
 
   return (
     <Card className="notifications-list-container mt-1 shadow-sm">
-      <Card.Header className="d-flex justify-content-between align-items-center p-2">
-        <InputGroup className="w-75 me-3">
+      <Card.Header>
+        <InputGroup>
           <InputGroup.Text><FontAwesomeIcon icon={faSearch} /></InputGroup.Text>
           <FormControl placeholder="Search Notifications" onChange={(e) => setSearch(e.target.value)} />
         </InputGroup>
@@ -111,7 +111,7 @@ const NotificationList = ({
           onChange={handleSetUnread}
         />
         <Button className="mark-all-read" onClick={() => markAllReadNotifications()}>
-          Mark all read
+          Mark All Read
         </Button>
       </Card.Header>
 
