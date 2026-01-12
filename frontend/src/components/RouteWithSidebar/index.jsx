@@ -5,10 +5,11 @@ import Sidebar from '../Sidebar'
 import './routewithsidebar.scss'
 import Navbar from '../Navbar/Navbar'
 
-// Check if running on demo host or low-power mode - skip scroll optimizations
-const shouldSkipScrollOptimizations = () =>
-  typeof document !== 'undefined' &&
-  document.documentElement.classList.contains('gs-low-power')
+// Check if running on demo host - skip scroll optimizations entirely
+const isDemoHost =
+  typeof window !== 'undefined' &&
+  (window.location?.hostname?.includes('ondigitalocean.app') ||
+   window.location?.hostname?.includes('demo'))
 
 const RouteWithSidebar = ({ children }) => {
   // const { userDetails } = useUserStore((state) => state)
@@ -22,10 +23,10 @@ const RouteWithSidebar = ({ children }) => {
   const [layoutAnimClass, setLayoutAnimClass] = useState('')
 
   // Perf: disable GPU-heavy blur while actively scrolling to keep scrolling snappy.
-  // Skip this on low-power mode since effects are already disabled.
+  // Skip this entirely on demo host since effects are already disabled via low-power mode.
   useEffect(() => {
-    // In low-power mode, effects are already disabled via CSS, so no need for scroll class
-    if (shouldSkipScrollOptimizations()) return
+    // On demo host, skip scroll optimizations - effects are already disabled
+    if (isDemoHost) return
 
     const root = document.documentElement
 
