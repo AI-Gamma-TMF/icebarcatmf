@@ -39,8 +39,14 @@ const generateTimePeriods = (todayBase, variance = 0.3) => {
   };
 };
 
-// Generate mock dashboard report data
-export const getMockDashboardData = () => ({
+// Cache for generated mock data to prevent constant re-generation
+let cachedMockData = null;
+
+// Generate mock dashboard report data (cached to prevent constant re-renders)
+export const getMockDashboardData = () => {
+  if (cachedMockData) return cachedMockData;
+  
+  cachedMockData = {
   DASHBOARD_REPORT: {
     // Top KPI cards
     scStakedTodayCount: randDecimal(15000, 45000),
@@ -59,20 +65,37 @@ export const getMockDashboardData = () => ({
     redemptionRateOverall: randDecimal(2.5, 8.5),
     redemptionRateToday: randDecimal(1.8, 6.2),
   }
-});
+  };
+  
+  return cachedMockData;
+};
+
+// Cache for other mock data functions
+let cachedLoginData = null;
+let cachedCustomerData = null;
+let cachedEconomyData = null;
+let cachedTransactionData = null;
+let cachedBonusData = null;
+let cachedReportTillData = null;
 
 // Generate mock login data for tables and charts
 export const getMockLoginData = () => {
-  return {
+  if (cachedLoginData) return cachedLoginData;
+  
+  cachedLoginData = {
     // Data for tables (nested time period structure)
     UNIQ_LOGIN: generateTimePeriods(rand(180, 350)),
     TOTAL_LOGIN: generateTimePeriods(rand(450, 850)),
   };
+  
+  return cachedLoginData;
 };
 
 // Generate mock customer data for tables and charts
 export const getMockCustomerData = () => {
-  return {
+  if (cachedCustomerData) return cachedCustomerData;
+  
+  cachedCustomerData = {
     // Data for tables (nested time period structure matching customerDataKeysV2)
     NEW_REGISTRATION: generateTimePeriods(rand(25, 85)),
     PENDING_REDEMPTION_COUNT: generateTimePeriods(rand(5, 25)),
@@ -92,11 +115,15 @@ export const getMockCustomerData = () => {
     CANCELLED_REDEMPTION_SUM: generateTimePeriods(randDecimal(150, 850)),
     NET_REVENUE: generateTimePeriods(randDecimal(8500, 25000)),
   };
+  
+  return cachedCustomerData;
 };
 
 // Generate mock economy data for tables (matching coinEcoDataKeys)
 export const getMockEconomyData = () => {
-  return {
+  if (cachedEconomyData) return cachedEconomyData;
+  
+  cachedEconomyData = {
     GC_CREDITED_PURCHASE: generateTimePeriods(randDecimal(15000, 45000)),
     SC_CREDITED_PURCHASE: generateTimePeriods(randDecimal(2500, 8500)),
     GC_AWARDED_TOTAL: generateTimePeriods(randDecimal(35000, 95000)),
@@ -105,11 +132,15 @@ export const getMockEconomyData = () => {
     USC_BALANCE: generateTimePeriods(randDecimal(85000, 250000)),
     RSC_BALANCE: generateTimePeriods(randDecimal(35000, 125000)),
   };
+  
+  return cachedEconomyData;
 };
 
 // Generate mock transaction data for tables (matching transactionDataKeys)
 export const getMockTransactionData = () => {
-  return {
+  if (cachedTransactionData) return cachedTransactionData;
+  
+  cachedTransactionData = {
     JACKPOT_REVENUE: generateTimePeriods(randDecimal(850, 3500)),
     ACTIVE_GC_PLAYER: generateTimePeriods(rand(120, 380)),
     ACTIVE_SC_PLAYER: generateTimePeriods(rand(85, 250)),
@@ -120,11 +151,15 @@ export const getMockTransactionData = () => {
     RETURN_TO_PLAYER: generateTimePeriods(randDecimal(85, 96)),
     HOUSE_EDGE: generateTimePeriods(randDecimal(4, 15)),
   };
+  
+  return cachedTransactionData;
 };
 
 // Generate mock bonus data for tables (matching bonusDataKeys)
 export const getMockBonusData = () => {
-  return {
+  if (cachedBonusData) return cachedBonusData;
+  
+  cachedBonusData = {
     AMOE_BONUS: generateTimePeriods(randDecimal(450, 1500)),
     TIER_BONUS: generateTimePeriods(randDecimal(350, 1200)),
     DAILY_BONUS: generateTimePeriods(randDecimal(2500, 8500)),
@@ -148,13 +183,21 @@ export const getMockBonusData = () => {
     PURCHASE_PROMOCODE_BONUS: generateTimePeriods(randDecimal(450, 1800)),
     TOTAL: generateTimePeriods(randDecimal(12500, 45000)),
   };
+  
+  return cachedBonusData;
 };
 
 // Generate mock report till date data (single values for TILL_DATE column)
-export const getMockReportTillData = () => ({
-  UNIQ_LOGIN: rand(125000, 350000),
-  TOTAL_LOGIN: rand(180000, 450000),
-});
+export const getMockReportTillData = () => {
+  if (cachedReportTillData) return cachedReportTillData;
+  
+  cachedReportTillData = {
+    UNIQ_LOGIN: rand(125000, 350000),
+    TOTAL_LOGIN: rand(180000, 450000),
+  };
+  
+  return cachedReportTillData;
+};
 
 // Wrapper to get all demo data at once
 export const getAllDemoData = () => ({
