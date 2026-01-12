@@ -44,7 +44,7 @@ const AdminSignIn = () => {
   }, []);
 
   return (
-    <main>
+    <main className="casino-login-main">
       <Helmet>
         <meta name="robots" content="noindex,nofollow" />
       </Helmet>
