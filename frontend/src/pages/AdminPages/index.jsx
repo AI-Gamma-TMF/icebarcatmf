@@ -215,7 +215,7 @@ const AdminPages = () => (
               <Navigate replace to={AdminRoutes.Dashboard} />
               )
             : (
-              <ProfilePage />
+          <ProfilePage />
               )}
         </PrivateRoute>
       }
