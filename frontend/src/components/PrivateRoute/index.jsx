@@ -6,10 +6,16 @@ import { AdminRoutes } from "../../routes";
 import { useEffect } from "react";
 import { getLoginToken } from "../../utils/storageUtils";
 
-const isDemoHost = () =>
-  typeof window !== "undefined" &&
-  (window.location.hostname.includes("icebarcatmf-admin-demo") ||
-   window.location.hostname.includes("ondigitalocean.app"));
+const isDemoHost = () => {
+  if (typeof window === "undefined") return false;
+  const hostname = window.location.hostname;
+  return (
+    hostname.includes("icebarcatmf-admin-demo") ||
+    hostname.includes("ondigitalocean.app") ||
+    hostname === "localhost" ||
+    hostname === "127.0.0.1"
+  );
+};
 
 const PrivateRoute = ({ isWithoutCard = false, children, module }) => {
   const { userDetails, loading, permissions } = usePrivateRoute();

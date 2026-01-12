@@ -37,9 +37,16 @@ import useCriticalNotifications from "../../pages/NotificationCenter/hooks/useCr
 import useCheckPermission from "../../utils/checkPermission";
 
 // Check if running on demo host
-const isDemoHost = () =>
-  typeof window !== "undefined" &&
-  window.location.hostname.includes("icebarcatmf-admin-demo");
+const isDemoHost = () => {
+  if (typeof window === "undefined") return false;
+  const hostname = window.location.hostname;
+  return (
+    hostname.includes("icebarcatmf-admin-demo") ||
+    hostname.includes("ondigitalocean.app") ||
+    hostname === "localhost" ||
+    hostname === "127.0.0.1"
+  );
+};
 
 const Navbar = ({ open, collapseSidebar, setCollapseSidebar }) => {
   const { t } = useTranslation(["sidebar"]);

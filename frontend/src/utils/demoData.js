@@ -3,11 +3,16 @@
  * This provides realistic-looking data for showcasing the platform.
  */
 
-// Helper to check if we're on the demo host
+// Helper to check if we're on the demo host OR localhost (for testing)
 export const isDemoHost = () => {
   if (typeof window === 'undefined') return false;
   const host = window.location.hostname;
-  return host.includes('ondigitalocean.app') || host.includes('demo');
+  return (
+    host.includes('ondigitalocean.app') || 
+    host.includes('demo') || 
+    host === 'localhost' || 
+    host === '127.0.0.1'
+  );
 };
 
 // Generate a random number within a range

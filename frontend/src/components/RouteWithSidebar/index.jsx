@@ -6,10 +6,16 @@ import './routewithsidebar.scss'
 import Navbar from '../Navbar/Navbar'
 
 // Check if running on demo host - skip scroll optimizations entirely
-const isDemoHost =
-  typeof window !== 'undefined' &&
-  (window.location?.hostname?.includes('ondigitalocean.app') ||
-   window.location?.hostname?.includes('demo'))
+const isDemoHost = () => {
+  if (typeof window === 'undefined') return false;
+  const hostname = window.location.hostname;
+  return (
+    hostname.includes('ondigitalocean.app') ||
+    hostname.includes('demo') ||
+    hostname === 'localhost' ||
+    hostname === '127.0.0.1'
+  );
+};
 
 const RouteWithSidebar = ({ children }) => {
   // const { userDetails } = useUserStore((state) => state)
