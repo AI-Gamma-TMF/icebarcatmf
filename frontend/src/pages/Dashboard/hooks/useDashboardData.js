@@ -10,6 +10,16 @@ import {
   convertToUtc,
 } from "../../../utils/helper";
 import { useUserStore } from "../../../store/store";
+import {
+  isDemoHost,
+  getMockDashboardData,
+  getMockLoginData,
+  getMockCustomerData,
+  getMockEconomyData,
+  getMockTransactionData,
+  getMockBonusData,
+  getMockReportTillData,
+} from "../../../utils/demoData";
 
 const useDashboardDataListing = (
   economicDataAccordionOpen = false,
@@ -19,6 +29,9 @@ const useDashboardDataListing = (
   const { t } = useTranslation(["dashboard"]);
   const [playerType, setPlayerType] = useState("real");
   const timeZoneCode = useUserStore((state) => state.timeZoneCode);
+  
+  // Check if we're on the demo host - use mock data instead of real API calls
+  const isDemo = isDemoHost();
 
   const [startDate, setStartDate] = useState(
     convertTimeZone(getDateThreeMonthsBefore(), timeZoneCode)
@@ -57,9 +70,11 @@ const useDashboardDataListing = (
     refetch: dashboardReportRefetchV2,
     isRefetching: isDashboardReportRefetchingV2,
   } = useQuery({
-    queryKey: ["dashboardReportV2", timeZoneCode, startDate, endDate],
+    queryKey: ["dashboardReportV2", timeZoneCode, startDate, endDate, isDemo],
     queryFn: () =>
-      getReportsV2({ ...getFormattedParams(), reportType: "dashboardData" }),
+      isDemo
+        ? Promise.resolve({ data: getMockDashboardData() })
+        : getReportsV2({ ...getFormattedParams(), reportType: "dashboardData" }),
     select: (res) => res?.data,
     refetchOnWindowFocus: false,
     // enabled:false
@@ -71,9 +86,11 @@ const useDashboardDataListing = (
     refetch: reportRefetch,
     isRefetching: isReportRefetching,
   } = useQuery({
-    queryKey: ["betReport", timeZoneCode, startDate, endDate],
+    queryKey: ["betReport", timeZoneCode, startDate, endDate, isDemo],
     queryFn: () =>
-      getReportsV2({ ...getFormattedParams(), reportType: "loginData" }),
+      isDemo
+        ? Promise.resolve({ data: getMockLoginData() })
+        : getReportsV2({ ...getFormattedParams(), reportType: "loginData" }),
     select: (res) => res?.data,
     refetchOnWindowFocus: false,
   });
@@ -96,9 +113,11 @@ const useDashboardDataListing = (
     refetch: customerRefetchV2,
     isRefetching: isCustomerRefetchingV2,
   } = useQuery({
-    queryKey: ["customerReportV2", timeZoneCode, startDate, endDate],
+    queryKey: ["customerReportV2", timeZoneCode, startDate, endDate, isDemo],
     queryFn: () =>
-      getReportsV2({ ...getFormattedParams(), reportType: "customerData" }),
+      isDemo
+        ? Promise.resolve({ data: getMockCustomerData() })
+        : getReportsV2({ ...getFormattedParams(), reportType: "customerData" }),
     select: (res) => res?.data,
     refetchOnWindowFocus: false,
 
@@ -123,10 +142,12 @@ const useDashboardDataListing = (
     refetch: economyRefetchV2,
     isRefetching: isEconomyRefetchingV2,
   } = useQuery({
-    queryKey: ["economyReportV2", timeZoneCode, startDate, endDate],
+    queryKey: ["economyReportV2", timeZoneCode, startDate, endDate, isDemo],
     queryFn: () =>
-      getReportsV2({ ...getFormattedParams(), reportType: "economyData" }),
-    enabled: economicDataAccordionOpen,
+      isDemo
+        ? Promise.resolve({ data: getMockEconomyData() })
+        : getReportsV2({ ...getFormattedParams(), reportType: "economyData" }),
+    enabled: economicDataAccordionOpen || isDemo,
     select: (res) => res?.data,
     refetchOnWindowFocus: false,
 
@@ -153,10 +174,12 @@ const useDashboardDataListing = (
     refetch: transactionRefetchV2,
     isRefetching: isTransactionRefetchingV2,
   } = useQuery({
-    queryKey: ["transactionReportV2", timeZoneCode, startDate, endDate],
+    queryKey: ["transactionReportV2", timeZoneCode, startDate, endDate, isDemo],
     queryFn: () =>
-      getReportsV2({ ...getFormattedParams(), reportType: "transactionData" }),
-    enabled: transactionDataAccordianOpen,
+      isDemo
+        ? Promise.resolve({ data: getMockTransactionData() })
+        : getReportsV2({ ...getFormattedParams(), reportType: "transactionData" }),
+    enabled: transactionDataAccordianOpen || isDemo,
     select: (res) => res?.data,
     refetchOnWindowFocus: false,
 
@@ -167,10 +190,12 @@ const useDashboardDataListing = (
     refetch: bonusRefetchV2,
     isRefetching: isBonusRefetchingV2,
   } = useQuery({
-    queryKey: ["bonusReportV2", timeZoneCode, startDate, endDate],
+    queryKey: ["bonusReportV2", timeZoneCode, startDate, endDate, isDemo],
     queryFn: () =>
-      getReportsV2({ ...getFormattedParams(), reportType: "bonusData" }),
-    enabled: bonusDataAccordionOpen,
+      isDemo
+        ? Promise.resolve({ data: getMockBonusData() })
+        : getReportsV2({ ...getFormattedParams(), reportType: "bonusData" }),
+    enabled: bonusDataAccordionOpen || isDemo,
     select: (res) => res?.data,
     refetchOnWindowFocus: false,
   });
@@ -181,12 +206,14 @@ const useDashboardDataListing = (
     refetch: reportTillRefetch,
     isRefetching: isReportTillRefetching,
   } = useQuery({
-    queryKey: ["tilldatedata", timeZoneCode, startDate, endDate],
+    queryKey: ["tilldatedata", timeZoneCode, startDate, endDate, isDemo],
     queryFn: () =>
-      getReportsV2({ ...getFormattedParams(), reportType: "loginDataTillDate" }),
+      isDemo
+        ? Promise.resolve({ data: getMockReportTillData() })
+        : getReportsV2({ ...getFormattedParams(), reportType: "loginDataTillDate" }),
     select: (res) => res?.data,
     refetchOnWindowFocus: false,
-    enabled: false,
+    enabled: isDemo, // Enable for demo, disabled for prod
   });
   return {
     dashboardDataV2,
