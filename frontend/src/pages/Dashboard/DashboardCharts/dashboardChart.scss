@@ -1516,16 +1516,16 @@ html.gs-is-scrolling {
     color: rgba(0, 229, 160, 1);
     text-transform: uppercase;
     font-weight: 800;
-    letter-spacing: 0.05em;
-    font-size: clamp(0.72rem, 0.66rem + 0.25vw, 0.82rem);
+    letter-spacing: 0.03em; // Reduced from 0.05em to prevent overlap
+    font-size: clamp(0.68rem, 0.62rem + 0.25vw, 0.78rem); // Slightly smaller
     border: 1px solid rgba(255, 255, 255, 0.06);
-    padding: 12px 10px;
-    // Wrap ONLY at spaces; never split a word like "YESTERDAY" into "YESTERDA\nY"
+    padding: 14px 8px; // Increased vertical, reduced horizontal
+    // Allow wrapping at spaces for multi-word headers
     white-space: normal;
-    word-break: keep-all;
-    overflow-wrap: normal;
+    word-break: normal; // Changed from keep-all to allow breaking
+    overflow-wrap: break-word; // Allow breaking if needed
     hyphens: none;
-    line-height: 1.15;
+    line-height: 1.3; // Increased from 1.15 for better readability when wrapped
     text-align: center;
     vertical-align: middle;
     text-wrap: balance;
@@ -1730,8 +1730,10 @@ html.gs-is-scrolling {
     min-width: 600px; // Ensure table doesn't collapse
     
     thead th {
-      padding: 10px 12px;
-      font-size: 0.75rem;
+      padding: 12px 6px; // More vertical space, less horizontal
+      font-size: 0.68rem; // Smaller to prevent overlap
+      letter-spacing: 0.02em; // Reduced letter spacing
+      line-height: 1.35; // Better for wrapped text
     }
     
     tbody td {
@@ -1861,8 +1863,10 @@ html.gs-is-scrolling {
     font-size: 0.75rem;
     
     thead th {
-      padding: 8px 10px;
-      font-size: 0.7rem;
+      padding: 10px 5px; // More vertical space, less horizontal
+      font-size: 0.65rem; // Smaller to prevent overlap
+      letter-spacing: 0.01em; // Minimal letter spacing
+      line-height: 1.4; // Better for wrapped text
     }
     
     tbody td {
@@ -1903,5 +1907,20 @@ html.gs-is-scrolling {
   .dashboard-view-tab {
     padding: 6px 10px;
     font-size: 0.7rem;
+  }
+  
+  // Table headers - extra small to prevent overlap
+  .dashboard-data-table {
+    thead th {
+      padding: 10px 4px; // Minimal horizontal padding
+      font-size: 0.6rem; // Very small to fit
+      letter-spacing: 0; // No letter spacing
+      line-height: 1.45; // Good for wrapped text
+    }
+    
+    tbody td {
+      padding: 8px 6px;
+      font-size: 0.7rem;
+    }
   }
 }
