@@ -88,6 +88,39 @@
   }
 }
 
+// Table column widths to prevent overlap
+.staff-table__table {
+  table-layout: fixed;
+  width: 100%;
+  
+  th, td {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding: 12px 8px;
+  }
+}
+
+.staff-table__id {
+  width: 60px;
+  text-align: left;
+}
+
+.staff-table__email {
+  width: 220px;
+  min-width: 180px;
+}
+
+.staff-table__name {
+  width: 180px;
+  min-width: 140px;
+  max-width: 200px;
+  
+  span {
+    max-width: 100%;
+  }
+}
+
 .staff-table__th--sortable {
   user-select: none;
 }
@@ -116,6 +149,10 @@
   padding: 0;
   text-align: left;
   cursor: pointer;
+  display: inline-block;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .staff-table__link:hover {
@@ -189,10 +226,49 @@
   margin-top: 10px;
 }
 
+// Responsive adjustments
+@media screen and (max-width: 1200px) {
+  .staff-table__email {
+    width: 180px;
+    min-width: 150px;
+  }
+  
+  .staff-table__name {
+    width: 140px;
+    min-width: 120px;
+  }
+}
+
 @media screen and (max-width: 767.9px) {
   .permission-row {
     border-bottom: 1px solid #80808042;
     width: 100%;
     margin: auto;
+  }
+  
+  .staff-table__table {
+    th, td {
+      padding: 8px 4px;
+      font-size: 0.85rem;
+    }
+  }
+  
+  .staff-table__email {
+    width: 150px;
+    min-width: 120px;
+  }
+  
+  .staff-table__name {
+    width: 120px;
+    min-width: 100px;
+  }
+  
+  .staff-actions {
+    gap: 4px;
+  }
+  
+  .staff-icon-btn.btn {
+    width: 36px;
+    height: 36px;
   }
 }
