@@ -1160,19 +1160,66 @@
   transform: translateY(-1px);
 }
 
+// ============================================================
+// Comprehensive Responsive Breakpoints
+// ============================================================
+
+// Large tablets and small desktops (≤ 1199px)
+@media (max-width: 1199px) {
+  .dashboard-boxes-container {
+    grid-auto-columns: minmax(190px, 1fr);
+    gap: 10px;
+  }
+  
+  .dashboard-viz-panel__toolbar {
+    gap: 10px;
+  }
+}
+
+// Tablets and medium screens (≤ 992px)
 @media (max-width: 992px) {
+  .dashboard-boxes-container {
+    grid-auto-columns: minmax(180px, 1fr);
+    padding: 10px 12px;
+  }
+  
   .dashboard-viz-panel__toolbar {
     grid-template-columns: 1fr;
+    gap: 12px;
   }
+  
   .dashboard-viz-panel__right {
     justify-content: flex-start;
   }
+  
   .dashboard-viz-panel__right-group {
     width: 100%;
     justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
   }
+  
   .dashboard-viz-panel__actions {
     justify-content: flex-start;
+  }
+  
+  .dashboard-view-tabs {
+    width: 100%;
+  }
+  
+  .customer-chart-container {
+    flex-direction: column;
+  }
+  
+  .customer-chart {
+    width: 100%;
+  }
+  
+  .customer-labels {
+    width: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
   }
 }
 
@@ -1542,4 +1589,294 @@ html.gs-is-scrolling {
   margin-left: 8px;
   width: 0.9rem;
   height: 0.9rem;
+}
+
+// ============================================================
+// Mobile and Small Tablet Responsive Styles (≤ 768px)
+// ============================================================
+@media (max-width: 768px) {
+  // Main dashboard typography adjustments
+  .dashboard-typography {
+    h3 {
+      font-size: clamp(1.5rem, 4vw, 1.85rem);
+    }
+    
+    h5 {
+      font-size: clamp(1rem, 3vw, 1.15rem);
+    }
+  }
+  
+  // KPI boxes - smaller on mobile
+  .dashboard-boxes-container {
+    grid-auto-columns: minmax(160px, 1fr);
+    gap: 8px;
+    padding: 8px 10px;
+  }
+  
+  .dashboard-box {
+    padding: 12px;
+    min-height: 100px;
+    border-radius: 14px;
+    
+    label {
+      font-size: 0.65rem;
+    }
+    
+    .live-report-data {
+      font-size: 1.15rem;
+    }
+    
+    .new-icon {
+      width: 36px;
+      height: 36px;
+      
+      img {
+        width: 18px;
+        height: 18px;
+      }
+    }
+  }
+  
+  // Ticker cards - mobile optimized
+  .ticker-container {
+    padding: 12px;
+    min-height: 100px;
+    border-radius: 14px;
+    
+    .ticket-todayC p {
+      font-size: 1rem;
+    }
+  }
+  
+  // Visualization panels - stack elements
+  .dashboard-viz-panel {
+    border-radius: 16px;
+    padding: 14px;
+  }
+  
+  .dashboard-viz-panel__toolbar {
+    padding: 12px;
+    gap: 10px;
+  }
+  
+  .dashboard-view-tabs {
+    gap: 6px;
+  }
+  
+  .dashboard-view-tab {
+    padding: 8px 14px;
+    font-size: 0.8rem;
+  }
+  
+  .dashboard-viz-icon-btn {
+    width: 34px;
+    height: 34px;
+    
+    svg {
+      width: 14px;
+      height: 14px;
+    }
+  }
+  
+  .dashboard-viz-panel__download {
+    padding: 7px 12px !important;
+    font-size: 0.7rem !important;
+    height: 36px;
+  }
+  
+  // Tables - horizontal scroll with better UX
+  .dashboard-table {
+    border-radius: 14px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    
+    // Show scrollbar hint on mobile
+    &::-webkit-scrollbar {
+      height: 6px;
+    }
+    
+    &::-webkit-scrollbar-thumb {
+      background: rgba(0, 229, 160, 0.3);
+      border-radius: 3px;
+    }
+  }
+  
+  .dashboard-data-table {
+    min-width: 600px; // Ensure table doesn't collapse
+    
+    thead th {
+      padding: 10px 12px;
+      font-size: 0.75rem;
+    }
+    
+    tbody td {
+      padding: 10px 12px;
+      font-size: 0.8rem;
+    }
+  }
+  
+  // Filters - stack vertically
+  .dashboard-filters {
+    padding: 12px;
+    gap: 10px;
+  }
+  
+  .dashboard-section-divider {
+    margin: 16px 0;
+  }
+}
+
+// ============================================================
+// Small Mobile Devices (≤ 576px)
+// ============================================================
+@media (max-width: 576px) {
+  // Typography - even smaller
+  .dashboard-typography {
+    h3 {
+      font-size: clamp(1.35rem, 5vw, 1.65rem);
+    }
+    
+    h5 {
+      font-size: clamp(0.95rem, 4vw, 1.1rem);
+    }
+  }
+  
+  // KPI boxes - single column friendly
+  .dashboard-boxes-container {
+    grid-auto-columns: minmax(145px, 1fr);
+    gap: 6px;
+    padding: 6px 8px;
+  }
+  
+  .dashboard-box {
+    padding: 10px;
+    min-height: 90px;
+    
+    label {
+      font-size: 0.6rem;
+    }
+    
+    .live-report-data {
+      font-size: 1.05rem;
+    }
+    
+    .new-icon {
+      width: 32px;
+      height: 32px;
+      
+      img {
+        width: 16px;
+        height: 16px;
+      }
+    }
+  }
+  
+  // Ticker - very compact
+  .ticker-container {
+    padding: 10px;
+    min-height: 85px;
+    
+    .ticker-label {
+      gap: 6px;
+      
+      label {
+        font-size: 0.65rem;
+      }
+      
+      img {
+        width: 18px;
+        height: 18px;
+      }
+    }
+    
+    .ticket-todayC p {
+      font-size: 0.95rem;
+    }
+  }
+  
+  // Panels - very compact
+  .dashboard-viz-panel {
+    padding: 12px;
+    border-radius: 14px;
+  }
+  
+  .dashboard-viz-panel__toolbar {
+    padding: 10px;
+    gap: 8px;
+  }
+  
+  .dashboard-view-tabs {
+    gap: 4px;
+    width: 100%;
+  }
+  
+  .dashboard-view-tab {
+    padding: 7px 12px;
+    font-size: 0.75rem;
+    flex: 1;
+  }
+  
+  .dashboard-viz-icon-btn {
+    width: 32px;
+    height: 32px;
+    
+    svg {
+      width: 12px;
+      height: 12px;
+    }
+  }
+  
+  .dashboard-viz-panel__download {
+    width: 100%;
+    margin-top: 8px;
+  }
+  
+  // Table - ensure readability
+  .dashboard-data-table {
+    font-size: 0.75rem;
+    
+    thead th {
+      padding: 8px 10px;
+      font-size: 0.7rem;
+    }
+    
+    tbody td {
+      padding: 8px 10px;
+      font-size: 0.75rem;
+    }
+  }
+  
+  // Filters - full width inputs
+  .dashboard-filters {
+    padding: 10px;
+    
+    .form-select,
+    .form-control {
+      font-size: 0.85rem;
+    }
+  }
+}
+
+// ============================================================
+// Extra Small Devices (≤ 400px)
+// ============================================================
+@media (max-width: 400px) {
+  .dashboard-boxes-container {
+    grid-auto-columns: minmax(135px, 1fr);
+  }
+  
+  .dashboard-box,
+  .ticker-container {
+    padding: 8px;
+    min-height: 80px;
+  }
+  
+  .dashboard-box .live-report-data {
+    font-size: 0.95rem;
+  }
+  
+  .dashboard-view-tab {
+    padding: 6px 10px;
+    font-size: 0.7rem;
+  }
 }

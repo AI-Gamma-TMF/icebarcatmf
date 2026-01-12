@@ -171,3 +171,73 @@ html.gs-is-scrolling {
 .site-logo{
     max-width: 75px;
 }
+
+// ============================================================
+// Responsive Main Layout
+// ============================================================
+
+// Tablets and below (≤ 992px)
+@media (max-width: 992px) {
+  .component-container {
+    padding-top: 56px;
+    padding-bottom: 20px;
+  }
+  
+  .app-page {
+    max-width: 100%;
+    padding: 14px;
+  }
+  
+  .app-page--surface {
+    border-radius: 22px;
+  }
+}
+
+// Small tablets and mobile (≤ 768px)
+@media (max-width: 768px) {
+  .component-container {
+    padding-top: 52px;
+    padding-bottom: 16px;
+  }
+  
+  .app-page {
+    padding: 12px;
+  }
+  
+  .app-page--surface {
+    border-radius: 18px;
+  }
+}
+
+// Mobile devices (≤ 576px)
+@media (max-width: 576px) {
+  .component-container {
+    padding-top: 48px;
+    padding-bottom: 12px;
+  }
+  
+  .app-page {
+    padding: 10px;
+  }
+  
+  .app-page--surface {
+    border-radius: 16px;
+    padding: 12px;
+  }
+}
+
+// Extra small devices (≤ 400px)
+@media (max-width: 400px) {
+  .component-container {
+    padding-top: 44px;
+  }
+  
+  .app-page {
+    padding: 8px;
+  }
+  
+  .app-page--surface {
+    border-radius: 14px;
+    padding: 10px;
+  }
+}
