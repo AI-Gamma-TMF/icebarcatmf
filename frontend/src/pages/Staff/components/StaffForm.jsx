@@ -103,11 +103,12 @@ const StaffForm = ({
   return (
     <>
       <Form>
-        <Row>
-          <Col md={6} sm={12}>
-            <BForm.Label>{t('staffFields.email.label')}<span className="text-danger"> *</span></BForm.Label>
+        <Row className='g-3'>
+          <Col xs={12} md={6}>
+            <BForm.Label className="form-label">{t('staffFields.email.label')}<span className="text-danger"> *</span></BForm.Label>
 
             <BForm.Control
+              className="staff-form__input"
               type='text'
               name='email'
               placeholder={t('staffFields.email.placeholder')}
@@ -120,16 +121,17 @@ const StaffForm = ({
             <ErrorMessage
               component='div'
               name='email'
-              className='text-danger'
+              className='text-danger mt-1'
             />
           </Col>
 
-          <Col md={6} sm={12}>
-            <BForm.Label>{t('staffFields.password.label')}<span className="text-danger"> *</span></BForm.Label>
+          <Col xs={12} md={6}>
+            <BForm.Label className="form-label">{t('staffFields.password.label')}<span className="text-danger"> *</span></BForm.Label>
 
             <Trigger message='Must be atleast 8 characters long with 1 uppercase and 1 lowercase letters, 1 special character and 1 digit' id={'info'} />
-            <InputGroup id={'info'}>
+            <InputGroup id={'info'} className="staff-form__input-group d-flex">
               <BForm.Control
+                className="staff-form__input flex-grow-1"
                 type={type}
                 name='password'
                 placeholder={t('staffFields.password.placeholder')}
@@ -138,10 +140,9 @@ const StaffForm = ({
                 onChange={handleChange}
                 onBlur={handleBlur}
               />
-              <InputGroup.Text className='b-1'>
+              <InputGroup.Text className='staff-form__input-icon d-flex align-items-center'>
                 <FontAwesomeIcon
                   icon={type === 'password' ? faEyeSlash : faEye}
-                  style={{ cursor: 'pointer' }}
                   onClick={() => {
                     type === 'password' ? setType('text') : setType('password')
                   }}
@@ -152,16 +153,17 @@ const StaffForm = ({
             <ErrorMessage
               component='div'
               name='password'
-              className='text-danger'
+              className='text-danger mt-1'
             />
           </Col>
         </Row>
 
-        <Row className='mt-3'>
-          <Col md={6} sm={12}>
-            <BForm.Label>{t('staffFields.firstName.label')}<span className="text-danger"> *</span></BForm.Label>
+        <Row className='g-3 mt-2'>
+          <Col xs={12} md={6}>
+            <BForm.Label className="form-label">{t('staffFields.firstName.label')}<span className="text-danger"> *</span></BForm.Label>
 
             <BForm.Control
+              className="staff-form__input"
               type='text'
               name='firstName'
               placeholder={t('staffFields.firstName.placeholder')}
@@ -173,14 +175,15 @@ const StaffForm = ({
             <ErrorMessage
               component='div'
               name='firstName'
-              className='text-danger'
+              className='text-danger mt-1'
             />
           </Col>
 
-          <Col md={6} sm={12}>
-            <BForm.Label>{t('staffFields.lastName.label')}<span className="text-danger"> *</span></BForm.Label>
+          <Col xs={12} md={6}>
+            <BForm.Label className="form-label">{t('staffFields.lastName.label')}<span className="text-danger"> *</span></BForm.Label>
 
             <BForm.Control
+              className="staff-form__input"
               type='text'
               name='lastName'
               placeholder={t('staffFields.lastName.placeholder')}
@@ -192,16 +195,17 @@ const StaffForm = ({
             <ErrorMessage
               component='div'
               name='lastName'
-              className='text-danger'
+              className='text-danger mt-1'
             />
           </Col>
         </Row>
 
-        <Row>
-          <Col md={6} sm={12} className='mt-3'>
-            <BForm.Label>{t('staffFields.username.label')}<span className="text-danger"> *</span></BForm.Label>
+        <Row className='g-3 mt-2'>
+          <Col xs={12} md={6}>
+            <BForm.Label className="form-label">{t('staffFields.username.label')}<span className="text-danger"> *</span></BForm.Label>
 
             <BForm.Control
+              className="staff-form__input"
               type='text'
               name='adminUsername'
               placeholder={t('staffFields.username.placeholder')}
@@ -214,12 +218,12 @@ const StaffForm = ({
             <ErrorMessage
               component='div'
               name='adminUsername'
-              className='text-danger'
+              className='text-danger mt-1'
             />
           </Col>
 
-          <Col md={6} sm={12} className='mt-3'>
-            <BForm.Label>{t('staffFields.group.label')}<span className="text-danger"> *</span></BForm.Label>
+          <Col xs={12} md={6}>
+            <BForm.Label className="form-label">{t('staffFields.group.label')}<span className="text-danger"> *</span></BForm.Label>
 
             <CreatableSelect
               isClearable
@@ -238,51 +242,55 @@ const StaffForm = ({
               }}
               options={groupOptions}
               value={selectedGroup}
-              classNamePrefix='select'
+              classNamePrefix='staff-select'
+              className="staff-form__select"
+              // Prevent menu being clipped inside glass cards / responsive containers
+              menuPortalTarget={typeof document !== 'undefined' ? document.body : undefined}
+              menuPosition="fixed"
+              styles={{
+                menuPortal: (base) => ({ ...base, zIndex: 99999 })
+              }}
               onChange={(option) => groupChangeHandler(option)}
             />
 
             <ErrorMessage
               component='div'
               name='group'
-              className='text-danger'
+              className='text-danger mt-1'
             />
           </Col>
 
-          <Col xs={12} md={12} lg={5} className='mt-3'>
-            <BForm.Label>
+          <Col xs={12} md={12} lg={6} className='mt-2'>
+            <BForm.Label className="form-label d-flex align-items-center">
               {t('staffFields.addCoins.label')}
+              <BForm.Check
+                type='switch'
+                name='addCoins'
+                checked={values.addCoins}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                className="ms-3"
+              />
             </BForm.Label>
-
-            <BForm.Check
-              type='switch'
-              name='addCoins'
-              // placeholder='Enter User Name'
-              checked={values.addCoins}
-              onChange={handleChange}
-              onBlur={handleBlur}
-            />
 
             <ErrorMessage
               component='div'
               name='addCoins'
-              className='text-danger'
+              className='text-danger mt-1'
             />
           </Col>
 
         </Row>
 
-        <Row>
-
-          {values.addCoins && <>
-
-            <Col md={6} sm={12} className='mt-3'>
-              <BForm.Label>
+        {values.addCoins && (
+          <Row className='g-3 mt-2'>
+            <Col xs={12} md={6}>
+              <BForm.Label className="form-label">
                 {t('staffFields.gcLimit.label')}
-                {/* <span className='text-danger'> *</span> */}
               </BForm.Label>
 
               <BForm.Control
+                className="staff-form__input"
                 type='number'
                 name='gcLimit'
                 min='1'
@@ -291,23 +299,22 @@ const StaffForm = ({
                 value={values.gcLimit}
                 onChange={handleChange}
                 onBlur={handleBlur}
-              // disabled={isEdit}
               />
 
               <ErrorMessage
                 component='div'
                 name='gcLimit'
-                className='text-danger'
+                className='text-danger mt-1'
               />
             </Col>
 
-            <Col md={6} sm={12} className='mt-3'>
-              <BForm.Label>
+            <Col xs={12} md={6}>
+              <BForm.Label className="form-label">
                 {t('staffFields.scLimit.label')}
-                {/* <span className='text-danger'> *</span> */}
               </BForm.Label>
 
               <BForm.Control
+                className="staff-form__input"
                 type='number'
                 name='scLimit'
                 min='1'
@@ -316,24 +323,23 @@ const StaffForm = ({
                 value={values.scLimit}
                 onChange={handleChange}
                 onBlur={handleBlur}
-              // disabled={isEdit}
               />
 
               <ErrorMessage
                 component='div'
                 name='scLimit'
-                className='text-danger'
+                className='text-danger mt-1'
               />
-            </Col> </>}
+            </Col>
+          </Row>
+        )}
 
-        </Row>
-
-        <Row>
-
-          <Col md={6} sm={12} className='mt-3'>
-            <BForm.Label>{t('staffFields.role.label')}<span className="text-danger"> *</span></BForm.Label>
+        <Row className='g-3 mt-2'>
+          <Col xs={12} md={6}>
+            <BForm.Label className="form-label">{t('staffFields.role.label')}<span className="text-danger"> *</span></BForm.Label>
 
             <BForm.Select
+              className="staff-form__select"
               name='role'
               value={values.role || ''}
               disabled={isEdit}
@@ -353,16 +359,16 @@ const StaffForm = ({
               })}
             </BForm.Select>
 
-            <ErrorMessage component='div' name='role' className='text-danger' />
+            <ErrorMessage component='div' name='role' className='text-danger mt-1' />
           </Col>
 
           {values.role === 'Support' && (
-            <Col md={6} sm={12} className='mt-3'>
-              <BForm.Label>{t('staffFields.manager.label')}</BForm.Label>
+            <Col xs={12} md={6}>
+              <BForm.Label className="form-label">{t('staffFields.manager.label')}</BForm.Label>
 
               <BForm.Select
+                className="staff-form__select"
                 name='adminId'
-
                 value={values.adminId || ''}
                 disabled={isEdit}
                 onChange={(e) => { handleChange(e) }}
@@ -387,7 +393,7 @@ const StaffForm = ({
               <ErrorMessage
                 component='div'
                 name='adminId'
-                className='text-danger'
+                className='text-danger mt-1'
               />
             </Col>
           )}
@@ -395,10 +401,12 @@ const StaffForm = ({
 
         {(['Manager'].includes(values?.role) ||
           values.adminId) && (
-            <Card className='mt-3'>
-              <Card.Header>{t('staffFields.permissions.label')}</Card.Header>
+            <Card className='mt-4 staff-form__permissions-card'>
+              <Card.Header className="staff-form__permissions-header">
+                {t('staffFields.permissions.label')}
+              </Card.Header>
               {!loading && adminDetails?.userPermission && (
-                <Card.Body className='px-2 px-md-4'>
+                <Card.Body className='px-2 px-md-4 py-3'>
                   {Object.keys(
                     adminDetails?.userPermission?.permission
                   ).map((key, index) => {
@@ -406,17 +414,17 @@ const StaffForm = ({
                       ((values.role === 'Support' && key === 'Admins')
                         ? null
                         : (
-                          <Row key={index} className='permission-row'>
-                            <Col md={6} sm={12}>
-                              <BForm.Label>{key}</BForm.Label>
+                          <Row key={index} className='permission-row g-2 align-items-center py-2'>
+                            <Col xs={12} md={4} lg={3}>
+                              <BForm.Label className="form-label fw-bold mb-0">{key}</BForm.Label>
                             </Col>
 
-                            <Col className='d-flex flex-wrap' md={6} sm={12}>
+                            <Col xs={12} md={8} lg={9} className='d-flex flex-wrap gap-2'>
                               {sortedPermissions[
                                 key
                               ].map((value, index) => {
                                 return (
-                                  <label key={index}>
+                                  <label key={index} className="mb-0">
                                     {sortedPermissions[
                                       key
                                     ].includes('R')
@@ -439,19 +447,17 @@ const StaffForm = ({
                                         />
                                       )}
 
-                                    <h3>
-                                      <Badge
-                                        className='p-2 mx-2 '
-                                        type='button'
-                                        bg={
-                                          values?.permission?.[key]?.includes(value)
-                                            ? 'success'
-                                            : 'primary'
-                                        }
-                                      >
-                                        {key === 'Alert' ? customLabel(value, t) : permissionLabel(value, t)}
-                                      </Badge>
-                                    </h3>
+                                    <Badge
+                                      className='staff-form__permission-badge'
+                                      type='button'
+                                      bg={
+                                        values?.permission?.[key]?.includes(value)
+                                          ? 'success'
+                                          : 'secondary'
+                                      }
+                                    >
+                                      {key === 'Alert' ? customLabel(value, t) : permissionLabel(value, t)}
+                                    </Badge>
                                   </label>
                                 )
                               })}
@@ -465,9 +471,10 @@ const StaffForm = ({
             </Card>
           )}
 
-        <div className='mt-4 d-flex justify-content-between align-items-center'>
+        <div className='mt-4 d-flex flex-column flex-sm-row justify-content-between align-items-stretch align-items-sm-center gap-3'>
           <Button
             variant='warning'
+            className="staff-form__button staff-form__button--cancel"
             onClick={() => navigate(AdminRoutes.Staff)}
           >
             {t('staffFields.cancelButton')}
@@ -475,10 +482,10 @@ const StaffForm = ({
 
           <Button
             variant='success'
+            className="staff-form__button staff-form__button--submit"
             onClick={() => {
               handleSubmit()
             }}
-            className='ml-2'
             disabled={loading}
           >
             {t('staffFields.submitButton')}
@@ -486,9 +493,10 @@ const StaffForm = ({
               <Spinner
                 as='span'
                 animation='border'
-
+                size="sm"
                 role='status'
                 aria-hidden='true'
+                className="ms-2"
               />
             )}
           </Button>

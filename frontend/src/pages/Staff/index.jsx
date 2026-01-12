@@ -1,4 +1,4 @@
-import { Button, Form, Row, Col, Table, Card } from "@themesberg/react-bootstrap";
+import { Button, Form, Row, Col, Table, Card, Dropdown, ButtonGroup } from "@themesberg/react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCheckSquare,
@@ -9,6 +9,7 @@ import {
   faArrowCircleDown,
   faEdit,
   faRedoAlt,
+  faEllipsisVertical,
 } from "@fortawesome/free-solid-svg-icons";
 import {
   ConfirmationModal,
@@ -250,7 +251,7 @@ const Staff = () => {
                             )}
                           </td>
                           <td className="staff-table__actions">
-                            <div className="staff-actions">
+                            <div className="staff-actions d-none d-xxl-flex">
                               {getRole(roleId) !== "Admin" && (
                                 <>
                                   <Trigger message="Edit" id={adminUserId + "edit"} />
@@ -377,9 +378,59 @@ const Staff = () => {
                                     <FontAwesomeIcon icon={faTrash} />
                                   </Button>
                                 </>
+                          )}
+                        </div>
+
+                        {/* Mobile Actions Dropdown */}
+                        <div className="d-xxl-none text-end">
+                          <Dropdown align="end" drop="start">
+                            <Dropdown.Toggle
+                              variant="link"
+                              className="staff-icon-btn text-white p-0 border-0"
+                            >
+                              <FontAwesomeIcon icon={faEllipsisVertical} />
+                            </Dropdown.Toggle>
+                            <Dropdown.Menu className="staff-dropdown-menu" popperConfig={{ strategy: "fixed" }} renderOnMount>
+                              {getRole(roleId) !== "Admin" && !isHidden({ module: { key: "Admins", value: "U" } }) && (
+                                <Dropdown.Item onClick={() => navigate(`${AdminRoutes.EditAdmin.split(":").shift()}${adminUserId}`)}>
+                                  <FontAwesomeIcon icon={faEdit} /> Edit
+                                </Dropdown.Item>
                               )}
-                            </div>
-                          </td>
+
+                              {!isHidden({ module: { key: "Admins", value: "R" } }) && (
+                                <Dropdown.Item onClick={() => navigate(`${AdminRoutes.AdminDetails.split(":").shift()}${adminUserId}`)}>
+                                  <FontAwesomeIcon icon={faEye} /> View Details
+                                </Dropdown.Item>
+                              )}
+
+                              {getRole(roleId) !== "Admin" && !isHidden({ module: { key: "Admins", value: "T" } }) && (
+                                <Dropdown.Item
+                                  onClick={() => handleShow(adminUserId, isActive)}
+                                  className={isActive ? "text-danger" : "text-success"}
+                                >
+                                  <FontAwesomeIcon icon={isActive ? faWindowClose : faCheckSquare} />
+                                  {isActive ? "Deactivate" : "Activate"}
+                                </Dropdown.Item>
+                              )}
+
+                              {getRole(roleId) !== "Support" && !isHidden({ module: { key: "Admins", value: "R" } }) && (
+                                <Dropdown.Item onClick={() => navigate(`${AdminRoutes.AdminDetails.split(":").shift()}${adminUserId}`, { state: { isTreeView: true } })}>
+                                  <img height="16px" src={packageTreeIcon} alt="Tree" style={{ marginRight: '10px' }} /> View Tree
+                                </Dropdown.Item>
+                              )}
+
+                              {getRole(roleId) !== "Admin" && !isHidden({ module: { key: "Admins", value: "D" } }) && (
+                                <>
+                                  <Dropdown.Divider />
+                                  <Dropdown.Item onClick={() => handleDeleteModal(adminUserId)} className="text-danger">
+                                    <FontAwesomeIcon icon={faTrash} /> Delete
+                                  </Dropdown.Item>
+                                </>
+                              )}
+                            </Dropdown.Menu>
+                          </Dropdown>
+                        </div>
+                      </td>
                         </tr>
                       );
                     }

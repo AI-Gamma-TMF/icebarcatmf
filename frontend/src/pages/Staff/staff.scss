@@ -13,6 +13,33 @@
   margin: 0;
 }
 
+.staff-page__back-btn {
+  color: rgba(234, 250, 245, 0.92);
+  text-decoration: none;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+
+  &:hover {
+    color: rgba(var(--gs-cta-rgb), 0.92);
+    background: rgba(var(--gs-cta-rgb), 0.08);
+    border-color: rgba(var(--gs-cta-rgb), 0.18);
+    transform: translateX(-3px);
+    text-decoration: none;
+  }
+
+  &:focus {
+    box-shadow: 0 0 0 0.2rem rgba(0, 229, 160, 0.18);
+    outline: none;
+  }
+}
+
 .staff-page__card {
   background:
     linear-gradient(135deg, rgba(255, 255, 255, 0.04) 0%, rgba(0, 0, 0, 0.22) 100%),
@@ -97,7 +124,9 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    padding: 12px 8px;
+    padding: 10px 8px;
+    vertical-align: middle;
+    line-height: 1.2;
   }
 }
 
@@ -161,20 +190,21 @@
 
 .staff-table__actions {
   text-align: right;
+  width: 240px; // keep actions on one line; table is responsive (scrolls) if needed
 }
 
 .staff-actions {
   display: inline-flex;
   align-items: center;
   justify-content: flex-end;
-  flex-wrap: wrap;
-  gap: 8px;
+  flex-wrap: nowrap; // prevent wrapping that causes huge row height
+  gap: 6px;
 }
 
 // Icon buttons (keep Bootstrap variants for semantics, but visually unify)
 .staff-icon-btn.btn {
-  width: 40px;
-  height: 40px;
+  width: 36px;
+  height: 36px;
   border-radius: 14px;
   padding: 0;
   display: inline-flex;
@@ -185,6 +215,10 @@
   color: rgba(234, 250, 245, 0.92) !important;
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
   transition: transform 140ms ease, background 140ms ease, border-color 140ms ease;
+}
+
+.staff-icon-btn.btn svg {
+  font-size: 0.95rem;
 }
 
 .staff-icon-btn.btn:hover {
@@ -226,6 +260,628 @@
   margin-top: 10px;
 }
 
+// ============================================================
+// Staff Form Styling - GLOBAL CONSISTENCY
+// ============================================================
+
+// Catch-all for ALL form controls in staff forms - CONSISTENT HEIGHT
+.staff-page__card,
+.staff-form {
+  .form-control,
+  .form-select {
+    background-color: rgba(0, 0, 0, 0.35) !important;
+    color: rgba(255, 255, 255, 0.92) !important;
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    border-radius: 14px !important;
+    padding: 12px 14px !important;
+    height: 48px !important;
+    line-height: 1.5;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06) !important;
+    transition: all 0.2s ease;
+
+    &::placeholder {
+      color: rgba(234, 250, 245, 0.55) !important;
+    }
+
+    &:focus {
+      outline: none !important;
+      border-color: rgba(0, 229, 160, 0.35) !important;
+      background-color: rgba(0, 0, 0, 0.45) !important;
+      box-shadow: 0 0 0 0.2rem rgba(0, 229, 160, 0.18),
+                  inset 0 1px 0 rgba(255, 255, 255, 0.06) !important;
+    }
+
+    &:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      background-color: rgba(0, 0, 0, 0.25) !important;
+    }
+  }
+
+  // Ensure selects have custom arrow
+  .form-select {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23eafaf5' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e") !important;
+    background-repeat: no-repeat !important;
+    background-position: right 0.75rem center !important;
+    background-size: 16px 12px !important;
+    padding-right: 2.5rem !important;
+  }
+}
+
+// Modern form inputs with dark glassmorphic design - ALL FIELDS SAME HEIGHT
+.staff-form__input.form-control,
+.staff-form__select.form-select,
+.staff-form__select.form-control,
+.form-control.staff-form__input,
+.form-select.staff-form__select {
+  background-color: rgba(0, 0, 0, 0.35) !important;
+  color: rgba(255, 255, 255, 0.92) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  border-radius: 14px !important;
+  padding: 12px 14px !important;
+  height: 48px !important;
+  line-height: 1.5;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06) !important;
+  transition: all 0.2s ease;
+
+  &::placeholder {
+    color: rgba(234, 250, 245, 0.55) !important;
+  }
+
+  &:focus {
+    outline: none !important;
+    border-color: rgba(0, 229, 160, 0.35) !important;
+    background-color: rgba(0, 0, 0, 0.45) !important;
+    box-shadow:
+      0 0 0 0.2rem rgba(0, 229, 160, 0.18),
+      inset 0 1px 0 rgba(255, 255, 255, 0.06) !important;
+  }
+
+  &:focus-within {
+    border-color: rgba(0, 229, 160, 0.35) !important;
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    background-color: rgba(0, 0, 0, 0.25) !important;
+  }
+
+  // Remove default select arrow and add custom
+  &.form-select {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23eafaf5' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 16px 12px;
+    padding-right: 2.5rem;
+  }
+}
+
+// Input group for password field - Seamless connection
+.input-group.staff-form__input-group {
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  border-radius: 14px;
+  overflow: hidden; // Ensures clean rounded corners
+
+  // Password input field
+  .staff-form__input.form-control {
+    background-color: rgba(0, 0, 0, 0.35) !important;
+    color: rgba(255, 255, 255, 0.92) !important;
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    border-right: 0 !important;
+    border-top-left-radius: 14px !important;
+    border-bottom-left-radius: 14px !important;
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+    padding: 12px 14px !important;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06) !important;
+    flex: 1 1 auto;
+
+    &::placeholder {
+      color: rgba(234, 250, 245, 0.55);
+    }
+
+    &:focus {
+      border-color: rgba(0, 229, 160, 0.35) !important;
+      border-right: 0 !important;
+      background-color: rgba(0, 0, 0, 0.45) !important;
+      outline: none;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06) !important;
+    }
+  }
+
+  // Eye icon container
+  .input-group-text.staff-form__input-icon {
+    background-color: rgba(0, 0, 0, 0.35) !important;
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    border-left: 0 !important;
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+    border-top-right-radius: 14px !important;
+    border-bottom-right-radius: 14px !important;
+    color: rgba(234, 250, 245, 0.78) !important;
+    padding: 12px 14px !important;
+    cursor: pointer;
+    transition: color 0.2s ease;
+    margin-left: 0;
+
+    svg {
+      cursor: pointer;
+    }
+
+    &:hover {
+      color: rgba(var(--gs-cta-rgb), 0.92) !important;
+    }
+  }
+
+  // When input is focused, style the icon part to match
+  &:focus-within {
+    .input-group-text.staff-form__input-icon {
+      border-color: rgba(0, 229, 160, 0.35) !important;
+      background-color: rgba(0, 0, 0, 0.45) !important;
+    }
+
+    // Add glow effect to entire group
+    box-shadow: 0 0 0 0.2rem rgba(0, 229, 160, 0.18);
+  }
+}
+
+// Prevent any inherited styles on the Group field column and Row
+.staff-form {
+  .row:has(.staff-form__select),
+  .col:has(.staff-form__select) {
+    &::before,
+    &::after {
+      content: none !important;
+      display: none !important;
+    }
+
+    border: none !important;
+    border-top: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+  }
+}
+
+// React-Select styling (for creatable group select) - NO EXTRA BORDERS/LINES
+.staff-form__select {
+  outline: none !important;
+  box-shadow: none !important;
+  border: none !important;
+  border-top: none !important;
+  position: relative;
+  isolation: isolate;
+  margin-top: 0 !important;
+
+  &::before,
+  &::after {
+    content: none !important;
+    display: none !important;
+  }
+
+  * {
+    outline: none !important;
+
+    &::before,
+    &::after {
+      display: none !important;
+    }
+  }
+
+  // Remove any inherited borders from wrapper div
+  > div {
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+
+    &::before,
+    &::after {
+      display: none !important;
+    }
+  }
+
+  // Container (outermost wrapper)
+  .staff-select__container {
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+
+    &::before,
+    &::after {
+      display: none !important;
+    }
+  }
+
+  // Control (the visible input box)
+  .staff-select__control {
+    background-color: rgba(0, 0, 0, 0.35) !important;
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.12) !important;
+    border-radius: 14px !important;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06) !important;
+    min-height: 48px !important;
+    height: 48px !important;
+    transition: all 0.2s ease;
+    outline: none !important;
+
+    &:hover {
+      border-color: rgba(255, 255, 255, 0.18) !important;
+    }
+
+    &::before,
+    &::after {
+      display: none !important;
+    }
+  }
+
+  // SAME GREEN FOCUS AS OTHER INPUTS
+  .staff-select__control--is-focused {
+    border-color: rgba(0, 229, 160, 0.35) !important;
+    background-color: rgba(0, 0, 0, 0.45) !important;
+    box-shadow:
+      0 0 0 0.2rem rgba(0, 229, 160, 0.18),
+      inset 0 1px 0 rgba(255, 255, 255, 0.06) !important;
+    outline: none !important;
+  }
+
+  .staff-select__value-container {
+    padding: 11px 14px !important;
+    height: 46px;
+    min-width: 0; // allow text to shrink on small screens
+    flex: 1 1 auto;
+  }
+
+  .staff-select__input-container {
+    margin: 0;
+    padding: 0;
+    min-width: 0;
+  }
+
+  // IMPORTANT: prevent the internal React-Select typing input from inheriting our global input styles
+  // (this was causing the small rounded "pill" showing on top/left of the select)
+  .staff-select__input-container,
+  .staff-select__input {
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border-radius: 0 !important;
+  }
+
+  .staff-select__input input {
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    height: auto !important;
+    min-height: 0 !important;
+    border-radius: 0 !important;
+    outline: none !important;
+  }
+
+  .staff-select__indicators {
+    height: 46px;
+  }
+
+  .staff-select__indicator {
+    padding: 8px;
+  }
+
+  .staff-select__menu {
+    background-color: rgba(26, 26, 26, 0.95) !important;
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    border-radius: 14px !important;
+    overflow: hidden;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+  }
+
+  .staff-select__menu-list {
+    padding: 4px;
+  }
+
+  .staff-select__option {
+    background-color: transparent !important;
+    color: rgba(255, 255, 255, 0.92) !important;
+    padding: 10px 14px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+
+    &:hover {
+      background-color: rgba(0, 229, 160, 0.12) !important;
+    }
+
+    &:active {
+      background-color: rgba(0, 229, 160, 0.18) !important;
+    }
+  }
+
+  .staff-select__option--is-selected {
+    background-color: rgba(0, 229, 160, 0.22) !important;
+    font-weight: 600;
+  }
+
+  .staff-select__option--is-focused {
+    background-color: rgba(0, 229, 160, 0.12) !important;
+  }
+
+  .staff-select__single-value,
+  .staff-select__input,
+  .staff-select__input-container {
+    color: rgba(255, 255, 255, 0.92) !important;
+  }
+
+  .staff-select__placeholder {
+    color: rgba(234, 250, 245, 0.55) !important;
+  }
+
+  .staff-select__single-value,
+  .staff-select__placeholder {
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  // When using menuPortalTarget, react-select renders into a portal container
+  .staff-select__menu-portal {
+    z-index: 99999 !important;
+  }
+
+  .staff-select__indicator {
+    color: rgba(234, 250, 245, 0.78) !important;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: rgba(var(--gs-cta-rgb), 0.92) !important;
+    }
+  }
+
+  .staff-select__indicator-separator {
+    background-color: rgba(255, 255, 255, 0.12) !important;
+  }
+
+  .staff-select__multi-value {
+    background-color: rgba(0, 229, 160, 0.18) !important;
+    border-radius: 8px;
+    
+    .staff-select__multi-value__label {
+      color: rgba(255, 255, 255, 0.92) !important;
+    }
+
+    .staff-select__multi-value__remove {
+      color: rgba(255, 255, 255, 0.70) !important;
+      
+      &:hover {
+        background-color: rgba(255, 107, 107, 0.25) !important;
+        color: rgba(255, 255, 255, 0.92) !important;
+      }
+    }
+  }
+}
+
+// React-Select menu is portaled to <body>, so it won't inherit `.staff-form__select` nesting.
+// These rules are scoped by `classNamePrefix='staff-select'` to avoid affecting other selects.
+.staff-select__menu {
+  background-color: rgba(26, 26, 26, 0.95) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  border-radius: 14px !important;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+}
+
+.staff-select__menu-portal {
+  z-index: 99999 !important;
+}
+
+.staff-select__menu-list {
+  padding: 4px;
+}
+
+.staff-select__option {
+  background-color: transparent !important;
+  color: rgba(255, 255, 255, 0.92) !important;
+  padding: 10px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.staff-select__option--is-focused {
+  background-color: rgba(0, 229, 160, 0.12) !important;
+}
+
+.staff-select__option--is-selected {
+  background-color: rgba(0, 229, 160, 0.22) !important;
+  color: rgba(255, 255, 255, 0.95) !important;
+  font-weight: 600;
+}
+
+// Mobile Actions Dropdown styling
+.staff-dropdown-menu {
+  background-color: rgba(26, 26, 26, 0.95) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  border-radius: 14px !important;
+  padding: 8px !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5) !important;
+  overflow: hidden;
+  z-index: 99999 !important;
+
+  .dropdown-item {
+    color: rgba(255, 255, 255, 0.92) !important;
+    padding: 10px 16px !important;
+    border-radius: 8px !important;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 500;
+
+    svg {
+      width: 16px;
+      opacity: 0.7;
+    }
+
+    &:hover {
+      background-color: rgba(0, 229, 160, 0.12) !important;
+      color: rgba(0, 229, 160, 0.92) !important;
+      
+      svg {
+        opacity: 1;
+      }
+    }
+
+    &:active {
+      background-color: rgba(0, 229, 160, 0.18) !important;
+    }
+  }
+}
+
+.staff-select__placeholder {
+  color: rgba(234, 250, 245, 0.55) !important;
+}
+
+.staff-select__single-value,
+.staff-select__input,
+.staff-select__input-container {
+  color: rgba(255, 255, 255, 0.92) !important;
+}
+
+.staff-select__indicator {
+  color: rgba(234, 250, 245, 0.78) !important;
+}
+
+.staff-select__indicator-separator {
+  background-color: rgba(255, 255, 255, 0.12) !important;
+}
+
+// Permissions card styling
+.staff-form__permissions-card {
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.04) 0%, rgba(0, 0, 0, 0.22) 100%),
+    rgba(26, 26, 26, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.55),
+    0 14px 40px rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(12px) saturate(140%);
+  -webkit-backdrop-filter: blur(12px) saturate(140%);
+}
+
+.staff-form__permissions-header {
+  background: rgba(0, 0, 0, 0.35);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  color: rgba(234, 250, 245, 0.92);
+  font-weight: 700;
+  padding: 16px 20px;
+  border-top-left-radius: 18px;
+  border-top-right-radius: 18px;
+}
+
+.staff-form__permission-badge {
+  padding: 8px 14px;
+  border-radius: 12px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 1px solid rgba(255, 255, 255, 0.10);
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(var(--gs-cta-rgb), 0.25);
+  }
+}
+
+// Form buttons
+.staff-form__button {
+  border-radius: 14px;
+  padding: 12px 24px;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  transition: all 0.2s ease;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  min-width: 140px;
+
+  &--cancel {
+    background: rgba(255, 193, 7, 0.18);
+    border-color: rgba(255, 193, 7, 0.22);
+    color: rgba(255, 193, 7, 0.92);
+
+    &:hover {
+      background: rgba(255, 193, 7, 0.28);
+      border-color: rgba(255, 193, 7, 0.32);
+      transform: translateY(-2px);
+    }
+  }
+
+  &--submit {
+    background: linear-gradient(135deg, var(--gs-cta-start) 0%, var(--gs-cta-end) 100%);
+    border-color: rgba(var(--gs-cta-rgb), 0.22);
+    box-shadow:
+      0 10px 26px rgba(var(--gs-cta-rgb), 0.12),
+      inset 0 1px 0 rgba(255, 255, 255, 0.18);
+
+    &:hover:not(:disabled) {
+      filter: brightness(1.05);
+      transform: translateY(-2px);
+      box-shadow:
+        0 12px 30px rgba(var(--gs-cta-rgb), 0.18),
+        inset 0 1px 0 rgba(255, 255, 255, 0.18);
+    }
+
+    &:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+  }
+}
+
+// Form labels - CONSISTENT STYLING
+.staff-page {
+  .form-label {
+    color: rgba(234, 250, 245, 0.92) !important;
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+    letter-spacing: 0.02em;
+  }
+
+  // Switch/Checkbox styling to match theme
+  .form-check-input {
+    background-color: rgba(0, 0, 0, 0.35);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    transition: all 0.2s ease;
+
+    &:checked {
+      background-color: rgba(var(--gs-cta-rgb), 0.92);
+      border-color: rgba(var(--gs-cta-rgb), 0.92);
+    }
+
+    &:focus {
+      border-color: rgba(0, 229, 160, 0.35);
+      box-shadow: 0 0 0 0.2rem rgba(0, 229, 160, 0.18);
+    }
+  }
+
+  // Switch specific styling
+  .form-switch .form-check-input {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23fff'/%3e%3c/svg%3e");
+    
+    &:checked {
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23fff'/%3e%3c/svg%3e");
+    }
+  }
+}
+
 // Responsive adjustments
 @media screen and (max-width: 1200px) {
   .staff-table__email {
@@ -241,15 +897,28 @@
 
 @media screen and (max-width: 767.9px) {
   .permission-row {
-    border-bottom: 1px solid #80808042;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     width: 100%;
-    margin: auto;
+    padding-bottom: 12px;
+    margin-bottom: 12px;
   }
   
   .staff-table__table {
+    // Allow rows to grow on mobile to fit wrapped buttons
+    tr {
+      height: auto !important;
+    }
+
     th, td {
       padding: 8px 4px;
       font-size: 0.85rem;
+    }
+
+    // Mobile: don't clip the Action buttons
+    th.staff-table__actions,
+    td.staff-table__actions {
+      overflow: visible !important;
+      height: auto !important;
     }
   }
   
@@ -264,11 +933,48 @@
   }
   
   .staff-actions {
-    gap: 4px;
+    gap: 6px;
+    flex-wrap: wrap; // allow wrap on small screens
+    max-width: 100%;
+    justify-content: center; // Center buttons in the sticky cell
+    padding: 4px 0;
+  }
+
+  // Keep the Actions column visible on small screens (table can scroll horizontally)
+  .staff-table__table {
+    th.staff-table__actions,
+    td.staff-table__actions {
+      position: sticky;
+      right: 0;
+      z-index: 3;
+      width: 84px; // only the "more" dropdown button
+      min-width: 84px;
+      max-width: 84px;
+      white-space: nowrap;
+      background: rgba(16, 16, 16, 0.95); // Slightly more opaque
+      backdrop-filter: blur(10px) saturate(140%);
+      -webkit-backdrop-filter: blur(10px) saturate(140%);
+      box-shadow: -12px 0 18px rgba(0, 0, 0, 0.35);
+      vertical-align: middle;
+      display: table-cell;
+    }
+
+    th.staff-table__actions {
+      z-index: 4;
+    }
   }
   
   .staff-icon-btn.btn {
-    width: 36px;
-    height: 36px;
+    width: 32px;
+    height: 32px;
+  }
+
+  .staff-form__button {
+    min-width: 100%;
+    padding: 12px 20px;
+  }
+
+  .staff-form__permissions-header {
+    padding: 12px 16px;
   }
 }

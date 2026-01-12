@@ -1,9 +1,14 @@
 import React from 'react'
-import { Card, Row, Col } from '@themesberg/react-bootstrap'
+import { Card, Row, Col, Button } from '@themesberg/react-bootstrap'
 import { Formik } from 'formik'
 import { updateStaffSchema } from '../schemas'
 import StaffForm from './StaffForm'
 import useEditAdmin from '../hooks/useEditAdmin'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
+import { useNavigate } from 'react-router-dom'
+import { AdminRoutes } from '../../../routes'
+import '../staff.scss'
 
 const EditStaffAdmin = () => {
   const {
@@ -12,16 +17,27 @@ const EditStaffAdmin = () => {
     t,
     loading
   } = useEditAdmin()
+  
+  const navigate = useNavigate()
 
   return (
-    <div>
-      <Row>
-        <Col sm={8}>
-          <h3>{t('editStaff.title')}</h3>
+    <div className="staff-page dashboard-typography">
+      <Row className="d-flex align-items-center mb-3">
+        <Col xs="auto">
+          <Button
+            variant="link"
+            className="staff-page__back-btn p-0"
+            onClick={() => navigate(AdminRoutes.Staff)}
+          >
+            <FontAwesomeIcon icon={faArrowLeft} size="lg" />
+          </Button>
+        </Col>
+        <Col>
+          <h3 className="staff-page__title mb-0">{t('editStaff.title')}</h3>
         </Col>
       </Row>
 
-      <Card body>
+      <Card className="staff-page__card p-4">
         {adminDetails && (
           <Formik
             initialValues={{
