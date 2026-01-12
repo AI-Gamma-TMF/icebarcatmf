@@ -233,30 +233,22 @@
     pointer-events: none;
   }
 
+  // NOTE: We intentionally disable “colorful hover” on KPI tiles for parity with the
+  // desired UI (no hover coloring on the dashboard tiles).
+  // Keep hover neutral (no transform, no tint overlay).
   &:hover {
-    transform: translateY(-1px);
-    border-color: rgba(0, 229, 160, 0.18);
+    transform: none;
+    border-color: rgba(255, 255, 255, 0.06);
     box-shadow:
       0 1px 2px rgba(0, 0, 0, 0.55),
-      0 18px 55px rgba(0, 0, 0, 0.45),
-      0 0 18px rgba(0, 229, 160, 0.10);
+      0 14px 40px rgba(0, 0, 0, 0.35);
 
     &::after {
-      opacity: 1;
+      opacity: 0;
     }
 
     &::before {
-      opacity: 1;
-      background: linear-gradient(
-        90deg,
-        rgba(0, 0, 0, 0) 0%,
-        rgba(0, 0, 0, 0) 12%,
-        rgba(0, 229, 160, 0.25) 28%,
-        rgba(0, 229, 160, 0.75) 50%,
-        rgba(0, 229, 160, 0.25) 72%,
-        rgba(0, 0, 0, 0) 88%,
-        rgba(0, 0, 0, 0) 100%
-      );
+      opacity: 0.0;
     }
   }
 
@@ -456,16 +448,16 @@
     opacity: 0.7;
   }
 
+  // Keep ticker wrapper neutral on hover (no tint/raise effect).
   &:hover {
-    transform: translateY(-1px);
-    border-color: rgba(0, 229, 160, 0.18);
+    transform: none;
+    border-color: rgba(255, 255, 255, 0.06);
     box-shadow:
       0 1px 2px rgba(0, 0, 0, 0.55),
-      0 18px 55px rgba(0, 0, 0, 0.45),
-      0 0 18px rgba(0, 229, 160, 0.10);
+      0 14px 40px rgba(0, 0, 0, 0.35);
 
     &::after {
-      opacity: 1;
+      opacity: 0;
     }
   }
 
