@@ -15,6 +15,11 @@ import { InlineLoader } from '../Preloader'
 // import { useLogoutUser } from '../../reactQuery/hooks/customMutationHook';
 import { affiliateNavLink, navItems } from '../../utils/navItems';
 
+// Check if running on demo host - bypass all permission checks
+const isDemoHost = () =>
+  typeof window !== "undefined" &&
+  window.location.hostname.includes("icebarcatmf-admin-demo");
+
 const Sidebar = (props) => {
   const { t } = useTranslation(['sidebar'])
   const location = useLocation();
@@ -23,6 +28,7 @@ const Sidebar = (props) => {
   const showClass = show ? 'show' : '';
   const userDetails = useUserStore((state) => state.userDetails)
   const permissions = useUserStore((state) => state.permissions)
+  const isDemo = isDemoHost();
   // const navigate = useNavigate()
   const isUserAffiliate = useUserStore((state) => state.isUserAffiliate)
   // const logoutUser = () => {
@@ -104,7 +110,8 @@ const Sidebar = (props) => {
   const CollapsableNavItem = (props) => {
     const { permissionLabel, accordianPath, eventKey, titleKey, icon, children = null } = props;
 
-    if (permissionLabel && !Object.keys(permissions).includes(permissionLabel)) return (<></>);
+    // On demo, skip permission checks
+    if (!isDemo && permissionLabel && !Object.keys(permissions || {}).includes(permissionLabel)) return (<></>);
 
     return (
       <Accordion as={Nav.Item} defaultActiveKey={activeAccordianKey(accordianPath, eventKey)} style={{ backgroundColor: '#1a1a1a', border: 'none', boxShadow: 'none' }}>
@@ -186,8 +193,9 @@ const Sidebar = (props) => {
     const classNames = badgeText ? 'd-flex justify-content-start align-items-center justify-content-between' : '';
     const navItemClassName = link === handlePathName(pathname) ? 'active' : '';
     const linkProps = external ? { href: link } : { as: Link, to: link };
-    if (permissionLabel && !Object.keys(permissions).includes(permissionLabel)) return (<></>);
-    if (inSidePermissionLabel && !permissions?.[permissionLabel]?.includes(inSidePermissionLabel)) return (<></>);
+    // On demo, skip permission checks
+    if (!isDemo && permissionLabel && !Object.keys(permissions || {}).includes(permissionLabel)) return (<></>);
+    if (!isDemo && inSidePermissionLabel && !permissions?.[permissionLabel]?.includes(inSidePermissionLabel)) return (<></>);
     return (
       <Nav.Item className={navItemClassName} onClick={() => setShow(false)}>
         <Nav.Link {...linkProps} target={target} className={classNames}>
@@ -248,7 +256,8 @@ const Sidebar = (props) => {
 
           <Nav className='flex-column pt-3 pt-md-0'>
 
-            {userDetails ? null : (
+            {/* On demo, skip the loader since there's no userDetails */}
+            {!isDemo && !userDetails && (
               <div className='d-flex justify-content-center'><InlineLoader /></div>
             )}
             {renderNavItems(isUserAffiliate ? affiliateNavLink : navItems)}
