@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useUserStore } from "../../../store/store";
 import { jackpotSocket, loginCountSocket, whaleAlertSocket } from "../../../utils/socket";
+import { isDemoHost } from "../../../utils/demoData";
 
 const useMainRoute =()=>{
     
@@ -37,12 +38,13 @@ const useMainRoute =()=>{
     
     useEffect(() => {
       if (!userDetails.userDetails) return
-      // Perf: sockets can keep the tab “hot” (frequent messages) and spike CPU/GPU on some machines.
-      // In low-power mode, we skip opening realtime connections.
+      // Perf: sockets can keep the tab "hot" (frequent messages) and spike CPU/GPU on some machines.
+      // In low-power mode or on demo host, we skip opening realtime connections to reduce CPU usage.
       const lowPower =
         typeof document !== "undefined" &&
         document.documentElement.classList.contains("gs-low-power");
-      if (lowPower) return;
+      // Always skip sockets on demo host - we use mock data instead
+      if (lowPower || isDemoHost()) return;
       loginCountSocket.connect()
       whaleAlertSocket.connect()
       jackpotSocket.connect()

@@ -43,8 +43,12 @@ try {
   const isLocalhost =
     window.location?.hostname === 'localhost' ||
     window.location?.hostname === '127.0.0.1'
+  // Also enable low-power mode on demo/staging environments to ensure smooth performance
+  const isDemoHost =
+    window.location?.hostname?.includes('ondigitalocean.app') ||
+    window.location?.hostname?.includes('demo')
   const autoLowPower =
-    !!reduceMotion || !!reduceData || cores <= 4 || mem <= 4 || (isDev && isLocalhost)
+    !!reduceMotion || !!reduceData || cores <= 4 || mem <= 4 || (isDev && isLocalhost) || isDemoHost
   const enabled =
     forced === '1' ? true : forced === '0' ? false : autoLowPower
   if (enabled) document.documentElement.classList.add('gs-low-power')

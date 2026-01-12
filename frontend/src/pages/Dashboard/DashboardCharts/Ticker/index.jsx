@@ -5,6 +5,7 @@ import { formatNumber } from "../../../../utils/dateFormatter";
 import { getLoginToken, getItem, setItem } from "../../../../utils/storageUtils";
 import { loginCountSocket } from "../../../../utils/socket";
 import { useUserStore } from "../../../../store/store";
+import { isDemoHost } from "../../../../utils/demoData";
 
 const DEFAULT_TICKER_SLOTS = [
   "onlinePlayers",
@@ -126,6 +127,8 @@ export const Ticker = ({ data }) => {
   }, [slotTileIds, userKey]);
 
   useEffect(() => {
+    // Skip socket connections entirely on demo host - we use mock data instead
+    if (isDemoHost()) return;
     if (!loginCountSocketConnection && !livePlayersCountConnection) return;
 
     lowPowerRef.current =
