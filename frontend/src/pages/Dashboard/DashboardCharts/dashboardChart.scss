@@ -135,17 +135,32 @@
     width: 100%;
     margin: 0;
     padding: 6px 2px;
+    line-height: 1.2;
+    
+    // Ensure both child spans are vertically centered
+    > span {
+      display: flex;
+      align-items: center;
+    }
   }
 
   .accordian-heading span:first-child {
     font-family: 'Space Grotesk', 'Inter', 'Nunito Sans', sans-serif;
     font-weight: 800;
     letter-spacing: -0.02em;
+    line-height: 1.2;
   }
 
   .accordian-heading svg {
     color: rgba(var(--gs-cta-rgb), 0.85);
     filter: drop-shadow(0 0 10px rgba(var(--gs-cta-rgb), 0.12));
+    flex-shrink: 0;
+  }
+  
+  // Ensure view tabs align properly with text
+  .dashboard-view-tabs--compact {
+    margin: 0;
+    flex-shrink: 0;
   }
 }
 
