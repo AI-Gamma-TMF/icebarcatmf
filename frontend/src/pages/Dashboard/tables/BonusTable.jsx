@@ -22,26 +22,22 @@ const BonusTable = ({
   return (
     <>
         <Row
-          className="mt-4 align-items-center dashboard-accordion-header"
+          className="mt-4 dashboard-accordion-header"
           onClick={() => setAccordionOpen(!accordionOpen)}
           style={{ cursor: "pointer" }}
         >
           <Col>
-            <div className="d-flex align-items-center" style={{ gap: "10px" }}>
-              <h5 className="accordian-heading">
-                <span>Bonus Data</span>
-
-                <span>
-                  {accordionOpen ? (
-                    <FontAwesomeIcon icon={faChevronDown} />
-                  ) : (
-                    <FontAwesomeIcon icon={faChevronRight} />
-                  )}{" "}
-                </span>
-              </h5>
-            </div>
+            <h5 className="accordian-heading">
+              <span>Bonus Data</span>
+              <span>
+                {accordionOpen ? (
+                  <FontAwesomeIcon icon={faChevronDown} />
+                ) : (
+                  <FontAwesomeIcon icon={faChevronRight} />
+                )}
+              </span>
+            </h5>
           </Col>
-          <Col></Col>
         </Row>
 
         <Accordion activeKey={accordionOpen ? "0" : ""}>

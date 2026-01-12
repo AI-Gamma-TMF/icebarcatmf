@@ -128,13 +128,23 @@
 
 // Accordion section headings (Economy / Transactions / Bonus)
 .dashboard-accordion-header {
+  // Remove Bootstrap Row default margins
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  
+  // Remove Bootstrap Col padding for consistent alignment
+  .col, [class*="col-"] {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+  
   .accordian-heading {
     display: flex;
     align-items: center;
     justify-content: space-between;
     width: 100%;
     margin: 0;
-    padding: 6px 2px;
+    padding: 8px 0;
     line-height: 1.2;
     
     // Ensure both child spans are vertically centered

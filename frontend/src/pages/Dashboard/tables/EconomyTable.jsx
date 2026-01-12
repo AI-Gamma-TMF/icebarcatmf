@@ -43,36 +43,34 @@ const EconomyTable = ({ accordionOpen, setAccordionOpen, t, economyDataV2,
 
   return (
     <>
-      <Row className="mt-4 align-items-center dashboard-accordion-header" onClick={() => setAccordionOpen(!accordionOpen)} style={{ cursor: 'pointer' }}>
-        <Col className='col-12'>
-          <div className="d-flex align-items-center" style={{ gap: "10px" }}>
-            <h5 className='accordian-heading'>
-              <span>{t(`headers.coinEcoDataKeys`)} {t('headers.data')}</span>
-              <span className="d-flex align-items-center gap-2">
-                <div className="dashboard-view-tabs dashboard-view-tabs--compact" onClick={(e) => e.stopPropagation()}>
-                  <button
-                    type="button"
-                    className={`dashboard-view-tab ${view === "table" ? "is-active" : ""}`}
-                    onClick={() => setView("table")}
-                  >
-                    Table
-                  </button>
-                  <button
-                    type="button"
-                    className={`dashboard-view-tab ${view === "chart" ? "is-active" : ""}`}
-                    onClick={() => {
-                      setMetricId((prev) => prev || metricOptions?.[0]?.value || "");
-                      setView("chart");
-                    }}
-                    disabled={economyLoadingV2 || !economyDataV2 || !Object.keys(economyDataV2)?.length}
-                  >
-                    Chart
-                  </button>
-                </div>
-                {accordionOpen ? <FontAwesomeIcon icon={faChevronDown} /> : <FontAwesomeIcon icon={faChevronRight} />} 
-              </span>
-            </h5>
-          </div>
+      <Row className="mt-4 dashboard-accordion-header" onClick={() => setAccordionOpen(!accordionOpen)} style={{ cursor: 'pointer' }}>
+        <Col>
+          <h5 className='accordian-heading'>
+            <span>{t(`headers.coinEcoDataKeys`)} {t('headers.data')}</span>
+            <span className="d-flex align-items-center gap-2">
+              <div className="dashboard-view-tabs dashboard-view-tabs--compact" onClick={(e) => e.stopPropagation()}>
+                <button
+                  type="button"
+                  className={`dashboard-view-tab ${view === "table" ? "is-active" : ""}`}
+                  onClick={() => setView("table")}
+                >
+                  Table
+                </button>
+                <button
+                  type="button"
+                  className={`dashboard-view-tab ${view === "chart" ? "is-active" : ""}`}
+                  onClick={() => {
+                    setMetricId((prev) => prev || metricOptions?.[0]?.value || "");
+                    setView("chart");
+                  }}
+                  disabled={economyLoadingV2 || !economyDataV2 || !Object.keys(economyDataV2)?.length}
+                >
+                  Chart
+                </button>
+              </div>
+              {accordionOpen ? <FontAwesomeIcon icon={faChevronDown} /> : <FontAwesomeIcon icon={faChevronRight} />} 
+            </span>
+          </h5>
         </Col>
       </Row>
       <Accordion activeKey={accordionOpen ? '0' : ''}>

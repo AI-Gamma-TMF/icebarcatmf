@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { Row, Table, Accordion, Button } from '@themesberg/react-bootstrap';
+import { Row, Col, Table, Accordion, Button } from '@themesberg/react-bootstrap';
 import { totalTablesList, tableData } from '../constants';
 import { InlineLoader } from '../../../components/Preloader';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -47,32 +47,34 @@ const TransactionTable = ({ accordionOpen, setAccordionOpen, t,
     return (
         <>
             <Row className='mt-4 dashboard-accordion-header' onClick={() => setAccordionOpen(!accordionOpen)} style={{ cursor: 'pointer' }}>
-                <h5 className='accordian-heading'>
-                    <span>{t(`headers.transactionDataKeys`)} {t('headers.data')}</span>
-                    <span className="d-flex align-items-center gap-2">
-                        <div className="dashboard-view-tabs dashboard-view-tabs--compact" onClick={(e) => e.stopPropagation()}>
-                            <button
-                                type="button"
-                                className={`dashboard-view-tab ${view === "table" ? "is-active" : ""}`}
-                                onClick={() => setView("table")}
-                            >
-                                Table
-                            </button>
-                            <button
-                                type="button"
-                                className={`dashboard-view-tab ${view === "chart" ? "is-active" : ""}`}
-                                onClick={() => {
-                                    setMetricId((prev) => prev || metricOptions?.[0]?.value || "");
-                                    setView("chart");
-                                }}
-                                disabled={transactionLoadingV2 || !transactionDataV2 || !Object.keys(transactionDataV2)?.length}
-                            >
-                                Chart
-                            </button>
-                        </div>
-                        {accordionOpen ? <FontAwesomeIcon icon={faChevronDown} /> : <FontAwesomeIcon icon={faChevronRight} />} 
-                    </span>
-                </h5>
+                <Col>
+                    <h5 className='accordian-heading'>
+                        <span>{t(`headers.transactionDataKeys`)} {t('headers.data')}</span>
+                        <span className="d-flex align-items-center gap-2">
+                            <div className="dashboard-view-tabs dashboard-view-tabs--compact" onClick={(e) => e.stopPropagation()}>
+                                <button
+                                    type="button"
+                                    className={`dashboard-view-tab ${view === "table" ? "is-active" : ""}`}
+                                    onClick={() => setView("table")}
+                                >
+                                    Table
+                                </button>
+                                <button
+                                    type="button"
+                                    className={`dashboard-view-tab ${view === "chart" ? "is-active" : ""}`}
+                                    onClick={() => {
+                                        setMetricId((prev) => prev || metricOptions?.[0]?.value || "");
+                                        setView("chart");
+                                    }}
+                                    disabled={transactionLoadingV2 || !transactionDataV2 || !Object.keys(transactionDataV2)?.length}
+                                >
+                                    Chart
+                                </button>
+                            </div>
+                            {accordionOpen ? <FontAwesomeIcon icon={faChevronDown} /> : <FontAwesomeIcon icon={faChevronRight} />} 
+                        </span>
+                    </h5>
+                </Col>
             </Row>
             <Accordion activeKey={accordionOpen ? '0' : ''}>
                 <Accordion.Item eventKey="0">
