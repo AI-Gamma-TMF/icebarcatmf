@@ -193,6 +193,36 @@
   width: 240px; // keep actions on one line; table is responsive (scrolls) if needed
 }
 
+// React-Bootstrap wraps <Table responsive> with .table-responsive.
+// Bootstrap overflow on that wrapper can clip dropdown menus (often only noticed in prod builds).
+.staff-table {
+  .table-responsive {
+    overflow-y: visible !important;
+    overflow-x: visible !important;
+  }
+}
+
+// Allow dropdown menus in the Actions column to escape the cell (do not clip).
+// Note: we keep the general `th, td { overflow: hidden; }` for other columns.
+.staff-table__table {
+  th.staff-table__actions,
+  td.staff-table__actions {
+    overflow: visible !important;
+    position: relative;
+    z-index: 1;
+  }
+}
+
+// Keep horizontal scrolling on smaller screens while still allowing dropdowns to render.
+@media (max-width: 991.98px) {
+  .staff-table {
+    .table-responsive {
+      overflow-x: auto !important;
+      overflow-y: visible !important;
+    }
+  }
+}
+
 .staff-actions {
   display: inline-flex;
   align-items: center;
