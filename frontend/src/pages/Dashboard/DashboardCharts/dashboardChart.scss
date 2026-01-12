@@ -1204,17 +1204,25 @@
 
 // Low power mode: reduce GPU-heavy effects on the dashboard surfaces
 html.gs-low-power {
+  // Disable ALL transitions and animations to prevent scroll flickering
   .dashboard-box,
   .dashboard-viz-panel,
   .dashboard-filters,
   .dashboard-table,
   .ticker-replace-modal .modal-content,
-  .dashboard-viz-panel__chart {
+  .dashboard-viz-panel__chart,
+  .ticker-container,
+  .dashboard-view-tab,
+  .dashboard-view-tabs,
+  .dashboard-viz-icon-btn,
+  .dashboard-viz-icon-group {
     backdrop-filter: none !important;
     -webkit-backdrop-filter: none !important;
     // Disable GPU layer hints that can cause flickering during fast scroll
     will-change: auto !important;
     transform: none !important;
+    // Disable ALL transitions - they cause flickering during scroll
+    transition: none !important;
   }
 
   .dashboard-box,
@@ -1241,6 +1249,7 @@ html.gs-low-power {
       0 1px 2px rgba(0, 0, 0, 0.55),
       0 10px 26px rgba(0, 0, 0, 0.30) !important;
     will-change: auto !important;
+    transition: none !important;
   }
 
   // Hide ALL expensive pseudo-elements (gradient borders, hover glows, decorations)
@@ -1254,6 +1263,11 @@ html.gs-low-power {
   .dashboard-viz-panel__chart::before,
   .dashboard-viz-panel__chart::after {
     display: none !important;
+  }
+
+  // Disable all canvas/chart animations
+  canvas {
+    image-rendering: optimizeSpeed !important;
   }
 }
 
