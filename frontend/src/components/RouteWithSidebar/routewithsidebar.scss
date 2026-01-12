@@ -65,7 +65,8 @@ main.gs-layout-shift-right .component-container {
   will-change: transform;
 }
 
-// Low power mode: keep the same dark look but disable expensive backdrop-filter blurs.
+// Low power mode: keep the same dark look but disable expensive backdrop-filter blurs
+// and pseudo-element decorations that can cause rendering issues during fast scrolling.
 .gs-low-power {
   .app-page--surface {
     backdrop-filter: none;
@@ -73,6 +74,14 @@ main.gs-layout-shift-right .component-container {
     box-shadow:
       0 1px 2px rgba(0, 0, 0, 0.55),
       0 10px 28px rgba(0, 0, 0, 0.38);
+    // Disable GPU layer hints that can cause flickering
+    will-change: auto;
+  }
+
+  // Hide expensive pseudo-elements (gradient borders, inner highlights)
+  .app-page--surface::before,
+  .app-page--surface::after {
+    display: none;
   }
 }
 

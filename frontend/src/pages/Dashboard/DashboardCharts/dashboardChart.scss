@@ -1212,6 +1212,9 @@ html.gs-low-power {
   .dashboard-viz-panel__chart {
     backdrop-filter: none !important;
     -webkit-backdrop-filter: none !important;
+    // Disable GPU layer hints that can cause flickering during fast scroll
+    will-change: auto !important;
+    transform: none !important;
   }
 
   .dashboard-box,
@@ -1237,13 +1240,20 @@ html.gs-low-power {
     box-shadow:
       0 1px 2px rgba(0, 0, 0, 0.55),
       0 10px 26px rgba(0, 0, 0, 0.30) !important;
+    will-change: auto !important;
   }
 
-  // Cut expensive hover glows in low power mode
+  // Hide ALL expensive pseudo-elements (gradient borders, hover glows, decorations)
+  // These can cause rendering issues during fast scrolling
+  .dashboard-box::before,
   .dashboard-box::after,
+  .ticker-container::before,
   .ticker-container::after,
+  .dashboard-viz-panel::before,
+  .dashboard-viz-panel::after,
+  .dashboard-viz-panel__chart::before,
   .dashboard-viz-panel__chart::after {
-    opacity: 0 !important;
+    display: none !important;
   }
 }
 
