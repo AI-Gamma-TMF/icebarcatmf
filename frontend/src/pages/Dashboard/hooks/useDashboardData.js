@@ -33,12 +33,14 @@ const useDashboardDataListing = (
   // Check if we're on the demo host - use mock data instead of real API calls
   const isDemo = isDemoHost();
 
-  const [startDate, setStartDate] = useState(
+  const [startDate, setStartDate] = useState(() =>
     convertTimeZone(getDateThreeMonthsBefore(), timeZoneCode)
   );
-  const [endDate, setEndDate] = useState(
+  const [endDate, setEndDate] = useState(() =>
     convertTimeZone(new Date(), timeZoneCode)
   );
+  
+  // Only update dates when timezone actually changes, not on every render
   useEffect(() => {
     setStartDate(convertTimeZone(getDateThreeMonthsBefore(), timeZoneCode));
     setEndDate(convertTimeZone(new Date(), timeZoneCode));
@@ -70,7 +72,7 @@ const useDashboardDataListing = (
     refetch: dashboardReportRefetchV2,
     isRefetching: isDashboardReportRefetchingV2,
   } = useQuery({
-    queryKey: ["dashboardReportV2", timeZoneCode, startDate, endDate, isDemo],
+    queryKey: ["dashboardReportV2", timeZoneCode, startDate?.toISOString?.() || startDate, endDate?.toISOString?.() || endDate, isDemo],
     queryFn: () =>
       isDemo
         ? Promise.resolve({ data: getMockDashboardData() })
@@ -86,7 +88,7 @@ const useDashboardDataListing = (
     refetch: reportRefetch,
     isRefetching: isReportRefetching,
   } = useQuery({
-    queryKey: ["betReport", timeZoneCode, startDate, endDate, isDemo],
+    queryKey: ["betReport", timeZoneCode, startDate?.toISOString?.() || startDate, endDate?.toISOString?.() || endDate, isDemo],
     queryFn: () =>
       isDemo
         ? Promise.resolve({ data: getMockLoginData() })
@@ -113,7 +115,7 @@ const useDashboardDataListing = (
     refetch: customerRefetchV2,
     isRefetching: isCustomerRefetchingV2,
   } = useQuery({
-    queryKey: ["customerReportV2", timeZoneCode, startDate, endDate, isDemo],
+    queryKey: ["customerReportV2", timeZoneCode, startDate?.toISOString?.() || startDate, endDate?.toISOString?.() || endDate, isDemo],
     queryFn: () =>
       isDemo
         ? Promise.resolve({ data: getMockCustomerData() })
@@ -142,7 +144,7 @@ const useDashboardDataListing = (
     refetch: economyRefetchV2,
     isRefetching: isEconomyRefetchingV2,
   } = useQuery({
-    queryKey: ["economyReportV2", timeZoneCode, startDate, endDate, isDemo],
+    queryKey: ["economyReportV2", timeZoneCode, startDate?.toISOString?.() || startDate, endDate?.toISOString?.() || endDate, isDemo],
     queryFn: () =>
       isDemo
         ? Promise.resolve({ data: getMockEconomyData() })
@@ -174,7 +176,7 @@ const useDashboardDataListing = (
     refetch: transactionRefetchV2,
     isRefetching: isTransactionRefetchingV2,
   } = useQuery({
-    queryKey: ["transactionReportV2", timeZoneCode, startDate, endDate, isDemo],
+    queryKey: ["transactionReportV2", timeZoneCode, startDate?.toISOString?.() || startDate, endDate?.toISOString?.() || endDate, isDemo],
     queryFn: () =>
       isDemo
         ? Promise.resolve({ data: getMockTransactionData() })
@@ -190,7 +192,7 @@ const useDashboardDataListing = (
     refetch: bonusRefetchV2,
     isRefetching: isBonusRefetchingV2,
   } = useQuery({
-    queryKey: ["bonusReportV2", timeZoneCode, startDate, endDate, isDemo],
+    queryKey: ["bonusReportV2", timeZoneCode, startDate?.toISOString?.() || startDate, endDate?.toISOString?.() || endDate, isDemo],
     queryFn: () =>
       isDemo
         ? Promise.resolve({ data: getMockBonusData() })
@@ -206,7 +208,7 @@ const useDashboardDataListing = (
     refetch: reportTillRefetch,
     isRefetching: isReportTillRefetching,
   } = useQuery({
-    queryKey: ["tilldatedata", timeZoneCode, startDate, endDate, isDemo],
+    queryKey: ["tilldatedata", timeZoneCode, startDate?.toISOString?.() || startDate, endDate?.toISOString?.() || endDate, isDemo],
     queryFn: () =>
       isDemo
         ? Promise.resolve({ data: getMockReportTillData() })
