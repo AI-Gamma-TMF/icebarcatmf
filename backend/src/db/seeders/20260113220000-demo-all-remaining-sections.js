@@ -449,7 +449,9 @@ module.exports = {
           valid_from: new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000),
           valid_to: new Date(now.getTime() + 365 * 24 * 60 * 60 * 1000),
           promotion_title: JSON.stringify({ EN: 'Welcome Bonus - Double Your First Purchase!' }),
-          bonus_type: 'deposit',
+          // NOTE: `bonus.bonus_type` is an enum in prod DB (enum_bonus_bonus_type).
+          // Use a known enum value; "deposit" is NOT a valid enum and breaks migrate-seed.
+          bonus_type: 'promotion-bonus',
           term_condition: JSON.stringify({ EN: 'Available on first purchase only. 1x wagering requirement.' }),
           currency: JSON.stringify({ USD: true }),
           image_url: 'https://example.com/bonus-welcome.jpg',
@@ -475,7 +477,8 @@ module.exports = {
           valid_from: now,
           valid_to: new Date(now.getTime() + 365 * 24 * 60 * 60 * 1000),
           promotion_title: JSON.stringify({ EN: 'Daily Login Reward' }),
-          bonus_type: 'freespins',
+          // Use a known enum value; "freespins" is NOT a valid enum in prod DB.
+          bonus_type: 'gc-bonus',
           term_condition: JSON.stringify({ EN: 'Login daily to claim. Resets at midnight UTC.' }),
           currency: JSON.stringify({ USD: true }),
           image_url: 'https://example.com/bonus-daily.jpg',
@@ -498,7 +501,8 @@ module.exports = {
           valid_from: now,
           valid_to: new Date(now.getTime() + 365 * 24 * 60 * 60 * 1000),
           promotion_title: JSON.stringify({ EN: 'Weekend Bonus Boost!' }),
-          bonus_type: 'deposit',
+          // Use a known enum value; "deposit" is NOT a valid enum and breaks migrate-seed.
+          bonus_type: 'promotion-bonus',
           term_condition: JSON.stringify({ EN: 'Available Saturday and Sunday only.' }),
           currency: JSON.stringify({ USD: true }),
           image_url: 'https://example.com/bonus-weekend.jpg',
