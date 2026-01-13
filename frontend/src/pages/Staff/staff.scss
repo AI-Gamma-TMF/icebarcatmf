@@ -131,23 +131,49 @@
 }
 
 .staff-table__id {
-  width: 60px;
+  width: 50px;
+  min-width: 50px;
+  max-width: 50px;
   text-align: left;
 }
 
 .staff-table__email {
-  width: 220px;
-  min-width: 180px;
+  width: 240px;
+  min-width: 200px;
 }
 
 .staff-table__name {
-  width: 180px;
-  min-width: 140px;
-  max-width: 200px;
+  width: 160px;
+  min-width: 130px;
+  max-width: 180px;
   
   span {
     max-width: 100%;
   }
+}
+
+// Role column - reduce width
+.staff-table__table th:nth-child(4),
+.staff-table__table td:nth-child(4) {
+  width: 100px;
+  min-width: 90px;
+  max-width: 110px;
+}
+
+// Group column - reduce width
+.staff-table__table th:nth-child(5),
+.staff-table__table td:nth-child(5) {
+  width: 130px;
+  min-width: 110px;
+  max-width: 150px;
+}
+
+// Status column - reduce width
+.staff-table__table th:nth-child(6),
+.staff-table__table td:nth-child(6) {
+  width: 100px;
+  min-width: 90px;
+  max-width: 110px;
 }
 
 .staff-table__th--sortable {
@@ -939,14 +965,31 @@
 
 // Responsive adjustments
 @media screen and (max-width: 1200px) {
+  .staff-table__id {
+    width: 45px;
+    min-width: 45px;
+  }
+  
   .staff-table__email {
-    width: 180px;
-    min-width: 150px;
+    width: 200px;
+    min-width: 170px;
   }
   
   .staff-table__name {
     width: 140px;
     min-width: 120px;
+  }
+  
+  .staff-table__table th:nth-child(4),
+  .staff-table__table td:nth-child(4) {
+    width: 90px;
+    min-width: 80px;
+  }
+  
+  .staff-table__table th:nth-child(5),
+  .staff-table__table td:nth-child(5) {
+    width: 110px;
+    min-width: 100px;
   }
 }
 
@@ -977,14 +1020,37 @@
     }
   }
   
+  .staff-table__id {
+    width: 40px;
+    min-width: 40px;
+  }
+  
   .staff-table__email {
     width: 150px;
-    min-width: 120px;
+    min-width: 130px;
   }
   
   .staff-table__name {
-    width: 120px;
+    width: 110px;
     min-width: 100px;
+  }
+  
+  .staff-table__table th:nth-child(4),
+  .staff-table__table td:nth-child(4) {
+    width: 80px;
+    min-width: 75px;
+  }
+  
+  .staff-table__table th:nth-child(5),
+  .staff-table__table td:nth-child(5) {
+    width: 100px;
+    min-width: 90px;
+  }
+  
+  .staff-table__table th:nth-child(6),
+  .staff-table__table td:nth-child(6) {
+    width: 85px;
+    min-width: 80px;
   }
   
   .staff-actions {
