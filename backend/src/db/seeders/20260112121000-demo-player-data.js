@@ -15,6 +15,8 @@ module.exports = {
     try {
       const now = new Date()
       const passwordHash = '$2b$10$KCuZXsk7bTTsgY8H9anRxu/ly.45YfFHXeDKQB02H0ceNUsT2Pe9m' // Admin@123!
+      const asJsonbLiteral = (obj) =>
+        queryInterface.sequelize.literal(`'${JSON.stringify(obj).replace(/'/g, "''")}'::jsonb`)
 
       const demoUsers = [
         {
@@ -173,9 +175,12 @@ module.exports = {
           gc_coin: 0,
           sc_bonus_coin: 0,
           gc_bonus_coin: 0,
-          sc_coin: { wsc, psc, bsc },
+          // NOTE: queryInterface.bulkInsert doesn't know column datatypes, so
+          // raw JS objects can throw "Invalid value { ... }" during SQL generation.
+          // Use explicit JSONB literal for Postgres.
+          sc_coin: asJsonbLiteral({ wsc, psc, bsc }),
           vault_gc_coin: 0,
-          vault_sc_coin: { wsc: 0, psc: 0, bsc: 0 },
+          vault_sc_coin: asJsonbLiteral({ wsc: 0, psc: 0, bsc: 0 }),
           created_at: now,
           updated_at: now
         })
