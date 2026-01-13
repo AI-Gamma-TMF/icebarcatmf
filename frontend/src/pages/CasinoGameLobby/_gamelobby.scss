@@ -1,4 +1,191 @@
 .game-lobby {
+  // ============================================================
+  // Filters (match other dashboard pages)
+  // ============================================================
+  .game-lobby__filters-col {
+    min-width: 240px;
+  }
+
+  .game-lobby__filters-label {
+    display: block;
+    margin: 0 0 8px 0;
+    color: rgba(234, 250, 245, 0.78);
+    font-weight: 700;
+    font-size: 0.78rem;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+  }
+
+  .game-lobby__error {
+    color: #ff6b6b;
+    margin-top: 6px;
+    font-size: 0.85rem;
+    font-weight: 600;
+  }
+
+  // ============================================================
+  // React-Select (stable classNamePrefix: gs-select)
+  // ============================================================
+  .gs-select {
+    width: 100%;
+  }
+
+  .gs-select__control {
+    background: rgba(26, 26, 26, 0.55) !important;
+    border: 1px solid rgba(255, 255, 255, 0.10) !important;
+    border-radius: 10px !important;
+    min-height: 44px !important;
+    box-shadow: none !important;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transition: all 0.18s ease;
+
+    &:hover {
+      border-color: rgba(255, 255, 255, 0.18) !important;
+    }
+  }
+
+  .gs-select__control--is-focused {
+    background: rgba(26, 26, 26, 0.72) !important;
+    border-color: rgba(0, 229, 160, 0.75) !important;
+    box-shadow: 0 0 0 3px rgba(0, 229, 160, 0.10) !important;
+  }
+
+  .gs-select__value-container {
+    padding: 2px 12px !important;
+  }
+
+  .gs-select__single-value {
+    color: rgba(234, 250, 245, 0.92) !important;
+  }
+
+  .gs-select__placeholder {
+    color: rgba(234, 250, 245, 0.45) !important;
+  }
+
+  .gs-select__input-container,
+  .gs-select__input-container input {
+    color: rgba(234, 250, 245, 0.92) !important;
+  }
+
+  .gs-select__indicator-separator {
+    background-color: rgba(255, 255, 255, 0.10) !important;
+  }
+
+  .gs-select__dropdown-indicator,
+  .gs-select__clear-indicator {
+    color: rgba(234, 250, 245, 0.55) !important;
+
+    &:hover {
+      color: rgba(0, 229, 160, 0.92) !important;
+    }
+  }
+
+  .gs-select__clear-indicator:hover {
+    color: #ff6b6b !important;
+  }
+
+  .gs-select__menu {
+    background: rgba(26, 26, 26, 0.96) !important;
+    border: 1px solid rgba(255, 255, 255, 0.10) !important;
+    border-radius: 12px !important;
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    min-width: 260px;
+  }
+
+  .gs-select__menu-portal {
+    z-index: 9999 !important;
+  }
+
+  .gs-select__menu-list {
+    padding: 6px !important;
+  }
+
+  .gs-select__option {
+    background: transparent !important;
+    color: rgba(234, 250, 245, 0.78) !important;
+    border-radius: 8px !important;
+    margin: 2px 0 !important;
+    padding: 10px 12px !important;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    &:hover {
+      background: rgba(0, 229, 160, 0.10) !important;
+      color: rgba(234, 250, 245, 0.92) !important;
+    }
+  }
+
+  .gs-select__option--is-selected {
+    background: rgba(0, 229, 160, 0.16) !important;
+    color: rgba(0, 229, 160, 0.92) !important;
+    font-weight: 700;
+  }
+
+  .gs-select__option--is-focused {
+    background: rgba(0, 229, 160, 0.10) !important;
+  }
+
+  // ============================================================
+  // Month picker (react-datetime) - match dark inputs
+  // ============================================================
+  .rdt {
+    width: 100%;
+  }
+
+  .rdt input.form-control,
+  .game-lobby__month-input {
+    width: 100%;
+    min-height: 44px;
+    background: rgba(26, 26, 26, 0.55);
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    color: rgba(234, 250, 245, 0.92);
+    border-radius: 10px;
+    padding: 10px 12px;
+    box-shadow: none;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+
+    &:focus {
+      border-color: rgba(0, 229, 160, 0.75);
+      box-shadow: 0 0 0 3px rgba(0, 229, 160, 0.10);
+      outline: none;
+    }
+  }
+
+  .game-lobby__search-input {
+    min-height: 44px;
+    background: rgba(26, 26, 26, 0.55);
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    color: rgba(234, 250, 245, 0.92);
+    border-radius: 10px;
+    box-shadow: none;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+
+    &::placeholder {
+      color: rgba(234, 250, 245, 0.45);
+    }
+
+    &:focus {
+      border-color: rgba(0, 229, 160, 0.75);
+      box-shadow: 0 0 0 3px rgba(0, 229, 160, 0.10);
+      outline: none;
+    }
+  }
+
+  .rdtPicker {
+    background: rgba(26, 26, 26, 0.96);
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    border-radius: 12px;
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+  }
+
   .category-section {
     margin-bottom: 2rem;
   }
@@ -6,9 +193,16 @@
   .category-header {
     padding: 10px;
     border-radius: 10px;
-    color: #eaedf2;
-    border: 0.0625rem solid #4c5680;
-    background: #eeeeee !important;
+    color: rgba(234, 250, 245, 0.88);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background:
+      linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, rgba(0, 0, 0, 0.18) 100%),
+      rgba(26, 26, 26, 0.45) !important;
+    box-shadow:
+      0 1px 2px rgba(0, 0, 0, 0.45),
+      0 10px 30px rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(10px) saturate(130%);
+    -webkit-backdrop-filter: blur(10px) saturate(130%);
 
     .swiper-controls {
       display: flex;
@@ -27,14 +221,20 @@
     // width: 200px;
     width: 100%;
     // height: 200px;
-    background: #f8f9fa;
+    background:
+      linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, rgba(0, 0, 0, 0.18) 100%),
+      rgba(26, 26, 26, 0.45);
     border-radius: 8px;
     overflow: hidden;
     user-select: text !important;
-    border: 0.0625rem solid #4c56805e;
+    border: 1px solid rgba(255, 255, 255, 0.08);
     text-align: center;
     padding: 1rem;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    box-shadow:
+      0 1px 2px rgba(0, 0, 0, 0.45),
+      0 10px 24px rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(10px) saturate(130%);
+    -webkit-backdrop-filter: blur(10px) saturate(130%);
 
     .game-image-wrapper {
       height: 120px;
@@ -51,6 +251,7 @@
 
     .game-info {
       margin-top: 0.5rem;
+      color: rgba(234, 250, 245, 0.86);
 
       .discount-badge {
         background: #fdb72e;
@@ -64,7 +265,7 @@
       }
 
       .nodiscount-badge {
-        background: #c4b8b9;
+        background: rgba(255, 255, 255, 0.18);
         color: black;
         padding: 2px 6px;
         font-size: 0.75rem;
@@ -102,10 +303,6 @@
   -moz-user-select: auto !important;
   -ms-user-select: auto !important;
   user-select: auto !important;
-}
-
-.lobby-select {
-  z-index: 9 !important;
 }
 
 .searched-game-wrap {

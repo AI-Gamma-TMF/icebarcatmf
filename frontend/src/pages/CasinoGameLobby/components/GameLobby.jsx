@@ -51,14 +51,17 @@ const GameLobby = () => {
           <h4 className="mb-0">Games</h4>
         </Col>
       </Row>
-      <Row className="mb-2 mt-4">
-        <Col sm={6} lg={3}>
-          <BForm.Label>Sub Categories</BForm.Label>
+      <Row className="mb-2 mt-4 game-lobby__filters g-3 align-items-end">
+        <Col xs={12} md={6} lg={4} className="game-lobby__filters-col">
+          <BForm.Label className="game-lobby__filters-label">Sub Categories</BForm.Label>
           <Select
             placeholder="Sub Categories"
             options={subCategory}
-            className="lobby-select"
             isClearable
+            className="gs-select"
+            classNamePrefix="gs-select"
+            menuPortalTarget={document.body}
+            menuPosition="fixed"
             value={
               subCategory?.find((option) => option.value === subCategoryId) ||
               null
@@ -66,12 +69,13 @@ const GameLobby = () => {
             onChange={(e) => setSubCategoryId(e ? e.value : null)}
           />
         </Col>
-        <Col sm={6} lg={2}>
-          <BForm.Label>Search</BForm.Label>
+        <Col xs={12} md={6} lg={4} className="game-lobby__filters-col">
+          <BForm.Label className="game-lobby__filters-label">Search</BForm.Label>
           <BForm.Control
             type="search"
             value={search}
             placeholder={"Search by game name"}
+            className="game-lobby__search-input"
             onChange={(event) => {
               setPage(1);
               setSearch(
@@ -81,8 +85,8 @@ const GameLobby = () => {
           />
         </Col>
         
-        <Col sm={6} lg={2}>
-          <BForm.Label>Monthly Discount</BForm.Label>
+        <Col xs={12} md={6} lg={4} className="game-lobby__filters-col">
+          <BForm.Label className="game-lobby__filters-label">Monthly Discount</BForm.Label>
 
           <Datetime
             dateFormat="MMMM YYYY"
@@ -90,14 +94,18 @@ const GameLobby = () => {
             value={startDate}
             onChange={handleMonthYearChange}
             closeOnSelect={true} // this is key
-            inputProps={{ placeholder: "Select Month", readOnly: true }}
+            inputProps={{
+              placeholder: "Select Month",
+              readOnly: true,
+              className: "form-control game-lobby__month-input",
+            }}
             isValidDate={(currentDate) => {
               // Disallow future months and years
               return currentDate.isSameOrBefore(moment(), "month");
             }}
           />
           {(errorStart || errorEnd) && (
-            <div style={{ color: "red", marginTop: "5px" }}>
+            <div className="game-lobby__error">
               {errorStart || errorEnd}
             </div>
           )}
