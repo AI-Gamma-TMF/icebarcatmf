@@ -49,20 +49,117 @@
   transform: translateY(-1px);
 }
 
+// Table wrapper with horizontal scroll
 .aggregators-table-wrap {
-  overflow-x: auto;
+  overflow-x: auto !important;
+  overflow-y: visible !important;
+  -webkit-overflow-scrolling: touch;
 }
 
+// Table with fixed layout and minimum width
 .aggregators-table {
-  min-width: max-content;
+  table-layout: fixed;
+  width: 100%;
+  min-width: 800px; // Ensure minimum width for horizontal scroll
+  
+  th, td {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding: 10px 8px;
+    vertical-align: middle;
+  }
+  
+  // ID column
+  th:nth-child(1),
+  td:nth-child(1) {
+    width: 10%;
+    min-width: 80px;
+    max-width: 100px;
+  }
+  
+  // Name column
+  th:nth-child(2),
+  td:nth-child(2) {
+    width: 35%;
+    min-width: 200px;
+    max-width: 350px;
+  }
+  
+  // Status column
+  th:nth-child(3),
+  td:nth-child(3) {
+    width: 15%;
+    min-width: 100px;
+    max-width: 120px;
+  }
+  
+  // Actions column
+  th:nth-child(4),
+  td:nth-child(4) {
+    width: 40%;
+    min-width: 280px;
+    white-space: normal; // Allow buttons to wrap if needed
+  }
 }
 
 .aggregators-table__name {
-  max-width: 280px;
+  max-width: 100%;
+  display: inline-block;
 }
 
-.aggregators-table__actions .btn {
-  border-radius: 12px;
+.aggregators-table__actions {
+  .btn {
+    border-radius: 12px;
+    margin: 2px;
+  }
+}
+
+// Responsive adjustments
+@media screen and (max-width: 1200px) {
+  .aggregators-table {
+    min-width: 750px;
+  }
+}
+
+@media screen and (max-width: 767.9px) {
+  .aggregators-table {
+    min-width: 800px; // Force horizontal scroll on mobile
+    
+    th, td {
+      padding: 8px 6px;
+      font-size: 0.85rem;
+    }
+    
+    th:nth-child(1),
+    td:nth-child(1) {
+      width: 12%;
+      min-width: 70px;
+    }
+    
+    th:nth-child(2),
+    td:nth-child(2) {
+      width: 30%;
+      min-width: 180px;
+    }
+    
+    th:nth-child(3),
+    td:nth-child(3) {
+      width: 15%;
+      min-width: 90px;
+    }
+    
+    th:nth-child(4),
+    td:nth-child(4) {
+      width: 43%;
+      min-width: 260px;
+    }
+  }
+  
+  .aggregators-table__actions .btn {
+    padding: 6px 10px;
+    font-size: 0.85rem;
+  }
 }
 
 
