@@ -119,7 +119,7 @@
 .staff-table__table {
   table-layout: fixed;
   width: 100%;
-  min-width: 900px; // Ensure minimum width for horizontal scroll
+  min-width: 1100px; // Force horizontal scroll to show all content properly
   
   th, td {
     overflow: hidden;
@@ -226,6 +226,11 @@
 // React-Bootstrap wraps <Table responsive> with .table-responsive.
 // Enable horizontal scroll for better responsiveness while keeping dropdowns visible
 .staff-table {
+  overflow-x: auto !important;
+  overflow-y: visible !important;
+  -webkit-overflow-scrolling: touch;
+  width: 100%;
+  
   .table-responsive {
     overflow-y: visible !important;
     overflow-x: auto !important;
@@ -255,7 +260,7 @@
   }
   
   .staff-table__table {
-    min-width: 900px; // Force horizontal scroll on smaller screens
+    min-width: 1100px; // Force horizontal scroll on smaller screens
   }
 }
 
@@ -1016,7 +1021,7 @@
   }
   
   .staff-table__table {
-    min-width: 900px; // Force horizontal scroll to show all columns
+    min-width: 1100px; // Force horizontal scroll to show all columns
     
     // Allow rows to grow on mobile to fit wrapped buttons
     tr {
