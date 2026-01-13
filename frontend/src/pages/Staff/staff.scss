@@ -119,6 +119,7 @@
 .staff-table__table {
   table-layout: fixed;
   width: 100%;
+  min-width: 900px; // Ensure minimum width for horizontal scroll
   
   th, td {
     overflow: hidden;
@@ -222,11 +223,12 @@
 }
 
 // React-Bootstrap wraps <Table responsive> with .table-responsive.
-// Bootstrap overflow on that wrapper can clip dropdown menus (often only noticed in prod builds).
+// Enable horizontal scroll for better responsiveness while keeping dropdowns visible
 .staff-table {
   .table-responsive {
     overflow-y: visible !important;
-    overflow-x: visible !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch;
   }
 }
 
@@ -247,7 +249,12 @@
     .table-responsive {
       overflow-x: auto !important;
       overflow-y: visible !important;
+      -webkit-overflow-scrolling: touch;
     }
+  }
+  
+  .staff-table__table {
+    min-width: 900px; // Force horizontal scroll on smaller screens
   }
 }
 
@@ -1002,13 +1009,15 @@
   }
   
   .staff-table__table {
+    min-width: 900px; // Force horizontal scroll to show all columns
+    
     // Allow rows to grow on mobile to fit wrapped buttons
     tr {
       height: auto !important;
     }
 
     th, td {
-      padding: 8px 4px;
+      padding: 8px 6px;
       font-size: 0.85rem;
     }
 
@@ -1020,67 +1029,44 @@
     }
   }
   
+  // Keep desktop-like widths on mobile with horizontal scroll
   .staff-table__id {
-    width: 40px;
-    min-width: 40px;
+    width: 50px;
+    min-width: 50px;
   }
   
   .staff-table__email {
-    width: 150px;
-    min-width: 130px;
+    width: 220px;
+    min-width: 200px;
   }
   
   .staff-table__name {
-    width: 110px;
-    min-width: 100px;
+    width: 160px;
+    min-width: 140px;
   }
   
   .staff-table__table th:nth-child(4),
   .staff-table__table td:nth-child(4) {
-    width: 80px;
-    min-width: 75px;
-  }
-  
-  .staff-table__table th:nth-child(5),
-  .staff-table__table td:nth-child(5) {
     width: 100px;
     min-width: 90px;
   }
   
+  .staff-table__table th:nth-child(5),
+  .staff-table__table td:nth-child(5) {
+    width: 130px;
+    min-width: 110px;
+  }
+  
   .staff-table__table th:nth-child(6),
   .staff-table__table td:nth-child(6) {
-    width: 85px;
-    min-width: 80px;
+    width: 100px;
+    min-width: 90px;
   }
   
   .staff-actions {
     max-width: 100%;
     justify-content: center;
     padding: 4px 0;
-  }
-
-  // Keep the Actions column visible on small screens (table can scroll horizontally)
-  .staff-table__table {
-    th.staff-table__actions,
-    td.staff-table__actions {
-      position: sticky;
-      right: 0;
-      z-index: 3;
-      width: 84px;
-      min-width: 84px;
-      max-width: 84px;
-      white-space: nowrap;
-      background: rgba(16, 16, 16, 0.95); // Slightly more opaque
-      backdrop-filter: blur(10px) saturate(140%);
-      -webkit-backdrop-filter: blur(10px) saturate(140%);
-      box-shadow: -12px 0 18px rgba(0, 0, 0, 0.35);
-      vertical-align: middle;
-      display: table-cell;
-    }
-
-    th.staff-table__actions {
-      z-index: 4;
-    }
   }
   
   .staff-icon-btn.btn {
