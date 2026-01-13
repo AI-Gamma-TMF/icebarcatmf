@@ -361,21 +361,9 @@ const CasinoGames = () => {
                   return (
                     <tr key={categoryGameId}>
                       <td>{categoryGameId}</td>
-                      <td>
-                        {/* <Trigger message={gameName} id={categoryGameId} /> */}
-                        <span
-                          id={categoryGameId}
-                          style={{
-                            width: '100px',
-                            cursor: 'pointer',
-                            wordBreak: 'break-word',
-                            whiteSpace: 'normal',
-
-                            padding: 0,
-                            margin: 0,
-                          }}
-                          className='d-inline-block  '
-                        >
+                      <td className="game-name-cell">
+                        <Trigger message={gameName} id={categoryGameId + 'name'} />
+                        <span id={categoryGameId + 'name'}>
                           {gameName}
                         </span>
                       </td>

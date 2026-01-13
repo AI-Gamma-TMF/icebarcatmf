@@ -123,6 +123,24 @@
   vertical-align: middle;
 }
 
+// Override global .text-success/.text-danger styles for table cells
+// The global styles add display:flex and ::before icons which break table alignment
+.vip-questions-table__td--status {
+  text-align: center !important;
+  
+  &.text-success,
+  &.text-danger {
+    display: table-cell !important;
+    vertical-align: middle !important;
+    margin-top: 0 !important;
+    animation: none !important;
+    
+    &::before {
+      content: none !important;
+    }
+  }
+}
+
 .vip-questions-table__td--question {
   text-align: left;
 }

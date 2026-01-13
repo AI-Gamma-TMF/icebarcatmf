@@ -1,4 +1,4 @@
-// Reuse dashboard “modern” styling primitives (glass panels, dark inputs, table skin)
+// Reuse dashboard "modern" styling primitives (glass panels, dark inputs, table skin)
 @import "../Dashboard/DashboardCharts/dashboardChart.scss";
 
 .casino-games-page {
@@ -42,7 +42,76 @@
 }
 
 .casino-games-table {
-  min-width: max-content;
+  width: 100%;
+  table-layout: fixed;
+
+  thead th {
+    white-space: nowrap;
+    padding: 12px 8px !important;
+    vertical-align: middle;
+    font-size: 0.85rem;
+  }
+
+  tbody td {
+    padding: 10px 8px !important;
+    vertical-align: middle;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  // Column widths - adjust based on content needs
+  th:nth-child(1), td:nth-child(1) { // ID
+    width: 70px;
+    min-width: 70px;
+  }
+
+  th:nth-child(2), td:nth-child(2) { // Name
+    width: 150px;
+    min-width: 150px;
+  }
+
+  th:nth-child(3), td:nth-child(3) { // Thumbnail
+    width: 90px;
+    min-width: 90px;
+  }
+
+  th:nth-child(4), td:nth-child(4) { // Provider
+    width: 160px;
+    min-width: 160px;
+  }
+
+  th:nth-child(5), td:nth-child(5) { // Customer Facing
+    width: 100px;
+    min-width: 100px;
+  }
+
+  th:nth-child(6), td:nth-child(6) { // Created At
+    width: 160px;
+    min-width: 160px;
+  }
+
+  th:nth-child(7), td:nth-child(7) { // RTP
+    width: 90px;
+    min-width: 90px;
+  }
+
+  th:nth-child(8), td:nth-child(8) { // Status
+    width: 80px;
+    min-width: 80px;
+  }
+
+  th:nth-child(9), td:nth-child(9) { // Actions
+    width: 200px;
+    min-width: 200px;
+  }
+}
+
+// Game name cell - allow wrapping but constrain width
+.casino-games-table .game-name-cell {
+  max-width: 150px;
+  word-break: break-word;
+  white-space: normal;
+  line-height: 1.3;
 }
 
 

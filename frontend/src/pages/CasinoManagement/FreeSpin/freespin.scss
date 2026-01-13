@@ -50,7 +50,85 @@
 }
 
 .free-spin-table {
-  min-width: max-content;
+  width: 100%;
+  table-layout: fixed;
+  min-width: 1200px;
+
+  thead th {
+    white-space: nowrap;
+    padding: 12px 8px !important;
+    vertical-align: middle;
+    font-size: 0.8rem;
+  }
+
+  tbody td {
+    padding: 10px 8px !important;
+    vertical-align: middle;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  // Column widths for 12 columns
+  th:nth-child(1), td:nth-child(1) { // ID
+    width: 60px;
+    min-width: 60px;
+  }
+
+  th:nth-child(2), td:nth-child(2) { // Title
+    width: 140px;
+    min-width: 140px;
+  }
+
+  th:nth-child(3), td:nth-child(3) { // Provider
+    width: 120px;
+    min-width: 120px;
+  }
+
+  th:nth-child(4), td:nth-child(4) { // Game
+    width: 140px;
+    min-width: 140px;
+  }
+
+  th:nth-child(5), td:nth-child(5) { // Spin Amount
+    width: 90px;
+    min-width: 90px;
+  }
+
+  th:nth-child(6), td:nth-child(6) { // Spin Round
+    width: 80px;
+    min-width: 80px;
+  }
+
+  th:nth-child(7), td:nth-child(7) { // Coin Type
+    width: 80px;
+    min-width: 80px;
+  }
+
+  th:nth-child(8), td:nth-child(8) { // Spin Type
+    width: 90px;
+    min-width: 90px;
+  }
+
+  th:nth-child(9), td:nth-child(9) { // Start Date
+    width: 140px;
+    min-width: 140px;
+  }
+
+  th:nth-child(10), td:nth-child(10) { // End Date
+    width: 140px;
+    min-width: 140px;
+  }
+
+  th:nth-child(11), td:nth-child(11) { // Status
+    width: 90px;
+    min-width: 90px;
+  }
+
+  th:nth-child(12), td:nth-child(12) { // Action
+    width: 130px;
+    min-width: 130px;
+  }
 }
 
 .spin-card {
