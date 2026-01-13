@@ -24,26 +24,28 @@ const ProviderDashboard = ({ isHitoricalTab }) => {
 
 
   return (
-    <Row className="mb-2 mt-4">
-      <Col xs="auto">
-        <h5 className="mb-0">Provider Details</h5>
+    <Row className="mb-2 mt-4 provider-dashboard-content">
+      <Col xs={12}>
+        <h5 className="provider-dashboard-content__subtitle mb-3">Provider Details</h5>
       </Col>
 
       <Col md={12} sm={12} className="my-3">
-        <Card className=" tournament-card p-4">
-          <h4>Provider GGR % Share</h4>
-          {providerInfo?.percentageTotalGGRSum > 0 ? <>
-            {providerInfoLoading ? (
-              <InlineLoader />
-            ) : (
-              <PieChart
-                providerInfo={providerInfo}
-                providerInfoLoading={providerInfoLoading}
-              />)
-            }</> :
-            <Col className="text-danger text-center">
-              There is no graph data available.
-            </Col>}
+        <Card className="provider-dashboard-content__chart-card">
+          <Card.Body>
+            <h4 className="provider-dashboard-content__chart-title">Provider GGR % Share</h4>
+            {providerInfo?.percentageTotalGGRSum > 0 ? <>
+              {providerInfoLoading ? (
+                <InlineLoader />
+              ) : (
+                <PieChart
+                  providerInfo={providerInfo}
+                  providerInfoLoading={providerInfoLoading}
+                />)
+              }</> :
+              <div className="text-center provider-dashboard-content__no-data">
+                There is no graph data available.
+              </div>}
+          </Card.Body>
         </Card>
       </Col>
       <Row>

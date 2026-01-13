@@ -24,17 +24,21 @@ const CasinoProviderDashboard = () => {
   }, [location.state, navigate]);
 
   return (
-    <div className="dashboard-typography">
-      <div className="d-flex flex-wrap justify-content-between align-items-start gap-3 mb-3">
-        <div>
-          <h3>{t('casinoProviderDashboard.title')}</h3>
-          <p className="text-muted mb-0">Provider analytics and rate matrices</p>
-        </div>
-      </div>
+    <div className="provider-dashboard-page dashboard-typography">
+      <Row className="d-flex align-items-center mb-2">
+        <Col sm={8}>
+          <h3 className="provider-dashboard-page__title">{t('casinoProviderDashboard.title')}</h3>
+        </Col>
+      </Row>
 
-      <Card className="dashboard-filters mb-4">
-        <Card.Body>
-          <Tabs activeKey={key} onSelect={(k) => setKey(k)} className="ps-2" id="amoe-tabs">
+      <Card className="p-2 mb-2 provider-dashboard-page__card">
+        <Card.Body className="provider-dashboard-page__card-body">
+          <Tabs 
+            activeKey={key} 
+            onSelect={(k) => setKey(k)} 
+            className="provider-dashboard-tabs" 
+            id="provider-dashboard-tabs"
+          >
             <Tab eventKey="dashboard" title="Dashboard">
               <ProviderDashboard isHitoricalTab={key} />
             </Tab>
