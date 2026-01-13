@@ -158,14 +158,24 @@ const Staff = () => {
                     const isSortable = ["adminUserId", "email", "firstName"].includes(
                       h.value
                     );
+                    // Map column-specific class names
+                    const columnClassMap = {
+                      0: "staff-table__id",
+                      1: "staff-table__email",
+                      2: "staff-table__name",
+                      6: "staff-table__actions"
+                    };
+                    const columnClass = columnClassMap[idx] || "";
+                    
                     return (
                       <th
                         key={idx}
                         onClick={() => isSortable && setOrderBy(h.value)}
                         className={[
+                          columnClass,
                           isSortable ? "staff-table__th--sortable" : "",
                           selected(h) ? "staff-table__th--active" : "",
-                        ].join(" ")}
+                        ].filter(Boolean).join(" ")}
                         style={{ cursor: isSortable ? "pointer" : "default" }}
                       >
                         <span className="staff-table__th-label">{t(h.labelKey)}</span>
