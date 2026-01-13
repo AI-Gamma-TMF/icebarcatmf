@@ -44,14 +44,6 @@ const StaffSCCreditTable = ({
     <>
       <div className="table-responsive dashboard-table admin-coins-table">
         <Table size="sm" className="text-center dashboard-data-table admin-coins-table__table">
-          <colgroup>
-            <col style={{ width: "10%" }} />
-            <col style={{ width: "22%" }} />
-            <col style={{ width: "18%" }} />
-            <col style={{ width: "18%" }} />
-            <col style={{ width: "18%" }} />
-            <col style={{ width: "14%" }} />
-          </colgroup>
           <thead>
             <tr>
               {tableHeaders?.map((h, idx) => {
