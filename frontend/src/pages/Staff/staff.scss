@@ -190,7 +190,9 @@
 
 .staff-table__actions {
   text-align: right;
-  width: 140px; // kebab actions; keep table responsive if needed
+  width: 84px; // always just the kebab menu button
+  min-width: 84px;
+  max-width: 84px;
 }
 
 // React-Bootstrap wraps <Table responsive> with .table-responsive.
@@ -229,6 +231,24 @@
   justify-content: flex-end;
   flex-wrap: nowrap; // prevent wrapping that causes huge row height
   gap: 6px;
+}
+
+// Force "actions-in-kebab" at all breakpoints (no inline icon buttons).
+// Even if older markup renders multiple buttons, keep only the dropdown trigger visible.
+.staff-actions {
+  > .btn,
+  > .btn-group,
+  > .btn-group-vertical {
+    display: none !important;
+  }
+
+  > .dropdown {
+    display: inline-flex !important;
+  }
+
+  .staff-kebab-toggle.btn {
+    display: inline-flex !important;
+  }
 }
 
 // Icon buttons (keep Bootstrap variants for semantics, but visually unify)
@@ -968,10 +988,8 @@
   }
   
   .staff-actions {
-    gap: 6px;
-    flex-wrap: wrap; // allow wrap on small screens
     max-width: 100%;
-    justify-content: center; // Center buttons in the sticky cell
+    justify-content: center;
     padding: 4px 0;
   }
 
@@ -982,7 +1000,7 @@
       position: sticky;
       right: 0;
       z-index: 3;
-      width: 84px; // only the "more" dropdown button
+      width: 84px;
       min-width: 84px;
       max-width: 84px;
       white-space: nowrap;
