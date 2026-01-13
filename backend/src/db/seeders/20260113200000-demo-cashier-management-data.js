@@ -111,11 +111,11 @@ module.exports = {
         }
       ]
 
-      // Insert using raw SQL to properly handle empty integer arrays
+      // Insert using raw SQL - use NULL for player_ids to avoid empty array type issues
       for (const rule of redeemRulesData) {
         await queryInterface.sequelize.query(
           `INSERT INTO redeem_rule (rule_name, rule_condition, is_active, completion_time, is_subscriber_only, player_ids, created_at, updated_at)
-           VALUES (:name, :condition, :isActive, :completionTime, :isSubscriberOnly, ARRAY[]::INTEGER[], :now, :now)`,
+           VALUES (:name, :condition, :isActive, :completionTime, :isSubscriberOnly, NULL, :now, :now)`,
           {
             replacements: {
               name: rule.name,

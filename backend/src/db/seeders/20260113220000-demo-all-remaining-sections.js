@@ -689,13 +689,14 @@ module.exports = {
     )
 
     if (existingCrmPromos.length === 0) {
-      const crmPromotions = [
+      // Use raw SQL to properly handle ARRAY(BIGINT) type
+      const crmPromotionsData = [
         {
           promocode: 'DEMOCRM001',
           name: 'Demo: Re-engagement Campaign',
           campaign_id: 'CAMP-DEMO-001',
           status: 1,
-          user_ids: demoUserId ? [demoUserId] : [],
+          user_ids: demoUserId ? `ARRAY[${demoUserId}]::BIGINT[]` : 'ARRAY[]::BIGINT[]',
           claim_bonus: true,
           promotion_type: 'bonus',
           sc_amount: 25,
@@ -703,16 +704,14 @@ module.exports = {
           crm_promocode: true,
           expire_at: new Date(now.getTime() + 30 * 24 * 60 * 60 * 1000),
           valid_from: now,
-          more_details: JSON.stringify({ targetAudience: 'inactive_30_days', channel: 'email' }),
-          created_at: now,
-          updated_at: now
+          more_details: JSON.stringify({ targetAudience: 'inactive_30_days', channel: 'email' })
         },
         {
           promocode: 'DEMOCRM002',
           name: 'Demo: VIP Appreciation',
           campaign_id: 'CAMP-DEMO-002',
           status: 1,
-          user_ids: demoUserId ? [demoUserId] : [],
+          user_ids: demoUserId ? `ARRAY[${demoUserId}]::BIGINT[]` : 'ARRAY[]::BIGINT[]',
           claim_bonus: true,
           promotion_type: 'bonus',
           sc_amount: 100,
@@ -720,16 +719,14 @@ module.exports = {
           crm_promocode: true,
           expire_at: new Date(now.getTime() + 14 * 24 * 60 * 60 * 1000),
           valid_from: now,
-          more_details: JSON.stringify({ targetAudience: 'vip_players', channel: 'push' }),
-          created_at: now,
-          updated_at: now
+          more_details: JSON.stringify({ targetAudience: 'vip_players', channel: 'push' })
         },
         {
           promocode: 'DEMOCRM003',
           name: 'Demo: Birthday Special',
           campaign_id: 'CAMP-DEMO-003',
           status: 1,
-          user_ids: [],
+          user_ids: 'ARRAY[]::BIGINT[]',
           claim_bonus: true,
           promotion_type: 'promocode',
           sc_amount: 50,
@@ -737,14 +734,34 @@ module.exports = {
           crm_promocode: false,
           expire_at: new Date(now.getTime() + 7 * 24 * 60 * 60 * 1000),
           valid_from: now,
-          more_details: JSON.stringify({ targetAudience: 'birthday_this_month', channel: 'email' }),
-          created_at: now,
-          updated_at: now
+          more_details: JSON.stringify({ targetAudience: 'birthday_this_month', channel: 'email' })
         }
       ]
 
-      await queryInterface.bulkInsert('crm_promotions', crmPromotions, {})
-      console.log(`Inserted ${crmPromotions.length} demo CRM promotions`)
+      for (const promo of crmPromotionsData) {
+        await queryInterface.sequelize.query(
+          `INSERT INTO crm_promotions (promocode, name, campaign_id, status, user_ids, claim_bonus, promotion_type, sc_amount, gc_amount, crm_promocode, expire_at, valid_from, more_details, created_at, updated_at)
+           VALUES (:promocode, :name, :campaign_id, :status, ${promo.user_ids}, :claim_bonus, :promotion_type, :sc_amount, :gc_amount, :crm_promocode, :expire_at, :valid_from, :more_details, :now, :now)`,
+          {
+            replacements: {
+              promocode: promo.promocode,
+              name: promo.name,
+              campaign_id: promo.campaign_id,
+              status: promo.status,
+              claim_bonus: promo.claim_bonus,
+              promotion_type: promo.promotion_type,
+              sc_amount: promo.sc_amount,
+              gc_amount: promo.gc_amount,
+              crm_promocode: promo.crm_promocode,
+              expire_at: promo.expire_at,
+              valid_from: promo.valid_from,
+              more_details: promo.more_details,
+              now
+            }
+          }
+        )
+      }
+      console.log(`Inserted ${crmPromotionsData.length} demo CRM promotions`)
     }
 
     // ========================================
