@@ -132,49 +132,50 @@
 }
 
 .staff-table__id {
-  width: 50px;
-  min-width: 50px;
-  max-width: 50px;
+  width: 45px !important;
+  min-width: 45px !important;
+  max-width: 45px !important;
   text-align: left;
 }
 
 .staff-table__email {
-  width: 240px;
-  min-width: 200px;
+  width: 260px !important;
+  min-width: 240px !important;
+  max-width: 280px !important;
 }
 
 .staff-table__name {
-  width: 160px;
-  min-width: 130px;
-  max-width: 180px;
+  width: 150px !important;
+  min-width: 140px !important;
+  max-width: 160px !important;
   
   span {
     max-width: 100%;
   }
 }
 
-// Role column - reduce width
+// Role column - reduce width significantly
 .staff-table__table th:nth-child(4),
 .staff-table__table td:nth-child(4) {
-  width: 100px;
-  min-width: 90px;
-  max-width: 110px;
+  width: 85px !important;
+  min-width: 85px !important;
+  max-width: 85px !important;
 }
 
-// Group column - reduce width
+// Group column - reduce width significantly
 .staff-table__table th:nth-child(5),
 .staff-table__table td:nth-child(5) {
-  width: 130px;
-  min-width: 110px;
-  max-width: 150px;
+  width: 110px !important;
+  min-width: 110px !important;
+  max-width: 110px !important;
 }
 
-// Status column - reduce width
+// Status column - reduce width significantly
 .staff-table__table th:nth-child(6),
 .staff-table__table td:nth-child(6) {
-  width: 100px;
-  min-width: 90px;
-  max-width: 110px;
+  width: 85px !important;
+  min-width: 85px !important;
+  max-width: 85px !important;
 }
 
 .staff-table__th--sortable {
@@ -973,30 +974,36 @@
 // Responsive adjustments
 @media screen and (max-width: 1200px) {
   .staff-table__id {
-    width: 45px;
-    min-width: 45px;
+    width: 45px !important;
+    min-width: 45px !important;
   }
   
   .staff-table__email {
-    width: 200px;
-    min-width: 170px;
+    width: 240px !important;
+    min-width: 220px !important;
   }
   
   .staff-table__name {
-    width: 140px;
-    min-width: 120px;
+    width: 140px !important;
+    min-width: 130px !important;
   }
   
   .staff-table__table th:nth-child(4),
   .staff-table__table td:nth-child(4) {
-    width: 90px;
-    min-width: 80px;
+    width: 85px !important;
+    min-width: 85px !important;
   }
   
   .staff-table__table th:nth-child(5),
   .staff-table__table td:nth-child(5) {
-    width: 110px;
-    min-width: 100px;
+    width: 105px !important;
+    min-width: 105px !important;
+  }
+  
+  .staff-table__table th:nth-child(6),
+  .staff-table__table td:nth-child(6) {
+    width: 85px !important;
+    min-width: 85px !important;
   }
 }
 
@@ -1031,36 +1038,36 @@
   
   // Keep desktop-like widths on mobile with horizontal scroll
   .staff-table__id {
-    width: 50px;
-    min-width: 50px;
+    width: 45px !important;
+    min-width: 45px !important;
   }
   
   .staff-table__email {
-    width: 220px;
-    min-width: 200px;
+    width: 240px !important;
+    min-width: 220px !important;
   }
   
   .staff-table__name {
-    width: 160px;
-    min-width: 140px;
+    width: 150px !important;
+    min-width: 140px !important;
   }
   
   .staff-table__table th:nth-child(4),
   .staff-table__table td:nth-child(4) {
-    width: 100px;
-    min-width: 90px;
+    width: 85px !important;
+    min-width: 85px !important;
   }
   
   .staff-table__table th:nth-child(5),
   .staff-table__table td:nth-child(5) {
-    width: 130px;
-    min-width: 110px;
+    width: 110px !important;
+    min-width: 110px !important;
   }
   
   .staff-table__table th:nth-child(6),
   .staff-table__table td:nth-child(6) {
-    width: 100px;
-    min-width: 90px;
+    width: 85px !important;
+    min-width: 85px !important;
   }
   
   .staff-actions {
