@@ -26,12 +26,23 @@ module.exports = {
       'emma.rodriguez@demo.com'
     ]
 
-    const admins = await queryInterface.sequelize.query(
+    let admins = await queryInterface.sequelize.query(
       `SELECT admin_user_id, email, first_name, last_name
        FROM admin_users
        WHERE email IN (${demoStaffEmails.map(e => `'${e}'`).join(', ')})`,
       { type: queryInterface.sequelize.QueryTypes.SELECT }
     )
+
+    // Local/dev DBs may not have demo staff emails yet. Fallback to any admins.
+    if (!admins || admins.length === 0) {
+      admins = await queryInterface.sequelize.query(
+        `SELECT admin_user_id, email, first_name, last_name
+         FROM admin_users
+         ORDER BY admin_user_id ASC
+         LIMIT 3`,
+        { type: queryInterface.sequelize.QueryTypes.SELECT }
+      )
+    }
 
     if (!admins || admins.length === 0) return
 

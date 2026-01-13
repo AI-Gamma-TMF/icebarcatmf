@@ -19,6 +19,21 @@ const VipformQuestions = () => {
 	const { limit, setLimit, page, setPage, sort, setSort, setOrderBy, selected, over, setOver, vipQuestionsList, isLoading, totalPages, handleStatusShow, statusShow, setStatusShow, handleYes, status, handleDeleteYes, updateLoading,
 		handleDeleteModal, setDeleteModalShow, deleteModalShow, deleteQuestionLoading, setIsActive, search, setSearch } = useVipFormQuestions();
 
+	const getQuestionTypeLabel = (question) => {
+		const typeValue = question?.frontendQuestionType ?? question?.moreDetails?.type;
+		if (typeValue) return getFieldLabel(typeValue) || typeValue;
+
+		const qt = (question?.questionType || '').toString().toLowerCase();
+		const fallbackMap = {
+			one_liner: 'Short Text',
+			single_choice: 'Single Choice',
+			multi_choice: 'Multiple Choice',
+			tick_mark: 'Tick Mark',
+			sequence: 'Sequence',
+		};
+		return fallbackMap[qt] || (question?.questionType ?? 'NA');
+	};
+
 	return (
 		<>
 			<div className="vip-questions-page dashboard-typography">
@@ -93,7 +108,14 @@ const VipformQuestions = () => {
 				</Card>
 
 				<div className="vip-questions-page__table-wrap table-responsive dashboard-table">
-					<Table hover size="sm" className="dashboard-data-table vip-questions-table text-center">
+					<Table hover size="sm" className="dashboard-data-table vip-questions-table">
+						<colgroup>
+							<col className="vip-questions-table__col vip-questions-table__col--id" />
+							<col className="vip-questions-table__col vip-questions-table__col--question" />
+							<col className="vip-questions-table__col vip-questions-table__col--type" />
+							<col className="vip-questions-table__col vip-questions-table__col--status" />
+							<col className="vip-questions-table__col vip-questions-table__col--action" />
+						</colgroup>
 						<thead>
 					<tr>
 						{
@@ -101,7 +123,11 @@ const VipformQuestions = () => {
 							<th key={idx} onClick={() => header.value !== 'action' && setOrderBy(header.value)}
 
 								style={{ cursor: (header.value !== 'action' && 'pointer') }}
-								className={selected(header) ? 'border-3 border border-blue' : ''}
+								className={[
+									'vip-questions-table__th',
+									`vip-questions-table__th--${header.value}`,
+									selected(header) ? 'border-3 border border-blue' : '',
+								].join(' ')}
 							>
 								{header.labelKey} {' '} {selected(header) && (sort === 'asc' ? (<FontAwesomeIcon
 									style={over ? { color: 'red' } : {}}
@@ -126,7 +152,7 @@ const VipformQuestions = () => {
 
 					{isLoading ? (
 						<tr>
-							<td colSpan={5} className='text-center'>
+							<td colSpan={formBuilderHeader.length} className='text-center'>
 								<InlineLoader />
 							</td>
 						</tr>
@@ -137,72 +163,78 @@ const VipformQuestions = () => {
 						(vipQuestionsList && vipQuestionsList?.questions?.rows && vipQuestionsList?.questions?.rows?.length > 0 ? vipQuestionsList?.questions?.rows?.map((question) => {
 							return (
 								<tr key={question?.questionnaireId}>
-									<td>
+									<td className="vip-questions-table__td vip-questions-table__td--id text-center">
 										{question?.questionnaireId}
 									</td>
-									<td>
-										{question?.question || 'NA'}
+									<td className="vip-questions-table__td vip-questions-table__td--question">
+										<div
+											className="vip-questions-table__questionText"
+											title={question?.question || ''}
+										>
+											{question?.question || 'NA'}
+										</div>
 									</td>
-									<td>
-										{getFieldLabel(question?.frontendQuestionType) || 'NA'}
+									<td className="vip-questions-table__td vip-questions-table__td--type text-center">
+										{getQuestionTypeLabel(question)}
 									</td>
-									<td className={question?.isActive ? 'text-success' :
-										'text-danger'
-									}>{question?.isActive ? 'Active' : 'In - Active'}</td>
-									<td>
+									<td
+										className={[
+											'vip-questions-table__td',
+											'vip-questions-table__td--status',
+											'text-center',
+											question?.isActive ? 'text-success' : 'text-danger',
+										].join(' ')}
+									>
+										{question?.isActive ? 'Active' : 'Inactive'}
+									</td>
+									<td className="vip-questions-table__td vip-questions-table__td--action">
+										<div className="vip-questions-table__actions">
+											<div className="vip-questions-table__actionsRow">
+												<Trigger message='Edit' id={question?.questionnaireId + 'edit'} />
+												<Button
+													id={question?.questionnaireId + 'edit'}
+													className='m-1'
+													size='sm'
+													variant='warning'
+													onClick={() =>
+														navigate(`${AdminRoutes.EditVipQuestion.split(':')[0]}${question?.questionnaireId}`)
+													}
+													hidden={isHidden({
+														module: { key: 'VipManagement', value: 'U' },
+													})}
+												>
+													<FontAwesomeIcon icon={faEdit} />
+												</Button>
 
-										<>
-											<Trigger message='Edit' id={question?.questionnaireId + 'edit'} />
-											<Button
-												id={question?.questionnaireId + 'edit'}
-												className='m-1'
-												size='sm'
-												variant='warning'
-												onClick={() =>
-													navigate(`${AdminRoutes.EditVipQuestion.split(':')[0]}${question?.questionnaireId}`)
-												}
-												hidden={isHidden({
-													module: { key: 'VipManagement', value: 'U' },
-												})}
-											>
-												<FontAwesomeIcon icon={faEdit} />
-											</Button>
-										</>
-										<>
-											<Trigger message={'View Question'} id={question?.questionnaireId + 'view'} />
-											<Button
-												id={question?.questionnaireId + 'view'}
-												className='m-1'
-												size='sm'
-												variant='info'
-												onClick={() =>
-													navigate(
-														`${AdminRoutes.ViewVipQuestion.split(':').shift()}${question?.questionnaireId}`
-													)}
-											>
-												<FontAwesomeIcon icon={faEye} />
-											</Button>
+												<Trigger message={'View Question'} id={question?.questionnaireId + 'view'} />
+												<Button
+													id={question?.questionnaireId + 'view'}
+													className='m-1'
+													size='sm'
+													variant='info'
+													onClick={() =>
+														navigate(
+															`${AdminRoutes.ViewVipQuestion.split(':').shift()}${question?.questionnaireId}`
+														)}
+												>
+													<FontAwesomeIcon icon={faEye} />
+												</Button>
 
-										</>
-										<>
-											<Trigger message={'Delete'} id={question?.questionnaireId + 'delete'} />
-											<Button
-												id={question?.questionnaireId + 'delete'}
-												className='m-1'
-												size='sm'
-												variant='danger'
+												<Trigger message={'Delete'} id={question?.questionnaireId + 'delete'} />
+												<Button
+													id={question?.questionnaireId + 'delete'}
+													className='m-1'
+													size='sm'
+													variant='danger'
+													onClick={() => handleDeleteModal(question?.questionnaireId)}
+													hidden={isHidden({
+														module: { key: 'VipManagement', value: 'D' },
+													})}
+												>
+													<FontAwesomeIcon icon={faTrash} />
+												</Button>
 
-												onClick={() => handleDeleteModal(question?.questionnaireId)}
-												hidden={isHidden({
-													module: { key: 'VipManagement', value: 'D' },
-												})}
-											>
-												<FontAwesomeIcon icon={faTrash} />
-											</Button>
-										</>
-										<>
-											{!question?.isActive
-												? (
+												{!question?.isActive ? (
 													<>
 														<Trigger message={'Set Status Active'} id={question?.questionnaireId + 'active'} />
 														<Button
@@ -210,8 +242,7 @@ const VipformQuestions = () => {
 															className='m-1'
 															size='sm'
 															variant='success'
-															onClick={() =>
-																handleStatusShow(question?.questionnaireId, question?.isActive)}
+															onClick={() => handleStatusShow(question?.questionnaireId, question?.isActive)}
 															hidden={isHidden({
 																module: { key: 'VipManagement', value: 'T' },
 															})}
@@ -219,26 +250,25 @@ const VipformQuestions = () => {
 															<FontAwesomeIcon icon={faCheckSquare} />
 														</Button>
 													</>
-												)
-												: (<>
-													<Trigger message={'Set Status In-Active'} id={question?.questionnaireId + 'inactive'} />
-													<Button
-														id={question?.questionnaireId + 'inactive'}
-														className='m-1'
-														size='sm'
-														variant='danger'
-														onClick={() =>
-															handleStatusShow(question?.questionnaireId, question?.isActive)}
-														hidden={isHidden({
-															module: { key: 'VipManagement', value: 'T' },
-														})}
-													>
-														<FontAwesomeIcon icon={faWindowClose} />
-													</Button>
-												</>
+												) : (
+													<>
+														<Trigger message={'Set Status In-Active'} id={question?.questionnaireId + 'inactive'} />
+														<Button
+															id={question?.questionnaireId + 'inactive'}
+															className='m-1'
+															size='sm'
+															variant='danger'
+															onClick={() => handleStatusShow(question?.questionnaireId, question?.isActive)}
+															hidden={isHidden({
+																module: { key: 'VipManagement', value: 'T' },
+															})}
+														>
+															<FontAwesomeIcon icon={faWindowClose} />
+														</Button>
+													</>
 												)}
-										</>
-
+											</div>
+										</div>
 									</td>
 								</tr>
 							)
