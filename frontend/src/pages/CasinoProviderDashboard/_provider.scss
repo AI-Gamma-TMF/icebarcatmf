@@ -678,6 +678,215 @@
 }
 
 // ============================================================
+// React-Select Dropdown Styling - Dark Theme
+// ============================================================
+.provider-dashboard-page {
+  // React-Select custom styling
+  .css-b62m3t-container,
+  div[class*="react-select"],
+  [class*="__control"],
+  [class*="__menu"] {
+    // Control (main dropdown box)
+    div[class*="-control"],
+    div[class*="__control"] {
+      background: rgba(26, 26, 26, 0.55) !important;
+      border: 1px solid rgba(255, 255, 255, 0.08) !important;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: none !important;
+      min-height: 38px;
+      transition: all 0.2s ease;
+      
+      &:hover {
+        border-color: rgba(255, 255, 255, 0.15) !important;
+      }
+    }
+    
+    // Focused state
+    div[class*="-control"][class*="--is-focused"],
+    div[class*="__control--is-focused"] {
+      background: rgba(26, 26, 26, 0.75) !important;
+      border-color: #00e5a0 !important;
+      box-shadow: 0 0 0 3px rgba(0, 229, 160, 0.1) !important;
+    }
+    
+    // Single value (selected text)
+    div[class*="-singleValue"],
+    div[class*="__single-value"] {
+      color: rgba(234, 250, 245, 0.92) !important;
+    }
+    
+    // Placeholder
+    div[class*="-placeholder"],
+    div[class*="__placeholder"] {
+      color: rgba(234, 250, 245, 0.5) !important;
+    }
+    
+    // Input
+    div[class*="-Input"] input,
+    div[class*="__input"] input {
+      color: rgba(234, 250, 245, 0.92) !important;
+    }
+    
+    // Dropdown menu
+    div[class*="-menu"],
+    div[class*="__menu"] {
+      background: rgba(26, 26, 26, 0.95) !important;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+      z-index: 1000;
+    }
+    
+    // Menu list
+    div[class*="-MenuList"],
+    div[class*="__menu-list"] {
+      padding: 4px;
+    }
+    
+    // Options
+    div[class*="-option"],
+    div[class*="__option"] {
+      background: transparent !important;
+      color: rgba(234, 250, 245, 0.75) !important;
+      padding: 10px 12px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      border-radius: 6px;
+      margin: 2px 0;
+      
+      &:hover {
+        background: rgba(0, 229, 160, 0.1) !important;
+        color: rgba(234, 250, 245, 0.92) !important;
+      }
+    }
+    
+    // Selected option
+    div[class*="-option"][class*="--is-selected"],
+    div[class*="__option--is-selected"] {
+      background: rgba(0, 229, 160, 0.15) !important;
+      color: #00e5a0 !important;
+      font-weight: 500;
+    }
+    
+    // Focused option
+    div[class*="-option"][class*="--is-focused"],
+    div[class*="__option--is-focused"] {
+      background: rgba(0, 229, 160, 0.1) !important;
+    }
+    
+    // Indicators (dropdown arrow, clear button)
+    div[class*="-indicatorSeparator"],
+    div[class*="__indicator-separator"] {
+      background-color: rgba(255, 255, 255, 0.08) !important;
+    }
+    
+    div[class*="-indicatorContainer"],
+    div[class*="__indicator"] {
+      color: rgba(234, 250, 245, 0.5) !important;
+      
+      &:hover {
+        color: rgba(234, 250, 245, 0.75) !important;
+      }
+    }
+    
+    // Clear indicator
+    div[class*="-clearIndicator"],
+    div[class*="__clear-indicator"] {
+      color: rgba(234, 250, 245, 0.5) !important;
+      
+      &:hover {
+        color: #ff6b6b !important;
+      }
+    }
+    
+    // Dropdown indicator
+    div[class*="-dropdownIndicator"],
+    div[class*="__dropdown-indicator"] {
+      color: rgba(234, 250, 245, 0.5) !important;
+      
+      &:hover {
+        color: #00e5a0 !important;
+      }
+    }
+  }
+}
+
+// Global React-Select styling (applies everywhere in the app)
+div[class*="css-"][class*="-container"] {
+  div[class*="-control"] {
+    background: rgba(26, 26, 26, 0.55) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: none !important;
+    
+    &:hover {
+      border-color: rgba(255, 255, 255, 0.15) !important;
+    }
+  }
+  
+  div[class*="-control"][class*="--is-focused"] {
+    background: rgba(26, 26, 26, 0.75) !important;
+    border-color: #00e5a0 !important;
+    box-shadow: 0 0 0 3px rgba(0, 229, 160, 0.1) !important;
+  }
+  
+  div[class*="-singleValue"] {
+    color: rgba(234, 250, 245, 0.92) !important;
+  }
+  
+  div[class*="-placeholder"] {
+    color: rgba(234, 250, 245, 0.5) !important;
+  }
+  
+  div[class*="-Input"] input {
+    color: rgba(234, 250, 245, 0.92) !important;
+  }
+  
+  div[class*="-menu"] {
+    background: rgba(26, 26, 26, 0.95) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    z-index: 1000;
+  }
+  
+  div[class*="-option"] {
+    background: transparent !important;
+    color: rgba(234, 250, 245, 0.75) !important;
+    padding: 10px 12px;
+    border-radius: 6px;
+    margin: 2px 4px;
+    
+    &:hover {
+      background: rgba(0, 229, 160, 0.1) !important;
+      color: rgba(234, 250, 245, 0.92) !important;
+    }
+  }
+  
+  div[class*="-option"][class*="--is-selected"] {
+    background: rgba(0, 229, 160, 0.15) !important;
+    color: #00e5a0 !important;
+    font-weight: 500;
+  }
+  
+  div[class*="-indicatorSeparator"] {
+    background-color: rgba(255, 255, 255, 0.08) !important;
+  }
+  
+  div[class*="-indicatorContainer"] {
+    color: rgba(234, 250, 245, 0.5) !important;
+    
+    &:hover {
+      color: rgba(234, 250, 245, 0.75) !important;
+    }
+  }
+}
+
+// ============================================================
 // Utility Classes
 // ============================================================
 .small-icon {
