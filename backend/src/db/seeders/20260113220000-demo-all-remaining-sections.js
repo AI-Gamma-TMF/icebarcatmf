@@ -65,17 +65,23 @@ module.exports = {
           start_date: new Date(now.getTime() - 3 * 24 * 60 * 60 * 1000),
           end_date: new Date(now.getTime() + 4 * 24 * 60 * 60 * 1000),
           game_id: demoGameIds.length > 0 ? demoGameIds : null,
-          win_gc: JSON.stringify({ 1: 100000, 2: 50000, 3: 25000 }),
-          win_sc: JSON.stringify({ 1: 100, 2: 50, 3: 25 }),
+          // NOTE: `tournament.win_gc` / `tournament.win_sc` are DOUBLE columns (not JSON).
+          // Store numeric totals, and keep the per-rank breakdown in JSON (`more_details`).
+          win_gc: 175000, // 100000 + 50000 + 25000
+          win_sc: 175, // 100 + 50 + 25
           player_limit: 1000,
           vip_tournament: false,
           total_win: 0,
           total_bet: 0,
           order_id: 1,
-          status: 1,
+          status: 'active',
           winner_percentages: [50, 30, 20],
           image_url: 'https://example.com/tournament-slots.jpg',
           is_subscriber_only: false,
+          more_details: JSON.stringify({
+            prize_breakdown_gc: { 1: 100000, 2: 50000, 3: 25000 },
+            prize_breakdown_sc: { 1: 100, 2: 50, 3: 25 }
+          }),
           created_at: now,
           updated_at: now
         },
@@ -87,17 +93,21 @@ module.exports = {
           start_date: new Date(now.getTime() + 1 * 24 * 60 * 60 * 1000),
           end_date: new Date(now.getTime() + 8 * 24 * 60 * 60 * 1000),
           game_id: demoGameIds.length > 0 ? demoGameIds : null,
-          win_gc: JSON.stringify({ 1: 500000, 2: 250000, 3: 100000 }),
-          win_sc: JSON.stringify({ 1: 500, 2: 250, 3: 100 }),
+          win_gc: 850000, // 500000 + 250000 + 100000
+          win_sc: 850, // 500 + 250 + 100
           player_limit: 100,
           vip_tournament: true,
           total_win: 0,
           total_bet: 0,
           order_id: 2,
-          status: 1,
+          status: 'active',
           winner_percentages: [60, 25, 15],
           image_url: 'https://example.com/tournament-vip.jpg',
           is_subscriber_only: false,
+          more_details: JSON.stringify({
+            prize_breakdown_gc: { 1: 500000, 2: 250000, 3: 100000 },
+            prize_breakdown_sc: { 1: 500, 2: 250, 3: 100 }
+          }),
           created_at: now,
           updated_at: now
         },
@@ -109,17 +119,21 @@ module.exports = {
           start_date: new Date(now.getTime() - 12 * 60 * 60 * 1000),
           end_date: new Date(now.getTime() + 12 * 60 * 60 * 1000),
           game_id: demoGameIds.length > 0 ? [demoGameIds[0]] : null,
-          win_gc: JSON.stringify({ 1: 200000, 2: 100000, 3: 50000 }),
-          win_sc: JSON.stringify({ 1: 50, 2: 25, 3: 10 }),
+          win_gc: 350000, // 200000 + 100000 + 50000
+          win_sc: 85, // 50 + 25 + 10
           player_limit: 500,
           vip_tournament: false,
           total_win: 0,
           total_bet: 0,
           order_id: 3,
-          status: 1,
+          status: 'active',
           winner_percentages: [50, 30, 20],
           image_url: 'https://example.com/tournament-subscriber.jpg',
           is_subscriber_only: true,
+          more_details: JSON.stringify({
+            prize_breakdown_gc: { 1: 200000, 2: 100000, 3: 50000 },
+            prize_breakdown_sc: { 1: 50, 2: 25, 3: 10 }
+          }),
           created_at: now,
           updated_at: now
         },
@@ -131,17 +145,21 @@ module.exports = {
           start_date: new Date(now.getTime() - 14 * 24 * 60 * 60 * 1000),
           end_date: new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000),
           game_id: demoGameIds.length > 0 ? demoGameIds : null,
-          win_gc: JSON.stringify({ 1: 150000, 2: 75000, 3: 35000 }),
-          win_sc: JSON.stringify({ 1: 75, 2: 35, 3: 15 }),
+          win_gc: 260000, // 150000 + 75000 + 35000
+          win_sc: 125, // 75 + 35 + 15
           player_limit: 500,
           vip_tournament: false,
           total_win: 125,
           total_bet: 500,
           order_id: 99,
-          status: 2, // Completed
+          status: 'completed',
           winner_percentages: [50, 30, 20],
           image_url: 'https://example.com/tournament-past.jpg',
           is_subscriber_only: false,
+          more_details: JSON.stringify({
+            prize_breakdown_gc: { 1: 150000, 2: 75000, 3: 35000 },
+            prize_breakdown_sc: { 1: 75, 2: 35, 3: 15 }
+          }),
           created_at: new Date(now.getTime() - 14 * 24 * 60 * 60 * 1000),
           updated_at: new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000)
         }
