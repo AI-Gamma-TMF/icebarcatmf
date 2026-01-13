@@ -65,23 +65,11 @@
 // write your custom styles here!
 
 // ============================================================
-// Global "zoom out" (whole layout, not just fonts)
+// IMPORTANT: Do NOT force any global "zoom".
 // ============================================================
-// Using CSS zoom (better support for fixed positioning than transform)
+// `zoom` is non-standard and will make the UI look inconsistent across displays.
+// The layout should adapt using responsive breakpoints instead.
 html,
 body {
   overflow-x: hidden;
-}
-
-body {
-  zoom: 0.75;
-}
-
-// Fix sidebar height with zoom applied
-.sidebar {
-  // `zoom` scales vh/px visually, so we must compensate to avoid clipping at the bottom.
-  // Keep top offset (60px) as-is (it also gets zoomed), but expand the height by 1/zoom.
-  height: calc((100vh - 60px) / 0.75) !important;
-  max-height: none !important;
-  bottom: auto !important; // let explicit height control the box
 }
