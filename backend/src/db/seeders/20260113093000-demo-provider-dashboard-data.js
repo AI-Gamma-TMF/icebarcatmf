@@ -171,6 +171,8 @@ module.exports = {
               master_casino_provider_id: providerIdsByName[g.providerName] || null,
               is_active: true,
               is_hidden: false,
+              // Required NOT NULL column in prod/demo DB schema
+              is_demo_supported: true,
               return_to_player: g.rtp,
               created_at: now,
               updated_at: now
