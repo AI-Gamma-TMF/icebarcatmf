@@ -15,7 +15,6 @@ const { QueryTypes } = require('sequelize')
 
 module.exports = {
   async up (queryInterface) {
-    const transaction = await queryInterface.sequelize.transaction()
     try {
       const now = new Date()
 
@@ -42,12 +41,11 @@ module.exports = {
       // Grab any existing user (casino_transactions.user_id is NOT NULL)
       const userRow = await queryInterface.sequelize.query(
         `SELECT user_id AS "userId" FROM users ORDER BY user_id ASC LIMIT 1;`,
-        { type: QueryTypes.SELECT, transaction }
+        { type: QueryTypes.SELECT }
       )
       const demoUserId = userRow?.[0]?.userId
       if (!demoUserId) {
         // No users in DB yet; skip safely (demo-player-data seeder should create users in our demo env)
-        await transaction.commit()
         return
       }
 
@@ -64,7 +62,7 @@ module.exports = {
            FROM master_game_aggregators
            WHERE name = :name
            LIMIT 1;`,
-          { type: QueryTypes.SELECT, replacements: { name: a.name }, transaction }
+          { type: QueryTypes.SELECT, replacements: { name: a.name } }
         )
 
         if (existingAgg?.[0]?.id) {
@@ -83,7 +81,7 @@ module.exports = {
               updated_at: now
             }
           ],
-          { transaction, returning: ['master_game_aggregator_id'] }
+          { returning: ['master_game_aggregator_id'] }
         )
 
         // Some dialects don't return rows; fetch again by name
@@ -92,7 +90,7 @@ module.exports = {
            FROM master_game_aggregators
            WHERE name = :name
            LIMIT 1;`,
-          { type: QueryTypes.SELECT, replacements: { name: a.name }, transaction }
+          { type: QueryTypes.SELECT, replacements: { name: a.name } }
         )
         aggregatorIdsByName[a.name] = aggIdRow?.[0]?.id
       }
@@ -110,7 +108,7 @@ module.exports = {
            FROM master_casino_providers
            WHERE name = :name
            LIMIT 1;`,
-          { type: QueryTypes.SELECT, replacements: { name: p.name }, transaction }
+          { type: QueryTypes.SELECT, replacements: { name: p.name } }
         )
         if (existingProv?.[0]?.id) {
           providerIdsByName[p.name] = existingProv[0].id
@@ -129,7 +127,7 @@ module.exports = {
               updated_at: now
             }
           ],
-          { transaction }
+          {}
         )
 
         const provIdRow = await queryInterface.sequelize.query(
@@ -137,7 +135,7 @@ module.exports = {
            FROM master_casino_providers
            WHERE name = :name
            LIMIT 1;`,
-          { type: QueryTypes.SELECT, replacements: { name: p.name }, transaction }
+          { type: QueryTypes.SELECT, replacements: { name: p.name } }
         )
         providerIdsByName[p.name] = provIdRow?.[0]?.id
       }
@@ -157,7 +155,7 @@ module.exports = {
            FROM master_casino_games
            WHERE identifier = :identifier
            LIMIT 1;`,
-          { type: QueryTypes.SELECT, replacements: { identifier: g.identifier }, transaction }
+          { type: QueryTypes.SELECT, replacements: { identifier: g.identifier } }
         )
         if (existingGame?.[0]?.id) {
           gameIdsByIdentifier[g.identifier] = existingGame[0].id
@@ -178,7 +176,7 @@ module.exports = {
               updated_at: now
             }
           ],
-          { transaction }
+          {}
         )
 
         const gameIdRow = await queryInterface.sequelize.query(
@@ -186,14 +184,13 @@ module.exports = {
            FROM master_casino_games
            WHERE identifier = :identifier
            LIMIT 1;`,
-          { type: QueryTypes.SELECT, replacements: { identifier: g.identifier }, transaction }
+          { type: QueryTypes.SELECT, replacements: { identifier: g.identifier } }
         )
         gameIdsByIdentifier[g.identifier] = gameIdRow?.[0]?.id
       }
 
       const demoGameIds = Object.values(gameIdsByIdentifier).filter(Boolean)
       if (demoGameIds.length === 0) {
-        await transaction.commit()
         return
       }
 
@@ -204,7 +201,7 @@ module.exports = {
         `DELETE FROM casino_game_stats
          WHERE game_id IN (${idsSql})
            AND timestamp BETWEEN :start AND :end;`,
-        { replacements: { start: monthStart.toISOString(), end: monthEnd.toISOString() }, transaction }
+        { replacements: { start: monthStart.toISOString(), end: monthEnd.toISOString() } }
       )
 
       // Also clear any "recent" demo rows (last 35 minutes) to keep the live widgets deterministic.
@@ -212,7 +209,7 @@ module.exports = {
         `DELETE FROM casino_game_stats
          WHERE game_id IN (${idsSql})
            AND timestamp > (NOW() - INTERVAL '35 minutes');`,
-        { transaction }
+        {}
       )
 
       await queryInterface.sequelize.query(
@@ -220,7 +217,7 @@ module.exports = {
          WHERE game_id IN (${demoGameIds.map(id => `'${id}'`).join(', ')})
            AND transaction_id LIKE 'demo-provider-%'
            AND created_at BETWEEN :start AND :end;`,
-        { replacements: { start: monthStart.toISOString(), end: monthEnd.toISOString() }, transaction }
+        { replacements: { start: monthStart.toISOString(), end: monthEnd.toISOString() } }
       )
 
       await queryInterface.sequelize.query(
@@ -232,8 +229,7 @@ module.exports = {
           replacements: {
             startMonthDate: monthStart.toISOString(),
             endMonthDate: monthEnd.toISOString()
-          },
-          transaction
+          }
         }
       )
 
@@ -246,7 +242,7 @@ module.exports = {
         created_at: now,
         updated_at: now
       }))
-      await queryInterface.bulkInsert('game_monthly_discount', discounts, { transaction })
+      await queryInterface.bulkInsert('game_monthly_discount', discounts, {})
 
       // Insert provider rate matrix rows (if missing)
       for (const p of providers) {
@@ -263,7 +259,7 @@ module.exports = {
              AND ggr_maximum IS NULL
              AND deleted_at IS NULL
            LIMIT 1;`,
-          { type: QueryTypes.SELECT, replacements: { providerId, aggregatorId }, transaction }
+          { type: QueryTypes.SELECT, replacements: { providerId, aggregatorId } }
         )
 
         if (existingRate?.[0]?.rateId) continue
@@ -281,7 +277,7 @@ module.exports = {
               updated_at: now
             }
           ],
-          { transaction }
+          {}
         )
       }
 
@@ -345,7 +341,7 @@ module.exports = {
       }
 
       if (statsRows.length > 0) {
-        await queryInterface.bulkInsert('casino_game_stats', statsRows, { transaction })
+        await queryInterface.bulkInsert('casino_game_stats', statsRows, {})
       }
 
       // Insert a few "live" casino transactions within current month for each game
@@ -387,18 +383,14 @@ module.exports = {
         })
       }
       if (txRows.length > 0) {
-        await queryInterface.bulkInsert('casino_transactions', txRows, { transaction })
+        await queryInterface.bulkInsert('casino_transactions', txRows, {})
       }
-
-      await transaction.commit()
     } catch (err) {
-      await transaction.rollback()
       throw err
     }
   },
 
   async down (queryInterface) {
-    const transaction = await queryInterface.sequelize.transaction()
     try {
       // Only remove the explicit demo-named rows, keep real data intact.
       const providerNames = ['Demo Provider Alpha', 'Demo Provider Beta', 'Demo Provider Gamma']
@@ -407,41 +399,38 @@ module.exports = {
 
       const providers = await queryInterface.sequelize.query(
         `SELECT master_casino_provider_id AS "id" FROM master_casino_providers WHERE name IN (:names);`,
-        { type: QueryTypes.SELECT, replacements: { names: providerNames }, transaction }
+        { type: QueryTypes.SELECT, replacements: { names: providerNames } }
       )
       const providerIds = providers.map(r => r.id).filter(Boolean)
 
       const games = await queryInterface.sequelize.query(
         `SELECT master_casino_game_id AS "id" FROM master_casino_games WHERE identifier IN (:ids);`,
-        { type: QueryTypes.SELECT, replacements: { ids: gameIdentifiers }, transaction }
+        { type: QueryTypes.SELECT, replacements: { ids: gameIdentifiers } }
       )
       const gameIds = games.map(r => r.id).filter(Boolean)
 
       if (gameIds.length > 0) {
         const idsSql = gameIds.join(', ')
-        await queryInterface.sequelize.query(`DELETE FROM casino_game_stats WHERE game_id IN (${idsSql});`, { transaction })
-        await queryInterface.sequelize.query(`DELETE FROM game_monthly_discount WHERE master_casino_game_id IN (${idsSql});`, { transaction })
+        await queryInterface.sequelize.query(`DELETE FROM casino_game_stats WHERE game_id IN (${idsSql});`, {})
+        await queryInterface.sequelize.query(`DELETE FROM game_monthly_discount WHERE master_casino_game_id IN (${idsSql});`, {})
         await queryInterface.sequelize.query(
           `DELETE FROM casino_transactions WHERE game_id IN (${gameIds.map(id => `'${id}'`).join(', ')}) AND transaction_id LIKE 'demo-provider-%';`,
-          { transaction }
+          {}
         )
-        await queryInterface.sequelize.query(`DELETE FROM master_casino_games WHERE master_casino_game_id IN (${idsSql});`, { transaction })
+        await queryInterface.sequelize.query(`DELETE FROM master_casino_games WHERE master_casino_game_id IN (${idsSql});`, {})
       }
 
       if (providerIds.length > 0) {
         const idsSql = providerIds.join(', ')
-        await queryInterface.sequelize.query(`DELETE FROM provider_rate WHERE provider_id IN (${idsSql});`, { transaction })
-        await queryInterface.sequelize.query(`DELETE FROM master_casino_providers WHERE master_casino_provider_id IN (${idsSql});`, { transaction })
+        await queryInterface.sequelize.query(`DELETE FROM provider_rate WHERE provider_id IN (${idsSql});`, {})
+        await queryInterface.sequelize.query(`DELETE FROM master_casino_providers WHERE master_casino_provider_id IN (${idsSql});`, {})
       }
 
       await queryInterface.sequelize.query(
         `DELETE FROM master_game_aggregators WHERE name IN (:names);`,
-        { replacements: { names: aggregatorNames }, transaction }
+        { replacements: { names: aggregatorNames } }
       )
-
-      await transaction.commit()
     } catch (err) {
-      await transaction.rollback()
       throw err
     }
   }
