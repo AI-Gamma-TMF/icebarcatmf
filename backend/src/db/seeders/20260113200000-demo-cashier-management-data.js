@@ -21,10 +21,11 @@ module.exports = {
     )
 
     if (existingRules.length === 0) {
-      const redeemRules = [
+      // Use raw SQL to handle empty integer arrays properly in PostgreSQL
+      const redeemRulesData = [
         {
-          rule_name: 'Demo: Standard Redemption',
-          rule_condition: JSON.stringify({
+          name: 'Demo: Standard Redemption',
+          condition: JSON.stringify({
             minAmount: 50,
             maxAmount: 5000,
             minPlaythrough: 1,
@@ -32,16 +33,13 @@ module.exports = {
             tierRequired: null,
             description: 'Standard redemption rule for all verified users'
           }),
-          is_active: true,
-          completion_time: '24-48 hours',
-          is_subscriber_only: false,
-          player_ids: [],
-          created_at: now,
-          updated_at: now
+          isActive: true,
+          completionTime: '24-48 hours',
+          isSubscriberOnly: false
         },
         {
-          rule_name: 'Demo: VIP Fast Track',
-          rule_condition: JSON.stringify({
+          name: 'Demo: VIP Fast Track',
+          condition: JSON.stringify({
             minAmount: 100,
             maxAmount: 25000,
             minPlaythrough: 0.5,
@@ -49,16 +47,13 @@ module.exports = {
             tierRequired: 'Gold',
             description: 'Expedited processing for VIP members'
           }),
-          is_active: true,
-          completion_time: '2-6 hours',
-          is_subscriber_only: false,
-          player_ids: [],
-          created_at: now,
-          updated_at: now
+          isActive: true,
+          completionTime: '2-6 hours',
+          isSubscriberOnly: false
         },
         {
-          rule_name: 'Demo: Subscriber Exclusive',
-          rule_condition: JSON.stringify({
+          name: 'Demo: Subscriber Exclusive',
+          condition: JSON.stringify({
             minAmount: 25,
             maxAmount: 10000,
             minPlaythrough: 0.75,
@@ -66,16 +61,13 @@ module.exports = {
             tierRequired: null,
             description: 'Special rates for active subscribers'
           }),
-          is_active: true,
-          completion_time: '12-24 hours',
-          is_subscriber_only: true,
-          player_ids: [],
-          created_at: now,
-          updated_at: now
+          isActive: true,
+          completionTime: '12-24 hours',
+          isSubscriberOnly: true
         },
         {
-          rule_name: 'Demo: High Roller',
-          rule_condition: JSON.stringify({
+          name: 'Demo: High Roller',
+          condition: JSON.stringify({
             minAmount: 1000,
             maxAmount: 100000,
             minPlaythrough: 1,
@@ -83,16 +75,13 @@ module.exports = {
             tierRequired: 'Diamond',
             description: 'Premium redemption for high-value players'
           }),
-          is_active: true,
-          completion_time: '1-4 hours',
-          is_subscriber_only: false,
-          player_ids: [],
-          created_at: now,
-          updated_at: now
+          isActive: true,
+          completionTime: '1-4 hours',
+          isSubscriberOnly: false
         },
         {
-          rule_name: 'Demo: Weekend Special',
-          rule_condition: JSON.stringify({
+          name: 'Demo: Weekend Special',
+          condition: JSON.stringify({
             minAmount: 20,
             maxAmount: 2000,
             minPlaythrough: 1.5,
@@ -101,16 +90,13 @@ module.exports = {
             daysOfWeek: ['Saturday', 'Sunday'],
             description: 'Weekend-only redemption with bonus processing'
           }),
-          is_active: false, // Inactive rule for demo
-          completion_time: '24-72 hours',
-          is_subscriber_only: false,
-          player_ids: [],
-          created_at: now,
-          updated_at: now
+          isActive: false,
+          completionTime: '24-72 hours',
+          isSubscriberOnly: false
         },
         {
-          rule_name: 'Demo: New Player Welcome',
-          rule_condition: JSON.stringify({
+          name: 'Demo: New Player Welcome',
+          condition: JSON.stringify({
             minAmount: 10,
             maxAmount: 500,
             minPlaythrough: 2,
@@ -119,17 +105,30 @@ module.exports = {
             maxAccountAge: 30,
             description: 'First redemption for new players within 30 days'
           }),
-          is_active: true,
-          completion_time: '48-72 hours',
-          is_subscriber_only: false,
-          player_ids: [],
-          created_at: now,
-          updated_at: now
+          isActive: true,
+          completionTime: '48-72 hours',
+          isSubscriberOnly: false
         }
       ]
 
-      await queryInterface.bulkInsert('redeem_rule', redeemRules, {})
-      console.log(`Inserted ${redeemRules.length} demo redeem rules`)
+      // Insert using raw SQL to properly handle empty integer arrays
+      for (const rule of redeemRulesData) {
+        await queryInterface.sequelize.query(
+          `INSERT INTO redeem_rule (rule_name, rule_condition, is_active, completion_time, is_subscriber_only, player_ids, created_at, updated_at)
+           VALUES (:name, :condition, :isActive, :completionTime, :isSubscriberOnly, ARRAY[]::INTEGER[], :now, :now)`,
+          {
+            replacements: {
+              name: rule.name,
+              condition: rule.condition,
+              isActive: rule.isActive,
+              completionTime: rule.completionTime,
+              isSubscriberOnly: rule.isSubscriberOnly,
+              now
+            }
+          }
+        )
+      }
+      console.log(`Inserted ${redeemRulesData.length} demo redeem rules`)
     }
 
     // ========================================
