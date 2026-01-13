@@ -26,6 +26,17 @@ module.exports = {
   async up (queryInterface) {
     const now = new Date()
 
+    // This seeder is used on demo deployments where DB schemas can drift.
+    // Never fail the entire deploy due to one missing table/column.
+    const safeSection = async (name, fn) => {
+      try {
+        await fn()
+      } catch (err) {
+        // eslint-disable-next-line no-console
+        console.warn(`[DEMO SEED] Skipping "${name}" due to error: ${err?.message || err}`)
+      }
+    }
+
     // Fetch demo user and admin
     const userRow = await queryInterface.sequelize.query(
       `SELECT user_id AS "userId", email FROM users ORDER BY user_id ASC LIMIT 1;`,
@@ -336,7 +347,17 @@ module.exports = {
     // ========================================
     // 5. EMAIL TEMPLATES
     // ========================================
-    if (demoAdminId) {
+    await safeSection('Email Templates', async () => {
+      if (!demoAdminId) return
+
+      // Some environments have an older `email_templates` schema without `label`.
+      const cols = await queryInterface.sequelize.query(
+        `SELECT column_name FROM information_schema.columns WHERE table_schema = 'public' AND table_name = 'email_templates';`,
+        { type: QueryTypes.SELECT }
+      )
+      const colNames = new Set((cols || []).map((c) => c.column_name))
+      if (!colNames.has('label')) throw new Error('email_templates.label column missing')
+
       const existingEmailTemplates = await queryInterface.sequelize.query(
         `SELECT email_template_id FROM email_templates WHERE label LIKE 'Demo:%' LIMIT 1;`,
         { type: QueryTypes.SELECT }
@@ -409,7 +430,7 @@ module.exports = {
         await queryInterface.bulkInsert('email_templates', emailTemplates, {})
         console.log(`Inserted ${emailTemplates.length} demo email templates`)
       }
-    }
+    })
 
     // ========================================
     // 6. BONUS
@@ -1075,7 +1096,13 @@ module.exports = {
     await queryInterface.sequelize.query(`DELETE FROM amoe WHERE entry_id LIKE 'DEMO-%';`)
     await queryInterface.sequelize.query(`DELETE FROM affiliates WHERE email LIKE 'demo-affiliate%';`)
     await queryInterface.sequelize.query(`DELETE FROM bonus WHERE bonus_name LIKE 'Demo:%';`)
-    await queryInterface.sequelize.query(`DELETE FROM email_templates WHERE label LIKE 'Demo:%';`)
+    // Best-effort cleanup: older schemas might not have email_templates.label
+    try {
+      await queryInterface.sequelize.query(`DELETE FROM email_templates WHERE label LIKE 'Demo:%';`)
+    } catch (e) {
+      // eslint-disable-next-line no-console
+      console.warn(`[DEMO SEED] Cleanup skipped for email_templates: ${e?.message || e}`)
+    }
     await queryInterface.sequelize.query(`DELETE FROM cms_pages WHERE slug LIKE 'demo-%';`)
     await queryInterface.sequelize.query(`DELETE FROM raffles WHERE title LIKE 'Demo:%';`)
     await queryInterface.sequelize.query(`DELETE FROM tiers WHERE name LIKE 'Demo:%';`)
