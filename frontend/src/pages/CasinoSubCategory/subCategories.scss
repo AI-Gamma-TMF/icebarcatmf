@@ -49,20 +49,159 @@
   transform: translateY(-1px);
 }
 
+// Table wrapper with horizontal scroll
 .subcats-table-wrap {
-  overflow-x: auto;
+  overflow-x: auto !important;
+  overflow-y: visible !important;
+  -webkit-overflow-scrolling: touch;
 }
 
+// Table with fixed layout and minimum width
 .subcats-table {
-  min-width: max-content;
+  table-layout: fixed;
+  width: 100%;
+  min-width: 900px; // Ensure minimum width for horizontal scroll
+  
+  th, td {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding: 10px 8px;
+    vertical-align: middle;
+  }
+  
+  // ID column
+  th:nth-child(1),
+  td:nth-child(1) {
+    width: 8%;
+    min-width: 70px;
+    max-width: 90px;
+  }
+  
+  // Name column
+  th:nth-child(2),
+  td:nth-child(2) {
+    width: 20%;
+    min-width: 180px;
+    max-width: 280px;
+  }
+  
+  // Slug column
+  th:nth-child(3),
+  td:nth-child(3) {
+    width: 15%;
+    min-width: 130px;
+    max-width: 180px;
+  }
+  
+  // Order ID column
+  th:nth-child(4),
+  td:nth-child(4) {
+    width: 10%;
+    min-width: 90px;
+    max-width: 110px;
+  }
+  
+  // Featured column
+  th:nth-child(5),
+  td:nth-child(5) {
+    width: 10%;
+    min-width: 90px;
+    max-width: 110px;
+  }
+  
+  // Status column
+  th:nth-child(6),
+  td:nth-child(6) {
+    width: 12%;
+    min-width: 100px;
+    max-width: 120px;
+  }
+  
+  // Actions column
+  th:nth-child(7),
+  td:nth-child(7) {
+    width: 25%;
+    min-width: 300px;
+    white-space: normal; // Allow buttons to wrap if needed
+  }
 }
 
 .subcats-table__name {
-  max-width: 260px;
+  max-width: 100%;
+  display: inline-block;
 }
 
-.subcats-table__actions .btn {
-  border-radius: 12px;
+.subcats-table__actions {
+  .btn {
+    border-radius: 12px;
+    margin: 2px;
+  }
+}
+
+// Responsive adjustments
+@media screen and (max-width: 1200px) {
+  .subcats-table {
+    min-width: 850px;
+  }
+}
+
+@media screen and (max-width: 767.9px) {
+  .subcats-table {
+    min-width: 900px; // Force horizontal scroll on mobile
+    
+    th, td {
+      padding: 8px 6px;
+      font-size: 0.85rem;
+    }
+    
+    th:nth-child(1),
+    td:nth-child(1) {
+      width: 8%;
+      min-width: 65px;
+    }
+    
+    th:nth-child(2),
+    td:nth-child(2) {
+      width: 18%;
+      min-width: 160px;
+    }
+    
+    th:nth-child(3),
+    td:nth-child(3) {
+      width: 14%;
+      min-width: 120px;
+    }
+    
+    th:nth-child(4),
+    td:nth-child(4) {
+      width: 10%;
+      min-width: 85px;
+    }
+    
+    th:nth-child(5),
+    td:nth-child(5) {
+      width: 10%;
+      min-width: 85px;
+    }
+    
+    th:nth-child(6),
+    td:nth-child(6) {
+      width: 12%;
+      min-width: 95px;
+    }
+    
+    th:nth-child(7),
+    td:nth-child(7) {
+      width: 28%;
+      min-width: 280px;
+    }
+  }
+  
+  .subcats-table__actions .btn {
+    padding: 6px 10px;
+    font-size: 0.85rem;
+  }
 }
 
 
