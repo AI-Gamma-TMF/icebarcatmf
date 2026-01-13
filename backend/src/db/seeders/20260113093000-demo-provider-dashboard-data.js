@@ -23,6 +23,22 @@ module.exports = {
       const monthStart = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), 1, 0, 0, 0))
       const monthEnd = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth() + 1, 0, 23, 59, 59))
 
+      // Match backend "latest cumulative" boundary used by Game Dashboard / Provider Dashboard.
+      // This helps demo data appear immediately in summary widgets and list queries.
+      const latestCumulative = new Date(now)
+      latestCumulative.setUTCMinutes(latestCumulative.getUTCMinutes() - (latestCumulative.getUTCMinutes() % 30), 0, 0)
+      const bufferMs = 5 * 60 * 1000
+      if ((now - latestCumulative) < bufferMs) {
+        latestCumulative.setUTCMinutes(latestCumulative.getUTCMinutes() - 30)
+      }
+
+      // Game Dashboard summary uses endTime = (floorTo30Min - 1 minute), with seconds 59.999
+      const endTime = new Date(now)
+      endTime.setUTCMinutes(Math.floor(endTime.getUTCMinutes() / 30) * 30 - 1, 59, 999)
+      if (now < new Date(endTime.getTime() + 5 * 60 * 1000)) {
+        endTime.setUTCMinutes(endTime.getUTCMinutes() - 30, 59, 999)
+      }
+
       // Grab any existing user (casino_transactions.user_id is NOT NULL)
       const userRow = await queryInterface.sequelize.query(
         `SELECT user_id AS "userId" FROM users ORDER BY user_id ASC LIMIT 1;`,
@@ -191,6 +207,14 @@ module.exports = {
         { replacements: { start: monthStart.toISOString(), end: monthEnd.toISOString() }, transaction }
       )
 
+      // Also clear any "recent" demo rows (last 35 minutes) to keep the live widgets deterministic.
+      await queryInterface.sequelize.query(
+        `DELETE FROM casino_game_stats
+         WHERE game_id IN (${idsSql})
+           AND timestamp > (NOW() - INTERVAL '35 minutes');`,
+        { transaction }
+      )
+
       await queryInterface.sequelize.query(
         `DELETE FROM casino_transactions
          WHERE game_id IN (${demoGameIds.map(id => `'${id}'`).join(', ')})
@@ -267,7 +291,7 @@ module.exports = {
       for (let d = 0; d < dayCount; d++) {
         const ts = new Date(now)
         ts.setUTCDate(now.getUTCDate() - d)
-        ts.setUTCHours(12, 0, 0, 0)
+        ts.setUTCHours(0, 10, 0, 0)
 
         // Ensure within month
         if (ts < monthStart || ts > monthEnd) continue
@@ -285,6 +309,41 @@ module.exports = {
           })
         }
       }
+
+      // Add a "recent" stats row for liveTopGames (timestamp > now - 30 minutes)
+      // and also a row <= latestCumulative/endTime so summary widgets show non-zero totals.
+      const recentTs = new Date(now.getTime() - 10 * 60 * 1000)
+      if (recentTs >= monthStart && recentTs <= monthEnd) {
+        for (const gameId of demoGameIds) {
+          const seed = (gameId * 19) % 100
+          const totalBets = 120 + seed * 2
+          const totalWins = totalBets * (0.82 + (seed % 9) / 100)
+          statsRows.push({
+            game_id: gameId,
+            timestamp: recentTs,
+            total_bets: Number(totalBets.toFixed(2)),
+            total_wins: Number(totalWins.toFixed(2)),
+            total_rounds: 30 + (seed % 20)
+          })
+        }
+      }
+
+      const cumulativeTs = new Date(Math.min(latestCumulative.getTime(), endTime.getTime()) - 60 * 1000)
+      if (cumulativeTs >= monthStart && cumulativeTs <= monthEnd) {
+        for (const gameId of demoGameIds) {
+          const seed = (gameId * 23) % 100
+          const totalBets = 200 + seed
+          const totalWins = totalBets * (0.86 + (seed % 5) / 100)
+          statsRows.push({
+            game_id: gameId,
+            timestamp: cumulativeTs,
+            total_bets: Number(totalBets.toFixed(2)),
+            total_wins: Number(totalWins.toFixed(2)),
+            total_rounds: 40 + (seed % 25)
+          })
+        }
+      }
+
       if (statsRows.length > 0) {
         await queryInterface.bulkInsert('casino_game_stats', statsRows, { transaction })
       }
