@@ -462,7 +462,8 @@ module.exports = {
           sc_amount: 50,
           is_unique: true,
           percentage: 100,
-          minimum_purchase: 9.99,
+          // DB column is `minimum_purchase_amount` (not `minimum_purchase`)
+          minimum_purchase_amount: 9.99,
           btn_text: 'Claim Now',
           created_at: now,
           updated_at: now
@@ -511,7 +512,8 @@ module.exports = {
           sc_amount: 25,
           is_unique: false,
           percentage: 50,
-          minimum_purchase: 19.99,
+          // DB column is `minimum_purchase_amount` (not `minimum_purchase`)
+          minimum_purchase_amount: 19.99,
           btn_text: 'Get Weekend Bonus',
           created_at: now,
           updated_at: now
