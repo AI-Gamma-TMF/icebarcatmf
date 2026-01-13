@@ -46,7 +46,7 @@ const useCommissionReport = () => {
       const params = { timezone };
       if (queryKey[2]){
         if(queryKey[2] === 'all'){
-          const managerArr = vipManagersList?.map((manager)=>manager?.adminUserId)
+          const managerArr = vipManagersList?.map((manager)=>manager?.adminUserId) || [];
           params.managerAdminId = JSON.stringify(managerArr);
         }
         else{
@@ -61,7 +61,7 @@ const useCommissionReport = () => {
     select: (res) => res?.data?.data,
     refetchOnWindowFocus: false,
     retry: false,
-    enabled: !isLoadingManagers && vipManagersList?.length > 0
+    enabled: !isLoadingManagers
   });
 
   
