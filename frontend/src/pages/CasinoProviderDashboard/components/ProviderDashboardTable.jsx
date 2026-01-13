@@ -67,19 +67,23 @@ const ProviderDashboardTable = ({ providerId,
 
 
   return (
-    <Row className="">
+    <Row className="provider-dashboard-table-section">
       <Row className="mb-2">
         <Col xs="auto">
           <h5 className="mb-0">Provider Details Table</h5>
         </Col>
       </Row>
-      <Row>
-        <Col sm={6} lg={2}>
-          <Form.Label>Aggregator</Form.Label>
+      <Row className="provider-dashboard-filters g-3 align-items-end">
+        <Col xs={12} md={6} lg={4} className="provider-dashboard-filters__col">
+          <Form.Label className="provider-dashboard-filters__label">Aggregator</Form.Label>
           <Select
             placeholder="Aggregator"
             options={aggregatorNameOptions}
             isClearable
+            className="gs-select"
+            classNamePrefix="gs-select"
+            menuPortalTarget={document.body}
+            menuPosition="fixed"
             value={
               aggregatorNameOptions?.find(
                 (option) => option.value === aggregatorId
@@ -88,12 +92,16 @@ const ProviderDashboardTable = ({ providerId,
             onChange={(e) => setAggregatorId(e ? e.value : null)}
           />
         </Col>
-        <Col sm={6} lg={3}>
-          <Form.Label>Game Provider</Form.Label>
+        <Col xs={12} md={6} lg={4} className="provider-dashboard-filters__col">
+          <Form.Label className="provider-dashboard-filters__label">Game Provider</Form.Label>
           <Select
             placeholder="Game Provider"
             options={providerNameOptions}
             isClearable
+            className="gs-select"
+            classNamePrefix="gs-select"
+            menuPortalTarget={document.body}
+            menuPosition="fixed"
             value={
               providerNameOptions.find(
                 (option) => option.value === providerId
@@ -143,12 +151,8 @@ const ProviderDashboardTable = ({ providerId,
           )}
         </Col> */}
 
-        <Col sm={6} lg={2}>
-          <Form.Label
-            style={{ marginBottom: "0", marginRight: "15px", marginTop: "5px" }}
-          >
-            Select Month
-          </Form.Label>
+        <Col xs={12} md={6} lg={4} className="provider-dashboard-filters__col">
+          <Form.Label className="provider-dashboard-filters__label">Select Month</Form.Label>
 
           <Datetime
             dateFormat="MMMM YYYY"
@@ -156,7 +160,11 @@ const ProviderDashboardTable = ({ providerId,
             value={startDate}
             onChange={handleMonthYearChange}
             closeOnSelect={true} // this is key
-            inputProps={{ placeholder: "Select Month", readOnly: true }}
+            inputProps={{
+              placeholder: "Select Month",
+              readOnly: true,
+              className: "form-control provider-dashboard-filters__month-input",
+            }}
             // inputProps={{
             //   readOnly: true,
             //   placeholder: "Select Month",
@@ -171,21 +179,22 @@ const ProviderDashboardTable = ({ providerId,
             }}
           />
           {(errorStart || errorEnd) && (
-            <div style={{ color: "red", marginTop: "5px" }}>
+            <div className="provider-dashboard-filters__error">
               {errorStart || errorEnd}
             </div>
           )}
         </Col>
 
       </Row>
-      <Table
-        bordered
-        striped
-        responsive
-        hover
-        size="sm"
-        className="text-center mt-4"
-      >
+      <div className="provider-dashboard-table-wrap mt-4">
+        <Table
+          bordered
+          striped
+          responsive
+          hover
+          size="sm"
+          className="provider-dashboard-table dashboard-data-table text-center"
+        >
         <thead className="thead-dark">
           <tr>
             {providerDashboardTableHeaders.map((h, idx) => (
@@ -226,7 +235,7 @@ const ProviderDashboardTable = ({ providerId,
         <tbody>
           {providerInfoLoading ? (
             <tr>
-              <td colSpan={6} className="text-center">
+              <td colSpan={providerDashboardTableHeaders.length} className="text-center">
                 <InlineLoader />
               </td>
             </tr>
@@ -247,7 +256,7 @@ const ProviderDashboardTable = ({ providerId,
                 avgGgrDiscountPercentage,
                 netGGR
               }) => (
-                <tr>
+                <tr key={`${masterCasinoProviderName || 'provider'}-${masterGameAggregatorName || 'agg'}-${rtpVersion || 'rtp'}`}>
                   <td>{masterCasinoProviderName || '-'}</td>
                   <td>{masterGameAggregatorName || '-'}</td>
                   <td>{rate ?? '-'}</td>
@@ -280,7 +289,7 @@ const ProviderDashboardTable = ({ providerId,
             )
           ) : (
             <tr>
-              <td colSpan={6} className="text-danger text-center">
+              <td colSpan={providerDashboardTableHeaders.length} className="text-danger text-center">
                 No Data Found
               </td>
             </tr>
@@ -305,7 +314,8 @@ const ProviderDashboardTable = ({ providerId,
             <td></td>
           </tr>
         </tfoot>
-      </Table>
+        </Table>
+      </div>
 
       {/* {rateMatrixList?.finalOutput !== 0 && (
         <PaginationComponent
