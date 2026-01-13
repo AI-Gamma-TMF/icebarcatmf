@@ -193,7 +193,7 @@ const VipformQuestions = () => {
 												<Trigger message='Edit' id={question?.questionnaireId + 'edit'} />
 												<Button
 													id={question?.questionnaireId + 'edit'}
-													className='m-1'
+													className='vip-questions-table__actionBtn'
 													size='sm'
 													variant='warning'
 													onClick={() =>
@@ -202,6 +202,7 @@ const VipformQuestions = () => {
 													hidden={isHidden({
 														module: { key: 'VipManagement', value: 'U' },
 													})}
+													aria-label="Edit question"
 												>
 													<FontAwesomeIcon icon={faEdit} />
 												</Button>
@@ -209,13 +210,14 @@ const VipformQuestions = () => {
 												<Trigger message={'View Question'} id={question?.questionnaireId + 'view'} />
 												<Button
 													id={question?.questionnaireId + 'view'}
-													className='m-1'
+													className='vip-questions-table__actionBtn'
 													size='sm'
 													variant='info'
 													onClick={() =>
 														navigate(
 															`${AdminRoutes.ViewVipQuestion.split(':').shift()}${question?.questionnaireId}`
 														)}
+													aria-label="View question"
 												>
 													<FontAwesomeIcon icon={faEye} />
 												</Button>
@@ -223,13 +225,14 @@ const VipformQuestions = () => {
 												<Trigger message={'Delete'} id={question?.questionnaireId + 'delete'} />
 												<Button
 													id={question?.questionnaireId + 'delete'}
-													className='m-1'
+													className='vip-questions-table__actionBtn'
 													size='sm'
 													variant='danger'
 													onClick={() => handleDeleteModal(question?.questionnaireId)}
 													hidden={isHidden({
 														module: { key: 'VipManagement', value: 'D' },
 													})}
+													aria-label="Delete question"
 												>
 													<FontAwesomeIcon icon={faTrash} />
 												</Button>
@@ -239,13 +242,14 @@ const VipformQuestions = () => {
 														<Trigger message={'Set Status Active'} id={question?.questionnaireId + 'active'} />
 														<Button
 															id={question?.questionnaireId + 'active'}
-															className='m-1'
+															className='vip-questions-table__actionBtn'
 															size='sm'
 															variant='success'
 															onClick={() => handleStatusShow(question?.questionnaireId, question?.isActive)}
 															hidden={isHidden({
 																module: { key: 'VipManagement', value: 'T' },
 															})}
+															aria-label="Set question active"
 														>
 															<FontAwesomeIcon icon={faCheckSquare} />
 														</Button>
@@ -255,13 +259,14 @@ const VipformQuestions = () => {
 														<Trigger message={'Set Status In-Active'} id={question?.questionnaireId + 'inactive'} />
 														<Button
 															id={question?.questionnaireId + 'inactive'}
-															className='m-1'
+															className='vip-questions-table__actionBtn'
 															size='sm'
 															variant='danger'
 															onClick={() => handleStatusShow(question?.questionnaireId, question?.isActive)}
 															hidden={isHidden({
 																module: { key: 'VipManagement', value: 'T' },
 															})}
+															aria-label="Set question inactive"
 														>
 															<FontAwesomeIcon icon={faWindowClose} />
 														</Button>

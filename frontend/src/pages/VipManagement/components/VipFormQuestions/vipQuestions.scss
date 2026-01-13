@@ -115,7 +115,7 @@
 }
 
 .vip-questions-table__col--action {
-  width: 250px;
+  width: 320px;
 }
 
 .vip-questions-table__th,
@@ -138,13 +138,32 @@
 }
 
 .vip-questions-table__td--action {
-  white-space: nowrap;
+  // Allow wrapping so 4-5 icon actions don't get clipped on smaller widths
+  white-space: normal;
 }
 
 .vip-questions-table__actionsRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.vip-questions-table__actionBtn.btn {
+  padding: 6px 10px;
+  border-radius: 12px;
+  min-width: 42px;
+  line-height: 1;
   display: inline-flex;
   align-items: center;
-  flex-wrap: nowrap;
+  justify-content: center;
+}
+
+@media (max-width: 768px) {
+  .vip-questions-table__col--action {
+    width: 280px;
+  }
 }
 
 .vip-questions-page__empty {
