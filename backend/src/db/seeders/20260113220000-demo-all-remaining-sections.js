@@ -1,6 +1,7 @@
 'use strict'
 
 const { QueryTypes } = require('sequelize')
+const { randomUUID } = require('crypto')
 
 // Comprehensive demo data seeder for ALL remaining admin panel sections:
 // - Tournaments
@@ -445,6 +446,8 @@ module.exports = {
         {
           parent_type: 'system',
           bonus_name: 'Demo: Welcome Bonus',
+          // Some demo DBs have `promo_code` NOT NULL without a DEFAULT, so we must set it explicitly.
+          promo_code: randomUUID(),
           parent_id: 1,
           valid_from: new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000),
           valid_to: new Date(now.getTime() + 365 * 24 * 60 * 60 * 1000),
@@ -473,6 +476,8 @@ module.exports = {
         {
           parent_type: 'system',
           bonus_name: 'Demo: Daily Login Bonus',
+          // Some demo DBs have `promo_code` NOT NULL without a DEFAULT, so we must set it explicitly.
+          promo_code: randomUUID(),
           parent_id: 1,
           valid_from: now,
           valid_to: new Date(now.getTime() + 365 * 24 * 60 * 60 * 1000),
@@ -497,6 +502,8 @@ module.exports = {
         {
           parent_type: 'system',
           bonus_name: 'Demo: Weekend Special',
+          // Some demo DBs have `promo_code` NOT NULL without a DEFAULT, so we must set it explicitly.
+          promo_code: randomUUID(),
           parent_id: 1,
           valid_from: now,
           valid_to: new Date(now.getTime() + 365 * 24 * 60 * 60 * 1000),
