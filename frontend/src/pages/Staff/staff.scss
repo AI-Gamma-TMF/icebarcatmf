@@ -190,7 +190,7 @@
 
 .staff-table__actions {
   text-align: right;
-  width: 240px; // keep actions on one line; table is responsive (scrolls) if needed
+  width: 140px; // kebab actions; keep table responsive if needed
 }
 
 // React-Bootstrap wraps <Table responsive> with .table-responsive.
@@ -255,6 +255,11 @@
   transform: translateY(-1px);
   border-color: rgba(var(--gs-cta-rgb), 0.18) !important;
   background: rgba(var(--gs-cta-rgb), 0.08) !important;
+}
+
+// Kebab dropdown toggle: hide bootstrap caret
+.staff-kebab-toggle.dropdown-toggle::after {
+  display: none !important;
 }
 
 .staff-pill {
