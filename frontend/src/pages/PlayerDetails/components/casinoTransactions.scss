@@ -29,6 +29,12 @@
 
 // React Datetime specific overrides for dark theme
 .casino-filters__date-wrapper {
+  position: relative;
+  
+  .rdt {
+    position: relative;
+  }
+  
   .rdt input {
     @extend .form-control;
     background-color: rgba(0, 0, 0, 0.2) !important;
@@ -40,6 +46,80 @@
       border-color: rgba(0, 229, 160, 0.5) !important;
       box-shadow: 0 0 0 2px rgba(0, 229, 160, 0.2) !important;
     }
+  }
+  
+  .rdtOpen {
+    position: relative;
+    z-index: 1000;
+  }
+  
+  .rdtPicker {
+    position: absolute !important;
+    background: rgba(18, 18, 18, 0.98) !important;
+    border: 1px solid rgba(0, 229, 160, 0.18) !important;
+    box-shadow: 0 18px 55px rgba(0, 0, 0, 0.55) !important;
+    border-radius: 14px !important;
+    color: rgba(234, 250, 245, 0.92) !important;
+    padding: 10px !important;
+    z-index: 9999 !important;
+    margin-top: 8px;
+    min-height: 290px !important;
+    width: 320px !important;
+  }
+  
+  // Calendar grid text colors
+  .rdtPicker th,
+  .rdtPicker td,
+  .rdtPicker .rdtDay,
+  .rdtPicker .rdtMonth,
+  .rdtPicker .rdtYear,
+  .rdtPicker .rdtTimeToggle,
+  .rdtPicker .rdtSwitch,
+  .rdtPicker .rdtPrev,
+  .rdtPicker .rdtNext {
+    color: rgba(234, 250, 245, 0.88) !important;
+  }
+  
+  .rdtPicker td.rdtDay:hover,
+  .rdtPicker td.rdtMonth:hover,
+  .rdtPicker td.rdtYear:hover {
+    background: rgba(0, 229, 160, 0.12) !important;
+    color: rgba(0, 229, 160, 0.92) !important;
+  }
+  
+  .rdtPicker td.rdtActive {
+    background: rgba(0, 229, 160, 0.18) !important;
+    color: rgba(0, 229, 160, 0.95) !important;
+    text-shadow: none !important;
+  }
+  
+  .rdtPicker td.rdtDisabled,
+  .rdtPicker td.rdtDisabled:hover {
+    background: transparent !important;
+    color: rgba(234, 250, 245, 0.25) !important;
+    cursor: not-allowed !important;
+  }
+  
+  .rdtPicker td.rdtOld,
+  .rdtPicker td.rdtNew {
+    color: rgba(234, 250, 245, 0.4) !important;
+  }
+  
+  // Time picker styles
+  .rdtPicker .rdtTime {
+    color: rgba(234, 250, 245, 0.88) !important;
+  }
+  
+  .rdtPicker .rdtCounter .rdtBtn {
+    color: rgba(234, 250, 245, 0.88) !important;
+    
+    &:hover {
+      background: rgba(0, 229, 160, 0.12) !important;
+    }
+  }
+  
+  .rdtPicker .rdtCounter .rdtCount {
+    color: rgba(234, 250, 245, 0.92) !important;
   }
 }
 

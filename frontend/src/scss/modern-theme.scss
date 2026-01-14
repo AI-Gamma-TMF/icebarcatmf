@@ -42,8 +42,13 @@ option:checked {
   // Allow specific cards to opt-out of overflow:hidden for datetime pickers etc.
   &.maintenance-mode-form__card,
   &.game-lobby-card,
-  &.free-spin-card {
+  &.free-spin-card,
+  &.dashboard-filters {
     overflow: visible !important;
+    
+    .card-body {
+      overflow: visible !important;
+    }
   }
   
   &:hover {
