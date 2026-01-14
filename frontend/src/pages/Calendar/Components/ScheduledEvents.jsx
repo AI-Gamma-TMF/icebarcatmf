@@ -252,15 +252,15 @@ const ScheduledEvents = () => {
         <Col>
           <h4 className="mb-0">Scheduled Events</h4>
         </Col>
-        <Col xs="auto" className="d-flex gap-3 align-items-end">
-          <div>
+        <Col xs="auto" className="d-flex gap-3 align-items-end calendar-filter-controls">
+          <div className="calendar-filter-control">
             <Form.Label className="mb-0">Select Event Types</Form.Label>
             <Dropdown className="event-type-dropdown">
               <Dropdown.Toggle
                 variant="light"
-                className="d-flex justify-content-between align-items-center"
+                className="d-flex align-items-center"
               >
-                <span className="text-truncate" style={{ maxWidth: "180px" }}>
+                <span className="calendar-filter-control__value text-truncate">
                   {selectedTypes.includes("all")
                     ? "All"
                     : CalendarType.filter(({ value }) =>
@@ -269,7 +269,7 @@ const ScheduledEvents = () => {
                       .map(({ label }) => label)
                       .join(", ")}
                 </span>
-                <FontAwesomeIcon icon={faChevronDown} className="ms-2" />
+                <FontAwesomeIcon icon={faChevronDown} className="calendar-filter-control__chevron" />
               </Dropdown.Toggle>
 
               <Dropdown.Menu
@@ -287,8 +287,8 @@ const ScheduledEvents = () => {
               </Dropdown.Menu>
             </Dropdown>
           </div>
-          <div className="d-flex align-items-center gap-2">
-            <div>
+          <div className="d-flex align-items-end gap-2">
+            <div className="calendar-filter-control">
               <Form.Label className="mb-0">Create Event</Form.Label>
               <Form.Select
                 value={createEventValue}
@@ -307,13 +307,13 @@ const ScheduledEvents = () => {
             <div className="info-icon-wrapper" style={{ position: "relative" }}>
               <Button
                 variant="link"
-                className="p-0"
+                className="p-0 calendar-filter-info-btn"
                 onClick={() => setShowColorLegend(!showColorLegend)}
                 title="Event Type Colors"
               >
                 <FontAwesomeIcon
                   icon={faInfoCircle}
-                  style={{ fontSize: "26px", color: "gray", marginTop: "25px" }}
+                  style={{ fontSize: "26px", color: "gray" }}
                 />
               </Button>
 
