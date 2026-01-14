@@ -143,7 +143,22 @@ select:autofill {
   border-color: rgba(255, 255, 255, 0.12) !important;
 }
 
-// On very small screens, slightly reduce the root size so the layout doesn’t feel “zoomed in”.
+// ============================================================
+// GLOBAL OVERRIDE: Staff page dropdowns must be SOLID BLACK
+// This targets any dropdown rendered on the staff page, regardless of portal location
+// ============================================================
+[class*="staff-dropdown-menu"],
+.dropdown-menu[class*="staff-dropdown-menu"] {
+  background: #000000 !important;
+  background-color: #000000 !important;
+  background-image: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  opacity: 1 !important;
+  filter: none !important;
+}
+
+// On very small screens, slightly reduce the root size so the layout doesn't feel "zoomed in".
 // This scales typography + spacing together (more consistent than ad-hoc per-page overrides).
 @media (max-width: 420px) {
   html {
