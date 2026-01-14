@@ -160,8 +160,9 @@ const EditPlayerForm = ({
           <div>
             <Select
               placeholder="Gender"
-              className={"react-select custom-select"}
-              classNamePrefix={"react-select"}
+              className={"gs-select"}
+              classNamePrefix={"gs-select"}
+              menuPortalTarget={typeof document !== "undefined" ? document.body : null}
               options={genderConst}
               value={values?.gender || null}
               // isLoading={isGetStateLoading}
@@ -239,8 +240,9 @@ const EditPlayerForm = ({
           <div>
             <Select
               placeholder="countryCode"
-              className={"react-select custom-select"}
-              classNamePrefix={"react-select"}
+              className={"gs-select"}
+              classNamePrefix={"gs-select"}
+              menuPortalTarget={typeof document !== "undefined" ? document.body : null}
               options={[{ value: "1", label: "USA" }]}
               // isLoading={isGetStateLoading}
               value={{ value: "1", label: "USA" }}
@@ -258,8 +260,9 @@ const EditPlayerForm = ({
           <BForm.Label>State</BForm.Label>
           <Select
             placeholder="State"
-            className={"react-select custom-select"}
-            classNamePrefix={"react-select"}
+            className={"gs-select"}
+            classNamePrefix={"gs-select"}
+            menuPortalTarget={typeof document !== "undefined" ? document.body : null}
             options={stateListConst(stateData)}
             onChange={(value) => {
               setFieldValue("state", value);

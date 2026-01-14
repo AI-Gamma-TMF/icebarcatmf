@@ -22,7 +22,9 @@
     }
 }
 
-.react-select{ 
+// Player Details uses react-select for a few fields.
+// We standardize on the global dark theme prefix "gs-select" (see CasinoProviderDashboard styles).
+.gs-select {
     &__control {
         min-height: 43px !important;
     }
