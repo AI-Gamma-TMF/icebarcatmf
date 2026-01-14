@@ -26,6 +26,7 @@ import { useUserStore } from "../../store/store";
 import Notifications from "../Notifications/Notifications";
 import { toast } from "../Toast";
 import { AdminRoutes, AffiliateRoute } from "../../routes";
+import ThemeToggle from "../ThemeToggle";
 
 import { useLogoutUser } from "../../reactQuery/hooks/customMutationHook";
 import { getItem, removeLoginToken, setItem } from "../../utils/storageUtils";
@@ -346,6 +347,12 @@ const Navbar = ({ open, collapseSidebar, setCollapseSidebar }) => {
             </div>
           </Dropdown.Menu>
             </Dropdown>
+          </div>
+
+          <div className="app-navbar__divider" />
+
+          <div className="app-navbar__group">
+            <ThemeToggle />
           </div>
 
           <div className="app-navbar__divider" />

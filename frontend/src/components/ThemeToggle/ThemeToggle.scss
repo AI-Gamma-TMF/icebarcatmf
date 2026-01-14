@@ -1,0 +1,137 @@
+// ============================================
+// THEME TOGGLE COMPONENT
+// Modern pill-style toggle switch
+// ============================================
+
+.theme-toggle {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 64px;
+  height: 32px;
+  padding: 4px;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+
+  &:hover {
+    border-color: rgba(0, 200, 140, 0.3);
+    box-shadow: 0 0 12px rgba(0, 200, 140, 0.15);
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0, 200, 140, 0.2);
+  }
+
+  // ============================================
+  // ICONS
+  // ============================================
+  &__icon {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    font-size: 12px;
+    transition: all 0.3s ease;
+
+    &--sun {
+      color: #fbbf24;
+    }
+
+    &--moon {
+      color: #94a3b8;
+    }
+  }
+
+  // ============================================
+  // SLIDER
+  // ============================================
+  &__slider {
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 26px;
+    height: 26px;
+    background: linear-gradient(135deg, #00c88c 0%, #00b77b 100%);
+    border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(0, 200, 140, 0.4);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  // ============================================
+  // DARK MODE STATE
+  // ============================================
+  &--dark {
+    background: rgba(0, 0, 0, 0.4);
+
+    .theme-toggle__slider {
+      transform: translateX(32px);
+      background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+      box-shadow: 0 2px 8px rgba(99, 102, 241, 0.4);
+    }
+
+    .theme-toggle__icon--sun {
+      opacity: 0.4;
+    }
+
+    .theme-toggle__icon--moon {
+      color: #c4b5fd;
+    }
+  }
+
+  // ============================================
+  // LIGHT MODE STATE
+  // ============================================
+  &--light {
+    background: rgba(255, 255, 255, 0.9);
+    border-color: rgba(0, 0, 0, 0.1);
+
+    .theme-toggle__slider {
+      transform: translateX(0);
+      background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+      box-shadow: 0 2px 8px rgba(251, 191, 36, 0.4);
+    }
+
+    .theme-toggle__icon--sun {
+      color: #f59e0b;
+    }
+
+    .theme-toggle__icon--moon {
+      opacity: 0.4;
+      color: #94a3b8;
+    }
+  }
+}
+
+// ============================================
+// RESPONSIVE
+// ============================================
+@media (max-width: 768px) {
+  .theme-toggle {
+    width: 56px;
+    height: 28px;
+
+    &__icon {
+      width: 18px;
+      height: 18px;
+      font-size: 10px;
+    }
+
+    &__slider {
+      width: 22px;
+      height: 22px;
+    }
+
+    &--dark .theme-toggle__slider {
+      transform: translateX(28px);
+    }
+  }
+}

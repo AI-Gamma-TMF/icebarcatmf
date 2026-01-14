@@ -42,6 +42,9 @@
 // Casino Elements - Cards, Chips, Dice
 @import "casino-elements";
 
+// Light Theme (applied when html[data-theme="light"])
+@import "light-theme";
+
 // Remove Scroll
 @import "remove-scroll";
 
