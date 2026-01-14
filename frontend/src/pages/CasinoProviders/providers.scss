@@ -58,11 +58,17 @@
 }
 
 .providers-table__name {
-  max-width: 260px;
+  // Prevent overlap on small screens: truncate within the cell width
+  display: block;
+  width: 100%;
+  max-width: 100%;
 }
 
 .providers-table__aggregator {
-  max-width: 220px;
+  // Same fix for aggregator label
+  display: block;
+  width: 100%;
+  max-width: 100%;
 }
 
 .providers-table__actions .btn {
