@@ -811,11 +811,18 @@
 
 // Mobile Actions Dropdown styling
 // Force the Staff "Actions" dropdown to be fully opaque (some global glass styles can make it look transparent)
+// ============================================================
+// Staff Actions Dropdown - ABSOLUTELY NO TRANSPARENCY
+// Must override global .dropdown-menu styles from modern-theme.scss
+// ============================================================
+.staff-page .dropdown-menu.staff-dropdown-menu,
+.staff-page .staff-dropdown-menu,
 .dropdown-menu.staff-dropdown-menu,
-.staff-dropdown-menu {
-  // Actions dropdown should be SOLID (no glass blur) to avoid looking “transparent”
-  background: #0b0b0b !important;
-  background-color: #0b0b0b !important;
+.staff-dropdown-menu,
+.dropdown.staff-actions .dropdown-menu {
+  // Pure black background - NO transparency at all
+  background: #000000 !important;
+  background-color: #000000 !important;
   background-image: none !important;
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
@@ -823,17 +830,20 @@
   filter: none !important;
   mix-blend-mode: normal !important;
   isolation: isolate;
-  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  border: 1px solid rgba(0, 229, 160, 0.25) !important;
   border-radius: 14px !important;
   padding: 8px !important;
   box-shadow:
-    0 12px 30px rgba(0, 0, 0, 0.75),
-    0 0 0 1px rgba(0, 229, 160, 0.14) inset !important;
+    0 16px 40px rgba(0, 0, 0, 0.95),
+    0 0 0 1px rgba(0, 229, 160, 0.18) inset !important;
   overflow: hidden;
   z-index: 99999 !important;
+  // Force no parent transparency
+  contain: paint;
+  will-change: auto;
 
   .dropdown-item {
-    color: rgba(255, 255, 255, 0.92) !important;
+    color: rgba(255, 255, 255, 0.96) !important;
     padding: 10px 16px !important;
     border-radius: 8px !important;
     transition: all 0.2s ease;
@@ -879,11 +889,17 @@
 }
 
 // Extra guard: if global styles add glass blur on `.dropdown-menu.show`, neutralize it here
-.dropdown-menu.show.staff-dropdown-menu {
-  background: #0b0b0b !important;
+.staff-page .dropdown-menu.show.staff-dropdown-menu,
+.dropdown-menu.show.staff-dropdown-menu,
+.dropdown.staff-actions .dropdown-menu.show {
+  background: #000000 !important;
+  background-color: #000000 !important;
+  background-image: none !important;
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
   opacity: 1 !important;
+  filter: none !important;
+  contain: paint;
 }
 
 .staff-select__placeholder {
