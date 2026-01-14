@@ -29,6 +29,51 @@
   -webkit-backdrop-filter: blur(12px) saturate(140%);
 }
 
+// ============================================================
+// Bonus Report accordion header (fix white hover from Volt accordion styles)
+// ============================================================
+.bonus-report-accordion {
+  .accordion-item {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 18px;
+    overflow: hidden;
+  }
+
+  .accordion-button {
+    background: rgba(0, 0, 0, 0.35) !important;
+    color: rgba(234, 250, 245, 0.92) !important;
+    font-weight: 800;
+    letter-spacing: 0.02em;
+    box-shadow: none !important;
+
+    // remove bootstrap default gradients/icons background
+    &::after {
+      filter: invert(1) grayscale(100%) brightness(200%);
+      opacity: 0.9;
+    }
+
+    &:hover,
+    &:focus,
+    &:focus-visible {
+      background: rgba(0, 229, 160, 0.10) !important;
+      color: rgba(0, 229, 160, 0.92) !important;
+      box-shadow: none !important;
+    }
+
+    &:not(.collapsed) {
+      background: rgba(0, 229, 160, 0.12) !important;
+      color: rgba(0, 229, 160, 0.95) !important;
+      box-shadow: none !important;
+    }
+  }
+
+  .accordion-body {
+    background: rgba(0, 0, 0, 0.22);
+    color: rgba(234, 250, 245, 0.90);
+  }
+}
+
 .bonus-graph-container {
   background: transparent;
   padding: 10px 6px 0;
