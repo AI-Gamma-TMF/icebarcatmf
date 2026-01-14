@@ -1354,44 +1354,59 @@ html[data-theme="light"] {
   }
 
   // ============================================
-  // SIDEBAR (Keep Dark for Contrast)
+  // SIDEBAR (Light Mode)
   // ============================================
   .sidebar {
-    background: rgba(18, 18, 18, 0.95) !important;
-    backdrop-filter: blur(22px) saturate(140%) !important;
-    -webkit-backdrop-filter: blur(22px) saturate(140%) !important;
+    background: #ffffff !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    border-right: 1px solid #e5e5e5 !important;
+    box-shadow: 2px 0 12px rgba(0, 0, 0, 0.06) !important;
+
+    // Hide the accent edge pseudo-element
+    &::after {
+      display: none !important;
+    }
     
-    // Keep sidebar text light - be very specific
+    // Nav links - dark text on light background
     .nav-link {
-      color: rgba(255, 255, 255, 0.88) !important;
+      color: var(--gs-text-primary) !important;
       opacity: 1 !important;
       visibility: visible !important;
 
       span {
-        color: rgba(255, 255, 255, 0.88) !important;
+        color: var(--gs-text-primary) !important;
         opacity: 1 !important;
       }
 
       // Sidebar icons
       svg {
-        color: rgba(255, 255, 255, 0.7) !important;
+        color: #00C88C !important;
         opacity: 1 !important;
       }
 
       &:hover {
-        background: rgba(0, 229, 160, 0.15) !important;
-        color: #00E5A0 !important;
+        background: rgba(0, 229, 160, 0.1) !important;
+        color: #00A878 !important;
 
-        span, svg {
+        span {
+          color: #00A878 !important;
+        }
+
+        svg {
           color: #00E5A0 !important;
         }
       }
 
       &.active {
-        background: rgba(0, 229, 160, 0.2) !important;
-        color: #00E5A0 !important;
+        background: rgba(0, 229, 160, 0.15) !important;
+        color: #00A878 !important;
 
-        span, svg {
+        span {
+          color: #00A878 !important;
+        }
+
+        svg {
           color: #00E5A0 !important;
         }
       }
@@ -1405,35 +1420,44 @@ html[data-theme="light"] {
 
     .accordion-button {
       background: transparent !important;
-      color: rgba(255, 255, 255, 0.88) !important;
+      color: var(--gs-text-primary) !important;
       box-shadow: none !important;
 
       span {
-        color: rgba(255, 255, 255, 0.88) !important;
+        color: var(--gs-text-primary) !important;
       }
 
       svg {
-        color: rgba(255, 255, 255, 0.7) !important;
+        color: #00C88C !important;
       }
 
+      // Arrow icon - keep dark for light background
       &::after {
-        filter: invert(1) brightness(0.8) !important;
+        filter: none !important;
       }
 
       &:not(.collapsed) {
         background: rgba(0, 229, 160, 0.1) !important;
-        color: #00E5A0 !important;
+        color: #00A878 !important;
 
-        span, svg {
+        span {
+          color: #00A878 !important;
+        }
+
+        svg {
           color: #00E5A0 !important;
         }
       }
 
       &:hover {
-        background: rgba(0, 229, 160, 0.15) !important;
-        color: #00E5A0 !important;
+        background: rgba(0, 229, 160, 0.08) !important;
+        color: #00A878 !important;
 
-        span, svg {
+        span {
+          color: #00A878 !important;
+        }
+
+        svg {
           color: #00E5A0 !important;
         }
       }
@@ -1449,27 +1473,27 @@ html[data-theme="light"] {
 
       .nav-link {
         padding-left: 2.5rem !important;
-        color: rgba(255, 255, 255, 0.75) !important;
+        color: var(--gs-text-secondary) !important;
 
         span {
-          color: rgba(255, 255, 255, 0.75) !important;
+          color: var(--gs-text-secondary) !important;
         }
 
         &:hover {
-          color: #00E5A0 !important;
-          background: rgba(0, 229, 160, 0.1) !important;
+          color: #00A878 !important;
+          background: rgba(0, 229, 160, 0.08) !important;
 
           span {
-            color: #00E5A0 !important;
+            color: #00A878 !important;
           }
         }
 
         &.active {
-          color: #00E5A0 !important;
-          background: rgba(0, 229, 160, 0.15) !important;
+          color: #00A878 !important;
+          background: rgba(0, 229, 160, 0.12) !important;
 
           span {
-            color: #00E5A0 !important;
+            color: #00A878 !important;
           }
         }
       }
@@ -1477,7 +1501,17 @@ html[data-theme="light"] {
 
     // Simplebar scrollbar
     .simplebar-scrollbar::before {
-      background: rgba(0, 229, 160, 0.4) !important;
+      background: rgba(0, 229, 160, 0.5) !important;
+    }
+
+    // Scroll fades - light version
+    .simplebar-content-wrapper {
+      &::before {
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.9) 0%, transparent 100%) !important;
+      }
+      &::after {
+        background: linear-gradient(0deg, rgba(255, 255, 255, 0.9) 0%, transparent 100%) !important;
+      }
     }
   }
 
