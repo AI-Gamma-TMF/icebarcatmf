@@ -93,6 +93,43 @@
   background: rgba(0, 229, 160, 0.12) !important;
 }
 
+// ============================================================
+// Bonus Report page: Bootstrap dropdowns must be DARK (no white menus)
+// Applies to AutoRefreshControl dropdown (and any other dropdown on this page)
+// ============================================================
+.bonus-report-page {
+  .dropdown-menu {
+    background: #0b0b0b !important;
+    background-color: #0b0b0b !important;
+    background-image: none !important;
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    border-radius: 14px !important;
+    box-shadow: 0 18px 55px rgba(0, 0, 0, 0.65) !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    padding: 8px !important;
+  }
+
+  .dropdown-item {
+    color: rgba(255, 255, 255, 0.92) !important;
+    border-radius: 10px !important;
+    padding: 10px 12px !important;
+    background: transparent !important;
+
+    &:hover,
+    &:focus {
+      background: rgba(0, 229, 160, 0.12) !important;
+      color: rgba(0, 229, 160, 0.92) !important;
+    }
+
+    &.active,
+    &:active {
+      background: rgba(0, 229, 160, 0.18) !important;
+      color: rgba(0, 229, 160, 0.95) !important;
+    }
+  }
+}
+
 .quick-range-wrapper {
   display: flex;
   align-items: center;
