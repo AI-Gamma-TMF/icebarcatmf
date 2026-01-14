@@ -1378,6 +1378,20 @@ html[data-theme="light"] {
       display: none !important;
     }
 
+    // Fill the area ABOVE the sidebar (because navbar is an inset capsule).
+    // This prevents any residual dark page background from showing through in the top-left region.
+    &::before {
+      content: "" !important;
+      position: fixed !important;
+      top: 0 !important;
+      left: 0 !important;
+      right: 0 !important;
+      height: 78px !important; // must match global sidebar top offset
+      background: #f5f7fa !important;
+      pointer-events: none !important;
+      z-index: 99 !important; // below navbar (999) and below sidebar (100), above page bg
+    }
+
     // Volt layout adds a dark overlay via .sidebar-inner::before – remove it for true light mode
     .sidebar-inner {
       background: transparent !important;
