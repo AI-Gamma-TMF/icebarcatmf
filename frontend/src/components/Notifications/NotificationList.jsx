@@ -134,8 +134,13 @@ const NotificationList = ({
                       return (
                         <ListGroup.Item
                           key={notif.id}
-                          className="d-flex align-items-center"
-                          style={{ backgroundColor: isNotificationUnread ? "#E4E0E1" : "#ffffff", margin: "5px" }}
+                          className={[
+                            "d-flex",
+                            "align-items-center",
+                            "notification-item",
+                            isNotificationUnread ? "notification-item--unread" : "notification-item--read",
+                            isSelected ? "notification-item--expanded" : "",
+                          ].join(" ")}
                         >
                           <div className="flex-grow-1" onClick={() => isNotificationUnread && markReadNotifications?.(notif.id)}>
                             <strong>{notif.title}</strong>
