@@ -299,7 +299,11 @@ const GameDashboard = () => {
               value={startDate}
               onChange={handleMonthYearChange}
               closeOnSelect={true}
-              inputProps={{ placeholder: "Select Month", readOnly: true }}
+              inputProps={{
+                placeholder: "Select Month",
+                readOnly: true,
+                className: "form-control game-dashboard-month-input",
+              }}
               isValidDate={(currentDate) => currentDate.isSameOrBefore(moment(), "month")}
             />
             {(errorStart || errorEnd) && (

@@ -20,6 +20,8 @@
     0 14px 40px rgba(0, 0, 0, 0.35);
   backdrop-filter: blur(12px) saturate(140%);
   -webkit-backdrop-filter: blur(12px) saturate(140%);
+  // Allow date picker / dropdown menus to render outside the card
+  overflow: visible;
 }
 
 .game-dashboard-summary {
@@ -84,6 +86,46 @@
 
 // react-select dark theme (scoped)
 .game-dashboard-filters {
+  // ------------------------------------------------------------
+  // Month picker (react-datetime): prevent clipping/overflow
+  // ------------------------------------------------------------
+  .rdt {
+    position: relative;
+    width: 100%;
+  }
+
+  .rdt input.form-control,
+  .game-dashboard-month-input {
+    width: 100%;
+    min-height: 44px;
+    background: rgba(0, 0, 0, 0.35);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: rgba(234, 250, 245, 0.92);
+    border-radius: 14px;
+    padding: 10px 12px;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+
+    &:focus {
+      border-color: rgba(0, 229, 160, 0.35);
+      box-shadow: 0 0 0 0.2rem rgba(0, 229, 160, 0.18);
+      outline: none;
+    }
+  }
+
+  // When open, keep the picker above the table / other content
+  .rdtOpen {
+    position: relative;
+    z-index: 100000;
+  }
+
+  .rdtPicker {
+    z-index: 100001;
+    // Right-align so the picker doesn't run off-screen on the last column
+    right: 0;
+    left: auto;
+    margin-top: 6px;
+  }
+
   .gd-select__control {
     min-height: 44px;
     background-color: rgba(0, 0, 0, 0.35);
