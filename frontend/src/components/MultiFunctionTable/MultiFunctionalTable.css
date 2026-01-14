@@ -126,3 +126,69 @@
   height: 100%;
   border-radius: 0.5rem !important;
 }
+
+/* ============================================================
+   react-multi-select-component (Select Columns) – DARK THEME
+   This component defaults to a white panel. Force dark on all OS.
+   Scoped to .custom-multiselect so other dropdowns are unaffected.
+   ============================================================ */
+
+.custom-multiselect .dropdown-container,
+.custom-multiselect .dropdown-heading {
+  background: rgba(0, 0, 0, 0.35) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  color: rgba(255, 255, 255, 0.92) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06) !important;
+}
+
+/* The open panel/content wrapper (class names vary slightly by version) */
+.custom-multiselect .dropdown-content,
+.custom-multiselect .select-panel,
+.custom-multiselect .panel-content {
+  background: #0b0b0b !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  border-radius: 14px !important;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.65) !important;
+  overflow: hidden !important;
+  z-index: 99999 !important;
+}
+
+/* Search bar inside the panel */
+.custom-multiselect .search,
+.custom-multiselect .search input {
+  background: transparent !important;
+  color: rgba(255, 255, 255, 0.92) !important;
+}
+
+.custom-multiselect .search input::placeholder {
+  color: rgba(234, 250, 245, 0.55) !important;
+}
+
+/* Options list + rows */
+.custom-multiselect .options,
+.custom-multiselect ul {
+  background: transparent !important;
+}
+
+.custom-multiselect .select-item,
+.custom-multiselect .option,
+.custom-multiselect li {
+  background: #0f0f0f !important;
+  color: rgba(255, 255, 255, 0.92) !important;
+  border: 1px solid rgba(255, 255, 255, 0.06) !important;
+  border-radius: 10px !important;
+  margin: 6px !important;
+  padding: 10px 12px !important;
+}
+
+.custom-multiselect .select-item:hover,
+.custom-multiselect .option:hover,
+.custom-multiselect li:hover {
+  background: rgba(0, 229, 160, 0.12) !important;
+  border-color: rgba(0, 229, 160, 0.22) !important;
+}
+
+/* Checkbox tint (Chromium/modern browsers) */
+.custom-multiselect input[type="checkbox"] {
+  accent-color: rgb(0, 229, 160);
+}
