@@ -38,6 +38,11 @@ html[data-theme="light"] {
   --gs-shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.1);
   --gs-shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.12);
 
+  // Subtle “green glow” vibe (performance-safe: static box-shadows only)
+  --gs-glow-weak: 0 0 0 1px rgba(0, 229, 160, 0.18);
+  --gs-glow-med: 0 0 0 1px rgba(0, 229, 160, 0.22), 0 10px 30px rgba(0, 229, 160, 0.08);
+  --gs-glow-strong: 0 0 0 1px rgba(0, 229, 160, 0.28), 0 14px 42px rgba(0, 229, 160, 0.10);
+
   // ============================================
   // BODY & ROOT BACKGROUND
   // Override casino-background.scss dark theme
@@ -90,12 +95,12 @@ html[data-theme="light"] {
   .card {
     background: var(--gs-bg-card) !important;
     border: 1px solid var(--gs-border-color) !important;
-    box-shadow: var(--gs-shadow-md) !important;
+    box-shadow: var(--gs-shadow-md), var(--gs-glow-weak) !important;
     backdrop-filter: none !important;
     -webkit-backdrop-filter: none !important;
 
     &:hover {
-      box-shadow: var(--gs-shadow-lg) !important;
+      box-shadow: var(--gs-shadow-lg), var(--gs-glow-med) !important;
       border-color: rgba(0, 229, 160, 0.4) !important;
     }
 
@@ -1170,7 +1175,7 @@ html[data-theme="light"] {
   .dashboard-box {
     background: #ffffff !important;
     border: 1px solid #e5e5e5 !important;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08), var(--gs-glow-weak) !important;
     backdrop-filter: none !important;
     -webkit-backdrop-filter: none !important;
     color: var(--gs-text-primary) !important;
@@ -1187,7 +1192,7 @@ html[data-theme="light"] {
 
     &:hover {
       border-color: rgba(0, 229, 160, 0.5) !important;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12) !important;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12), var(--gs-glow-med) !important;
       transform: translateY(-2px);
 
       &::before {
@@ -1262,7 +1267,7 @@ html[data-theme="light"] {
   .ticker-container {
     background: #ffffff !important;
     border: 1px solid #e5e5e5 !important;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08), var(--gs-glow-weak) !important;
     backdrop-filter: none !important;
     -webkit-backdrop-filter: none !important;
     color: var(--gs-text-primary) !important;
@@ -1274,7 +1279,7 @@ html[data-theme="light"] {
 
     &:hover {
       border-color: rgba(0, 229, 160, 0.4) !important;
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1) !important;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1), var(--gs-glow-med) !important;
     }
 
     // Specific ticker colors
@@ -1361,7 +1366,7 @@ html[data-theme="light"] {
     backdrop-filter: none !important;
     -webkit-backdrop-filter: none !important;
     border-right: 1px solid #e5e5e5 !important;
-    box-shadow: 2px 0 12px rgba(0, 0, 0, 0.06) !important;
+    box-shadow: 2px 0 12px rgba(0, 0, 0, 0.06), 1px 0 0 rgba(0, 229, 160, 0.12) !important;
 
     // Hide the accent edge pseudo-element
     &::after {
@@ -1546,7 +1551,7 @@ html[data-theme="light"] {
     backdrop-filter: none !important;
     -webkit-backdrop-filter: none !important;
     border-bottom: 1px solid #e5e5e5 !important;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08) !important;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08), 0 1px 0 rgba(0, 229, 160, 0.16) !important;
 
     .navbar-brand,
     .nav-link,
@@ -1560,7 +1565,7 @@ html[data-theme="light"] {
       background-image: none !important;
       border: 1px solid #e5e5e5 !important;
       color: var(--gs-text-primary) !important;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06) !important;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06), var(--gs-glow-weak) !important;
 
       &::before {
         display: none !important;
@@ -1568,7 +1573,7 @@ html[data-theme="light"] {
 
       &:hover {
         border-color: rgba(0, 229, 160, 0.5) !important;
-        box-shadow: 0 0 0 3px rgba(0, 229, 160, 0.1) !important;
+        box-shadow: 0 0 0 3px rgba(0, 229, 160, 0.1), var(--gs-glow-med) !important;
       }
     }
 
@@ -1593,7 +1598,7 @@ html[data-theme="light"] {
       background: #ffffff !important;
       border: 1px solid #e5e5e5 !important;
       color: var(--gs-text-secondary) !important;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06) !important;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06), var(--gs-glow-weak) !important;
 
       svg {
         color: #00C88C !important;
@@ -1604,6 +1609,7 @@ html[data-theme="light"] {
         background: rgba(0, 229, 160, 0.1) !important;
         border-color: rgba(0, 229, 160, 0.4) !important;
         color: #00C88C !important;
+        box-shadow: 0 0 0 3px rgba(0, 229, 160, 0.10), 0 10px 28px rgba(0, 0, 0, 0.08) !important;
       }
 
       // Critical icon stays red
@@ -1619,12 +1625,12 @@ html[data-theme="light"] {
       color: var(--gs-text-primary) !important;
       backdrop-filter: none !important;
       -webkit-backdrop-filter: none !important;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06) !important;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06), var(--gs-glow-weak) !important;
 
       &:hover,
       &:focus {
         border-color: rgba(0, 229, 160, 0.5) !important;
-        box-shadow: 0 0 0 3px rgba(0, 229, 160, 0.1) !important;
+        box-shadow: 0 0 0 3px rgba(0, 229, 160, 0.1), var(--gs-glow-med) !important;
       }
     }
 
@@ -1665,6 +1671,13 @@ html[data-theme="light"] {
 
     &::placeholder {
       color: var(--gs-text-muted) !important;
+    }
+  }
+
+  // Accessibility: remove hover “lift” for reduced motion users
+  @media (prefers-reduced-motion: reduce) {
+    .dashboard-box:hover {
+      transform: none !important;
     }
   }
 }
