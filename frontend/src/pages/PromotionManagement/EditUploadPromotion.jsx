@@ -7,7 +7,7 @@ import {
   Spinner,
 } from '@themesberg/react-bootstrap';
 import { Form, Formik } from 'formik';
-import React from 'react';
+import React, { useRef } from 'react';
 import toast from "react-hot-toast";
 const EditUploadPromotion = ({
   type,
@@ -17,6 +17,7 @@ const EditUploadPromotion = ({
   createUpdate,
   loading,
 }) => {
+  const fileInputRef = useRef(null);
 
   // const [image, setImage] = useState(null);
   const handleFileChange = (event, setFieldValue, field) => {
@@ -191,12 +192,25 @@ const EditUploadPromotion = ({
                                 <BForm.Control
                                   type='file'
                                   name='promotionThumbnailImage'
+                                  accept="image/*"
+                                  ref={fileInputRef}
                                   onChange={(event) => handleFileChange(event, setFieldValue, 'promotionThumbnailImage')}
                                   onBlur={handleBlur}
                                 />
 
-                                <Button >File Upload</Button>
+                                <Button
+                                  type="button"
+                                  onClick={() => fileInputRef.current?.click?.()}
+                                >
+                                  File Upload
+                                </Button>
                               </div>
+
+                              {values?.promotionThumbnailImage?.name ? (
+                                <div className="mt-2 small text-muted">
+                                  Selected: {values.promotionThumbnailImage.name}
+                                </div>
+                              ) : null}
 
 
 

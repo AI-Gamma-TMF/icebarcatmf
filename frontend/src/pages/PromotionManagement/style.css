@@ -54,10 +54,12 @@
 
 .custom-file-upload-button input {
   opacity: 0;
-  width: 109 px;
+  width: 109px;
   position: absolute;
   left: 0;
   top: 0;
+  height: 100%;
+  cursor: pointer;
 }
 
 @media (max-width: 767px) {
