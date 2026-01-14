@@ -811,7 +811,11 @@
 
 // Mobile Actions Dropdown styling
 .staff-dropdown-menu {
-  background-color: rgba(26, 26, 26, 0.95) !important;
+  // Actions dropdown should be SOLID (no glass blur) to avoid looking “transparent”
+  background: #141414 !important;
+  background-color: #141414 !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
   border: 1px solid rgba(255, 255, 255, 0.12) !important;
   border-radius: 14px !important;
   padding: 8px !important;
@@ -828,6 +832,7 @@
     align-items: center;
     gap: 10px;
     font-weight: 500;
+    transform: none !important;
 
     svg {
       width: 16px;
@@ -837,7 +842,8 @@
     &:hover {
       background-color: rgba(0, 229, 160, 0.12) !important;
       color: rgba(0, 229, 160, 0.92) !important;
-      
+      transform: none !important;
+
       svg {
         opacity: 1;
       }
@@ -846,6 +852,19 @@
     &:active {
       background-color: rgba(0, 229, 160, 0.18) !important;
     }
+
+    &.disabled,
+    &:disabled {
+      opacity: 0.45 !important;
+      color: rgba(255, 255, 255, 0.65) !important;
+      background: transparent !important;
+      transform: none !important;
+    }
+  }
+
+  .dropdown-divider {
+    border-color: rgba(255, 255, 255, 0.10) !important;
+    opacity: 1 !important;
   }
 }
 
