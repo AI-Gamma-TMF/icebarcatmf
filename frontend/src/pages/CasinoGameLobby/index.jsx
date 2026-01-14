@@ -17,7 +17,7 @@ const CasinoGameLobby = () => {
         </div>
       </div>
 
-      <Card className="dashboard-filters mb-4">
+      <Card className="dashboard-filters game-lobby-card mb-4">
         <Card.Body>
           <GameLobby />
         </Card.Body>
