@@ -17,6 +17,7 @@
   
   <!-- CRITICAL: Force staff dropdown to be completely black (no transparency) -->
   <style>
+    /* Force dropdown to be solid black */
     .staff-dropdown-menu,
     [class*="staff-dropdown-menu"],
     .dropdown-menu.staff-dropdown-menu,
@@ -28,6 +29,23 @@
       -webkit-backdrop-filter: none !important;
       opacity: 1 !important;
       filter: none !important;
+      position: relative !important;
+      z-index: 99999 !important;
+    }
+    
+    /* Add a solid black pseudo-element behind dropdown to block any bleed-through */
+    .staff-dropdown-menu::before,
+    [class*="staff-dropdown-menu"]::before,
+    .dropdown-menu.staff-dropdown-menu::before {
+      content: "" !important;
+      position: absolute !important;
+      top: 0 !important;
+      left: 0 !important;
+      right: 0 !important;
+      bottom: 0 !important;
+      background: #000000 !important;
+      z-index: -1 !important;
+      border-radius: 14px !important;
     }
   </style>
 
