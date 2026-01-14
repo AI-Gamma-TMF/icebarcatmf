@@ -1,21 +1,31 @@
 .event-type-dropdown {
   .dropdown-toggle {
-    background-color: #fff;
-    border: 1px solid #ced4da !important;
-    border-radius: 6px;
+    background-color: rgba(26, 26, 26, 0.95) !important;
+    border: 1px solid rgba(0, 229, 160, 0.25) !important;
+    border-radius: 10px;
     padding: 0.325rem 1.5rem 0.325rem 0.75rem;
     font-size: 14px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 240px;
+    color: rgba(234, 250, 245, 0.92) !important;
+    transition: all 0.2s ease;
+
+    &:hover, &:focus {
+      border-color: rgba(0, 229, 160, 0.5) !important;
+      box-shadow: 0 0 0 3px rgba(0, 229, 160, 0.12);
+    }
   }
 
   .dropdown-menu {
     width: 100%;
     padding: 8px;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    border-radius: 12px;
+    background: rgba(26, 26, 26, 0.98);
+    border: 1px solid rgba(0, 229, 160, 0.2);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(16px);
   }
 
   .form-check {
@@ -24,18 +34,25 @@
 
     .form-check-input {
       margin-right: 8px;
+      background-color: rgba(255, 255, 255, 0.1);
+      border-color: rgba(0, 229, 160, 0.4);
+
+      &:checked {
+        background-color: #00E5A0;
+        border-color: #00E5A0;
+      }
     }
 
     .form-check-label {
       font-size: 14px;
       font-weight: 400;
+      color: rgba(234, 250, 245, 0.9);
     }
   }
 }
 
 /* Toolbar styles */
 .custom-toolbar {
-  display: flex;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -55,6 +72,7 @@
   text-align: center;
   font-size: 18px;
   font-weight: 700;
+  color: rgba(234, 250, 245, 0.92);
 }
 
 .custom-toolbar .view-controls {
@@ -65,8 +83,8 @@
 
 .custom-toolbar .view-controls .view-toggle {
   display: flex;
-  border: 1px solid #ccc;
-  border-radius: 6px;
+  border: 1px solid rgba(0, 229, 160, 0.25);
+  border-radius: 10px;
   overflow: hidden;
 }
 
@@ -75,10 +93,11 @@
   padding: 6px 12px;
   font-size: 14px;
   font-weight: 600;
-  background-color: #fff;
-  color: #333;
+  background-color: rgba(26, 26, 26, 0.95);
+  color: rgba(234, 250, 245, 0.92);
   border: none;
   cursor: pointer;
+  transition: all 0.2s ease;
   @media (max-width: 768px) {
     font-size: 12px;
     padding: 6px;
@@ -87,23 +106,29 @@
 
 .today-button {
   padding: 5px 20px;
-  border: 1px solid #d1d7e0;
+  border: 1px solid rgba(0, 229, 160, 0.25) !important;
   border-radius: 20px;
-  background: white;
-  color: "#333";
+  background: rgba(26, 26, 26, 0.95) !important;
+  color: rgba(234, 250, 245, 0.92) !important;
+
+  &:hover {
+    background: rgba(0, 229, 160, 0.15) !important;
+    border-color: rgba(0, 229, 160, 0.5) !important;
+  }
 }
 
 .custom-toolbar .view-controls .view-toggle button:not(:last-child),
 .custom-toolbar .view-controls .today-button {
-  border-right: 1px solid #ccc;
+  border-right: 1px solid rgba(0, 229, 160, 0.2);
 }
 
 .custom-toolbar .view-controls .view-toggle button.active,
 .custom-toolbar .view-controls .view-toggle button.active:hover {
-  background-color: #c2e7ff;
+  background-color: rgba(0, 229, 160, 0.2);
+  color: #00E5A0;
 }
 .custom-toolbar .view-controls .view-toggle button:hover {
-  background-color: #e8eaed;
+  background-color: rgba(0, 229, 160, 0.1);
 }
 
 // .custom-event.cancelled-event {
@@ -141,7 +166,7 @@
   padding: 4px 6px;
   font-weight: bold;
   font-size: 14px;
-  color: #444;
+  color: rgba(234, 250, 245, 0.7);
   text-align: center;
   margin-top: 128px;
 }
@@ -174,15 +199,17 @@
 
 .rbc-time-view {
   border-left: none !important;
-  background: #fff;
+  background: rgba(26, 26, 26, 0.95);
   border-radius: 1.5rem;
   overflow: hidden;
+  border: 1px solid rgba(0, 229, 160, 0.15);
 }
 
 .rbc-month-view {
-  background: #fff;
+  background: rgba(26, 26, 26, 0.95);
   border-radius: 1.5rem;
   overflow: hidden;
+  border: 1px solid rgba(0, 229, 160, 0.15);
 }
 
 .rbc-time-content {
@@ -192,7 +219,7 @@
 .rbc-day-slot {
   .rbc-timeslot-group {
     .rbc-time-slot {
-      border: 1px solid #e0e0e0;
+      border: 1px solid rgba(255, 255, 255, 0.08);
     }
   }
 }
@@ -257,6 +284,7 @@
   align-items: center;
   font-weight: 500;
   font-size: 14px;
+  color: rgba(234, 250, 245, 0.85);
 
   .day-number {
     font-size: 20px;
@@ -270,8 +298,8 @@
 
 /* Highlight today's date */
 .custom-day-header.today .day-number {
-  background-color: #0d6efd;
-  color: #fff;
+  background-color: #00E5A0;
+  color: #0a0a0a;
   border-radius: 999px;
   padding: 6px 12px;
   font-weight: bold;
@@ -287,17 +315,18 @@
 }
 
 .custom-day-header.today .day-name {
-  color: #0d6efd;
+  color: #00E5A0;
 }
 
 .floating-event-modal {
-  background: #f1f3f4;
+  background: rgba(26, 26, 26, 0.98);
   border-radius: 12px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(0, 229, 160, 0.2);
   width: 420px;
   overflow: hidden;
   font-family: "Roboto", sans-serif;
-  color: #202124;
+  color: rgba(234, 250, 245, 0.92);
   z-index: 9999;
   position: absolute;
   top: 50% !important;
@@ -305,6 +334,7 @@
   transition: opacity 150ms ease-out, transform 150ms ease-out;
   opacity: 0;
   transform: translate(-50%, -50%);
+  backdrop-filter: blur(16px);
 
   .fixed-position {
     position: fixed;
@@ -335,6 +365,7 @@
   align-items: center;
   gap: 8px;
   margin: 0;
+  color: rgba(234, 250, 245, 0.95);
 }
 
 .header-actions {
@@ -347,12 +378,13 @@
   border: none;
   font-size: 20px;
   font-weight: bold;
-  color: #5f6368;
+  color: rgba(234, 250, 245, 0.6);
   cursor: pointer;
+  transition: color 0.2s ease;
 }
 
 .header-actions .close-btn:hover {
-  color: #202124;
+  color: #00E5A0;
 }
 
 .event-popup-body {
@@ -366,10 +398,11 @@
   align-items: flex-start;
   gap: 10px;
   margin-bottom: 10px;
+  color: rgba(234, 250, 245, 0.85);
 }
 
 .event-row .icon {
-  color: #5f6368;
+  color: rgba(0, 229, 160, 0.7);
   font-size: 16px;
   margin-top: 2px;
 }
@@ -380,29 +413,30 @@
 }
 
 .status-0 {
-  color: #0d6efd;
+  color: #00E5A0;
 }
 .status-1 {
   color: #34a853;
 }
 .status-2 {
-  color: #5f6368;
+  color: rgba(234, 250, 245, 0.6);
 }
 .status-3 {
-  color: #d93025;
+  color: #ef4444;
 }
 
 .event-popup-footer {
   padding: 12px 16px;
   display: flex;
   justify-content: flex-end;
-  background-color: #f1f3f4;
+  background-color: rgba(20, 20, 20, 0.95);
+  border-top: 1px solid rgba(0, 229, 160, 0.1);
 }
 
 .event-popup-footer .btn-primary {
   background-color: transparent;
-  color: #1a73e8;
-  border: 1px solid #1a73e8;
+  color: #00E5A0;
+  border: 1px solid #00E5A0;
   font-weight: 500;
   border-radius: 6px;
   padding: 6px 12px;
@@ -410,10 +444,10 @@
 }
 
 .event-popup-footer .btn-primary:hover {
-  background-color: transparent;
-  color: #1a73e8;
-  border-color: #1a73e8;
-  box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.2);
+  background-color: rgba(0, 229, 160, 0.1);
+  color: #00E5A0;
+  border-color: #00E5A0;
+  box-shadow: 0 0 0 3px rgba(0, 229, 160, 0.2);
 }
 
 .rbc-current-time-indicator {
@@ -439,17 +473,18 @@
   position: absolute;
   top: 60%;
   right: 83%;
-  background: white;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+  background: rgba(26, 26, 26, 0.98);
+  border: 1px solid rgba(0, 229, 160, 0.2);
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
   padding: 16px;
   width: 260px;
   z-index: 999;
+  backdrop-filter: blur(16px);
 }
 
 .legend-header {
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid rgba(0, 229, 160, 0.15);
   padding-bottom: 6px;
   margin-bottom: 10px;
 
@@ -461,10 +496,17 @@
     cursor: pointer;
     line-height: 1;
     margin-bottom: 0;
+    color: rgba(234, 250, 245, 0.6);
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: #00E5A0;
+    }
   }
   h5 {
     margin-bottom: 0;
     font-size: 1rem;
+    color: rgba(234, 250, 245, 0.95);
   }
 }
 
@@ -475,23 +517,41 @@
 
   li {
     font-size: 14px;
+    color: rgba(234, 250, 245, 0.85);
   }
 }
 
 .events-calendar-filter {
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid rgba(0, 229, 160, 0.15);
   padding-bottom: 0.5rem;
   margin: 0;
   & .form-select {
     padding: 0.25rem 1.5rem 0.25rem 0.75rem;
+    background-color: rgba(26, 26, 26, 0.95);
+    border: 1px solid rgba(0, 229, 160, 0.25);
+    color: rgba(234, 250, 245, 0.92);
+    border-radius: 10px;
+
+    &:focus {
+      border-color: rgba(0, 229, 160, 0.5);
+      box-shadow: 0 0 0 3px rgba(0, 229, 160, 0.12);
+    }
+
+    option {
+      background-color: #1a1a1a;
+      color: rgba(234, 250, 245, 0.92);
+    }
+  }
+  & .form-label {
+    color: rgba(234, 250, 245, 0.7);
   }
 }
 
 .rbc-show-more {
-  color: #121212b0;
+  color: #00E5A0;
 }
 .rbc-today {
-  background-color: #fff !important;
+  background-color: rgba(0, 229, 160, 0.05) !important;
 }
 
 .rbc-date-cell.rbc-now div {
@@ -502,8 +562,8 @@
   justify-content: center;
   padding: 2px;
   border-radius: 20px;
-  background: #0b57d0;
-  color: #fff;
+  background: #00E5A0;
+  color: #0a0a0a;
 }
 
 .rbc-date-cell.rbc-now {
@@ -516,10 +576,13 @@
 }
 
 .rbc-overlay {
-  border-radius: 30px;
-  padding: 30px;
+  border-radius: 16px;
+  padding: 20px;
   max-height: 250px;
   overflow-y: auto;
+  background: rgba(26, 26, 26, 0.98) !important;
+  border: 1px solid rgba(0, 229, 160, 0.2) !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
   & .custom-event {
     clip-path: polygon(
       10px 0,
@@ -538,4 +601,72 @@
 
 .rbc-overlay-header {
   font-weight: 800;
+  color: rgba(234, 250, 245, 0.95);
+}
+
+/* Additional dark theme styles for calendar grid */
+.rbc-month-view .rbc-month-row,
+.rbc-month-view .rbc-day-bg {
+  border-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+.rbc-month-view .rbc-day-bg + .rbc-day-bg {
+  border-left-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+.rbc-month-row + .rbc-month-row {
+  border-top-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+.rbc-off-range-bg {
+  background: rgba(0, 0, 0, 0.2) !important;
+}
+
+.rbc-off-range {
+  color: rgba(234, 250, 245, 0.35) !important;
+}
+
+.rbc-date-cell {
+  color: rgba(234, 250, 245, 0.85);
+}
+
+.rbc-time-slot {
+  color: rgba(234, 250, 245, 0.7);
+}
+
+.rbc-label {
+  color: rgba(234, 250, 245, 0.7);
+}
+
+.rbc-day-slot .rbc-events-container {
+  margin-right: 0;
+}
+
+.rbc-event {
+  background-color: transparent !important;
+  border: none !important;
+}
+
+.rbc-row-segment {
+  padding: 0 2px;
+}
+
+/* Navigation buttons in toolbar */
+.custom-toolbar .nav-buttons button {
+  background: rgba(26, 26, 26, 0.95);
+  border: 1px solid rgba(0, 229, 160, 0.25);
+  color: rgba(234, 250, 245, 0.92);
+  border-radius: 8px;
+  padding: 6px 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: rgba(0, 229, 160, 0.15);
+    border-color: rgba(0, 229, 160, 0.5);
+  }
+
+  svg {
+    color: #00E5A0;
+  }
 }
