@@ -40,17 +40,48 @@ html[data-theme="light"] {
 
   // ============================================
   // BODY & ROOT BACKGROUND
+  // Override casino-background.scss dark theme
   // ============================================
   body, #root {
-    background: #ffffff !important;
+    background: #f5f7fa !important;
     background-image: none !important;
+    background-color: #f5f7fa !important;
     color: var(--gs-text-primary) !important;
   }
 
-  // Remove dark theme animated backgrounds
+  // Remove dark theme animated backgrounds and pseudo-elements
   body::before,
-  body::after {
+  body::after,
+  #root::before,
+  #root::after {
     display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+  }
+
+  // Main content area - must override dark backgrounds
+  .content,
+  .content-collapsed,
+  main.content,
+  main.content-collapsed {
+    background: #f5f7fa !important;
+    background-color: #f5f7fa !important;
+  }
+
+  .component-container {
+    background: transparent !important;
+  }
+
+  // App page wrapper
+  .app-page,
+  .app-page--surface {
+    background: transparent !important;
+  }
+
+  // Dashboard specific
+  .dashboard-typography {
+    background: transparent !important;
+    color: var(--gs-text-primary) !important;
   }
 
   // ============================================
@@ -1287,14 +1318,11 @@ html[data-theme="light"] {
   }
 
   // ============================================
-  // MAIN CONTENT AREA
+  // MAIN CONTENT AREA (Additional overrides)
   // ============================================
   .main-content,
   #main-content,
-  .content-wrapper,
-  .content,
-  main,
-  [class*="content"] {
+  .content-wrapper {
     background: #f5f7fa !important;
     background-image: none !important;
   }
@@ -1311,6 +1339,18 @@ html[data-theme="light"] {
   .page-title,
   h1, h2, h3 {
     color: var(--gs-text-primary) !important;
+  }
+
+  // Override any inline dark backgrounds
+  [style*="background"] {
+    // Can't override inline styles with CSS, but we can target common patterns
+  }
+
+  // Chart container backgrounds
+  .chart-container,
+  .graph-container,
+  .recharts-wrapper {
+    background: transparent !important;
   }
 
   // ============================================
