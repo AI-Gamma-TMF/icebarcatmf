@@ -276,6 +276,13 @@ const Staff = () => {
                                   className="staff-dropdown-menu"
                                   popperConfig={{ strategy: "fixed" }}
                                   renderOnMount
+                                  style={{
+                                    backgroundColor: '#000000',
+                                    backgroundImage: 'none',
+                                    backdropFilter: 'none',
+                                    WebkitBackdropFilter: 'none',
+                                    opacity: 1
+                                  }}
                                 >
                                   {getRole(roleId) !== "Admin" &&
                                     !isHidden({ module: { key: "Admins", value: "U" } }) && (
