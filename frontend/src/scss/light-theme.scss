@@ -69,6 +69,20 @@ html[data-theme="light"] {
     visibility: hidden !important;
   }
 
+  // Full-width light strip at the very top of the page
+  // This covers any residual dark background above the capsule navbar
+  &::before {
+    content: "" !important;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    height: 80px !important; // covers area above + behind capsule navbar
+    background: #f5f7fa !important;
+    pointer-events: none !important;
+    z-index: 998 !important; // just below navbar (999), above everything else
+  }
+
   // Main content area - must override dark backgrounds
   .content,
   .content-collapsed,
@@ -1380,12 +1394,13 @@ html[data-theme="light"] {
 
     // Fill the area ABOVE the sidebar (because navbar is an inset capsule).
     // This prevents any residual dark page background from showing through in the top-left region.
+    // NOTE: Only covers the sidebar width, not full page - navbar handles its own area.
     &::before {
       content: "" !important;
       position: fixed !important;
       top: 0 !important;
       left: 0 !important;
-      right: 0 !important;
+      width: 285px !important; // sidebar width only
       height: 78px !important; // must match global sidebar top offset
       background: #f5f7fa !important;
       pointer-events: none !important;
