@@ -213,4 +213,50 @@
   background: rgba(0, 229, 160, 0.12) !important;
 }
 
+// ============================================================
+// Redeem Report Accordion: force dark header (Volt hover is light)
+// ============================================================
+.redeem-rate-report-page {
+  .redeem-report-accordion {
+    .accordion-item {
+      background: rgba(18, 18, 18, 0.92) !important;
+      border: 1px solid rgba(0, 229, 160, 0.18) !important;
+      border-radius: 16px !important;
+      overflow: hidden;
+    }
+
+    .accordion-button {
+      background: rgba(18, 18, 18, 0.98) !important;
+      color: rgba(234, 250, 245, 0.92) !important;
+      font-weight: 800;
+      letter-spacing: 0.3px;
+      border: none !important;
+      box-shadow: none !important;
+
+      &:hover,
+      &:focus {
+        background: rgba(0, 229, 160, 0.10) !important;
+        color: rgba(0, 229, 160, 0.95) !important;
+        box-shadow: none !important;
+      }
+
+      &:not(.collapsed) {
+        background: rgba(0, 229, 160, 0.12) !important;
+        color: rgba(0, 229, 160, 0.95) !important;
+        box-shadow: none !important;
+      }
+
+      &::after {
+        // Make the caret visible on dark background
+        filter: invert(1) opacity(0.85);
+      }
+    }
+
+    .accordion-body {
+      background: rgba(0, 0, 0, 0.35) !important;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+  }
+}
+
 
