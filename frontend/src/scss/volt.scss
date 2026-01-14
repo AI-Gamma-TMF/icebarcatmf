@@ -91,3 +91,44 @@ html {
     font-size: 15px;
   }
 }
+
+// ============================================================
+// Global dropdown/option active color (match GS theme)
+// ============================================================
+// NOTE: Native <select> dropdown menus are OS-rendered (e.g. macOS blue highlight)
+// and cannot be fully restyled. These rules cover Bootstrap dropdowns + react-select.
+
+// Bootstrap dropdown active (removes default blue)
+.dropdown-menu {
+  .dropdown-item.active,
+  .dropdown-item:active {
+    background: rgba(var(--gs-cta-rgb), 0.18) !important;
+    color: rgba(0, 229, 160, 0.92) !important;
+  }
+}
+
+// react-select (both prefixes used around the app)
+// - gs-select: our preferred prefix
+// - react-select: legacy usage in some pages
+.gs-select__menu,
+.react-select__menu {
+  background: rgba(26, 26, 26, 0.96) !important;
+  border: 1px solid rgba(255, 255, 255, 0.10) !important;
+}
+
+.gs-select__option,
+.react-select__option {
+  background: transparent !important;
+  color: rgba(234, 250, 245, 0.78) !important;
+}
+
+.gs-select__option--is-focused,
+.react-select__option--is-focused {
+  background: rgba(var(--gs-cta-rgb), 0.10) !important;
+}
+
+.gs-select__option--is-selected,
+.react-select__option--is-selected {
+  background: rgba(var(--gs-cta-rgb), 0.18) !important;
+  color: rgba(0, 229, 160, 0.92) !important;
+}
