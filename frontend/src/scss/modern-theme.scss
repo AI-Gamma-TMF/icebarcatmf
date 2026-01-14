@@ -574,8 +574,9 @@ label {
 // MODERN ERROR MESSAGES
 // ============================================
 
+// Error messages (div elements with text-danger class from Formik ErrorMessage)
 .error-message,
-.text-danger {
+div.text-danger {
   color: #ff6b6b !important;
   font-size: 0.875rem !important;
   margin-top: 0.5rem !important;
@@ -592,6 +593,19 @@ label {
     content: "⚠" !important;
     font-size: 1.1rem !important;
     flex-shrink: 0 !important;
+  }
+}
+
+// Inline text-danger (for required field asterisks) - no icon, just color
+span.text-danger {
+  color: #ff6b6b !important;
+  display: inline !important;
+  font-size: inherit !important;
+  margin: 0 !important;
+  animation: none !important;
+  
+  &::before {
+    content: none !important;
   }
 }
 
