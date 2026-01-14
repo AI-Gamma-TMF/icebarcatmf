@@ -850,6 +850,57 @@
 }
 
 // ============================================================
+// Create/Edit Provider Rate Matrix - Form alignment
+// ============================================================
+.provider-rate-matrix-page {
+  // align with other dark dashboard pages
+  h3 {
+    color: rgba(234, 250, 245, 0.92);
+  }
+
+  .provider-rate-matrix__entry-row {
+    // keep consistent vertical alignment even when labels wrap
+    align-items: flex-end;
+  }
+
+  .provider-rate-matrix__label {
+    display: block;
+    margin: 0 0 8px 0;
+    color: rgba(234, 250, 245, 0.78);
+    font-weight: 700;
+    font-size: 0.78rem;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+    line-height: 1.25;
+  }
+
+  // On md+ screens, reserve some height so wrapped labels don't shift controls
+  @media (min-width: 768px) {
+    .provider-rate-matrix__label {
+      min-height: 38px;
+    }
+  }
+
+  .provider-rate-matrix__field {
+    .form-control {
+      min-height: 44px;
+    }
+  }
+
+  .provider-rate-matrix__action-col {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+  }
+
+  .provider-rate-matrix__action-btn {
+    min-height: 44px;
+    min-width: 120px;
+    padding: 10px 18px;
+  }
+}
+
+// ============================================================
 // Table responsiveness (match other pages)
 // ============================================================
 .provider-dashboard-table-wrap {

@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Table, Row, Col, Button, Form } from "@themesberg/react-bootstrap"
 import Select from "react-select";
 
+import "../_provider.scss";
 import { DeleteConfirmationModal } from '../../../components/ConfirmationModal/index'
 import Trigger from '../../../components/OverlayTrigger'
 import PaginationComponent from '../../../components/Pagination'
@@ -42,13 +43,17 @@ const ProviderRateMatrixList = ({ isHitoricalTab }) => {
 
   return (
     <Row className="mt-4">
-      <Row className="mb-2">
-        <Col sm={6} lg={3}>
-          <Form.Label>Game Provider</Form.Label>
+      <Row className="mb-2 provider-dashboard-filters g-3 align-items-end">
+        <Col xs={12} md={6} lg={4} className="provider-dashboard-filters__col">
+          <Form.Label className="provider-dashboard-filters__label">Game Provider</Form.Label>
           <Select
             placeholder="Game Provider"
             options={providerNameOptions}
             isClearable
+            className="gs-select"
+            classNamePrefix="gs-select"
+            menuPortalTarget={document.body}
+            menuPosition="fixed"
             value={
               providerNameOptions.find(
                 (option) => option.value === providerId

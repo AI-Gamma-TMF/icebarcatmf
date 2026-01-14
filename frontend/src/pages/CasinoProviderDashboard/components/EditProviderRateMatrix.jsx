@@ -15,6 +15,7 @@ import { DeleteConfirmationModal } from "../../../components/ConfirmationModal/i
 import { useEffect, useState } from "react";
 import { toast } from "../../../components/Toast/index.jsx";
 import { AdminRoutes } from "../../../routes.js";
+import "../_provider.scss";
 
 const EditProviderRateMatrix = () => {
   const navigate = useNavigate();
@@ -124,7 +125,7 @@ const EditProviderRateMatrix = () => {
   console.log("rates", rateList);
 
   return (
-    <div>
+    <div className="provider-rate-matrix-page dashboard-typography">
       <Row>
         <Col sm={8}>
           <h3>Edit Provider Rate Matrix</h3>
@@ -234,26 +235,26 @@ const EditProviderRateMatrix = () => {
                     />
                   </Col>
                 </Row>
-                <Row className="mb-3">
-                  <Col md={3}>
-                    <BForm.Label>Min GGR <span className="text-danger">*</span></BForm.Label>
+                <Row className="mb-3 provider-rate-matrix__entry-row align-items-end g-3">
+                  <Col xs={12} md={3} className="provider-rate-matrix__field">
+                    <BForm.Label className="provider-rate-matrix__label">Min GGR <span className="text-danger">*</span></BForm.Label>
                     <Field className="form-control" name="ggrMinimum" type="number" disabled />
                     <ErrorMessage name="ggrMinimum" className="text-danger" component="div" />
                   </Col>
-                  <Col md={3}>
-                    <BForm.Label>Max GGR (add "infinite" for last range) <span className="text-danger">*</span></BForm.Label>
+                  <Col xs={12} md={3} className="provider-rate-matrix__field">
+                    <BForm.Label className="provider-rate-matrix__label">Max GGR (add "infinite" for last range) <span className="text-danger">*</span></BForm.Label>
                     <Field className="form-control" name="ggrMaximum" type="text" onKeyDown={(evt) => ['E', '+', '-', '.'].includes(evt.key) && evt.preventDefault()} />
                     <ErrorMessage name="ggrMaximum" className="text-danger" component="div" />
                   </Col>
-                  <Col md={3}>
-                    <BForm.Label>Rate (%) <span className="text-danger">*</span></BForm.Label>
+                  <Col xs={12} md={3} className="provider-rate-matrix__field">
+                    <BForm.Label className="provider-rate-matrix__label">Rate (%) <span className="text-danger">*</span></BForm.Label>
                     <Field className="form-control" name="rate" type="number" />
                     <ErrorMessage name="rate" className="text-danger" component="div" />
                   </Col>
 
-                  <Col md={3} >
+                  <Col xs={12} md={3} className="provider-rate-matrix__action-col">
                     <Button
-                      style={{ marginTop: '32px' }}
+                      className="provider-rate-matrix__action-btn"
                       variant="primary"
                       type="submit"
                       disabled={editIndex === null && rateList.length > 0 && rateList[rateList.length - 1].ggrMaximum === null}
