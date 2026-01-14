@@ -1291,35 +1291,153 @@ html[data-theme="light"] {
   // ============================================
   .main-content,
   #main-content,
-  .content-wrapper {
-    background: #f8f9fa !important;
+  .content-wrapper,
+  .content,
+  main,
+  [class*="content"] {
+    background: #f5f7fa !important;
+    background-image: none !important;
+  }
+
+  // Page wrapper
+  .page-wrapper,
+  .dashboard-wrapper,
+  .admin-wrapper {
+    background: #f5f7fa !important;
+  }
+
+  // Dashboard page title
+  .dashboard h1,
+  .page-title,
+  h1, h2, h3 {
+    color: var(--gs-text-primary) !important;
   }
 
   // ============================================
   // SIDEBAR (Keep Dark for Contrast)
   // ============================================
-  .sidebar,
-  .nav-sidebar,
-  .sidenav {
-    background: #0a0a0a !important;
+  .sidebar {
+    background: rgba(18, 18, 18, 0.95) !important;
+    backdrop-filter: blur(22px) saturate(140%) !important;
+    -webkit-backdrop-filter: blur(22px) saturate(140%) !important;
     
-    // Keep sidebar text light
-    .nav-link,
-    .sidebar-link,
-    span {
-      color: rgba(255, 255, 255, 0.85) !important;
+    // Keep sidebar text light - be very specific
+    .nav-link {
+      color: rgba(255, 255, 255, 0.88) !important;
+      opacity: 1 !important;
+      visibility: visible !important;
+
+      span {
+        color: rgba(255, 255, 255, 0.88) !important;
+        opacity: 1 !important;
+      }
+
+      // Sidebar icons
+      svg {
+        color: rgba(255, 255, 255, 0.7) !important;
+        opacity: 1 !important;
+      }
+
+      &:hover {
+        background: rgba(0, 229, 160, 0.15) !important;
+        color: #00E5A0 !important;
+
+        span, svg {
+          color: #00E5A0 !important;
+        }
+      }
+
+      &.active {
+        background: rgba(0, 229, 160, 0.2) !important;
+        color: #00E5A0 !important;
+
+        span, svg {
+          color: #00E5A0 !important;
+        }
+      }
     }
 
-    .nav-link:hover,
-    .sidebar-link:hover {
-      background: rgba(0, 229, 160, 0.15) !important;
-      color: #00E5A0 !important;
+    // Accordion items in sidebar
+    .accordion-item {
+      background: transparent !important;
+      border: none !important;
     }
 
-    .nav-link.active,
-    .sidebar-link.active {
-      background: rgba(0, 229, 160, 0.2) !important;
-      color: #00E5A0 !important;
+    .accordion-button {
+      background: transparent !important;
+      color: rgba(255, 255, 255, 0.88) !important;
+      box-shadow: none !important;
+
+      span {
+        color: rgba(255, 255, 255, 0.88) !important;
+      }
+
+      svg {
+        color: rgba(255, 255, 255, 0.7) !important;
+      }
+
+      &::after {
+        filter: invert(1) brightness(0.8) !important;
+      }
+
+      &:not(.collapsed) {
+        background: rgba(0, 229, 160, 0.1) !important;
+        color: #00E5A0 !important;
+
+        span, svg {
+          color: #00E5A0 !important;
+        }
+      }
+
+      &:hover {
+        background: rgba(0, 229, 160, 0.15) !important;
+        color: #00E5A0 !important;
+
+        span, svg {
+          color: #00E5A0 !important;
+        }
+      }
+    }
+
+    .accordion-collapse {
+      background: transparent !important;
+    }
+
+    .accordion-body {
+      background: transparent !important;
+      padding: 0 !important;
+
+      .nav-link {
+        padding-left: 2.5rem !important;
+        color: rgba(255, 255, 255, 0.75) !important;
+
+        span {
+          color: rgba(255, 255, 255, 0.75) !important;
+        }
+
+        &:hover {
+          color: #00E5A0 !important;
+          background: rgba(0, 229, 160, 0.1) !important;
+
+          span {
+            color: #00E5A0 !important;
+          }
+        }
+
+        &.active {
+          color: #00E5A0 !important;
+          background: rgba(0, 229, 160, 0.15) !important;
+
+          span {
+            color: #00E5A0 !important;
+          }
+        }
+      }
+    }
+
+    // Simplebar scrollbar
+    .simplebar-scrollbar::before {
+      background: rgba(0, 229, 160, 0.4) !important;
     }
   }
 
