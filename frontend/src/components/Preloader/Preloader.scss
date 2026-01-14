@@ -1,12 +1,15 @@
 #cover-spin {
   position: fixed;
-  margin-left: 285px;
-  width: 100%;
-  left: 0;
+  /* Align to the main content area (sidebar is ~285px on desktop) */
+  left: 285px;
+  width: calc(100vw - 285px);
   right: 0;
   top: 0;
   bottom: 0;
-  background-color: rgba(255, 255, 255, 0.7);
+  /* Dark theme overlay (avoid the white bar) */
+  background-color: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   z-index: 9999;
 }
 
@@ -39,12 +42,20 @@
   width: 40px;
   height: 40px;
   border-style: solid;
-  border-color: black;
+  border-color: rgba(234, 250, 245, 0.85);
   border-top-color: transparent;
   border-width: 4px;
   border-radius: 50%;
   -webkit-animation: spin .8s linear infinite;
   animation: spin .8s linear infinite;
+}
+
+/* On smaller screens the sidebar collapses/overlays, so cover the whole viewport */
+@media (max-width: 991.98px) {
+  #cover-spin {
+    left: 0;
+    width: 100vw;
+  }
 }
 
 

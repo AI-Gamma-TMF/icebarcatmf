@@ -3,6 +3,12 @@
 
 .maintenance-mode-form {
   padding-bottom: 6px;
+  overflow: visible !important;
+  
+  // Ensure all grid/layout elements allow overflow for calendar popups
+  .row, .col, [class*="col-"] {
+    overflow: visible !important;
+  }
 }
 
 .maintenance-mode-form__title {
@@ -16,7 +22,8 @@
   font-size: 0.85rem;
 }
 
-.maintenance-mode-form__card {
+// Override global .card overflow:hidden for this specific card
+.maintenance-mode-form__card.card {
   background:
     linear-gradient(135deg, rgba(255, 255, 255, 0.04) 0%, rgba(0, 0, 0, 0.22) 100%),
     rgba(26, 26, 26, 0.55);
@@ -27,9 +34,27 @@
     0 14px 40px rgba(0, 0, 0, 0.35);
   backdrop-filter: blur(12px) saturate(140%);
   -webkit-backdrop-filter: blur(12px) saturate(140%);
+  // Override global .card overflow:hidden to allow datetime popups to escape
+  overflow: visible !important;
+  
+  // Force card body to allow overflow
+  .card-body {
+    overflow: visible !important;
+  }
 }
 
 .maintenance-mode-form {
+
+  .rdt {
+    position: relative;
+  }
+
+  // Keep open picker above the action buttons and other UI
+  .rdtOpen {
+    position: relative;
+    z-index: 1000;
+  }
+
   .rdt input {
     width: 100%;
     background-color: rgba(0, 0, 0, 0.35);
@@ -41,12 +66,54 @@
   }
 
   .rdtPicker {
+    position: absolute !important; // Position relative to .rdtOpen parent
     background: rgba(18, 18, 18, 0.96);
     border: 1px solid rgba(0, 229, 160, 0.18);
     box-shadow: 0 18px 55px rgba(0, 0, 0, 0.55);
     border-radius: 14px;
     color: rgba(234, 250, 245, 0.92);
     padding: 10px;
+    z-index: 9999 !important; // Above everything
+    margin-top: 8px;
+    max-width: min(380px, 92vw);
+    min-height: 290px !important; // Ensure full calendar grid is visible
+    width: 320px !important; // Explicit width to prevent shrinking
+  }
+
+  // Ensure the calendar grid text is visible (default theme can be dark-on-dark)
+  .rdtPicker th,
+  .rdtPicker td,
+  .rdtPicker .rdtDay,
+  .rdtPicker .rdtMonth,
+  .rdtPicker .rdtYear,
+  .rdtPicker .rdtTimeToggle {
+    color: rgba(234, 250, 245, 0.88) !important;
+  }
+
+  .rdtPicker td.rdtDay:hover,
+  .rdtPicker td.rdtMonth:hover,
+  .rdtPicker td.rdtYear:hover {
+    background: rgba(0, 229, 160, 0.12) !important;
+    color: rgba(0, 229, 160, 0.92) !important;
+  }
+
+  .rdtPicker td.rdtActive {
+    background: rgba(0, 229, 160, 0.18) !important;
+    color: rgba(0, 229, 160, 0.95) !important;
+    text-shadow: none !important;
+  }
+
+  .rdtPicker td.rdtDisabled,
+  .rdtPicker td.rdtDisabled:hover {
+    background: transparent !important;
+    color: rgba(234, 250, 245, 0.25) !important;
+    cursor: not-allowed !important;
+  }
+
+  // Right-align the picker for the right-side field so it doesn't overflow off-screen
+  .col-md-6:last-child .rdtPicker {
+    right: 0;
+    left: auto;
   }
 }
 

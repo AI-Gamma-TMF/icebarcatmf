@@ -16,6 +16,7 @@ import { AdminRoutes } from "../../../routes";
 import { useNavigate } from "react-router-dom";
 import { toast } from "../../../components/Toast";
 import useFreeSpinListing from "./hooks/useFreeSpinListing";
+import "./freespin.scss";
 
 const FreeSpinCreate = ({ tempData }) => {
   const editData = tempData?.data;
@@ -134,7 +135,7 @@ const FreeSpinCreate = ({ tempData }) => {
   };
 
   return (
-    <>
+    <div className="free-spin-create-page dashboard-typography">
       <Row className="align-items-center justify-content-between mb-3">
         <Col>
           <h3>{editData ? "Edit Free Spin" : "Create Free Spin"} </h3>
@@ -210,7 +211,7 @@ const FreeSpinCreate = ({ tempData }) => {
           );
         }}
       </Formik>
-    </>
+    </div>
   );
 };
 

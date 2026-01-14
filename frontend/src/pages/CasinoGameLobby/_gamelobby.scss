@@ -17,6 +17,20 @@
     min-width: 240px;
   }
 
+  // Keep filter row (and any popups inside it) above the content below.
+  // This prevents the "No data available" card / other content from sitting on top
+  // of the month picker and blocking clicks.
+  .game-lobby__filters {
+    position: relative;
+    z-index: 10;
+  }
+
+  // When the month picker is open, reserve vertical space so it doesn't overlap
+  // the "No data available" row / content below.
+  .game-lobby__filters--month-open {
+    margin-bottom: 140px !important;
+  }
+
   .game-lobby__filters-label {
     display: block;
     margin: 0 0 8px 0;
@@ -196,11 +210,12 @@
     box-shadow: 0 10px 28px rgba(0, 0, 0, 0.45);
     backdrop-filter: blur(18px);
     -webkit-backdrop-filter: blur(18px);
-    z-index: 100001;
+    z-index: 1000001;
     // Right-align so it doesn't overflow off-screen on the last column
     right: 0;
     left: auto;
     margin-top: 6px;
+    max-width: 92vw;
   }
 
   // When open, keep picker above other UI (tables/cards/swipers)
@@ -317,6 +332,8 @@
     justify-content: center;
     align-items: center;
     color: red;
+    position: relative;
+    z-index: 1;
   }
 }
 

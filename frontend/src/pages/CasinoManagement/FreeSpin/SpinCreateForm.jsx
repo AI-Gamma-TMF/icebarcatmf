@@ -74,6 +74,13 @@ const SpinCreateForm = ({
   const [isAlea, setIsAlea] = useState(false)
   const [isMascot, setIsMascot] = useState(false)
   const fileInputRef = useRef(null);
+
+  const freeSpinSelectProps = {
+    className: "free-spin-select",
+    classNamePrefix: "free-spin-select",
+    menuPortalTarget: document.body,
+    menuPosition: "fixed",
+  };
   const handleReplaceCsvClick = () => {
     fileInputRef.current.click();
   };
@@ -185,6 +192,7 @@ const SpinCreateForm = ({
                 editData?.status == 3
               }
               placeholder="Select Subscription Type"
+              {...freeSpinSelectProps}
             />
             <ErrorMessage
               component="div"
@@ -232,6 +240,7 @@ const SpinCreateForm = ({
               editData?.status == 3
             }
             placeholder="Select Provider"
+            {...freeSpinSelectProps}
           />
           <ErrorMessage
             component="div"
@@ -266,6 +275,7 @@ const SpinCreateForm = ({
             }
             isLoading={isFetchingNextPage}
             placeholder="Select Game"
+            {...freeSpinSelectProps}
           />
           <ErrorMessage
             component="div"
@@ -493,13 +503,7 @@ const SpinCreateForm = ({
             inputProps={{
               placeholder: "MM-DD-YYYY HH:MM",
               readOnly: true,
-              style: {
-                padding: "10px 12px",
-                borderRadius: "8px",
-                border: "1px solid #ccc",
-                fontSize: "14px",
-                width: "100%",
-              },
+              className: "form-control free-spin__datetime-input",
               disabled:
                 values.daysValidity ||
                 editData?.status == 1 ||
@@ -532,13 +536,7 @@ const SpinCreateForm = ({
             inputProps={{
               placeholder: "MM-DD-YYYY HH:MM",
               readOnly: true,
-              style: {
-                padding: "10px 12px",
-                borderRadius: "8px",
-                border: "1px solid #ccc",
-                fontSize: "14px",
-                width: "100%",
-              },
+              className: "form-control free-spin__datetime-input",
               disabled:
                 values.daysValidity ||
                 editData?.status == 2 ||

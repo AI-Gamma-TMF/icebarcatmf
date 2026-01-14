@@ -31,6 +31,7 @@ const GameLobby = () => {
 
   const [errorEnd, setErrorEnd] = useState("");
   const [errorStart, setErrorStart] = useState("");
+  const [isMonthPickerOpen, setIsMonthPickerOpen] = useState(false);
 
   const handleMonthYearChange = (date, _event) => {
     const selectedDate = moment(date);
@@ -51,7 +52,14 @@ const GameLobby = () => {
           <h4 className="mb-0">Games</h4>
         </Col>
       </Row>
-      <Row className="mb-2 mt-4 game-lobby__filters g-3 align-items-end">
+      <Row
+        className={[
+          "mb-2 mt-4 game-lobby__filters g-3 align-items-end",
+          isMonthPickerOpen ? "game-lobby__filters--month-open" : "",
+        ]
+          .filter(Boolean)
+          .join(" ")}
+      >
         <Col xs={12} md={6} lg={4} className="game-lobby__filters-col">
           <BForm.Label className="game-lobby__filters-label">Sub Categories</BForm.Label>
           <Select
@@ -94,6 +102,8 @@ const GameLobby = () => {
             value={startDate}
             onChange={handleMonthYearChange}
             closeOnSelect={true} // this is key
+            onOpen={() => setIsMonthPickerOpen(true)}
+            onClose={() => setIsMonthPickerOpen(false)}
             inputProps={{
               placeholder: "Select Month",
               readOnly: true,

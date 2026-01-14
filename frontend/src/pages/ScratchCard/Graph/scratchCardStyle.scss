@@ -207,6 +207,25 @@
   }
 }
 
+// User Details date picker: keep it as an overlay without shifting layout.
+.scratch-user-filters {
+  .rdt {
+    position: relative;
+  }
+
+  .rdtOpen {
+    position: relative;
+    z-index: 1000;
+  }
+
+  .rdtPicker {
+    z-index: 1001 !important;
+    right: 0;
+    left: auto;
+    margin-top: 8px;
+  }
+}
+
 // react-datetime input styling inside scratch card graph
 .bonus-graph-container {
   .rdt {

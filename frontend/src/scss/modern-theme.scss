@@ -39,6 +39,13 @@ option:checked {
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
   overflow: hidden !important;
   
+  // Allow specific cards to opt-out of overflow:hidden for datetime pickers etc.
+  &.maintenance-mode-form__card,
+  &.game-lobby-card,
+  &.free-spin-card {
+    overflow: visible !important;
+  }
+  
   &:hover {
     transform: translateY(-2px) !important;
     box-shadow: 
