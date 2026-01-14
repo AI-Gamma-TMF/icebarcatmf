@@ -29,3 +29,27 @@
         min-height: 43px !important;
     }
 }
+
+// ------------------------------------------------------------
+// Player Activity filters (fix white dropdowns on dark theme)
+// ------------------------------------------------------------
+.player-activity-filters {
+  .player-activity-filters__select.form-select {
+    background-color: rgba(0, 0, 0, 0.20) !important;
+    border: 1px solid rgba(255, 255, 255, 0.10) !important;
+    color: #eafaf5 !important;
+    border-radius: 12px;
+    min-height: 42px;
+
+    &:focus {
+      border-color: rgba(var(--gs-cta-rgb), 0.65) !important;
+      box-shadow: 0 0 0 0.2rem rgba(var(--gs-cta-rgb), 0.15) !important;
+    }
+  }
+
+  // Dropdown option background (browser-dependent, but helps where supported)
+  .player-activity-filters__select option {
+    background: #121212;
+    color: #eafaf5;
+  }
+}

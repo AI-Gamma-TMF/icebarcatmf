@@ -95,7 +95,7 @@ const ActivityTableFilters = ({
     }
   };
   return (
-    <Row>
+    <Row className="player-activity-filters">
       {/* <Col xs="12" sm="6" lg="3" className="mb-3">
         <Form.Label column="sm" className="mx-auto text-nowrap px-2">
           Time Period
@@ -160,6 +160,7 @@ const ActivityTableFilters = ({
       <Col xs={3} className="mb-3">
         <Form.Label>Actions</Form.Label>
         <Form.Select
+          className="player-activity-filters__select"
           value={action}
           onChange={(e) => {
             setPage(1);
@@ -179,6 +180,7 @@ const ActivityTableFilters = ({
       <Col xs={3} className="mb-3">
         <Form.Label>Transaction</Form.Label>
         <Form.Select
+          className="player-activity-filters__select"
           value={transaction}
           onChange={(e) => {
             setPage(1);
@@ -198,6 +200,7 @@ const ActivityTableFilters = ({
       <Col xs={3} className="mb-3">
         <Form.Label>Coin Type</Form.Label>
         <Form.Select
+          className="player-activity-filters__select"
           value={coinType}
           onChange={(e) => {
             setPage(1);
@@ -214,6 +217,7 @@ const ActivityTableFilters = ({
           <Col xs={3} className="mb-3">
             <Form.Label>Provider</Form.Label>
             <Form.Select
+              className="player-activity-filters__select"
               value={providerName}
               onChange={(e) => {
                 setProviderName(e.target.value);
