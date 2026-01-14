@@ -37,6 +37,77 @@ ChartJS.register(
 );
 
 const BonusGraph = () => {
+  // Force react-select dark theme via inline `styles` prop.
+  // This is the most reliable way to prevent white hover/active colors across browsers/OS.
+  const bonusSelectStyles = {
+    control: (base, state) => ({
+      ...base,
+      minHeight: 44,
+      backgroundColor: "rgba(0,0,0,0.35)",
+      borderColor: state.isFocused
+        ? "rgba(0, 229, 160, 0.35)"
+        : "rgba(255,255,255,0.12)",
+      borderRadius: 14,
+      boxShadow: state.isFocused
+        ? "0 0 0 0.2rem rgba(0, 229, 160, 0.18), inset 0 1px 0 rgba(255,255,255,0.06)"
+        : "inset 0 1px 0 rgba(255,255,255,0.06)",
+    }),
+    menu: (base) => ({
+      ...base,
+      backgroundColor: "rgba(18, 18, 18, 0.98)",
+      border: "1px solid rgba(0, 229, 160, 0.18)",
+      boxShadow: "0 18px 55px rgba(0, 0, 0, 0.55)",
+      borderRadius: 14,
+      overflow: "hidden",
+    }),
+    menuList: (base) => ({
+      ...base,
+      padding: 6,
+    }),
+    option: (base, state) => ({
+      ...base,
+      backgroundColor: state.isSelected
+        ? "rgba(0, 229, 160, 0.18)"
+        : state.isFocused
+        ? "rgba(0, 229, 160, 0.12)"
+        : "transparent",
+      color: state.isSelected
+        ? "rgba(0, 229, 160, 0.95)"
+        : state.isFocused
+        ? "rgba(0, 229, 160, 0.92)"
+        : "rgba(255,255,255,0.92)",
+      borderRadius: 10,
+      padding: "10px 12px",
+      cursor: "pointer",
+    }),
+    singleValue: (base) => ({
+      ...base,
+      color: "rgba(255,255,255,0.92)",
+    }),
+    placeholder: (base) => ({
+      ...base,
+      color: "rgba(234, 250, 245, 0.55)",
+    }),
+    input: (base) => ({
+      ...base,
+      color: "rgba(255,255,255,0.92)",
+    }),
+    indicatorSeparator: (base) => ({
+      ...base,
+      backgroundColor: "rgba(255,255,255,0.12)",
+    }),
+    dropdownIndicator: (base) => ({
+      ...base,
+      color: "rgba(234, 250, 245, 0.78)",
+      ":hover": { color: "rgba(0, 229, 160, 0.92)" },
+    }),
+    clearIndicator: (base) => ({
+      ...base,
+      color: "rgba(234, 250, 245, 0.78)",
+      ":hover": { color: "rgba(0, 229, 160, 0.92)" },
+    }),
+  };
+
   const [bonusGraphData, setBonusGraphData] = useState({
     labels: [],
     datasets: [],
@@ -167,6 +238,7 @@ const BonusGraph = () => {
               placeholder="Select Metric"
               isClearable={false}
               classNamePrefix="bonus-select"
+              styles={bonusSelectStyles}
             />
           </Col>
 
@@ -295,6 +367,7 @@ const BonusGraph = () => {
               placeholder="Select Interval"
               isClearable={false}
               classNamePrefix="bonus-select"
+              styles={bonusSelectStyles}
             />
           </Col>
 
