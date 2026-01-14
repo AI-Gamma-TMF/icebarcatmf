@@ -87,10 +87,22 @@
 
 .bonus-select__option {
   color: rgba(255, 255, 255, 0.92) !important;
+  background: transparent !important;
 }
 
 .bonus-select__option--is-focused {
   background: rgba(0, 229, 160, 0.12) !important;
+}
+
+// react-select can still show a light hover in some builds; force it dark.
+.bonus-select__option:hover {
+  background: rgba(0, 229, 160, 0.12) !important;
+  color: rgba(0, 229, 160, 0.92) !important;
+}
+
+.bonus-select__option--is-selected {
+  background: rgba(0, 229, 160, 0.18) !important;
+  color: rgba(0, 229, 160, 0.95) !important;
 }
 
 // ============================================================
@@ -117,14 +129,17 @@
     background: transparent !important;
 
     &:hover,
-    &:focus {
+    &:focus,
+    &:focus-visible {
       background: rgba(0, 229, 160, 0.12) !important;
+      background-color: rgba(0, 229, 160, 0.12) !important;
       color: rgba(0, 229, 160, 0.92) !important;
     }
 
     &.active,
     &:active {
       background: rgba(0, 229, 160, 0.18) !important;
+      background-color: rgba(0, 229, 160, 0.18) !important;
       color: rgba(0, 229, 160, 0.95) !important;
     }
   }
