@@ -3,6 +3,9 @@ import Select from "react-select";
 import { bonusTypeOptions } from "./constant";
 
 const BonusTypeDropdown = ({ bonusType, setBonusType }) => {
+    const bonusSelectPortalTarget =
+        typeof document !== "undefined" ? document.body : null;
+
     return (
         <Select
             isMulti
@@ -11,6 +14,8 @@ const BonusTypeDropdown = ({ bonusType, setBonusType }) => {
             options={bonusTypeOptions}
             placeholder="Select Bonus Type"
             classNamePrefix="bonus-select"
+            menuPortalTarget={bonusSelectPortalTarget}
+            menuPosition="fixed"
             styles={{
                 control: (base) => ({
                     ...base,
@@ -25,6 +30,10 @@ const BonusTypeDropdown = ({ bonusType, setBonusType }) => {
                     backgroundColor: 'rgba(18, 18, 18, 0.98)',
                     border: '1px solid rgba(0, 229, 160, 0.18)',
                     boxShadow: '0 18px 55px rgba(0, 0, 0, 0.55)',
+                }),
+                menuPortal: (base) => ({
+                    ...base,
+                    zIndex: 2000000,
                 }),
                 option: (base, state) => ({
                     ...base,

@@ -39,6 +39,9 @@ ChartJS.register(
 const BonusGraph = () => {
   // Force react-select dark theme via inline `styles` prop.
   // This is the most reliable way to prevent white hover/active colors across browsers/OS.
+  const bonusSelectPortalTarget =
+    typeof document !== "undefined" ? document.body : null;
+
   const bonusSelectStyles = {
     control: (base, state) => ({
       ...base,
@@ -59,6 +62,12 @@ const BonusGraph = () => {
       boxShadow: "0 18px 55px rgba(0, 0, 0, 0.55)",
       borderRadius: 14,
       overflow: "hidden",
+    }),
+    // When the menu is rendered in a portal (to escape overflow clipping),
+    // this controls the actual wrapper and ensures it stays above cards/tables.
+    menuPortal: (base) => ({
+      ...base,
+      zIndex: 2000000,
     }),
     menuList: (base) => ({
       ...base,
@@ -239,6 +248,8 @@ const BonusGraph = () => {
               isClearable={false}
               classNamePrefix="bonus-select"
               styles={bonusSelectStyles}
+              menuPortalTarget={bonusSelectPortalTarget}
+              menuPosition="fixed"
             />
           </Col>
 
@@ -368,6 +379,8 @@ const BonusGraph = () => {
               isClearable={false}
               classNamePrefix="bonus-select"
               styles={bonusSelectStyles}
+              menuPortalTarget={bonusSelectPortalTarget}
+              menuPosition="fixed"
             />
           </Col>
 
