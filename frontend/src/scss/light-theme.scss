@@ -47,6 +47,11 @@ html[data-theme="light"] {
   // BODY & ROOT BACKGROUND
   // Override casino-background.scss dark theme
   // ============================================
+  // Important: the navbar is inset/capsule, so the *html* background can show
+  // around it. Force html to the same light surface to avoid any dark halo.
+  background: #f5f7fa !important;
+  background-color: #f5f7fa !important;
+
   body, #root {
     background: #f5f7fa !important;
     background-image: none !important;
