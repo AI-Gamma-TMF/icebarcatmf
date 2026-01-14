@@ -24,33 +24,9 @@ import useCheckPermission from "../../utils/checkPermission";
 import { useTranslation } from "react-i18next";
 import { searchRegEx } from "../../utils/helper";
 import { InlineLoader } from "../../components/Preloader";
-import { useEffect } from "react";
 import "./staff.scss";
 
 const Staff = () => {
-  // Force black background on dropdown menus via DOM manipulation
-  useEffect(() => {
-    const forceDropdownStyles = () => {
-      const dropdowns = document.querySelectorAll('.staff-dropdown-menu, [class*="staff-dropdown-menu"]');
-      dropdowns.forEach(dropdown => {
-        dropdown.style.backgroundColor = '#000000';
-        dropdown.style.backgroundImage = 'none';
-        dropdown.style.backdropFilter = 'none';
-        dropdown.style.webkitBackdropFilter = 'none';
-        dropdown.style.opacity = '1';
-        dropdown.style.filter = 'none';
-      });
-    };
-
-    // Run immediately
-    forceDropdownStyles();
-
-    // Run on mutations (when dropdowns are rendered)
-    const observer = new MutationObserver(forceDropdownStyles);
-    observer.observe(document.body, { childList: true, subtree: true });
-
-    return () => observer.disconnect();
-  }, []);
 
   const {
     navigate,
@@ -301,13 +277,6 @@ const Staff = () => {
                                   className="staff-dropdown-menu"
                                   popperConfig={{ strategy: "fixed" }}
                                   renderOnMount
-                                  style={{
-                                    backgroundColor: '#000000',
-                                    backgroundImage: 'none',
-                                    backdropFilter: 'none',
-                                    WebkitBackdropFilter: 'none',
-                                    opacity: 1
-                                  }}
                                 >
                                   {getRole(roleId) !== "Admin" &&
                                     !isHidden({ module: { key: "Admins", value: "U" } }) && (
