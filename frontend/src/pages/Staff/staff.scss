@@ -832,7 +832,8 @@
   isolation: isolate;
   border: 1px solid rgba(0, 229, 160, 0.25) !important;
   border-radius: 14px !important;
-  padding: 8px !important;
+  // Remove inner gaps so the table can't "bleed through" between items.
+  padding: 6px !important;
   box-shadow:
     0 16px 40px rgba(0, 0, 0, 0.95),
     0 0 0 1px rgba(0, 229, 160, 0.18) inset !important;
@@ -845,7 +846,7 @@
   .dropdown-item {
     color: rgba(255, 255, 255, 0.96) !important;
     padding: 10px 16px !important;
-    border-radius: 8px !important;
+    border-radius: 10px !important;
     transition: all 0.2s ease;
     display: flex;
     align-items: center;
@@ -858,7 +859,8 @@
     background-color: #0f0f0f !important;
     background-image: none !important;
     border: 1px solid rgba(255, 255, 255, 0.06) !important;
-    margin-bottom: 6px !important;
+    margin: 0 !important;
+    width: 100% !important;
 
     svg {
       width: 16px;
@@ -886,15 +888,12 @@
       background: #0f0f0f !important;
       transform: none !important;
     }
-
-    &:last-child {
-      margin-bottom: 0 !important;
-    }
   }
 
   .dropdown-divider {
     border-color: rgba(255, 255, 255, 0.10) !important;
     opacity: 1 !important;
+    margin: 6px 4px !important;
   }
 }
 
