@@ -167,6 +167,23 @@ select:autofill {
 }
 
 // ============================================================
+// Laptop scale tuning (the UI can feel "zoomed in" at 100% on 13–15" screens)
+// Users were preferring ~75% browser zoom; we approximate this by reducing
+// the root rem size on common laptop widths while keeping desktop + mobile intact.
+// ============================================================
+@media (min-width: 992px) and (max-width: 1600px) {
+  html {
+    font-size: 14px;
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1366px) {
+  html {
+    font-size: 13px;
+  }
+}
+
+// ============================================================
 // Global dropdown/option active color (match GS theme)
 // ============================================================
 // NOTE: Native <select> dropdown menus are OS-rendered (e.g. macOS blue highlight)
