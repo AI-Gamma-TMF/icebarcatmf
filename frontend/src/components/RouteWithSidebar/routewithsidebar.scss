@@ -1,5 +1,6 @@
 .component-container {
-  padding-top: 60px;
+  // Navbar is now an inset capsule (top margin + 60px height)
+  padding-top: 78px;
   padding-bottom: 24px;
   display: flex;
   justify-content: center;
@@ -179,7 +180,7 @@ html.gs-is-scrolling {
 // Tablets and below (≤ 992px)
 @media (max-width: 992px) {
   .component-container {
-    padding-top: 56px;
+    padding-top: 74px;
     padding-bottom: 20px;
   }
   
@@ -196,7 +197,7 @@ html.gs-is-scrolling {
 // Small tablets and mobile (≤ 768px)
 @media (max-width: 768px) {
   .component-container {
-    padding-top: 52px;
+    padding-top: 70px;
     padding-bottom: 16px;
   }
   
@@ -212,7 +213,7 @@ html.gs-is-scrolling {
 // Mobile devices (≤ 576px)
 @media (max-width: 576px) {
   .component-container {
-    padding-top: 48px;
+    padding-top: 66px;
     padding-bottom: 12px;
   }
   
@@ -229,7 +230,7 @@ html.gs-is-scrolling {
 // Extra small devices (≤ 400px)
 @media (max-width: 400px) {
   .component-container {
-    padding-top: 44px;
+    padding-top: 62px;
   }
   
   .app-page {

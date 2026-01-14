@@ -75,8 +75,6 @@ html[data-theme="light"] {
 
   .component-container {
     background: transparent !important;
-    // navbar becomes inset/capsule in light mode → push content down a bit
-    padding-top: 78px !important;
   }
 
   // App page wrapper
@@ -1369,9 +1367,6 @@ html[data-theme="light"] {
     -webkit-backdrop-filter: none !important;
     border-right: 1px solid #e5e5e5 !important;
     box-shadow: 2px 0 12px rgba(0, 0, 0, 0.06), 1px 0 0 rgba(0, 229, 160, 0.12) !important;
-    // navbar becomes inset/capsule in light mode → avoid overlap
-    top: 78px !important;
-    max-height: calc(100vh - 78px) !important;
 
     // Hide the accent edge pseudo-element
     &::after {
@@ -1559,12 +1554,6 @@ html[data-theme="light"] {
     border: 1px solid #e5e5e5 !important;
     border-bottom: 1px solid #e5e5e5 !important;
     box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08), 0 1px 0 rgba(0, 229, 160, 0.16) !important;
-    border-radius: 9999px !important;
-    // Inset pill
-    top: 10px !important;
-    left: 12px !important;
-    right: 12px !important;
-    width: auto !important;
 
     .navbar-brand,
     .nav-link,
@@ -1667,22 +1656,9 @@ html[data-theme="light"] {
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12) !important;
   }
 
-  // Slightly tighter pill on small screens
-  @media (max-width: 575px) {
-    .app-navbar {
-      top: 8px !important;
-      left: 8px !important;
-      right: 8px !important;
-      border-radius: 9999px !important;
-    }
-    .component-container {
-      padding-top: 74px !important;
-    }
-    .sidebar {
-      top: 74px !important;
-      max-height: calc(100vh - 74px) !important;
-    }
-  }
+  // NOTE: Capsule sizing/positioning is handled globally (dark + light) in `navbar.scss`,
+  // and layout offsets are handled globally in `routewithsidebar.scss` + `_sidenav.scss`.
+  // Light mode should only affect colors, not dimensions.
 
   // ============================================
   // SEARCH INPUT (Light)
