@@ -852,7 +852,13 @@
     gap: 10px;
     font-weight: 500;
     transform: none !important;
-    background: transparent !important;
+    // Key: even if a parent/container ends up translucent from global styles,
+    // keep each row fully opaque so the menu never looks "see-through".
+    background: #0f0f0f !important;
+    background-color: #0f0f0f !important;
+    background-image: none !important;
+    border: 1px solid rgba(255, 255, 255, 0.06) !important;
+    margin-bottom: 6px !important;
 
     svg {
       width: 16px;
@@ -877,8 +883,12 @@
     &:disabled {
       opacity: 0.45 !important;
       color: rgba(255, 255, 255, 0.65) !important;
-      background: transparent !important;
+      background: #0f0f0f !important;
       transform: none !important;
+    }
+
+    &:last-child {
+      margin-bottom: 0 !important;
     }
   }
 
