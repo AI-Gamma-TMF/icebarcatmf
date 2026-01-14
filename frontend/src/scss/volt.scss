@@ -101,7 +101,22 @@ select:-webkit-autofill:focus {
   -webkit-text-fill-color: rgba(255, 255, 255, 0.92) !important;
   caret-color: rgba(255, 255, 255, 0.92) !important;
   transition: background-color 9999s ease-in-out 0s !important;
+  // Chromium applies its own internal background; the most reliable override is a huge inset shadow.
+  -webkit-box-shadow: 0 0 0px 1000px rgba(0, 0, 0, 0.35) inset !important;
   box-shadow: 0 0 0px 1000px rgba(0, 0, 0, 0.35) inset !important;
+  background-color: transparent !important;
+  border-color: rgba(255, 255, 255, 0.12) !important;
+}
+
+// Chromium internal pseudo (mainly affects Windows/Incognito). Not standard, but harmless if ignored.
+input:-internal-autofill-selected,
+textarea:-internal-autofill-selected,
+select:-internal-autofill-selected {
+  -webkit-text-fill-color: rgba(255, 255, 255, 0.92) !important;
+  caret-color: rgba(255, 255, 255, 0.92) !important;
+  -webkit-box-shadow: 0 0 0px 1000px rgba(0, 0, 0, 0.35) inset !important;
+  box-shadow: 0 0 0px 1000px rgba(0, 0, 0, 0.35) inset !important;
+  background-color: transparent !important;
   border-color: rgba(255, 255, 255, 0.12) !important;
 }
 
@@ -111,7 +126,9 @@ textarea:autofill,
 select:autofill {
   color: rgba(255, 255, 255, 0.92) !important;
   caret-color: rgba(255, 255, 255, 0.92) !important;
+  -webkit-box-shadow: 0 0 0px 1000px rgba(0, 0, 0, 0.35) inset !important;
   box-shadow: 0 0 0px 1000px rgba(0, 0, 0, 0.35) inset !important;
+  background-color: transparent !important;
   border-color: rgba(255, 255, 255, 0.12) !important;
 }
 
