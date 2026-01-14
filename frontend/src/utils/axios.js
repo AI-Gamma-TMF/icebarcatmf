@@ -49,10 +49,45 @@ const METHODS = {
 }
 
 const makeRequest = async (url, method, data = {}, params = {}, headers = null) => {
-  if(!headers) {
-    headers = {
-      'Content-Type': 'application/json'
-    }
+  // Default JSON content-type unless caller overrides.
+  if (!headers) {
+    headers = { 'Content-Type': 'application/json' }
+  }
+
+  // ------------------------------------------------------------
+  // IMPORTANT: File uploads (FormData) must NOT hardcode Content-Type.
+  // The browser/axios will set: multipart/form-data; boundary=...
+  // If we set an incorrect type (e.g. multipart/formdata) the backend
+  // won't parse files and uploads "silently" fail.
+  // ------------------------------------------------------------
+  const isFormData =
+    typeof FormData !== 'undefined' &&
+    data &&
+    typeof data === 'object' &&
+    data instanceof FormData
+
+  if (isFormData) {
+    // Clone so we don't mutate callers' objects.
+    const nextHeaders = { ...headers }
+
+    // Remove Content-Type regardless of casing.
+    Object.keys(nextHeaders).forEach((key) => {
+      if (key.toLowerCase() === 'content-type') {
+        delete nextHeaders[key]
+      }
+    })
+
+    headers = nextHeaders
+  } else if (headers && typeof headers === 'object') {
+    // Normalize a common typo found across the codebase:
+    // 'multipart/formdata' -> 'multipart/form-data'
+    Object.keys(headers).forEach((key) => {
+      if (key.toLowerCase() !== 'content-type') return
+      const val = String(headers[key] ?? '')
+      if (val.toLowerCase().includes('multipart/formdata')) {
+        headers[key] = 'multipart/form-data'
+      }
+    })
   }
 
   return axiosInstance({
