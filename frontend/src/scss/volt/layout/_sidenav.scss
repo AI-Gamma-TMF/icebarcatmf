@@ -1,42 +1,47 @@
 /*
- * Sidebar
+ * Sidebar - Capsule style matching navbar
 */
 .sidebar {
   display: block;
   position: fixed;
   // Sit below the inset capsule navbar (10px top margin + 60px height + ~8px gap)
   top: 78px;
-  bottom: 0;
-  left: 0;
+  bottom: 12px; // inset from bottom to match capsule style
+  left: 12px; // inset from left to match navbar
   z-index: 100;
-  max-height: calc(100vh - 78px);
+  max-height: calc(100vh - 90px); // account for top + bottom insets
   // overflow-y: auto;
   width: 100%;
   margin-top: 0;
-  @include transition(max-width 0.18s);
+  @include transition(max-width 0.18s, border-radius 0.18s);
 
   // Modern glass + dark gradient (match navbar)
   background: rgba(18, 18, 18, 0.72);
   backdrop-filter: blur(22px) saturate(140%);
   -webkit-backdrop-filter: blur(22px) saturate(140%);
-  border-right: 1px solid rgba(255, 255, 255, 0.06);
-  box-shadow: 10px 0 36px rgba(0, 0, 0, 0.42);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 10px 0 36px rgba(0, 0, 0, 0.42), 0 0 1px rgba(0, 229, 160, 0.12);
+  
+  // Capsule rounded corners
+  border-radius: 24px;
+  overflow: hidden;
 
-  // Subtle accent edge
+  // Subtle accent edge (now on all sides via border-radius)
   &::after {
     content: "";
     position: absolute;
     top: 0;
-    right: -1px;
-    width: 1px;
+    right: 0;
+    width: 2px;
     height: 100%;
     background: linear-gradient(
       180deg,
       rgba(0, 229, 160, 0) 0%,
-      rgba(0, 229, 160, 0.35) 40%,
+      rgba(0, 229, 160, 0.25) 40%,
       rgba(0, 229, 160, 0) 100%
     );
     pointer-events: none;
+    border-radius: 0 24px 24px 0;
   }
 
   // -----------------------------
@@ -124,7 +129,7 @@
 
   @include media-breakpoint-up(md) {
     width: 100%;
-    max-width: 274px;
+    max-width: 260px; // slightly narrower to account for left inset
   }
 
   .nav {
@@ -352,7 +357,8 @@
   transition: none;
 
   @include media-breakpoint-up(md) {
-    margin-left: 274px;
+    // Sidebar: left 12px + width 260px + gap 12px = 284px
+    margin-left: 284px;
   }
 }
 

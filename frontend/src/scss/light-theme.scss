@@ -60,6 +60,7 @@ html[data-theme="light"] {
   }
 
   // Remove dark theme animated backgrounds and pseudo-elements
+  // With capsule sidebar + navbar, the page background shows through gaps naturally
   body::before,
   body::after,
   #root::before,
@@ -67,20 +68,7 @@ html[data-theme="light"] {
     display: none !important;
     opacity: 0 !important;
     visibility: hidden !important;
-  }
-
-  // Full-width light strip at the very top of the page
-  // This covers any residual dark background above the capsule navbar
-  &::before {
-    content: "" !important;
-    position: fixed !important;
-    top: 0 !important;
-    left: 0 !important;
-    right: 0 !important;
-    height: 80px !important; // covers area above + behind capsule navbar
-    background: #f5f7fa !important;
-    pointer-events: none !important;
-    z-index: 998 !important; // just below navbar (999), above everything else
+    animation: none !important;
   }
 
   // Main content area - must override dark backgrounds
@@ -1378,33 +1366,29 @@ html[data-theme="light"] {
   }
 
   // ============================================
-  // SIDEBAR (Light Mode)
+  // SIDEBAR (Light Mode) - Capsule style matching navbar
   // ============================================
   .sidebar {
     background: #ffffff !important;
     backdrop-filter: none !important;
     -webkit-backdrop-filter: none !important;
-    border-right: 1px solid #e5e5e5 !important;
-    box-shadow: 2px 0 12px rgba(0, 0, 0, 0.06), 1px 0 0 rgba(0, 229, 160, 0.12) !important;
+    // Capsule border all around (matches dark mode)
+    border: 1px solid #e5e5e5 !important;
+    box-shadow: 
+      0 4px 20px rgba(0, 0, 0, 0.08),
+      0 0 0 1px rgba(0, 229, 160, 0.12),
+      var(--gs-glow-weak) !important;
+    // Capsule rounded corners (inherited from base, but ensure light mode keeps them)
+    border-radius: 24px !important;
 
-    // Hide the accent edge pseudo-element
+    // Hide the accent edge pseudo-element (not needed with capsule style)
     &::after {
       display: none !important;
     }
 
-    // Fill the area ABOVE the sidebar (because navbar is an inset capsule).
-    // This prevents any residual dark page background from showing through in the top-left region.
-    // NOTE: Only covers the sidebar width, not full page - navbar handles its own area.
+    // No need for fill layer above sidebar anymore (capsule is inset)
     &::before {
-      content: "" !important;
-      position: fixed !important;
-      top: 0 !important;
-      left: 0 !important;
-      width: 285px !important; // sidebar width only
-      height: 78px !important; // must match global sidebar top offset
-      background: #f5f7fa !important;
-      pointer-events: none !important;
-      z-index: 99 !important; // below navbar (999) and below sidebar (100), above page bg
+      display: none !important;
     }
 
     // Volt layout adds a dark overlay via .sidebar-inner::before – remove it for true light mode
