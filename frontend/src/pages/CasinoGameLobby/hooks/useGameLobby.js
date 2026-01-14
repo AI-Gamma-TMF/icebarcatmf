@@ -36,7 +36,8 @@ const useGameLobby = () => {
 
       return getGameLobbyGames(params)
     },
-    select: (res) => res?.data?.data,
+    // Always return an array so callers can safely use `.length` and `.map`
+    select: (res) => res?.data?.data ?? [],
     refetchOnWindowFocus: false,
   })
 
@@ -80,7 +81,7 @@ const useGameLobby = () => {
     subCategory,
     subCategoryId,
     setSubCategoryId,
-    gameLobbyDetails,
+    gameLobbyDetails: gameLobbyDetails ?? [],
     gameLobbyLoading,
     search,
     setSearch,
