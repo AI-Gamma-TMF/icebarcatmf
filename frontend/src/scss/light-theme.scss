@@ -1131,4 +1131,240 @@ html[data-theme="light"] {
       }
     }
   }
+
+  // ============================================
+  // DASHBOARD KPI BOXES (Light Mode)
+  // These have hardcoded dark backgrounds that need overriding
+  // ============================================
+  .dashboard-box {
+    background: #ffffff !important;
+    border: 1px solid #e5e5e5 !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    color: var(--gs-text-primary) !important;
+
+    &::before {
+      background: linear-gradient(90deg, transparent 0%, rgba(0, 229, 160, 0.4) 50%, transparent 100%) !important;
+      opacity: 0.6 !important;
+    }
+
+    &::after {
+      background: none !important;
+      opacity: 0 !important;
+    }
+
+    &:hover {
+      border-color: rgba(0, 229, 160, 0.5) !important;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12) !important;
+      transform: translateY(-2px);
+
+      &::before {
+        opacity: 1 !important;
+      }
+    }
+
+    // KPI title
+    h6, .dashboard-box__title {
+      color: var(--gs-text-secondary) !important;
+      font-weight: 500 !important;
+    }
+
+    // KPI value
+    h4, h3, .dashboard-box__value {
+      color: var(--gs-text-primary) !important;
+      font-weight: 700 !important;
+    }
+
+    // Icon container
+    .dashboard-box__icon,
+    img {
+      filter: none !important;
+    }
+  }
+
+  // Specific KPI box colors (light pastel versions)
+  .sc-stack {
+    background: linear-gradient(135deg, #e8fff4 0%, #d4ffe8 100%) !important;
+    border-color: rgba(0, 229, 160, 0.3) !important;
+  }
+
+  .sc-win {
+    background: linear-gradient(135deg, #e5fcff 0%, #d4f8ff 100%) !important;
+    border-color: rgba(96, 255, 245, 0.4) !important;
+  }
+
+  .scr-sc {
+    background: linear-gradient(135deg, #ffecfd 0%, #ffe0fb 100%) !important;
+    border-color: rgba(255, 115, 231, 0.3) !important;
+  }
+
+  .usc-balance {
+    background: linear-gradient(135deg, #fff4e7 0%, #ffe8d4 100%) !important;
+    border-color: rgba(255, 202, 145, 0.4) !important;
+  }
+
+  .rsc-balance {
+    background: linear-gradient(135deg, #e6e6ff 0%, #dcdcff 100%) !important;
+    border-color: rgba(150, 174, 255, 0.4) !important;
+  }
+
+  .ggrsc-balance {
+    background: linear-gradient(135deg, #ffd9d9 0%, #ffcece 100%) !important;
+    border-color: rgba(255, 107, 107, 0.3) !important;
+
+    // Tooltip stays dark for readability
+    span {
+      background: rgba(30, 30, 30, 0.95) !important;
+      color: #ffffff !important;
+    }
+  }
+
+  .sc-jackpot {
+    background: linear-gradient(135deg, #f9ffd9 0%, #f0ffcc 100%) !important;
+    border-color: rgba(207, 255, 107, 0.4) !important;
+  }
+
+  // ============================================
+  // TICKER CONTAINERS (Light Mode)
+  // ============================================
+  .ticker-container {
+    background: #ffffff !important;
+    border: 1px solid #e5e5e5 !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    color: var(--gs-text-primary) !important;
+
+    &::before,
+    &::after {
+      display: none !important;
+    }
+
+    &:hover {
+      border-color: rgba(0, 229, 160, 0.4) !important;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1) !important;
+    }
+
+    // Specific ticker colors
+    &.online {
+      background: linear-gradient(135deg, #e8f0ff 0%, #dde8ff 100%) !important;
+      border-color: rgba(125, 148, 253, 0.3) !important;
+    }
+
+    &.active {
+      background: linear-gradient(135deg, #e8fff4 0%, #d8ffe8 100%) !important;
+      border-color: rgba(97, 207, 93, 0.3) !important;
+    }
+
+    &.total-wallet {
+      background: linear-gradient(135deg, #fff4e7 0%, #ffe8d4 100%) !important;
+      border-color: rgba(243, 172, 129, 0.4) !important;
+    }
+
+    &.total-vault {
+      background: linear-gradient(135deg, #ffecfd 0%, #ffe0fb 100%) !important;
+      border-color: rgba(255, 115, 231, 0.3) !important;
+    }
+
+    &.overall {
+      background: linear-gradient(135deg, #e6e6ff 0%, #dcdcff 100%) !important;
+      border-color: rgba(97, 132, 242, 0.3) !important;
+    }
+
+    &.today {
+      background: linear-gradient(135deg, #ffe8f2 0%, #ffdde8 100%) !important;
+      border-color: rgba(247, 101, 163, 0.3) !important;
+    }
+
+    h6, p, span {
+      color: var(--gs-text-primary) !important;
+    }
+
+    .green-c {
+      color: #00a878 !important;
+    }
+  }
+
+  // ============================================
+  // MAIN CONTENT AREA
+  // ============================================
+  .main-content,
+  #main-content,
+  .content-wrapper {
+    background: #f8f9fa !important;
+  }
+
+  // ============================================
+  // SIDEBAR (Keep Dark for Contrast)
+  // ============================================
+  .sidebar,
+  .nav-sidebar,
+  .sidenav {
+    background: #0a0a0a !important;
+    
+    // Keep sidebar text light
+    .nav-link,
+    .sidebar-link,
+    span {
+      color: rgba(255, 255, 255, 0.85) !important;
+    }
+
+    .nav-link:hover,
+    .sidebar-link:hover {
+      background: rgba(0, 229, 160, 0.15) !important;
+      color: #00E5A0 !important;
+    }
+
+    .nav-link.active,
+    .sidebar-link.active {
+      background: rgba(0, 229, 160, 0.2) !important;
+      color: #00E5A0 !important;
+    }
+  }
+
+  // ============================================
+  // NAVBAR (Light)
+  // ============================================
+  .navbar,
+  .app-navbar {
+    background: #ffffff !important;
+    border-bottom: 1px solid #e5e5e5 !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06) !important;
+
+    .navbar-brand,
+    .nav-link,
+    .btn-link {
+      color: var(--gs-text-primary) !important;
+    }
+
+    .nav-icon-btn {
+      color: var(--gs-text-secondary) !important;
+
+      &:hover {
+        color: #00E5A0 !important;
+        background: rgba(0, 229, 160, 0.1) !important;
+      }
+    }
+  }
+
+  // ============================================
+  // SEARCH INPUT (Light)
+  // ============================================
+  .search-input,
+  .form-control-search {
+    background: #f5f5f5 !important;
+    border: 1px solid #e5e5e5 !important;
+    color: var(--gs-text-primary) !important;
+
+    &:focus {
+      background: #ffffff !important;
+      border-color: #00E5A0 !important;
+      box-shadow: 0 0 0 3px rgba(0, 229, 160, 0.15) !important;
+    }
+
+    &::placeholder {
+      color: var(--gs-text-muted) !important;
+    }
+  }
 }
