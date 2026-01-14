@@ -83,6 +83,37 @@
     color: rgba(234, 250, 245, 0.42) !important;
   }
 
+  // ============================================================
+  // LOGIN-SPECIFIC: Autofill override (no white backgrounds!)
+  // ============================================================
+  // The global autofill override in volt.scss should handle most cases,
+  // but we add a scoped override here for extra insurance on the login page.
+  .form-control:-webkit-autofill,
+  .form-control:-webkit-autofill:hover,
+  .form-control:-webkit-autofill:focus,
+  .form-control:-webkit-autofill:active,
+  .form-control:-internal-autofill-selected,
+  .form-control:-internal-autofill-previewed {
+    -webkit-text-fill-color: rgba(234, 250, 245, 0.96) !important;
+    caret-color: rgba(234, 250, 245, 0.96) !important;
+    transition: background-color 9999s ease-in-out 0s !important;
+    -webkit-box-shadow: 0 0 0px 1000px rgba(255, 255, 255, 0.045) inset !important;
+    box-shadow: 0 0 0px 1000px rgba(255, 255, 255, 0.045) inset !important;
+    background-color: rgba(255, 255, 255, 0.045) !important;
+    background-image: none !important;
+    border: 0 !important;
+  }
+
+  .form-control:autofill {
+    color: rgba(234, 250, 245, 0.96) !important;
+    caret-color: rgba(234, 250, 245, 0.96) !important;
+    -webkit-box-shadow: 0 0 0px 1000px rgba(255, 255, 255, 0.045) inset !important;
+    box-shadow: 0 0 0px 1000px rgba(255, 255, 255, 0.045) inset !important;
+    background-color: rgba(255, 255, 255, 0.045) !important;
+    background-image: none !important;
+    border: 0 !important;
+  }
+
   // Focus ring for the whole control (not the internal pieces)
   .input-group:focus-within {
     border-color: rgba(0, 229, 160, 0.68) !important;
