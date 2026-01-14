@@ -448,6 +448,20 @@
     background-position: right 0.75rem center;
     background-size: 16px 12px;
     padding-right: 2.5rem;
+
+    // Style native select options (works in Firefox, limited in Chrome/Windows)
+    option {
+      background-color: #1a1a1a !important;
+      color: rgba(255, 255, 255, 0.92) !important;
+      padding: 10px 12px !important;
+    }
+
+    option:hover,
+    option:focus,
+    option:checked {
+      background-color: rgba(0, 229, 160, 0.3) !important;
+      color: #ffffff !important;
+    }
   }
 }
 

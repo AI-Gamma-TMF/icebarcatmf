@@ -14,6 +14,7 @@ import Trigger from '../../../components/OverlayTrigger'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEye, faEyeSlash } from '@fortawesome/free-regular-svg-icons'
 import CreatableSelect from 'react-select/creatable'
+import Select from 'react-select'
 import { toast } from '../../../components/Toast'
 import { AdminRoutes } from '../../../routes'
 import useStaffForm from '../hooks/useStaffForm'
@@ -338,26 +339,24 @@ const StaffForm = ({
           <Col xs={12} md={6}>
             <BForm.Label className="form-label">{t('staffFields.role.label')}<span className="text-danger"> *</span></BForm.Label>
 
-            <BForm.Select
+            <Select
+              classNamePrefix='staff-select'
               className="staff-form__select"
               name='role'
-              value={values.role || ''}
-              disabled={isEdit}
-              onChange={(e) => roleChangeHandler(e)}
+              value={values.role ? { value: values.role, label: values.role } : null}
+              isDisabled={isEdit}
+              onChange={(option) => roleChangeHandler({ target: { name: 'role', value: option?.value || '' } })}
               onBlur={handleBlur}
-            >
-              <option value='' disabled key=''>
-                {t('staffFields.role.selectRole')}
-              </option>
-              {adminRole?.map((roles, index) => {
-                return (
-                  roles.name !== 'Admin' &&
-                  <option key={index} value={roles && roles.name}>
-                    {roles && roles.name}
-                  </option>
-                )
-              })}
-            </BForm.Select>
+              placeholder={t('staffFields.role.selectRole')}
+              options={adminRole?.filter(r => r.name !== 'Admin').map(roles => ({
+                value: roles.name,
+                label: roles.name
+              })) || []}
+              menuPortalTarget={document.body}
+              styles={{
+                menuPortal: (base) => ({ ...base, zIndex: 99999 })
+              }}
+            />
 
             <ErrorMessage component='div' name='role' className='text-danger mt-1' />
           </Col>
@@ -366,29 +365,29 @@ const StaffForm = ({
             <Col xs={12} md={6}>
               <BForm.Label className="form-label">{t('staffFields.manager.label')}</BForm.Label>
 
-              <BForm.Select
+              <Select
+                classNamePrefix='staff-select'
                 className="staff-form__select"
                 name='adminId'
-                value={values.adminId || ''}
-                disabled={isEdit}
-                onChange={(e) => { handleChange(e) }}
+                value={values.adminId ? {
+                  value: values.adminId,
+                  label: data?.rows?.find(a => a.adminUserId === values.adminId)
+                    ? `${data.rows.find(a => a.adminUserId === values.adminId).firstName} ${data.rows.find(a => a.adminUserId === values.adminId).lastName}`
+                    : values.adminId
+                } : null}
+                isDisabled={isEdit}
+                onChange={(option) => handleChange({ target: { name: 'adminId', value: option?.value || '' } })}
                 onBlur={handleBlur}
-              >
-                <option value='' disabled>
-                  {t('staffFields.manager.selectManager')}
-                </option>
-                {data &&
-                  data?.rows?.map((admin, index) => {
-                    return (
-                      <option
-                        key={index}
-                        value={admin && admin.adminUserId}
-                      >
-                        {admin && `${admin?.firstName} ${admin?.lastName}`}
-                      </option>
-                    )
-                  })}
-              </BForm.Select>
+                placeholder={t('staffFields.manager.selectManager')}
+                options={data?.rows?.map(admin => ({
+                  value: admin.adminUserId,
+                  label: `${admin.firstName} ${admin.lastName}`
+                })) || []}
+                menuPortalTarget={document.body}
+                styles={{
+                  menuPortal: (base) => ({ ...base, zIndex: 99999 })
+                }}
+              />
 
               <ErrorMessage
                 component='div'
