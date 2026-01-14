@@ -258,8 +258,7 @@ const ScheduledEvents = () => {
             <Dropdown className="event-type-dropdown">
               <Dropdown.Toggle
                 variant="light"
-                className="w-100 d-flex justify-content-between align-items-center border"
-                style={{ minWidth: "220px", textAlign: "left" }}
+                className="d-flex justify-content-between align-items-center"
               >
                 <span className="text-truncate" style={{ maxWidth: "180px" }}>
                   {selectedTypes.includes("all")
