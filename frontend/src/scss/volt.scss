@@ -76,3 +76,18 @@ html,
 body {
   overflow-x: hidden;
 }
+
+// Prevent iOS/Safari “text autosizing” that can make the UI look zoomed on small screens.
+// Keep this global so every page is consistent.
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+// On very small screens, slightly reduce the root size so the layout doesn’t feel “zoomed in”.
+// This scales typography + spacing together (more consistent than ad-hoc per-page overrides).
+@media (max-width: 420px) {
+  html {
+    font-size: 15px;
+  }
+}
