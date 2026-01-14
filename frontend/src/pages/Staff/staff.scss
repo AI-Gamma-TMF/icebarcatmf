@@ -245,8 +245,20 @@
   td.staff-table__actions {
     overflow: visible !important;
     position: relative;
-    z-index: 1;
+    // Don't set a fixed z-index on *every* actions cell. That creates many stacking contexts
+    // and can cause other rows' kebab buttons to render ABOVE the open dropdown.
+    z-index: auto;
   }
+}
+
+// When a row's dropdown is open, lift THAT dropdown above other rows so nothing shows "through" it.
+.staff-table__actions .dropdown.show {
+  position: relative;
+  z-index: 999999;
+}
+
+.staff-table__actions .dropdown.show .dropdown-menu {
+  z-index: 1000000 !important;
 }
 
 // Keep horizontal scrolling on smaller screens while still allowing dropdowns to render.
