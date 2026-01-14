@@ -181,6 +181,34 @@ select:autofill {
   }
 }
 
+// ============================================================
+// GLOBAL FILE UPLOAD BUTTON: make the hidden <input type="file">
+// cover the ENTIRE visible button so clicks always open the picker.
+// This fixes "upload not working" issues on Mac/Windows caused by
+// partial-width overlays (e.g. width: 109px).
+// ============================================================
+.custom-file-upload-button {
+  position: relative !important;
+  display: inline-flex;
+  align-items: center;
+}
+
+.custom-file-upload-button input[type="file"] {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  opacity: 0 !important;
+  cursor: pointer !important;
+  z-index: 2 !important; // above the visible button
+}
+
+.custom-file-upload-button button,
+.custom-file-upload-button .btn {
+  position: relative;
+  z-index: 1;
+}
+
 // react-select (both prefixes used around the app)
 // - gs-select: our preferred prefix
 // - react-select: legacy usage in some pages
