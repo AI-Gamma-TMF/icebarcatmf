@@ -810,16 +810,25 @@
 }
 
 // Mobile Actions Dropdown styling
+// Force the Staff "Actions" dropdown to be fully opaque (some global glass styles can make it look transparent)
+.dropdown-menu.staff-dropdown-menu,
 .staff-dropdown-menu {
   // Actions dropdown should be SOLID (no glass blur) to avoid looking “transparent”
-  background: #141414 !important;
-  background-color: #141414 !important;
+  background: #0b0b0b !important;
+  background-color: #0b0b0b !important;
+  background-image: none !important;
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
+  opacity: 1 !important;
+  filter: none !important;
+  mix-blend-mode: normal !important;
+  isolation: isolate;
   border: 1px solid rgba(255, 255, 255, 0.12) !important;
   border-radius: 14px !important;
   padding: 8px !important;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5) !important;
+  box-shadow:
+    0 12px 30px rgba(0, 0, 0, 0.75),
+    0 0 0 1px rgba(0, 229, 160, 0.14) inset !important;
   overflow: hidden;
   z-index: 99999 !important;
 
@@ -833,6 +842,7 @@
     gap: 10px;
     font-weight: 500;
     transform: none !important;
+    background: transparent !important;
 
     svg {
       width: 16px;
@@ -866,6 +876,14 @@
     border-color: rgba(255, 255, 255, 0.10) !important;
     opacity: 1 !important;
   }
+}
+
+// Extra guard: if global styles add glass blur on `.dropdown-menu.show`, neutralize it here
+.dropdown-menu.show.staff-dropdown-menu {
+  background: #0b0b0b !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  opacity: 1 !important;
 }
 
 .staff-select__placeholder {
