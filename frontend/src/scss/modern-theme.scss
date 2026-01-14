@@ -2,6 +2,28 @@
 // Glass Morphism, Smooth Animations, Contemporary Design
 
 // ============================================
+// GLOBAL SELECT/OPTION DARK THEME (for Windows compatibility)
+// ============================================
+select,
+select option {
+  background-color: #1a1a1a !important;
+  color: rgba(255, 255, 255, 0.92) !important;
+}
+
+option {
+  background-color: #1a1a1a !important;
+  color: rgba(255, 255, 255, 0.92) !important;
+  padding: 8px 12px !important;
+}
+
+option:hover,
+option:focus,
+option:checked {
+  background-color: rgba(0, 229, 160, 0.3) !important;
+  color: #ffffff !important;
+}
+
+// ============================================
 // MODERN CARD DESIGNS
 // ============================================
 
@@ -484,10 +506,16 @@ label {
     background-repeat: no-repeat !important;
     background-position: right 12px center !important;
     background-size: 18px 18px !important;
+
+    option {
+      background-color: #1a1a1a !important;
+      color: rgba(255, 255, 255, 0.92) !important;
+      padding: 10px !important;
+    }
   }
 
   .form-select option {
-    background: rgba(18, 18, 18, 0.98) !important;
+    background-color: #1a1a1a !important;
     color: rgba(255, 255, 255, 0.92) !important;
   }
 
