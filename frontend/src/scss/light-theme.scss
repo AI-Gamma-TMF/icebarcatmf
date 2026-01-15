@@ -174,6 +174,32 @@ html[data-theme="light"] {
     color: var(--gs-text-primary) !important;
   }
 
+  // Dashboard Table/Chart switch (light mode)
+  .dashboard-view-tabs {
+    background: rgba(15, 23, 42, 0.06) !important;
+    border: 1px solid var(--gs-border-color) !important;
+    box-shadow: var(--gs-shadow-sm) !important;
+  }
+
+  .dashboard-view-tab {
+    background: rgba(15, 23, 42, 0.06) !important;
+    border: 1px solid rgba(15, 23, 42, 0.12) !important;
+    color: #334155 !important;
+  }
+
+  .dashboard-view-tab:hover:not(:disabled) {
+    background: rgba(var(--gs-accent-rgb), 0.12) !important;
+    border-color: rgba(var(--gs-accent-rgb), 0.35) !important;
+    color: #0f172a !important;
+  }
+
+  .dashboard-view-tab.is-active {
+    background: #ffffff !important;
+    border-color: rgba(var(--gs-accent-rgb), 0.45) !important;
+    color: #0f172a !important;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8) !important;
+  }
+
   // ============================================
   // CARDS
   // ============================================
@@ -1212,6 +1238,364 @@ html[data-theme="light"] {
       color: var(--gs-text-primary) !important;
       border-color: var(--gs-border-color) !important;
     }
+
+    // Override dark "card row" styling from dashboardChart.scss
+    tbody tr td {
+      background: linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%) !important;
+      border-top: 1px solid rgba(226, 232, 240, 0.9) !important;
+      border-bottom: 1px solid rgba(226, 232, 240, 0.9) !important;
+      color: var(--gs-text-primary) !important;
+    }
+
+    tbody tr td:first-child {
+      border-left: 4px solid rgba(var(--gs-accent-rgb), 0.7) !important;
+    }
+  }
+
+  // Staff status pill (light mode)
+  .staff-pill {
+    background: #f1f5f9 !important;
+    border: 1px solid rgba(148, 163, 184, 0.4) !important;
+    color: #334155 !important;
+  }
+
+  .staff-pill--active {
+    background: rgba(16, 185, 129, 0.18) !important;
+    border-color: rgba(16, 185, 129, 0.45) !important;
+    color: #047857 !important;
+  }
+
+  .staff-pill--inactive {
+    background: rgba(239, 68, 68, 0.12) !important;
+    border-color: rgba(239, 68, 68, 0.35) !important;
+    color: #b91c1c !important;
+  }
+
+  // Admin Added Coins page (light mode)
+  .admin-coins-page__card {
+    background: linear-gradient(145deg, #ffffff 0%, #f6f9fc 100%) !important;
+    border: 1px solid rgba(226, 232, 240, 0.85) !important;
+    box-shadow:
+      0 1px 2px rgba(0, 0, 0, 0.04),
+      0 10px 24px rgba(0, 0, 0, 0.06) !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
+  .admin-coins-page__reset-btn {
+    border-color: rgba(var(--gs-accent-rgb), 0.35) !important;
+    background: rgba(var(--gs-accent-rgb), 0.12) !important;
+  }
+
+  .admin-coins-page__reset-btn:hover {
+    border-color: rgba(var(--gs-accent-rgb), 0.5) !important;
+    background: rgba(var(--gs-accent-rgb), 0.18) !important;
+  }
+
+  .admin-coins-filters .admin-coins-filters__control.form-control {
+    background-color: #ffffff !important;
+    color: #0f172a !important;
+    border: 1px solid rgba(148, 163, 184, 0.5) !important;
+    box-shadow: none !important;
+  }
+
+  .admin-coins-filters .admin-coins-filters__control.form-control::placeholder {
+    color: #94a3b8 !important;
+  }
+
+  .admin-coins-filters .admin-coins-filters__control.form-control:focus {
+    border-color: rgba(var(--gs-accent-rgb), 0.45) !important;
+    box-shadow: 0 0 0 0.2rem rgba(var(--gs-accent-rgb), 0.12) !important;
+  }
+
+  .admin-coins-highlight {
+    background: linear-gradient(145deg, #ffffff 0%, #f3f6fb 100%) !important;
+    border: 1px solid rgba(226, 232, 240, 0.85) !important;
+    color: #0f172a !important;
+  }
+
+  .admin-coins-highlight__title {
+    color: #0f172a !important;
+  }
+
+  .admin-coins-highlight__kv {
+    color: #334155 !important;
+  }
+
+  .admin-coins-highlight__kv strong {
+    color: #059669 !important;
+  }
+
+  .admin-coins-table__link {
+    color: #0f766e !important;
+  }
+
+  .admin-coins-empty {
+    color: #e11d48 !important;
+  }
+
+  // Casino Provider Dashboard (light mode)
+  .provider-dashboard-page__title {
+    color: #0f172a !important;
+  }
+
+  .provider-dashboard-page__card {
+    background: linear-gradient(145deg, #ffffff 0%, #f6f9fc 100%) !important;
+    border: 1px solid rgba(226, 232, 240, 0.85) !important;
+    box-shadow:
+      0 1px 2px rgba(0, 0, 0, 0.04),
+      0 10px 24px rgba(0, 0, 0, 0.06) !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
+  .provider-dashboard-tabs {
+    border-bottom: 1px solid rgba(148, 163, 184, 0.4) !important;
+
+    .nav-link {
+      color: #64748b !important;
+    }
+
+    .nav-link:hover {
+      color: #0f766e !important;
+      background: rgba(var(--gs-accent-rgb), 0.08) !important;
+    }
+
+    .nav-link.active {
+      color: #0f766e !important;
+      background: rgba(var(--gs-accent-rgb), 0.12) !important;
+      border-bottom-color: rgba(var(--gs-accent-rgb), 0.7) !important;
+    }
+  }
+
+  .provider-dashboard-content__subtitle {
+    color: #0f172a !important;
+  }
+
+  .provider-dashboard-content__chart-card {
+    background: linear-gradient(145deg, #ffffff 0%, #f3f6fb 100%) !important;
+    border: 1px solid rgba(226, 232, 240, 0.85) !important;
+    box-shadow:
+      0 1px 2px rgba(0, 0, 0, 0.04),
+      0 10px 24px rgba(0, 0, 0, 0.06) !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
+  .provider-dashboard-content__chart-title {
+    color: #0f172a !important;
+  }
+
+  .provider-dashboard-content__no-data {
+    color: #e11d48 !important;
+  }
+
+  .provider-dashboard-content .table {
+    td {
+      color: #0f172a !important;
+    }
+    th {
+      color: #0f172a !important;
+      border-bottom: 1px solid rgba(226, 232, 240, 0.9) !important;
+    }
+  }
+
+  .provider-dashboard-table tfoot,
+  .provider-dashboard-table .tfoot-dark {
+    background: #f8fafc !important;
+  }
+
+  .provider-dashboard-table tfoot td,
+  .provider-dashboard-table .tfoot-dark td {
+    background: #f8fafc !important;
+    color: #0f172a !important;
+    border-top: 1px solid rgba(226, 232, 240, 0.9) !important;
+  }
+
+  // Casino Game Dashboard table footer (light mode)
+  .game-dashboard-table tfoot td,
+  .game-dashboard-table .tfoot-dark td {
+    background: #f8fafc !important;
+    color: #0f172a !important;
+    border-top: 1px solid rgba(226, 232, 240, 0.9) !important;
+  }
+
+  .provider-dashboard-filters__label {
+    color: #64748b !important;
+  }
+
+  .provider-dashboard-filters .form-control,
+  .provider-dashboard-filters .form-select,
+  .provider-dashboard-filters__month-input {
+    background-color: #ffffff !important;
+    color: #0f172a !important;
+    border: 1px solid rgba(148, 163, 184, 0.5) !important;
+    box-shadow: none !important;
+  }
+
+  .provider-dashboard-filters .form-control::placeholder {
+    color: #94a3b8 !important;
+  }
+
+  .provider-dashboard-filters .form-control:focus,
+  .provider-dashboard-filters .form-select:focus,
+  .provider-dashboard-filters__month-input:focus {
+    border-color: rgba(var(--gs-accent-rgb), 0.45) !important;
+    box-shadow: 0 0 0 0.2rem rgba(var(--gs-accent-rgb), 0.12) !important;
+  }
+
+  // Players page (light mode)
+  .players-page__card {
+    background: linear-gradient(145deg, #ffffff 0%, #f6f9fc 100%) !important;
+    border: 1px solid rgba(226, 232, 240, 0.85) !important;
+    box-shadow:
+      0 1px 2px rgba(0, 0, 0, 0.04),
+      0 10px 24px rgba(0, 0, 0, 0.06) !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    overflow: visible !important;
+  }
+
+  .players-page__card .card-body {
+    overflow: visible !important;
+  }
+
+  .players-search .form-label {
+    color: #64748b !important;
+  }
+
+  .players-search .form-control,
+  .players-search .form-select {
+    background-color: #ffffff !important;
+    color: #0f172a !important;
+    border: 1px solid rgba(148, 163, 184, 0.5) !important;
+    box-shadow: none !important;
+  }
+
+  .players-search .form-control::placeholder {
+    color: #94a3b8 !important;
+  }
+
+  .players-search .form-control:focus,
+  .players-search .form-select:focus {
+    border-color: rgba(var(--gs-accent-rgb), 0.45) !important;
+    box-shadow: 0 0 0 0.2rem rgba(var(--gs-accent-rgb), 0.12) !important;
+  }
+
+  .players-search__btn--secondary {
+    background: #ffffff !important;
+    border: 1px solid rgba(148, 163, 184, 0.45) !important;
+    color: #0f172a !important;
+  }
+
+  .players-search__btn--icon {
+    background: rgba(var(--gs-accent-rgb), 0.12) !important;
+    border: 1px solid rgba(var(--gs-accent-rgb), 0.35) !important;
+  }
+
+  .players-search__note {
+    color: #94a3b8 !important;
+  }
+
+  .players-page .custom-multiselect .dropdown-container {
+    background: #ffffff !important;
+    border: 1px solid rgba(148, 163, 184, 0.5) !important;
+    color: #0f172a !important;
+    box-shadow: none !important;
+  }
+
+  .players-page .custom-multiselect .search input {
+    background: transparent !important;
+    color: #0f172a !important;
+  }
+
+  // react-multi-select-component dropdown panel (light mode)
+  .custom-multiselect .dropdown-container {
+    background: #ffffff !important;
+    border: 1px solid rgba(148, 163, 184, 0.5) !important;
+    color: #0f172a !important;
+    border-radius: 14px !important;
+    box-shadow: none !important;
+    outline: none !important;
+  }
+
+  // Remove inner border so only the container outline is visible
+  .custom-multiselect .dropdown-heading {
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+  }
+
+  // Ensure the base rmsc styles don't add another ring
+  .rmsc .dropdown-container {
+    border: 1px solid rgba(148, 163, 184, 0.5) !important;
+    box-shadow: none !important;
+    outline: none !important;
+  }
+
+  // Remove extra focus ring/outline on the multiselect container
+  .custom-multiselect.rmsc .dropdown-container:focus-within,
+  .custom-multiselect .dropdown-container:focus-within {
+    box-shadow: none !important;
+    outline: none !important;
+  }
+
+  // Remove any pseudo-element borders/lines inside the control
+  .custom-multiselect .dropdown-container::before,
+  .custom-multiselect .dropdown-container::after,
+  .custom-multiselect .dropdown-heading::before,
+  .custom-multiselect .dropdown-heading::after {
+    content: none !important;
+  }
+
+  .custom-multiselect .dropdown-heading-dropdown-arrow {
+    border: 0 !important;
+    box-shadow: none !important;
+  }
+
+  .custom-multiselect .dropdown-content,
+  .custom-multiselect .select-panel,
+  .custom-multiselect .panel-content {
+    background: #ffffff !important;
+    border: 1px solid rgba(226, 232, 240, 0.9) !important;
+    box-shadow: none !important;
+    z-index: 99999 !important;
+  }
+
+  .custom-multiselect .search,
+  .custom-multiselect .search input {
+    background: transparent !important;
+    color: #0f172a !important;
+  }
+
+  .custom-multiselect .search input::placeholder {
+    color: #94a3b8 !important;
+  }
+
+  .custom-multiselect .options,
+  .custom-multiselect ul {
+    background: transparent !important;
+  }
+
+  .custom-multiselect .select-item,
+  .custom-multiselect .option,
+  .custom-multiselect li {
+    background: transparent !important;
+    color: #0f172a !important;
+    border: 0 !important;
+    border-bottom: 1px solid rgba(226, 232, 240, 0.7) !important;
+  }
+
+  .custom-multiselect .select-item:hover,
+  .custom-multiselect .option:hover,
+  .custom-multiselect li:hover,
+  .custom-multiselect .select-item.selected {
+    background: rgba(var(--gs-accent-rgb), 0.12) !important;
+    border-color: rgba(var(--gs-accent-rgb), 0.35) !important;
+  }
+
+  .custom-multiselect input[type="checkbox"] {
+    accent-color: rgb(0, 229, 160);
   }
 
   // ============================================
@@ -1226,7 +1610,7 @@ html[data-theme="light"] {
   .graph-wrapper,
   .login-data-chart,
   [class*="chart-"] {
-    background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%) !important;
+    background: linear-gradient(145deg, #ffffff 0%, #f3f6fb 100%) !important;
     border: 1px solid rgba(226, 232, 240, 0.8) !important;
     border-radius: 20px !important;
     box-shadow: 
@@ -1262,19 +1646,19 @@ html[data-theme="light"] {
   // Chart grid lines
   .recharts-cartesian-grid-horizontal line,
   .recharts-cartesian-grid-vertical line {
-    stroke: #e2e8f0 !important;
+    stroke: #cbd5e1 !important;
   }
 
   // Chart axis text
   .recharts-text,
   .recharts-cartesian-axis-tick-value {
-    fill: #64748b !important;
+    fill: #334155 !important;
   }
 
   // Chart axis lines
   .recharts-cartesian-axis-line,
   .recharts-cartesian-axis-tick-line {
-    stroke: #cbd5e1 !important;
+    stroke: #94a3b8 !important;
   }
 
   // Chart tooltip
@@ -1300,6 +1684,127 @@ html[data-theme="light"] {
     .recharts-legend-item-text {
       color: #475569 !important;
     }
+  }
+
+  // Dashboard chart canvas (inside viz panel)
+  .dashboard-viz-panel__chart {
+    background: linear-gradient(180deg, #ffffff 0%, #f4f7fb 100%) !important;
+    border: 1px solid rgba(226, 232, 240, 0.9) !important;
+  }
+
+  .dashboard-viz-panel__chart-skeleton {
+    border-color: rgba(148, 163, 184, 0.4) !important;
+    background: linear-gradient(90deg, rgba(148, 163, 184, 0.10) 0%, rgba(148, 163, 184, 0.18) 40%, rgba(148, 163, 184, 0.10) 80%) !important;
+  }
+
+  // Recharts tick text (tspan inside svg)
+  .recharts-cartesian-axis-tick tspan {
+    fill: #334155 !important;
+  }
+
+  // Make chart lines/bars visible in light mode
+  .dashboard-viz-panel__chart .recharts-line path,
+  .dashboard-viz-panel__chart .recharts-curve {
+    stroke: #0ea5e9 !important;
+    stroke-opacity: 1 !important;
+    stroke-width: 2.5 !important;
+  }
+
+  .dashboard-viz-panel__chart .recharts-area-area {
+    fill: rgba(14, 165, 233, 0.18) !important;
+    fill-opacity: 1 !important;
+  }
+
+  .dashboard-viz-panel__chart .recharts-bar-rectangle path,
+  .dashboard-viz-panel__chart .recharts-bar-rectangle rect {
+    fill: rgba(14, 165, 233, 0.7) !important;
+  }
+
+  .dashboard-viz-panel__chart .recharts-dot,
+  .dashboard-viz-panel__chart .recharts-active-dot {
+    fill: #0ea5e9 !important;
+    stroke: #0f172a !important;
+    stroke-width: 1.5 !important;
+  }
+
+  // ============================================
+  // DASHBOARD VIZ PANEL (Light)
+  // ============================================
+  .dashboard-viz-panel {
+    background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%) !important;
+    border: 1px solid rgba(226, 232, 240, 0.85) !important;
+    box-shadow:
+      0 1px 2px rgba(0, 0, 0, 0.04),
+      0 10px 24px rgba(0, 0, 0, 0.06) !important;
+    color: var(--gs-text-primary) !important;
+  }
+
+  .dashboard-viz-panel__label {
+    color: #64748b !important;
+  }
+
+  .dashboard-viz-panel__toolbar {
+    background: #ffffff !important;
+    border: 1px solid rgba(226, 232, 240, 0.85) !important;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9) !important;
+  }
+
+  .dashboard-viz-panel__right-group,
+  .dashboard-viz-icon-group {
+    background: rgba(15, 23, 42, 0.04) !important;
+    border: 1px solid rgba(15, 23, 42, 0.10) !important;
+  }
+
+  .dashboard-viz-panel__divider {
+    background: rgba(15, 23, 42, 0.12) !important;
+  }
+
+  .dashboard-viz-panel__select {
+    background-color: #ffffff !important;
+    color: #0f172a !important;
+    border: 1px solid rgba(148, 163, 184, 0.5) !important;
+  }
+
+  .dashboard-viz-panel__select:focus {
+    border-color: rgba(var(--gs-accent-rgb), 0.45) !important;
+    box-shadow: 0 0 0 0.2rem rgba(var(--gs-accent-rgb), 0.12) !important;
+  }
+
+  .dashboard-viz-icon-btn {
+    background: rgba(15, 23, 42, 0.04) !important;
+    border: 1px solid rgba(15, 23, 42, 0.12) !important;
+    color: #334155 !important;
+  }
+
+  .dashboard-viz-icon-btn:hover:not(:disabled) {
+    background: rgba(var(--gs-accent-rgb), 0.12) !important;
+    border-color: rgba(var(--gs-accent-rgb), 0.35) !important;
+    color: #0f172a !important;
+  }
+
+  .dashboard-viz-icon-btn.is-active {
+    background: rgba(var(--gs-accent-rgb), 0.18) !important;
+    border-color: rgba(var(--gs-accent-rgb), 0.45) !important;
+  }
+
+  .dashboard-viz-panel__toggles .form-check-label {
+    color: #64748b !important;
+  }
+
+  .dashboard-viz-switch .form-check-input {
+    background-color: #e2e8f0 !important;
+    border: 1px solid rgba(148, 163, 184, 0.6) !important;
+  }
+
+  .dashboard-viz-switch .form-check-input:checked {
+    background-color: rgba(var(--gs-accent-rgb), 0.85) !important;
+    border-color: rgba(var(--gs-accent-rgb), 0.55) !important;
+  }
+
+  .dashboard-viz-panel__download {
+    background: #ffffff !important;
+    border: 1px solid rgba(148, 163, 184, 0.45) !important;
+    color: #0f172a !important;
   }
 
   // ============================================
@@ -1421,7 +1926,7 @@ html[data-theme="light"] {
     }
 
     // KPI title
-    h6, .dashboard-box__title {
+    h6, .dashboard-box__title, label {
       color: #64748b !important;
       font-weight: 600 !important;
       font-size: 0.72rem !important;
@@ -1434,10 +1939,16 @@ html[data-theme="light"] {
       color: #0f172a !important;
       font-weight: 800 !important;
       font-size: 1.6rem !important;
-      background: linear-gradient(135deg, #0f172a 0%, #334155 100%) !important;
-      -webkit-background-clip: text !important;
-      -webkit-text-fill-color: transparent !important;
-      background-clip: text !important;
+      background: none !important;
+      -webkit-background-clip: border-box !important;
+      -webkit-text-fill-color: #0f172a !important;
+      background-clip: border-box !important;
+    }
+
+    // Dashboard KPI numbers (component uses .live-report-data)
+    .live-report-data {
+      color: #0f172a !important;
+      -webkit-text-fill-color: #0f172a !important;
     }
 
     // Icon container
@@ -1453,42 +1964,66 @@ html[data-theme="light"] {
     background: linear-gradient(145deg, #ecfdf5 0%, #d1fae5 50%, #a7f3d0 100%) !important;
     border-color: rgba(16, 185, 129, 0.2) !important;
     --card-glow: rgba(16, 185, 129, 0.25);
-    h4, h3 { background: linear-gradient(135deg, #047857 0%, #059669 100%) !important; -webkit-background-clip: text !important; background-clip: text !important; }
+    h4, h3, .dashboard-box__value {
+      color: #0f172a !important;
+      background: none !important;
+      -webkit-text-fill-color: #0f172a !important;
+    }
   }
 
   .sc-win {
     background: linear-gradient(145deg, #ecfeff 0%, #cffafe 50%, #a5f3fc 100%) !important;
     border-color: rgba(6, 182, 212, 0.2) !important;
     --card-glow: rgba(6, 182, 212, 0.25);
-    h4, h3 { background: linear-gradient(135deg, #0e7490 0%, #0891b2 100%) !important; -webkit-background-clip: text !important; background-clip: text !important; }
+    h4, h3, .dashboard-box__value {
+      color: #0f172a !important;
+      background: none !important;
+      -webkit-text-fill-color: #0f172a !important;
+    }
   }
 
   .scr-sc {
     background: linear-gradient(145deg, #fdf2f8 0%, #fce7f3 50%, #fbcfe8 100%) !important;
     border-color: rgba(236, 72, 153, 0.2) !important;
     --card-glow: rgba(236, 72, 153, 0.25);
-    h4, h3 { background: linear-gradient(135deg, #be185d 0%, #db2777 100%) !important; -webkit-background-clip: text !important; background-clip: text !important; }
+    h4, h3, .dashboard-box__value {
+      color: #0f172a !important;
+      background: none !important;
+      -webkit-text-fill-color: #0f172a !important;
+    }
   }
 
   .usc-balance {
     background: linear-gradient(145deg, #fff7ed 0%, #ffedd5 50%, #fed7aa 100%) !important;
     border-color: rgba(249, 115, 22, 0.2) !important;
     --card-glow: rgba(249, 115, 22, 0.25);
-    h4, h3 { background: linear-gradient(135deg, #c2410c 0%, #ea580c 100%) !important; -webkit-background-clip: text !important; background-clip: text !important; }
+    h4, h3, .dashboard-box__value {
+      color: #0f172a !important;
+      background: none !important;
+      -webkit-text-fill-color: #0f172a !important;
+    }
   }
 
   .rsc-balance {
     background: linear-gradient(145deg, #eef2ff 0%, #e0e7ff 50%, #c7d2fe 100%) !important;
     border-color: rgba(99, 102, 241, 0.2) !important;
     --card-glow: rgba(99, 102, 241, 0.25);
-    h4, h3 { background: linear-gradient(135deg, #4338ca 0%, #6366f1 100%) !important; -webkit-background-clip: text !important; background-clip: text !important; }
+    h4, h3, .dashboard-box__value {
+      color: #0f172a !important;
+      background: none !important;
+      -webkit-text-fill-color: #0f172a !important;
+    }
   }
 
   .ggrsc-balance {
     background: linear-gradient(145deg, #fef2f2 0%, #fee2e2 50%, #fecaca 100%) !important;
     border-color: rgba(239, 68, 68, 0.2) !important;
     --card-glow: rgba(239, 68, 68, 0.25);
-    h4, h3 { background: linear-gradient(135deg, #b91c1c 0%, #dc2626 100%) !important; -webkit-background-clip: text !important; background-clip: text !important; }
+    h4, h3, .dashboard-box__value {
+      color: #0f172a !important;
+      background: none !important;
+      -webkit-text-fill-color: #0f172a !important;
+    }
 
     // Tooltip stays dark for readability
     span:not(.dashboard-box__value) {
@@ -1502,7 +2037,11 @@ html[data-theme="light"] {
     background: linear-gradient(145deg, #fefce8 0%, #fef9c3 50%, #fef08a 100%) !important;
     border-color: rgba(234, 179, 8, 0.2) !important;
     --card-glow: rgba(234, 179, 8, 0.25);
-    h4, h3 { background: linear-gradient(135deg, #a16207 0%, #ca8a04 100%) !important; -webkit-background-clip: text !important; background-clip: text !important; }
+    h4, h3, .dashboard-box__value {
+      color: #0f172a !important;
+      background: none !important;
+      -webkit-text-fill-color: #0f172a !important;
+    }
   }
 
   // ============================================

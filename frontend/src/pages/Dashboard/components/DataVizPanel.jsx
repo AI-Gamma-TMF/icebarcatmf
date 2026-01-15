@@ -64,61 +64,65 @@ function getVerticalGradient(chart, key, stops) {
   return g;
 }
 
-const defaultOptions = {
-  responsive: true,
-  maintainAspectRatio: false,
-  animation: false,
-  plugins: {
-    legend: { display: false },
-    tooltip: {
-      enabled: true,
-      mode: "index",
-      intersect: false,
-      animation: false,
-      displayColors: false,
-      padding: 12,
-      backgroundColor: "rgba(18, 18, 18, 0.92)",
-      borderColor: (ctx) =>
-        rgbaFromTriplet(readCssRgbTriplet("--gs-cta-rgb"), 0.22),
-      borderWidth: 1,
-      titleColor: "rgba(234,250,245,0.92)",
-      bodyColor: "rgba(234,250,245,0.88)",
-      cornerRadius: 12,
-    },
-  },
-  interaction: { mode: "index", intersect: false },
-  scales: {
-    x: {
-      ticks: {
-        color: "rgba(234,250,245,0.85)",
-        font: {
-          family: "Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial",
-          size: 12,
-          weight: "600",
-        },
-        maxRotation: 0,
+function buildDefaultOptions(isLight) {
+  const tickColor = isLight ? "#475569" : "rgba(234,250,245,0.85)";
+  const gridColor = isLight ? "rgba(148,163,184,0.35)" : "rgba(255,255,255,0.06)";
+  return {
+    responsive: true,
+    maintainAspectRatio: false,
+    animation: false,
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        enabled: true,
+        mode: "index",
+        intersect: false,
+        animation: false,
+        displayColors: false,
+        padding: 12,
+        backgroundColor: isLight ? "#ffffff" : "rgba(18, 18, 18, 0.92)",
+        borderColor: (ctx) =>
+          rgbaFromTriplet(readCssRgbTriplet("--gs-cta-rgb"), isLight ? 0.25 : 0.22),
+        borderWidth: 1,
+        titleColor: isLight ? "#0f172a" : "rgba(234,250,245,0.92)",
+        bodyColor: isLight ? "#334155" : "rgba(234,250,245,0.88)",
+        cornerRadius: 12,
       },
-      grid: { display: false },
-      border: { display: false },
     },
-    y: {
-      ticks: {
-        color: "rgba(234,250,245,0.85)",
-        font: {
-          family: "Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial",
-          size: 12,
-          weight: "600",
+    interaction: { mode: "index", intersect: false },
+    scales: {
+      x: {
+        ticks: {
+          color: tickColor,
+          font: {
+            family: "Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial",
+            size: 12,
+            weight: "600",
+          },
+          maxRotation: 0,
         },
+        grid: { display: false },
+        border: { display: false },
       },
-      grid: { color: "rgba(255,255,255,0.06)" },
-      border: { display: false },
+      y: {
+        ticks: {
+          color: tickColor,
+          font: {
+            family: "Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial",
+            size: 12,
+            weight: "600",
+          },
+        },
+        grid: { color: gridColor },
+        border: { display: false },
+      },
     },
-  },
-  elements: {
-    point: { radius: 0, hoverRadius: 3 },
-    line: { borderJoinStyle: "round", borderCapStyle: "round" },
-  },
-};
+    elements: {
+      point: { radius: 0, hoverRadius: 3 },
+      line: { borderJoinStyle: "round", borderCapStyle: "round" },
+    },
+  };
+}
 
 const VIZ_MODES = {
   COMBO: "combo",
@@ -158,6 +162,9 @@ export default function DataVizPanel({
   demoSeed = "dashboard",
 }) {
   const chartRef = useRef(null);
+  const isLightTheme =
+    typeof document !== "undefined" &&
+    document.documentElement.getAttribute("data-theme") === "light";
   const [vizMode, setVizMode] = useState(VIZ_MODES.COMBO);
   const [showTrend, setShowTrend] = useState(true);
   const [normalize, setNormalize] = useState(false);
@@ -229,6 +236,7 @@ export default function DataVizPanel({
   const chartData = useMemo(() => {
     const safeValues = series.base;
     const trendValues = series.trend;
+    const accentTriplet = readCssRgbTriplet("--gs-cta-rgb");
 
     const datasets = [];
 
@@ -237,11 +245,16 @@ export default function DataVizPanel({
       label: `${title} (bars)`,
       data: safeValues,
       backgroundColor: (ctx) =>
-        getVerticalGradient(ctx.chart, "bars", [
+        getVerticalGradient(ctx.chart, "bars", isLightTheme ? [
+          { stop: 0, color: rgbaFromTriplet(accentTriplet, 0.85) },
+          { stop: 1, color: rgbaFromTriplet(accentTriplet, 0.25) },
+        ] : [
           { stop: 0, color: "rgba(234,250,245,0.82)" },
           { stop: 1, color: "rgba(234,250,245,0.22)" },
         ]),
-      borderColor: "rgba(255,255,255,0.18)",
+      borderColor: isLightTheme
+        ? rgbaFromTriplet(accentTriplet, 0.35)
+        : "rgba(255,255,255,0.18)",
       borderWidth: 1,
       borderRadius: 999,
       borderSkipped: false,
@@ -249,7 +262,10 @@ export default function DataVizPanel({
       categoryPercentage: 0.55,
       barPercentage: 0.55,
       hoverBackgroundColor: (ctx) =>
-        getVerticalGradient(ctx.chart, "barsHover", [
+        getVerticalGradient(ctx.chart, "barsHover", isLightTheme ? [
+          { stop: 0, color: rgbaFromTriplet(accentTriplet, 0.95) },
+          { stop: 1, color: rgbaFromTriplet(accentTriplet, 0.35) },
+        ] : [
           { stop: 0, color: "rgba(255,255,255,0.92)" },
           { stop: 1, color: "rgba(234,250,245,0.30)" },
         ]),
@@ -260,7 +276,10 @@ export default function DataVizPanel({
       ...barDataset,
       label: `${title} (ghost bars)`,
       backgroundColor: (ctx) =>
-        getVerticalGradient(ctx.chart, `ghostBars:${vizMode}`, [
+        getVerticalGradient(ctx.chart, `ghostBars:${vizMode}`, isLightTheme ? [
+          { stop: 0, color: rgbaFromTriplet(accentTriplet, 0.18) },
+          { stop: 1, color: rgbaFromTriplet(accentTriplet, 0.06) },
+        ] : [
           { stop: 0, color: "rgba(234,250,245,0.16)" },
           { stop: 1, color: "rgba(234,250,245,0.04)" },
         ]),
@@ -274,7 +293,10 @@ export default function DataVizPanel({
       label: `${title} (line)`,
       data: safeValues,
       borderColor: (ctx) =>
-        getVerticalGradient(ctx.chart, "line", [
+        getVerticalGradient(ctx.chart, "line", isLightTheme ? [
+          { stop: 0, color: rgbaFromTriplet(accentTriplet, 0.9) },
+          { stop: 1, color: rgbaFromTriplet(accentTriplet, 0.45) },
+        ] : [
           { stop: 0, color: "rgba(234,250,245,0.42)" },
           { stop: 1, color: "rgba(234,250,245,0.18)" },
         ]),
@@ -285,8 +307,12 @@ export default function DataVizPanel({
       fill: false,
       pointRadius: vizMode === VIZ_MODES.LINE ? 2.5 : 0,
       pointHoverRadius: vizMode === VIZ_MODES.LINE ? 4 : 3,
-      pointBackgroundColor: "rgba(234,250,245,0.85)",
-      pointBorderColor: "rgba(0,0,0,0.35)",
+      pointBackgroundColor: isLightTheme
+        ? rgbaFromTriplet(accentTriplet, 0.95)
+        : "rgba(234,250,245,0.85)",
+      pointBorderColor: isLightTheme
+        ? "rgba(15,23,42,0.45)"
+        : "rgba(0,0,0,0.35)",
       pointBorderWidth: 2,
     };
 
@@ -294,13 +320,12 @@ export default function DataVizPanel({
       ...lineDataset,
       label: `${title} (area)`,
       borderColor: (ctx) =>
-        rgbaFromTriplet(readCssRgbTriplet("--gs-cta-rgb"), 0.50),
+        rgbaFromTriplet(accentTriplet, isLightTheme ? 0.7 : 0.5),
       backgroundColor: (ctx) =>
         getVerticalGradient(ctx.chart, "areaFill", (() => {
-          const triplet = readCssRgbTriplet("--gs-cta-rgb");
           return [
-            { stop: 0, color: rgbaFromTriplet(triplet, 0.28) },
-            { stop: 1, color: rgbaFromTriplet(triplet, 0.02) },
+            { stop: 0, color: rgbaFromTriplet(accentTriplet, isLightTheme ? 0.35 : 0.28) },
+            { stop: 1, color: rgbaFromTriplet(accentTriplet, isLightTheme ? 0.05 : 0.02) },
           ];
         })()),
       fill: true,
@@ -328,7 +353,7 @@ export default function DataVizPanel({
         label: "Trend",
         data: trendValues,
         borderColor: (ctx) =>
-          rgbaFromTriplet(readCssRgbTriplet("--gs-cta-rgb"), 0.55),
+          rgbaFromTriplet(accentTriplet, isLightTheme ? 0.8 : 0.55),
         borderWidth: 2,
         cubicInterpolationMode: "monotone",
         tension: 0.35,
@@ -341,7 +366,12 @@ export default function DataVizPanel({
       labels,
       datasets,
     };
-  }, [labels, series.base, series.trend, title, vizMode]);
+  }, [labels, series.base, series.trend, title, vizMode, isLightTheme]);
+
+  const chartOptions = useMemo(
+    () => buildDefaultOptions(isLightTheme),
+    [isLightTheme]
+  );
 
   const handleDownloadPng = () => {
     const instance = chartRef.current;
@@ -471,7 +501,7 @@ export default function DataVizPanel({
               ref={chartRef}
               type="bar"
               data={chartData}
-              options={defaultOptions}
+              options={chartOptions}
               plugins={lowPower ? [] : [premiumShadows]}
             />
           ) : (

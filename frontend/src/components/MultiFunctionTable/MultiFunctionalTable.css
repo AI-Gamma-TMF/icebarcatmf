@@ -141,6 +141,18 @@
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06) !important;
 }
 
+/* Avoid double borders (container + heading) */
+.custom-multiselect .dropdown-heading {
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+/* Remove extra focus ring on the container */
+.custom-multiselect .dropdown-container:focus-within {
+  box-shadow: none !important;
+  outline: none !important;
+}
+
 /* The open panel/content wrapper (class names vary slightly by version) */
 .custom-multiselect .dropdown-content,
 .custom-multiselect .select-panel,
@@ -148,10 +160,38 @@
   background: #0b0b0b !important;
   border: 1px solid rgba(255, 255, 255, 0.12) !important;
   border-radius: 14px !important;
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.65) !important;
+  box-shadow: none !important;
   overflow: hidden !important;
   z-index: 99999 !important;
   padding: 6px !important; /* compact */
+}
+
+/* Reduce nested borders inside the dropdown panel */
+.custom-multiselect .select-item,
+.custom-multiselect .option,
+.custom-multiselect li {
+  border: 0 !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+/* Flatten inner wrappers and search field */
+.custom-multiselect .panel-content,
+.custom-multiselect .select-panel {
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  background: transparent !important;
+}
+
+.custom-multiselect .options,
+.custom-multiselect ul {
+  background: transparent !important;
+}
+
+.custom-multiselect .search input {
+  border: 0 !important;
+  outline: none !important;
+  box-shadow: none !important;
 }
 
 /* Search bar inside the panel */
