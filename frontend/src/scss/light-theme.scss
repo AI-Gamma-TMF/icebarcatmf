@@ -4,6 +4,102 @@
 // White background with turquoise (#00E5A0) accents
 // ============================================
 
+// ============================================
+// LIGHT MODE - BODY & ROOT BACKGROUND
+// These MUST be outside the html selector because body is a sibling of html, not a child!
+// ============================================
+html[data-theme="light"],
+:root[data-theme="light"] {
+  color-scheme: light !important;
+  // Page background (this is what you see around the inset sidebar capsule)
+  // Keep this VERY lightweight: static gradients only (no animations, no fixed attachments).
+  // Canvas (behind the white surfaces) — slightly darker so the capsules pop more
+  --gs-page-bg: #e9eef2;
+  // Surface (sidebar capsule + main panel)
+  --gs-surface-bg: #ffffff;
+  --gs-page-bg-image:
+    radial-gradient(1200px 700px at 12% 18%, rgba(0, 229, 160, 0.14) 0%, rgba(0, 229, 160, 0.00) 55%),
+    radial-gradient(900px 520px at 88% 14%, rgba(0, 200, 140, 0.10) 0%, rgba(0, 200, 140, 0.00) 55%),
+    radial-gradient(1100px 720px at 60% 92%, rgba(0, 229, 160, 0.08) 0%, rgba(0, 229, 160, 0.00) 60%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.86) 0%, rgba(233, 238, 242, 0.96) 100%);
+
+  background-color: var(--gs-page-bg) !important;
+  background-image: var(--gs-page-bg-image) !important;
+  background-attachment: scroll !important;
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
+  min-height: 100vh !important;
+}
+
+// Body styles when html has light theme
+html[data-theme="light"] ~ body,
+html[data-theme="light"] body,
+body:has(html[data-theme="light"]) {
+  background-color: var(--gs-page-bg) !important;
+  background-image: var(--gs-page-bg-image) !important;
+  background-attachment: scroll !important;
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
+  min-height: 100vh !important;
+}
+
+// Since body is inside html (not a sibling), we need this selector
+[data-theme="light"] body {
+  background-color: var(--gs-page-bg) !important;
+  background-image: var(--gs-page-bg-image) !important;
+  background-attachment: scroll !important;
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
+  min-height: 100vh !important;
+}
+
+// #root styles
+[data-theme="light"] #root {
+  background-color: var(--gs-page-bg) !important;
+  background-image: var(--gs-page-bg-image) !important;
+  background-attachment: scroll !important;
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
+  min-height: 100vh !important;
+}
+
+// Remove pseudo-elements
+[data-theme="light"]::before,
+[data-theme="light"]::after,
+[data-theme="light"] body::before,
+[data-theme="light"] body::after,
+[data-theme="light"] #root::before,
+[data-theme="light"] #root::after {
+  content: none !important;
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  background: transparent !important;
+  animation: none !important;
+}
+
+// Main content areas
+[data-theme="light"] main,
+[data-theme="light"] .content,
+[data-theme="light"] .content-collapsed {
+  // IMPORTANT: keep the canvas on html/body/#root only.
+  // If we paint backgrounds on main/content, it creates a visible "layer/band"
+  // behind the top navbar (since the navbar lives inside main).
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+}
+
+// Remove main pseudo-elements
+[data-theme="light"] main::before,
+[data-theme="light"] main::after,
+[data-theme="light"] .content::before,
+[data-theme="light"] .content::after {
+  content: none !important;
+  display: none !important;
+  background: transparent !important;
+}
+
 // Light mode is applied when html has data-theme="light" attribute
 html[data-theme="light"] {
   // ============================================
@@ -15,7 +111,7 @@ html[data-theme="light"] {
   --gs-bg-tertiary: #f5f5f5;
   --gs-bg-card: #ffffff;
   --gs-bg-input: #ffffff;
-  --gs-bg-sidebar: #0a0a0a;  // Keep sidebar dark like the logo background
+  --gs-bg-sidebar: #ffffff;
   --gs-bg-navbar: #ffffff;
   
   // GammaSweep turquoise accent
@@ -38,47 +134,10 @@ html[data-theme="light"] {
   --gs-shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.1);
   --gs-shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.12);
 
-  // Subtle “green glow” vibe (performance-safe: static box-shadows only)
+  // Subtle "green glow" vibe (performance-safe: static box-shadows only)
   --gs-glow-weak: 0 0 0 1px rgba(0, 229, 160, 0.18);
   --gs-glow-med: 0 0 0 1px rgba(0, 229, 160, 0.22), 0 10px 30px rgba(0, 229, 160, 0.08);
   --gs-glow-strong: 0 0 0 1px rgba(0, 229, 160, 0.28), 0 14px 42px rgba(0, 229, 160, 0.10);
-
-  // ============================================
-  // BODY & ROOT BACKGROUND
-  // Override casino-background.scss dark theme
-  // ============================================
-  // Important: the navbar is inset/capsule, so the *html* background can show
-  // around it. Force html to the same light surface to avoid any dark halo.
-  background: #f5f7fa !important;
-  background-color: #f5f7fa !important;
-
-  body, #root {
-    background: #f5f7fa !important;
-    background-image: none !important;
-    background-color: #f5f7fa !important;
-    color: var(--gs-text-primary) !important;
-  }
-
-  // Remove dark theme animated backgrounds and pseudo-elements
-  // With capsule sidebar + navbar, the page background shows through gaps naturally
-  body::before,
-  body::after,
-  #root::before,
-  #root::after {
-    display: none !important;
-    opacity: 0 !important;
-    visibility: hidden !important;
-    animation: none !important;
-  }
-
-  // Main content area - must override dark backgrounds
-  .content,
-  .content-collapsed,
-  main.content,
-  main.content-collapsed {
-    background: #f5f7fa !important;
-    background-color: #f5f7fa !important;
-  }
 
   .component-container {
     background: transparent !important;
@@ -88,6 +147,25 @@ html[data-theme="light"] {
   .app-page,
   .app-page--surface {
     background: transparent !important;
+  }
+
+  // The main surface wrapper (RouteWithSidebar) is dark by default and adds dark shadows + neon ring
+  // via ::before/::after. In light mode, make it a true light surface so nothing “black” shows
+  // behind the inset/capsule sidebar.
+  .app-page--surface {
+    background: var(--gs-surface-bg) !important;
+    background-image: none !important;
+    border: 1px solid #e5e5e5 !important;
+    box-shadow:
+      0 1px 2px rgba(0, 0, 0, 0.08),
+      0 12px 28px rgba(0, 0, 0, 0.10),
+      var(--gs-glow-weak) !important;
+  }
+
+  .app-page--surface::before,
+  .app-page--surface::after {
+    display: none !important;
+    opacity: 0 !important;
   }
 
   // Dashboard specific
@@ -206,17 +284,78 @@ html[data-theme="light"] {
     color: var(--gs-text-primary) !important;
   }
 
-  // Select elements
+  // Select elements - ensure all selects have visible borders
   select,
-  select option {
+  .form-select {
     background-color: var(--gs-bg-input) !important;
     color: var(--gs-text-primary) !important;
+    border: 1px solid var(--gs-border-color) !important;
+    border-radius: 8px !important;
+    padding: 0.5rem 2rem 0.5rem 0.75rem !important;
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%2364748b' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e") !important;
+    background-repeat: no-repeat !important;
+    background-position: right 0.75rem center !important;
+    background-size: 16px 12px !important;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease !important;
+
+    &:hover {
+      border-color: #94a3b8 !important;
+    }
+
+    &:focus {
+      border-color: #00E5A0 !important;
+      box-shadow: 0 0 0 3px rgba(0, 229, 160, 0.15) !important;
+      outline: none !important;
+    }
+
+    option {
+      background-color: var(--gs-bg-input) !important;
+      color: var(--gs-text-primary) !important;
+      padding: 0.5rem !important;
+    }
   }
 
   option:hover,
   option:focus,
   option:checked {
     background-color: rgba(0, 229, 160, 0.15) !important;
+  }
+
+  // All input types should have consistent styling
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="number"],
+  input[type="tel"],
+  input[type="url"],
+  input[type="search"],
+  input[type="date"],
+  input[type="time"],
+  input[type="datetime-local"],
+  textarea {
+    background-color: var(--gs-bg-input) !important;
+    color: var(--gs-text-primary) !important;
+    border: 1px solid var(--gs-border-color) !important;
+    border-radius: 8px !important;
+    padding: 0.5rem 0.75rem !important;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease !important;
+
+    &:hover {
+      border-color: #94a3b8 !important;
+    }
+
+    &:focus {
+      border-color: #00E5A0 !important;
+      box-shadow: 0 0 0 3px rgba(0, 229, 160, 0.15) !important;
+      outline: none !important;
+    }
+
+    &::placeholder {
+      color: var(--gs-text-muted) !important;
+    }
   }
 
   // ============================================
@@ -758,33 +897,8 @@ html[data-theme="light"] {
   }
 
   // ============================================
-  // SIDEBAR (Keep Dark for Contrast)
+  // SIDEBAR - Removed dark override (see SIDEBAR Light Mode section below)
   // ============================================
-  .sidebar,
-  .sidenav,
-  nav.sidebar,
-  .sidebar-inner {
-    background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%) !important;
-    
-    .nav-link {
-      color: rgba(255, 255, 255, 0.8) !important;
-
-      &:hover {
-        color: #ffffff !important;
-        background: rgba(0, 229, 160, 0.15) !important;
-      }
-
-      &.active {
-        color: #00E5A0 !important;
-        background: rgba(0, 229, 160, 0.2) !important;
-      }
-    }
-
-    .sidebar-heading,
-    .nav-title {
-      color: rgba(255, 255, 255, 0.5) !important;
-    }
-  }
 
   // ============================================
   // NAVBAR (Light)
@@ -1101,20 +1215,91 @@ html[data-theme="light"] {
   }
 
   // ============================================
-  // CHARTS (Light Background)
+  // CHARTS (Light Background) - Modern SaaS Style
   // ============================================
+  
+  // Chart card containers - override dark backgrounds
+  .chart-card,
+  .chart-wrapper,
+  .chart-box,
+  .graph-card,
+  .graph-wrapper,
+  .login-data-chart,
+  [class*="chart-"] {
+    background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%) !important;
+    border: 1px solid rgba(226, 232, 240, 0.8) !important;
+    border-radius: 20px !important;
+    box-shadow: 
+      0 1px 2px rgba(0, 0, 0, 0.02),
+      0 4px 8px rgba(0, 0, 0, 0.04),
+      0 12px 24px rgba(0, 0, 0, 0.04),
+      inset 0 1px 0 rgba(255, 255, 255, 0.8) !important;
+    color: var(--gs-text-primary) !important;
+  }
+
+  // Any card containing a chart
+  .card:has(.recharts-wrapper),
+  .card:has(.chart-container),
+  .card:has(canvas) {
+    background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%) !important;
+    border: 1px solid rgba(226, 232, 240, 0.8) !important;
+    border-radius: 20px !important;
+    box-shadow: 
+      0 1px 2px rgba(0, 0, 0, 0.02),
+      0 4px 8px rgba(0, 0, 0, 0.04),
+      0 12px 24px rgba(0, 0, 0, 0.04) !important;
+  }
+
+  // Override any inline dark backgrounds on chart containers
+  [style*="background"][class*="chart"],
+  [style*="background-color"][class*="chart"],
   .recharts-wrapper,
   .recharts-surface {
     background: transparent !important;
+    background-color: transparent !important;
   }
 
+  // Chart grid lines
   .recharts-cartesian-grid-horizontal line,
   .recharts-cartesian-grid-vertical line {
-    stroke: var(--gs-border-color) !important;
+    stroke: #e2e8f0 !important;
   }
 
-  .recharts-text {
-    fill: var(--gs-text-secondary) !important;
+  // Chart axis text
+  .recharts-text,
+  .recharts-cartesian-axis-tick-value {
+    fill: #64748b !important;
+  }
+
+  // Chart axis lines
+  .recharts-cartesian-axis-line,
+  .recharts-cartesian-axis-tick-line {
+    stroke: #cbd5e1 !important;
+  }
+
+  // Chart tooltip
+  .recharts-tooltip-wrapper {
+    .recharts-default-tooltip {
+      background: #ffffff !important;
+      border: 1px solid #e2e8f0 !important;
+      border-radius: 8px !important;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+      
+      .recharts-tooltip-label {
+        color: #0f172a !important;
+      }
+      
+      .recharts-tooltip-item {
+        color: #334155 !important;
+      }
+    }
+  }
+
+  // Chart legend
+  .recharts-legend-wrapper {
+    .recharts-legend-item-text {
+      color: #475569 !important;
+    }
   }
 
   // ============================================
@@ -1176,156 +1361,262 @@ html[data-theme="light"] {
   }
 
   // ============================================
-  // DASHBOARD KPI BOXES (Light Mode)
-  // These have hardcoded dark backgrounds that need overriding
+  // DASHBOARD KPI BOXES (Light Mode) - Modern SaaS Style
+  // Glassmorphism-inspired cards with subtle gradients and depth
   // ============================================
   .dashboard-box {
-    background: #ffffff !important;
-    border: 1px solid #e5e5e5 !important;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08), var(--gs-glow-weak) !important;
-    backdrop-filter: none !important;
-    -webkit-backdrop-filter: none !important;
+    background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%) !important;
+    border: 1px solid rgba(226, 232, 240, 0.8) !important;
+    border-radius: 20px !important;
+    box-shadow: 
+      0 1px 2px rgba(0, 0, 0, 0.02),
+      0 4px 8px rgba(0, 0, 0, 0.04),
+      0 12px 24px rgba(0, 0, 0, 0.04),
+      inset 0 1px 0 rgba(255, 255, 255, 0.8) !important;
+    backdrop-filter: blur(8px) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
     color: var(--gs-text-primary) !important;
+    position: relative !important;
+    overflow: hidden !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
 
+    // Subtle top highlight
     &::before {
-      background: linear-gradient(90deg, transparent 0%, rgba(0, 229, 160, 0.4) 50%, transparent 100%) !important;
-      opacity: 0.6 !important;
+      content: "" !important;
+      position: absolute !important;
+      top: 0 !important;
+      left: 0 !important;
+      right: 0 !important;
+      height: 1px !important;
+      background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.9) 50%, transparent 100%) !important;
+      opacity: 1 !important;
     }
 
+    // Colored glow effect at bottom
     &::after {
-      background: none !important;
-      opacity: 0 !important;
+      content: "" !important;
+      position: absolute !important;
+      bottom: -50% !important;
+      left: 10% !important;
+      right: 10% !important;
+      height: 50% !important;
+      background: radial-gradient(ellipse at center, var(--card-glow, rgba(0, 229, 160, 0.15)) 0%, transparent 70%) !important;
+      opacity: 0.6 !important;
+      transition: opacity 0.3s ease !important;
+      pointer-events: none !important;
     }
 
     &:hover {
-      border-color: rgba(0, 229, 160, 0.5) !important;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12), var(--gs-glow-med) !important;
-      transform: translateY(-2px);
+      border-color: rgba(0, 229, 160, 0.3) !important;
+      box-shadow: 
+        0 2px 4px rgba(0, 0, 0, 0.02),
+        0 8px 16px rgba(0, 0, 0, 0.06),
+        0 20px 40px rgba(0, 0, 0, 0.06),
+        inset 0 1px 0 rgba(255, 255, 255, 0.9) !important;
+      transform: translateY(-4px) !important;
 
-      &::before {
+      &::after {
         opacity: 1 !important;
       }
     }
 
     // KPI title
     h6, .dashboard-box__title {
-      color: var(--gs-text-secondary) !important;
-      font-weight: 500 !important;
+      color: #64748b !important;
+      font-weight: 600 !important;
+      font-size: 0.72rem !important;
+      letter-spacing: 0.4px !important;
+      text-transform: uppercase !important;
     }
 
     // KPI value
     h4, h3, .dashboard-box__value {
-      color: var(--gs-text-primary) !important;
-      font-weight: 700 !important;
+      color: #0f172a !important;
+      font-weight: 800 !important;
+      font-size: 1.6rem !important;
+      background: linear-gradient(135deg, #0f172a 0%, #334155 100%) !important;
+      -webkit-background-clip: text !important;
+      -webkit-text-fill-color: transparent !important;
+      background-clip: text !important;
     }
 
     // Icon container
     .dashboard-box__icon,
     img {
-      filter: none !important;
+      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1)) !important;
+      opacity: 1 !important;
     }
   }
 
-  // Specific KPI box colors (light pastel versions)
+  // Specific KPI box colors with gradient backgrounds
   .sc-stack {
-    background: linear-gradient(135deg, #e8fff4 0%, #d4ffe8 100%) !important;
-    border-color: rgba(0, 229, 160, 0.3) !important;
+    background: linear-gradient(145deg, #ecfdf5 0%, #d1fae5 50%, #a7f3d0 100%) !important;
+    border-color: rgba(16, 185, 129, 0.2) !important;
+    --card-glow: rgba(16, 185, 129, 0.25);
+    h4, h3 { background: linear-gradient(135deg, #047857 0%, #059669 100%) !important; -webkit-background-clip: text !important; background-clip: text !important; }
   }
 
   .sc-win {
-    background: linear-gradient(135deg, #e5fcff 0%, #d4f8ff 100%) !important;
-    border-color: rgba(96, 255, 245, 0.4) !important;
+    background: linear-gradient(145deg, #ecfeff 0%, #cffafe 50%, #a5f3fc 100%) !important;
+    border-color: rgba(6, 182, 212, 0.2) !important;
+    --card-glow: rgba(6, 182, 212, 0.25);
+    h4, h3 { background: linear-gradient(135deg, #0e7490 0%, #0891b2 100%) !important; -webkit-background-clip: text !important; background-clip: text !important; }
   }
 
   .scr-sc {
-    background: linear-gradient(135deg, #ffecfd 0%, #ffe0fb 100%) !important;
-    border-color: rgba(255, 115, 231, 0.3) !important;
+    background: linear-gradient(145deg, #fdf2f8 0%, #fce7f3 50%, #fbcfe8 100%) !important;
+    border-color: rgba(236, 72, 153, 0.2) !important;
+    --card-glow: rgba(236, 72, 153, 0.25);
+    h4, h3 { background: linear-gradient(135deg, #be185d 0%, #db2777 100%) !important; -webkit-background-clip: text !important; background-clip: text !important; }
   }
 
   .usc-balance {
-    background: linear-gradient(135deg, #fff4e7 0%, #ffe8d4 100%) !important;
-    border-color: rgba(255, 202, 145, 0.4) !important;
+    background: linear-gradient(145deg, #fff7ed 0%, #ffedd5 50%, #fed7aa 100%) !important;
+    border-color: rgba(249, 115, 22, 0.2) !important;
+    --card-glow: rgba(249, 115, 22, 0.25);
+    h4, h3 { background: linear-gradient(135deg, #c2410c 0%, #ea580c 100%) !important; -webkit-background-clip: text !important; background-clip: text !important; }
   }
 
   .rsc-balance {
-    background: linear-gradient(135deg, #e6e6ff 0%, #dcdcff 100%) !important;
-    border-color: rgba(150, 174, 255, 0.4) !important;
+    background: linear-gradient(145deg, #eef2ff 0%, #e0e7ff 50%, #c7d2fe 100%) !important;
+    border-color: rgba(99, 102, 241, 0.2) !important;
+    --card-glow: rgba(99, 102, 241, 0.25);
+    h4, h3 { background: linear-gradient(135deg, #4338ca 0%, #6366f1 100%) !important; -webkit-background-clip: text !important; background-clip: text !important; }
   }
 
   .ggrsc-balance {
-    background: linear-gradient(135deg, #ffd9d9 0%, #ffcece 100%) !important;
-    border-color: rgba(255, 107, 107, 0.3) !important;
+    background: linear-gradient(145deg, #fef2f2 0%, #fee2e2 50%, #fecaca 100%) !important;
+    border-color: rgba(239, 68, 68, 0.2) !important;
+    --card-glow: rgba(239, 68, 68, 0.25);
+    h4, h3 { background: linear-gradient(135deg, #b91c1c 0%, #dc2626 100%) !important; -webkit-background-clip: text !important; background-clip: text !important; }
 
     // Tooltip stays dark for readability
-    span {
+    span:not(.dashboard-box__value) {
       background: rgba(30, 30, 30, 0.95) !important;
       color: #ffffff !important;
+      -webkit-text-fill-color: #ffffff !important;
     }
   }
 
   .sc-jackpot {
-    background: linear-gradient(135deg, #f9ffd9 0%, #f0ffcc 100%) !important;
-    border-color: rgba(207, 255, 107, 0.4) !important;
+    background: linear-gradient(145deg, #fefce8 0%, #fef9c3 50%, #fef08a 100%) !important;
+    border-color: rgba(234, 179, 8, 0.2) !important;
+    --card-glow: rgba(234, 179, 8, 0.25);
+    h4, h3 { background: linear-gradient(135deg, #a16207 0%, #ca8a04 100%) !important; -webkit-background-clip: text !important; background-clip: text !important; }
   }
 
   // ============================================
-  // TICKER CONTAINERS (Light Mode)
+  // TICKER CONTAINERS (Light Mode) - Modern SaaS Style
   // ============================================
   .ticker-container {
-    background: #ffffff !important;
-    border: 1px solid #e5e5e5 !important;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08), var(--gs-glow-weak) !important;
-    backdrop-filter: none !important;
-    -webkit-backdrop-filter: none !important;
+    background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%) !important;
+    border: 1px solid rgba(226, 232, 240, 0.8) !important;
+    border-radius: 20px !important;
+    box-shadow: 
+      0 1px 2px rgba(0, 0, 0, 0.02),
+      0 4px 8px rgba(0, 0, 0, 0.04),
+      0 12px 24px rgba(0, 0, 0, 0.04),
+      inset 0 1px 0 rgba(255, 255, 255, 0.8) !important;
+    backdrop-filter: blur(8px) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
     color: var(--gs-text-primary) !important;
+    position: relative !important;
+    overflow: hidden !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
 
-    &::before,
+    // Subtle top highlight
+    &::before {
+      content: "" !important;
+      position: absolute !important;
+      top: 0 !important;
+      left: 0 !important;
+      right: 0 !important;
+      height: 1px !important;
+      background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.9) 50%, transparent 100%) !important;
+    }
+
+    // Colored glow
     &::after {
-      display: none !important;
+      content: "" !important;
+      position: absolute !important;
+      bottom: -50% !important;
+      left: 10% !important;
+      right: 10% !important;
+      height: 50% !important;
+      background: radial-gradient(ellipse at center, var(--card-glow, rgba(0, 229, 160, 0.15)) 0%, transparent 70%) !important;
+      opacity: 0.5 !important;
+      transition: opacity 0.3s ease !important;
+      pointer-events: none !important;
     }
 
     &:hover {
-      border-color: rgba(0, 229, 160, 0.4) !important;
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1), var(--gs-glow-med) !important;
+      border-color: rgba(0, 229, 160, 0.3) !important;
+      box-shadow: 
+        0 2px 4px rgba(0, 0, 0, 0.02),
+        0 8px 16px rgba(0, 0, 0, 0.06),
+        0 20px 40px rgba(0, 0, 0, 0.06),
+        inset 0 1px 0 rgba(255, 255, 255, 0.9) !important;
+      transform: translateY(-3px) !important;
+
+      &::after {
+        opacity: 0.8 !important;
+      }
     }
 
-    // Specific ticker colors
+    // Specific ticker colors with gradients
     &.online {
-      background: linear-gradient(135deg, #e8f0ff 0%, #dde8ff 100%) !important;
-      border-color: rgba(125, 148, 253, 0.3) !important;
+      background: linear-gradient(145deg, #eff6ff 0%, #dbeafe 50%, #bfdbfe 100%) !important;
+      border-color: rgba(59, 130, 246, 0.2) !important;
+      --card-glow: rgba(59, 130, 246, 0.25);
     }
 
     &.active {
-      background: linear-gradient(135deg, #e8fff4 0%, #d8ffe8 100%) !important;
-      border-color: rgba(97, 207, 93, 0.3) !important;
+      background: linear-gradient(145deg, #f0fdf4 0%, #dcfce7 50%, #bbf7d0 100%) !important;
+      border-color: rgba(34, 197, 94, 0.2) !important;
+      --card-glow: rgba(34, 197, 94, 0.25);
     }
 
     &.total-wallet {
-      background: linear-gradient(135deg, #fff4e7 0%, #ffe8d4 100%) !important;
-      border-color: rgba(243, 172, 129, 0.4) !important;
+      background: linear-gradient(145deg, #fffbeb 0%, #fef3c7 50%, #fde68a 100%) !important;
+      border-color: rgba(245, 158, 11, 0.2) !important;
+      --card-glow: rgba(245, 158, 11, 0.25);
     }
 
     &.total-vault {
-      background: linear-gradient(135deg, #ffecfd 0%, #ffe0fb 100%) !important;
-      border-color: rgba(255, 115, 231, 0.3) !important;
+      background: linear-gradient(145deg, #faf5ff 0%, #f3e8ff 50%, #e9d5ff 100%) !important;
+      border-color: rgba(168, 85, 247, 0.2) !important;
+      --card-glow: rgba(168, 85, 247, 0.25);
     }
 
     &.overall {
-      background: linear-gradient(135deg, #e6e6ff 0%, #dcdcff 100%) !important;
-      border-color: rgba(97, 132, 242, 0.3) !important;
+      background: linear-gradient(145deg, #eef2ff 0%, #e0e7ff 50%, #c7d2fe 100%) !important;
+      border-color: rgba(99, 102, 241, 0.2) !important;
+      --card-glow: rgba(99, 102, 241, 0.25);
     }
 
     &.today {
-      background: linear-gradient(135deg, #ffe8f2 0%, #ffdde8 100%) !important;
-      border-color: rgba(247, 101, 163, 0.3) !important;
+      background: linear-gradient(145deg, #fdf2f8 0%, #fce7f3 50%, #fbcfe8 100%) !important;
+      border-color: rgba(236, 72, 153, 0.2) !important;
+      --card-glow: rgba(236, 72, 153, 0.25);
     }
 
-    h6, p, span {
-      color: var(--gs-text-primary) !important;
+    // Title text
+    h6 {
+      color: #475569 !important;
+      font-weight: 600 !important;
+      font-size: 0.72rem !important;
+      letter-spacing: 0.4px !important;
+      text-transform: uppercase !important;
+    }
+
+    // Value text
+    p, span {
+      color: #0f172a !important;
+      font-weight: 700 !important;
     }
 
     .green-c {
-      color: #00a878 !important;
+      color: #059669 !important;
     }
   }
 
@@ -1335,7 +1626,8 @@ html[data-theme="light"] {
   .main-content,
   #main-content,
   .content-wrapper {
-    background: #f5f7fa !important;
+    background: transparent !important;
+    background-color: transparent !important;
     background-image: none !important;
   }
 
@@ -1343,7 +1635,8 @@ html[data-theme="light"] {
   .page-wrapper,
   .dashboard-wrapper,
   .admin-wrapper {
-    background: #f5f7fa !important;
+    background: transparent !important;
+    background-color: transparent !important;
   }
 
   // Dashboard page title
@@ -1353,40 +1646,82 @@ html[data-theme="light"] {
     color: var(--gs-text-primary) !important;
   }
 
-  // Override any inline dark backgrounds
-  [style*="background"] {
-    // Can't override inline styles with CSS, but we can target common patterns
+  // NOTE: Avoid broad `[style*="background"]` overrides here; they can cause unexpected regressions.
+
+  // Chart container backgrounds - force light theme
+  .chart-container,
+  .graph-container {
+    background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%) !important;
+    border: 1px solid rgba(226, 232, 240, 0.8) !important;
+    border-radius: 20px !important;
+    box-shadow: 
+      0 1px 2px rgba(0, 0, 0, 0.02),
+      0 4px 8px rgba(0, 0, 0, 0.04),
+      0 12px 24px rgba(0, 0, 0, 0.04) !important;
+    color: var(--gs-text-primary) !important;
+
+    // Labels inside chart containers
+    label, h6, .select-label, [class*="label"] {
+      color: #475569 !important;
+    }
+
+    // Nested dark backgrounds
+    > div,
+    > div > div {
+      background: transparent !important;
+      background-color: transparent !important;
+    }
   }
 
-  // Chart container backgrounds
-  .chart-container,
-  .graph-container,
-  .recharts-wrapper {
-    background: transparent !important;
+  // Override dark gray backgrounds commonly used in chart areas
+  [style*="rgb(55, 55, 55)"],
+  [style*="rgb(45, 45, 45)"],
+  [style*="rgb(35, 35, 35)"],
+  [style*="#373737"],
+  [style*="#2d2d2d"],
+  [style*="#232323"] {
+    background: #ffffff !important;
+    background-color: #ffffff !important;
+  }
+
+  // ============================================
+  // BACKGROUND / OVERLAY LAYERS (Light Mode)
+  // Some pages/themes add extra decorative overlays (vignette/grid/chips).
+  // Ensure they're fully disabled in light mode so the canvas is a single flat color.
+  // ============================================
+  .casino-corner-decoration,
+  .casino-card-pattern,
+  .casino-chip-pattern,
+  .dashboard-grid-overlay,
+  .vignette-overlay {
+    display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
   }
 
   // ============================================
   // SIDEBAR (Light Mode) - Capsule style matching navbar
   // ============================================
   .sidebar {
-    background: #ffffff !important;
+    // Colors only - layout/overflow is in _sidenav.scss
+    background: var(--gs-surface-bg) !important;
+    background-color: var(--gs-surface-bg) !important;
     backdrop-filter: none !important;
     -webkit-backdrop-filter: none !important;
-    // Capsule border all around (matches dark mode)
+    // Capsule border all around
     border: 1px solid #e5e5e5 !important;
     box-shadow: 
       0 4px 20px rgba(0, 0, 0, 0.08),
-      0 0 0 1px rgba(0, 229, 160, 0.12),
+      0 0 0 1px rgba(0, 229, 160, 0.08),
       var(--gs-glow-weak) !important;
-    // Capsule rounded corners (inherited from base, but ensure light mode keeps them)
-    border-radius: 24px !important;
 
-    // Hide the accent edge pseudo-element (not needed with capsule style)
+    // Hide the accent edge pseudo-element (dark mode only)
     &::after {
       display: none !important;
     }
 
-    // No need for fill layer above sidebar anymore (capsule is inset)
+    // No fill layer needed
     &::before {
       display: none !important;
     }
@@ -1401,7 +1736,7 @@ html[data-theme="light"] {
       }
     }
     
-    // Nav links - dark text on light background
+    // Nav links - dark text on light background (colors only, layout is in _sidenav.scss)
     .nav-link {
       color: var(--gs-text-primary) !important;
       opacity: 1 !important;
@@ -1445,7 +1780,7 @@ html[data-theme="light"] {
       }
     }
 
-    // Accordion items in sidebar
+    // Accordion items in sidebar (colors only)
     .accordion-item {
       background: transparent !important;
       border: none !important;
@@ -1465,7 +1800,7 @@ html[data-theme="light"] {
         color: #00C88C !important;
       }
 
-      // Arrow icon - keep dark for light background
+      // Arrow icon color for light background
       &::after {
         filter: none !important;
         color: rgba(0, 0, 0, 0.55) !important;
@@ -1534,8 +1869,16 @@ html[data-theme="light"] {
       }
     }
 
-    // Some sidebar entries render as plain <button>/<a> blocks; ensure they’re not dark
-    .nav-item,
+    // Nav items - colors only (layout is in _sidenav.scss)
+    .nav-item {
+      background: transparent !important;
+      
+      &.active > .nav-link {
+        background: rgba(0, 229, 160, 0.15) !important;
+        border-color: rgba(0, 229, 160, 0.3) !important;
+      }
+    }
+    
     .nav-item > .nav-link,
     .nav-item > button,
     .nav-item > a {
@@ -1554,6 +1897,27 @@ html[data-theme="light"] {
       }
       &::after {
         background: linear-gradient(0deg, rgba(255, 255, 255, 0.9) 0%, transparent 100%) !important;
+      }
+    }
+
+    // Collapsed sidebar state - colors only (layout is in _sidenav.scss)
+    &.sidebar-collapsed {
+      .nav-item.active > .nav-link {
+        background: rgba(0, 229, 160, 0.25) !important;
+      }
+      
+      .nav-link:hover {
+        background: rgba(0, 229, 160, 0.15) !important;
+      }
+
+      .accordion,
+      .accordion-item,
+      .accordion-button {
+        background: transparent !important;
+      }
+
+      .accordion-button:not(.collapsed) {
+        background: rgba(0, 229, 160, 0.15) !important;
       }
     }
   }

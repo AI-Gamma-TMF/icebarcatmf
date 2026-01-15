@@ -4,44 +4,63 @@
 .sidebar {
   display: block;
   position: fixed;
-  // Sit below the inset capsule navbar (10px top margin + 60px height + ~8px gap)
+  // Capsule positioning - inset from edges
   top: 78px;
-  bottom: 12px; // inset from bottom to match capsule style
-  left: 12px; // inset from left to match navbar
+  bottom: 12px;
+  left: 12px;
   z-index: 100;
-  max-height: calc(100vh - 90px); // account for top + bottom insets
-  // overflow-y: auto;
+  // Give SimpleBar a stable box to measure during resize; avoids overlap/jank
+  height: calc(100vh - 90px);
+  max-height: none;
+  // Responsive width: allow inline styles (collapse) + avoid resize breakage
   width: 100%;
+  min-width: 0;
+  max-width: 260px;
   margin-top: 0;
-  @include transition(max-width 0.18s, border-radius 0.18s);
+  // No transition on width to prevent resize jank
+  transition: none;
 
   // Modern glass + dark gradient (match navbar)
   background: rgba(18, 18, 18, 0.72);
   backdrop-filter: blur(22px) saturate(140%);
   -webkit-backdrop-filter: blur(22px) saturate(140%);
+  // Capsule border all around
   border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 10px 0 36px rgba(0, 0, 0, 0.42), 0 0 1px rgba(0, 229, 160, 0.12);
+  box-shadow: 0 10px 36px rgba(0, 0, 0, 0.42), 0 0 1px rgba(0, 229, 160, 0.12);
   
   // Capsule rounded corners
   border-radius: 24px;
-  overflow: hidden;
+  // Don't set overflow here - SimpleBar handles scrolling internally
+  // The border-radius will still clip content visually
 
-  // Subtle accent edge (now on all sides via border-radius)
+  // Mobile: full-width drawer style
+  @media (max-width: 767.98px) {
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 280px;
+    max-width: 280px;
+    height: 100vh;
+    z-index: 1050;
+    border-radius: 0;
+  }
+
+  // Subtle accent edge on right
   &::after {
     content: "";
     position: absolute;
-    top: 0;
+    top: 24px;
+    bottom: 24px;
     right: 0;
     width: 2px;
-    height: 100%;
     background: linear-gradient(
       180deg,
       rgba(0, 229, 160, 0) 0%,
-      rgba(0, 229, 160, 0.25) 40%,
+      rgba(0, 229, 160, 0.25) 50%,
       rgba(0, 229, 160, 0) 100%
     );
     pointer-events: none;
-    border-radius: 0 24px 24px 0;
+    border-radius: 2px;
   }
 
   // -----------------------------
@@ -127,22 +146,35 @@
     box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.22), 0 14px 34px rgba(0, 0, 0, 0.55), 0 0 18px rgba(0, 229, 160, 0.20);
   }
 
+  // Tablet and up: fixed width (capsule)
   @include media-breakpoint-up(md) {
-    width: 100%;
-    max-width: 260px; // slightly narrower to account for left inset
+    width: 260px;
+    min-width: 260px;
+    max-width: 260px;
   }
 
   .nav {
-    white-space: nowrap;
+    // Allow text to wrap/ellipsis rather than overflow into other UI on resize
+    white-space: normal;
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+    box-sizing: border-box;
   }
 
   .nav-item {
     border: $border-width solid transparent;
+    overflow: hidden;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
     &.active {
       & > .nav-link {
         color: $primary;
         background-color: rgba($primary, 0.1);
         border: $border-width solid rgba($primary, 0.3);
+        border-radius: $border-radius;
+        overflow: hidden;
       }
     }
     .nav-link {
@@ -168,15 +200,60 @@
     vertical-align: middle;
     padding: 0.55rem 0.75rem;
     @include border-radius($border-radius);
+    // Prevent row overlap when fonts/layout shift during resize
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    line-height: 1.15;
+    flex-wrap: nowrap; // never allow label to wrap onto a second line
+    justify-content: flex-start;
+    overflow: hidden;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+
+    // Our Sidebar markup wraps icon+text in an extra direct child <span>.
+    // On zoom/resizes, that wrapper can refuse to shrink (min-width:auto),
+    // which makes labels wrap. Force a shrinkable flex row.
+    > span {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+      flex: 1 1 0%; // Use 0% basis to allow proper shrinking
+      overflow: hidden;
+      max-width: 100%;
+    }
+
+    // Keep long labels from spilling into the chevron / next rows
+    .sidebar-text {
+      display: block;
+      min-width: 0;
+      max-width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      flex: 1 1 0%; // Use 0% basis to allow proper shrinking
+    }
+
+    // Right-side inline elements (badges, counts) must never overlap the label.
+    .badge,
+    .notification-count {
+      flex-shrink: 0;
+      margin-left: auto;
+    }
 
     .sidebar-icon {
       margin-right: 0.5rem;
       color: $primary;
+      flex-shrink: 0;
       span {
         min-width: 22px;
       }
       svg {
         min-width: 22px;
+        flex-shrink: 0;
       }
       &.svg-icon {
         margin-right: 14px;
@@ -185,6 +262,7 @@
 
     .link-arrow {
       font-size: $font-size-sm;
+      flex-shrink: 0;
     }
 
     &:focus {
@@ -272,18 +350,136 @@
 
       @include media-breakpoint-up(md) {
         & + .content {
-          margin-left: 95px;
+          // Sidebar collapse uses ~120px; keep content aligned with capsule inset + gap
+          margin-left: 144px;
         }
       }
 
-      max-width: 95px;
+      max-width: 120px;
+    }
+  }
+}
+
+// Collapsed sidebar state (triggered by collapseSidebar prop)
+.sidebar.sidebar-collapsed {
+  width: 120px !important;
+  min-width: 120px !important;
+  max-width: 120px !important;
+
+  .sidebar-inner {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+
+  // Hide all text labels
+  .sidebar-text,
+  .link-arrow,
+  .badge {
+    display: none !important;
+  }
+
+  .notification-count {
+    opacity: 1;
+    position: absolute;
+    top: 0;
+    left: 35px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    font-size: 0.7rem;
+    padding: 0.2rem;
+  }
+
+  // Nav items - icon only, centered
+  .nav-item {
+    position: relative;
+    width: 100%;
+    
+    &.active > .nav-link {
+      background-color: rgba($primary, 0.2);
+    }
+  }
+
+  .nav-link {
+    justify-content: center !important;
+    padding: 0.75rem 0.5rem !important;
+    width: 100% !important;
+    
+    // The wrapper span should just show the icon
+    > span {
+      justify-content: center !important;
+      flex: 0 0 auto !important;
+    }
+    
+    &:hover {
+      background-color: rgba($primary, 0.15);
+    }
+  }
+
+  // Accordion - show only icon, hide everything else
+  .accordion {
+    background: transparent !important;
+  }
+
+  .accordion-item {
+    background: transparent !important;
+    border: none !important;
+  }
+
+  .accordion-button {
+    justify-content: center !important;
+    padding: 0.75rem 0.5rem !important;
+    background: transparent !important;
+    width: 100% !important;
+    
+    // The wrapper span should just show the icon
+    > span {
+      justify-content: center !important;
+      flex: 0 0 auto !important;
+    }
+    
+    // Hide chevron in collapsed mode
+    &::after {
+      display: none !important;
+    }
+    
+    &:not(.collapsed) {
+      background: rgba($primary, 0.15) !important;
+    }
+  }
+
+  // Hide accordion body/collapse - use height:0 instead of display:none to preserve scroll
+  .accordion-body,
+  .accordion-collapse,
+  .multi-level {
+    height: 0 !important;
+    min-height: 0 !important;
+    max-height: 0 !important;
+    overflow: hidden !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+  }
+
+  .sidebar-icon {
+    margin-right: 0 !important;
+    text-align: center;
+    
+    svg {
+      width: 20px;
+      height: 20px;
     }
   }
 }
 
 .sidebar-inner {
   position: relative;
-  overflow-y: hidden;
+  height: 100%;
+  overflow-y: auto; // allow scrolling
+  overflow-x: hidden;
+  min-height: 0; // allow flex/scroll containers to size correctly
+  max-width: 100%;
   // subtle inner shading so content feels layered
   &::before {
     content: "";
@@ -297,6 +493,51 @@
     );
     opacity: 0.35;
     pointer-events: none;
+  }
+
+  // Accordion buttons in the sidebar should behave like nav rows (no overlap on resize)
+  .accordion-button {
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+
+    // Same wrapper span pattern as .nav-link (icon + label live in a direct child span)
+    > span {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+      flex: 1 1 0%; // Use 0% basis to allow proper shrinking
+      overflow: hidden;
+      max-width: calc(100% - 1.5rem); // Leave room for chevron
+    }
+
+    .sidebar-text {
+      min-width: 0;
+      max-width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      flex: 1 1 0%; // Use 0% basis to allow proper shrinking
+    }
+
+    svg {
+      flex-shrink: 0;
+    }
+
+    // Chevron positioning - use margin-left: auto for flex alignment
+    &::after {
+      flex-shrink: 0;
+      margin-left: auto;
+    }
   }
 
   > * {
@@ -316,7 +557,7 @@
     &:not(.collapsed) {
       background-color: rgba($primary, 0.12);
       &::after {
-        transform: rotate(90deg);
+        transform: translateY(-50%) rotate(90deg);
         transition: all 0.2s ease;
       }
     }
@@ -346,18 +587,21 @@
 
 @include media-breakpoint-down(sm) {
   .sidebar {
-    width: 100%;
+    width: 280px; // fixed drawer width on mobile
   }
 }
 
 .content {
   overflow: visible;
   padding: 0 $spacer 0 $spacer;
-  // Avoid animating layout-heavy properties (feels "slow" and can jank).
   transition: none;
 
+  // Mobile: no margin (sidebar is overlay)
+  margin-left: 0;
+
+  // Tablet and up: fixed margin matching capsule sidebar
+  // Sidebar: left 12px + width 260px + gap 12px = 284px
   @include media-breakpoint-up(md) {
-    // Sidebar: left 12px + width 260px + gap 12px = 284px
     margin-left: 284px;
   }
 }
@@ -365,16 +609,11 @@
 .content-collapsed {
   overflow: visible;
   padding: 0 $spacer 0 $spacer;
-  // Avoid animating layout-heavy properties (feels "slow" and can jank).
-  transition: none;
+  transition: margin-left 0.18s ease;
 
   @include media-breakpoint-up(md) {
-    margin-left: 120px;
-  }
-  // Navbar is full-width now (it should not shift when sidebar collapses)
-  .app-navbar {
-    left: 0;
-    width: 100%;
+    // Sidebar collapsed: left inset 12px + width 120px + gap 12px = 144px
+    margin-left: 144px;
   }
 }
 

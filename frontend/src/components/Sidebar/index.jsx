@@ -123,7 +123,13 @@ const Sidebar = (props) => {
     return (
       <Accordion as={Nav.Item} defaultActiveKey={activeAccordianKey(accordianPath, eventKey)} style={{ backgroundColor: '#1a1a1a', border: 'none', boxShadow: 'none' }}>
         <Accordion.Item eventKey={eventKey} style={{ backgroundColor: '#1a1a1a', border: 'none', boxShadow: 'none' }}>
-          <Accordion.Button as={Nav.Link} style={{ backgroundColor: '#1a1a1a', border: 'none', boxShadow: 'none' }} className='d-flex justify-content-between align-items-center'>
+          <Accordion.Button
+            as={Nav.Link}
+            style={{ backgroundColor: '#1a1a1a', border: 'none', boxShadow: 'none' }}
+            // Avoid Bootstrap `justify-content-between` utilities here (they use !important),
+            // they can cause overlap when the sidebar width changes. We handle layout in SCSS.
+            className='sidebar-accordion-btn'
+          >
             {props.collapseSidebar ? (
               <OverlayTrigger
                 key={titleKey}
@@ -197,7 +203,9 @@ const Sidebar = (props) => {
   const NavItem = (props) => {
 
     const { key, title, permissionLabel, inSidePermissionLabel, link, external, target, icon, image, badgeText, badgeBg = 'secondary', badgeColor = 'primary' } = props;
-    const classNames = badgeText ? 'd-flex justify-content-start align-items-center justify-content-between' : '';
+    // Avoid Bootstrap `justify-content-between` (it uses !important); we push badges via ms-auto
+    // so the label can always ellipsis cleanly at any width/zoom.
+    const classNames = badgeText ? 'd-flex justify-content-start align-items-center' : '';
     const navItemClassName = link === handlePathName(pathname) ? 'active' : '';
     const linkProps = external ? { href: link } : { as: Link, to: link };
     // On demo, skip permission checks
@@ -229,7 +237,7 @@ const Sidebar = (props) => {
             </span>
           )}
           {badgeText ? (
-            <Badge pill bg={badgeBg} text={badgeColor} className='badge-md notification-count ms-2'>{badgeText}</Badge>
+            <Badge pill bg={badgeBg} text={badgeColor} className='badge-md notification-count ms-auto flex-shrink-0'>{badgeText}</Badge>
           ) : null}
         </Nav.Link>
       </Nav.Item>
@@ -257,7 +265,7 @@ const Sidebar = (props) => {
       <SimpleBar
         ref={scrollBarRef}
         autoHide={false}
-        className={`collapse ${showClass} ${props.open ? 'd-block' : 'd-md-block'} sidebar d-md-block text-white`}
+        className={`collapse ${showClass} ${props.open ? 'd-block' : 'd-md-block'} sidebar d-md-block text-white ${props.collapseSidebar ? 'sidebar-collapsed' : ''}`}
       >
         <div className='sidebar-inner px-4 pt-3'>
 

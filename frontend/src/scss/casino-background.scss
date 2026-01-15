@@ -5,6 +5,33 @@
 // MAIN BACKGROUND
 // ============================================
 
+// Light mode override - MUST come first so dark mode styles below don't override
+html[data-theme="light"] {
+  // Use the shared light-mode page background token so the “canvas” matches the app surfaces.
+  // Fallback to white in case the variable isn't defined yet (should be defined in light-theme.scss).
+  background-color: var(--gs-page-bg, #e9eef2) !important;
+  background-image: var(--gs-page-bg-image, none) !important;
+  background-attachment: scroll !important;
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
+  
+  body, #root {
+    background-color: var(--gs-page-bg, #e9eef2) !important;
+    background-image: var(--gs-page-bg-image, none) !important;
+    background-attachment: scroll !important;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+  }
+  
+  body::before,
+  body::after,
+  #root::before,
+  #root::after {
+    display: none !important;
+    content: none !important;
+  }
+}
+
 body, #root {
   background: #0a0a0a;
   background-image: 

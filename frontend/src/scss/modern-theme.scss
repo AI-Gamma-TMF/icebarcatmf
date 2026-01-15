@@ -994,11 +994,27 @@ html.gs-low-power {
 
   // The layered casino background (many gradients + background-attachment: fixed) is also expensive.
   // In low power mode, use a simple solid background to keep the GPU cool.
+  // IMPORTANT: Respect the active theme (light vs dark).
   body,
   #root {
-    background: #0a0a0a !important;
     background-image: none !important;
     background-attachment: scroll !important;
+  }
+
+  // Dark theme (default)
+  &:not([data-theme="light"]) body,
+  &:not([data-theme="light"]) #root {
+    background: #0a0a0a !important;
+    background-color: #0a0a0a !important;
+  }
+
+  // Light theme
+  &[data-theme="light"] body,
+  &[data-theme="light"] #root {
+    // Low-power mode should remain extremely cheap: solid color, no gradients.
+    background: #e9eef2 !important;
+    background-color: #e9eef2 !important;
+    background-image: none !important;
   }
 
   .bg-glass,
