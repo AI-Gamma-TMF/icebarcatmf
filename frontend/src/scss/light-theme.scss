@@ -3139,6 +3139,92 @@ html[data-theme="light"] {
     }
   }
 
+  // Game Dashboard (Casino Management): remove the weird rounded “pill” overlay in react-select controls (light)
+  // Cause: react-select's internal <input> inherits our global input styles in light mode.
+  .game-dashboard-filters {
+    .gd-select__input-container,
+    .gd-select__input-container input,
+    .gd-select__input,
+    .gd-select__input input {
+      background: transparent !important;
+      border: 0 !important;
+      box-shadow: none !important;
+      padding: 0 !important;
+      margin: 0 !important;
+      border-radius: 0 !important;
+      outline: none !important;
+      appearance: none !important;
+    }
+  }
+
+  // Casino Providers Dashboard: react-select uses `gs-select` prefix here
+  .provider-dashboard-filters {
+    .gs-select__input-container,
+    .gs-select__input-container input,
+    .gs-select__input,
+    .gs-select__input input {
+      background: transparent !important;
+      border: 0 !important;
+      box-shadow: none !important;
+      padding: 0 !important;
+      margin: 0 !important;
+      border-radius: 0 !important;
+      outline: none !important;
+      appearance: none !important;
+    }
+  }
+
+  // Game Lobby Dashboard: same react-select prefix (`gs-select`) inside `.game-lobby__filters`
+  .game-lobby__filters {
+    .gs-select__input-container,
+    .gs-select__input-container input,
+    .gs-select__input,
+    .gs-select__input input {
+      background: transparent !important;
+      border: 0 !important;
+      box-shadow: none !important;
+      padding: 0 !important;
+      margin: 0 !important;
+      border-radius: 0 !important;
+      outline: none !important;
+      appearance: none !important;
+    }
+  }
+
+  // Free Spin pages (light): make text readable + cards match light surfaces
+  .spin-card {
+    background: #ffffff !important;
+    border: 1px solid rgba(226, 232, 240, 0.9) !important;
+    box-shadow: 0 10px 24px rgba(15, 23, 42, 0.08) !important;
+  }
+
+  .spin-card p,
+  .spin-card .spin-detail p {
+    color: #334155 !important;
+  }
+
+  // These summary cards use pastel backgrounds but were forcing white text (hard to see in light mode)
+  .spin-card.blue-bg,
+  .spin-card.green-bg,
+  .spin-card.orange-bg,
+  .spin-card.pink-bg {
+    color: #0f172a !important;
+  }
+
+  .spin-card.blue-bg h5,
+  .spin-card.green-bg h5,
+  .spin-card.orange-bg h5,
+  .spin-card.pink-bg h5 {
+    color: #0f172a !important;
+  }
+
+  .spin-card.blue-bg p,
+  .spin-card.green-bg p,
+  .spin-card.orange-bg p,
+  .spin-card.pink-bg p {
+    color: #334155 !important;
+  }
+
   // Accessibility: remove hover “lift” for reduced motion users
   @media (prefers-reduced-motion: reduce) {
     .dashboard-box:hover {

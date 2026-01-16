@@ -183,7 +183,7 @@ const ViewFreeSpin = () => {
    
 
       </Row>
-      <Card className="p-3 spin-card">
+      <Card className="p-3 spin-cards-wrap">
         <Row className="g-3">
           <Col xs={6} md={4} lg={3}>
             <Card className="spin-card">

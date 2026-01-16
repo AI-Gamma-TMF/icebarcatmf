@@ -446,3 +446,9 @@
     }
   }
 }
+
+// Container wrapper for the spin tiles on View Free Spin page
+// (was incorrectly using `.spin-card`, which made the whole grid a flex row and broke layout)
+.spin-cards-wrap {
+  display: block;
+}

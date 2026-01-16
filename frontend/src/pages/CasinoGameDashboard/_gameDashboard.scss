@@ -149,6 +149,21 @@
     padding: 2px 12px;
   }
 
+  // Fix: react-select renders an internal <input> for search.
+  // Our global light-mode input styles were making it look like a weird rounded “pill” on the left.
+  .gd-select__input-container,
+  .gd-select__input-container input,
+  .gd-select__input,
+  .gd-select__input input {
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border-radius: 0 !important;
+    min-height: 0 !important;
+  }
+
   .gd-select__single-value {
     color: rgba(255, 255, 255, 0.92);
     font-weight: 700;
