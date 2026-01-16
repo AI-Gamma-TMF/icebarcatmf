@@ -73,10 +73,20 @@
 // Summary sections spacing
 .admin-coins-summary {
   margin-top: 8px;
+  margin-bottom: 14px;
 }
 
 .admin-coins-summary__kpis {
   margin-bottom: 12px;
+}
+
+// Keep highlight cards the same height across the row
+.admin-coins-summary .row > [class*="col-"] {
+  display: flex;
+}
+
+.admin-coins-highlight {
+  height: 100%;
 }
 
 // “Highlight” cards use the ticker-container style for consistent glass look

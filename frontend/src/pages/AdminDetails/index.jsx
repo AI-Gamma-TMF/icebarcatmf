@@ -1,10 +1,14 @@
 import React from 'react'
-import { Tabs, Tab, Row, Col } from '@themesberg/react-bootstrap'
+import { Tabs, Tab, Row, Col, Button } from '@themesberg/react-bootstrap'
 import Overview from './components/Overview'
 import Permissions from './components/Permissions'
 import useAdminDetails from './hooks/useAdminDetails'
 import Preloader from '../../components/Preloader'
 import Hierarchy from '../../components/Hierarchy'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
+import { useNavigate } from 'react-router-dom'
+import { AdminRoutes } from '../../routes'
 
 const AdminDetails = () => {
   const {
@@ -15,15 +19,25 @@ const AdminDetails = () => {
     // navigate
   } = useAdminDetails()
 
+  const navigate = useNavigate()
+
   return (
     <>
       {loading && <Preloader />}
       <>
-        <Row>
-          <Col className='d-flex'>
-            <h3>{adminDetails?.AdminRole?.name}:&nbsp; </h3>
-
-            <h3>
+        <Row className="d-flex align-items-center mb-2">
+          <Col xs="auto">
+            <Button
+              variant="link"
+              className="admin-details__back-btn p-0"
+              onClick={() => navigate(AdminRoutes.Staff)}
+            >
+              <FontAwesomeIcon icon={faArrowLeft} size="lg" />
+            </Button>
+          </Col>
+          <Col className="d-flex align-items-center flex-wrap gap-2">
+            <h3 className="mb-0">{adminDetails?.AdminRole?.name}:&nbsp;</h3>
+            <h3 className="mb-0">
               <div
                 style={{
                   whitespace: 'nowrap',
@@ -36,7 +50,6 @@ const AdminDetails = () => {
               </div>
             </h3>
           </Col>
-
         </Row>
 
         <Tabs
